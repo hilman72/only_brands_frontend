@@ -1,6 +1,6 @@
 import React from "react"
 import './CouponList.style.scss'
-import Coupon from "../Coupon/Coupon.component"
+import Coupon from "../User-Coupon/Coupon.component"
 import ReferalCard from "../ReferalCard/ReferalCard.component"
 
 // tabs from material UI
