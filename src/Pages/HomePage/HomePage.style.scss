@@ -1,0 +1,30 @@
+.NavBar{
+    height: 10vh;
+    border: 2px solid black;
+    padding: 0rem 2rem;
+}
+
+.NavBar h1 {
+    text-align: left !important;
+}
+
+.BrandSection h1{
+    margin-bottom: -2rem;
+}
+
+.CouponSectionHeaders{
+    margin-top: -2rem;
+    padding: 2rem 0rem;
+    text-align: left;
+    margin-left: 2rem;
+}
+
+.ReferFriendContainer{
+    border: 2px solid black;
+    height: 12.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
