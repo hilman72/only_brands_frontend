@@ -10,6 +10,7 @@ const OtherReview = () => {
       <div className="each">
         <ReviewCard />
         <ReviewCard />
+        <ReviewCard />
       </div>
     </div>
   );
