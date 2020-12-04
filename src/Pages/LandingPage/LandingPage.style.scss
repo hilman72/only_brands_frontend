@@ -1,0 +1,88 @@
+.LogoHeader {
+    font-size: 7rem;
+  }
+
+.HeaderContainer {
+  border-bottom: 2px solid black;
+  height: 120vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.LoginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+} 
+
+.LoginContainer h2 {
+  font-size: 1.7rem;
+}
+
+.CarouselContainer {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+.AboutSection {
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+.AboutOnlyBrands {
+  margin: 5rem;
+  text-align: left;
+}
+
+.AboutOnlyBrands h1{
+  font-size: 4rem;
+}
+
+.AboutOnlyBrands p {
+  font-size: 1.5rem;
+}
+
+.HowItWorksContainer {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  padding: 5rem 20rem;
+}
+
+.HowItWorksContainer h1 {
+  font-size: 4rem;
+}
+
+.HowItWorkSteps {
+  border: 2px solid black;
+  height: 20rem;
+  width: 20rem;
+}
+
+.RegisterContainer {
+  height: 40vh;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  padding: 5rem 25rem;
+}
+
+.RegisterButton {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  margin-top: 5rem;
+}
+
+.RegisterContainer h1 {
+  font-size: 4rem;
+}
+
