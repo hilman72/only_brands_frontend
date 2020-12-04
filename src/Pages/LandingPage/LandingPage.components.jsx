@@ -1,11 +1,9 @@
 import React from 'react';
 import './LandingPage.style.scss'
 import Grid from '@material-ui/core/Grid';
-import UserRegister from '../../Components/UserRegister/UserRegister.components';
-import LoginButton from '../../Components/LoginButton/LoginButton.components';
 import CouponCarousel from '../../Components/CouponCarousel/CouponCarousel.components'
-import BusinessRegister from '../../Components/BusinessRegister/BusinessRegister.components'
 import Footer from '../../Components/Footer/Footer.components'
+import Button from '@material-ui/core/Button';
 
 
 function LandingPage() {
@@ -22,8 +20,10 @@ function LandingPage() {
                     </Grid>
                     <Grid item xs={6}>
                         <div className="LoginContainer">
-                            <h2>Discounts, Coupons & Rewards.</h2>
-                            <LoginButton />
+                            <h2>Rewards, Recommendations & Referrals</h2>
+                            <Button variant="contained" size="large" className="LoginButton" color="primary">
+                                Login
+                            </Button>
                         </div>
                     </Grid>
                 </Grid>
@@ -44,7 +44,7 @@ function LandingPage() {
                 <div className="AboutOnlyBrands">
                     <Grid container spacing={3}>
                         <Grid item xs={7}>
-                            <h1>About Only Brands</h1>
+                            <h1>About OnlyBrands</h1>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                             Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
@@ -88,13 +88,17 @@ function LandingPage() {
                         <h1>Join The OnlyBrands Network</h1>
                     </Grid>
                     <Grid item xs={6}>
-                        <div className="RegisterButton">
-                            <UserRegister />
+                        <div className="RegisterBtnContainer">
+                            <Button variant="contained" size="large" className="RegisterButton" color="secondary">
+                                Register As a User
+                            </Button>
                         </div>
                     </Grid>
                     <Grid item xs={6}>
-                        <div className="RegisterButton">
-                            <BusinessRegister />
+                        <div className="RegisterBtnContainer">
+                        <Button variant="contained" size="large" className="RegisterButton" color="secondary">
+                                Register As A Business
+                            </Button>
                         </div>
                     </Grid>
                 </Grid>

@@ -7,6 +7,7 @@ import PointsCarousel from '../../Components/PointsCarousel/PointsCarousel.compo
 import RecommendationCarousel from '../../Components/RecommendationCarousel/RecommendationCarousel.components'
 import Footer from '../../Components/Footer/Footer.components'
 import Header from '../../Components/Header/Header.component'
+import Button from '@material-ui/core/Button';
 
 function HomePage() {
 
@@ -31,7 +32,7 @@ function HomePage() {
                         <Grid container spacing={3}>
                             <Grid item xs={12}>
                                 <h1 className="CouponSectionHeaders">Earned Points</h1>
-                                <button>More</button>
+                                <Button variant="contained">More</Button>
                             </Grid>
                             <Grid item xs={9}>
                             <PointsCarousel />
@@ -43,21 +44,21 @@ function HomePage() {
                             </Grid>
                             <Grid item xs={12}>
                                 <h1 className="CouponSectionHeaders">Brands You Follow</h1>
-                                <button>More</button>
+                                <Button variant="contained">More</Button>
                             </Grid>
                             <Grid item xs={12}>
                                 <CouponCarousel />
                             </Grid>
                             <Grid item xs={12}>
                                 <h1 className="CouponSectionHeaders">Recommendations From Friends</h1>
-                                <button>More</button>
+                                <Button variant="contained">More</Button>
                             </Grid>
                             <Grid item xs={12}>
                                 <RecommendationCarousel />
                             </Grid>
                             <Grid item xs={12}>
                                 <h1 className="CouponSectionHeaders">Your Coupons</h1>
-                                <button>More</button>
+                                <Button variant="contained">More</Button>
                             </Grid>
                             <Grid item xs={12}>
                                 <CouponCarousel />
