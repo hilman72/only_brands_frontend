@@ -2,6 +2,11 @@
     font-size: 7rem;
   }
 
+h1,
+h2 {
+  text-align: center;
+}
+
 .HeaderContainer {
   border-bottom: 2px solid black;
   height: 120vh;
@@ -86,3 +91,16 @@
   font-size: 4rem;
 }
 
+.LoginButton {
+  padding: 10px 150px !important;
+}
+
+.RegisterButton {
+  padding: 15px 60px !important;
+}
+
+.RegisterBtnContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
