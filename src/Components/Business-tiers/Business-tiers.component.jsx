@@ -8,11 +8,11 @@ const BusinessTiers = () => {
   return (
     <div>
       <div>
-        <DiffRank />
-      </div>
-      <div>
         You Progress
         <UserRank />
+      </div>
+      <div>
+        <DiffRank />
       </div>
     </div>
   );
