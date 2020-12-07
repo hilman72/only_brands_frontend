@@ -8,6 +8,7 @@ import UserProfiles from "./Pages/UserProfiles/UserProfiles.components";
 import LoginPage from "./Pages/LoginPage/LoginPage.components";
 import LandingPage from "./Pages/LandingPage/LandingPage.components";
 import CouponSearch from "./Pages/CouponSearch/CouponSearch.components";
+import HomePage from "./Pages/HomePage/HomePage.components";
 
 class App extends React.Component {
   constructor() {
@@ -24,6 +25,7 @@ class App extends React.Component {
           <Route path="/UserProfiles" component={UserProfiles} />
           <Route path="/LoginPage" component={LoginPage} />
           <Route path="/CouponSearch" component={CouponSearch} />
+          <Route path="/HomePage" component={HomePage} />
         </Switch>
       </div>
     );
