@@ -12,7 +12,8 @@ const useStyles = makeStyles({
 
 const UserRank = () => {
   const classes = useStyles();
-  const [progress, setProgress] = React.useState(50);
+  // const [progress, setProgress] = React.useState(50);
+  const [progress] = React.useState(50);
 
   //   React.useEffect(() => {
   //     const timer = setInterval(() => {

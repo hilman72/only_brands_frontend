@@ -29,6 +29,12 @@ const BusinessCoupon = () => {
         <Grid item xs={12} sm={6}>
           <Coupon />
         </Grid>
+        <Grid item xs={12} sm={6}>
+          <Coupon />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Coupon />
+        </Grid>
       </Grid>
     </div>
   );
