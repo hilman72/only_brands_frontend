@@ -12,20 +12,13 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Fab from '@material-ui/core/Fab';
 import Button from '@material-ui/core/Button'
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Grow from '@material-ui/core/Grow';
-import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
 import HomeIcon from '@material-ui/icons/Home';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Logo from '../../Images/logo.png'
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import MenuList from '@material-ui/core/MenuList';
 import { Popover } from '@material-ui/core';
-import { NoMeetingRoom } from '@material-ui/icons';
+import FilterMenu from '../FilterMenu/FilterMenu.components'
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -69,9 +62,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: `calc(1em + ${theme.spacing(1)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
-    display: 'none',
     [theme.breakpoints.up('md')]: {
-       display: 'block',
       width: '30ch',
     },
   },
@@ -87,42 +78,21 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
+  sectionMobile2: {
+    display: 'flex',
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+  }
 }));
-
-const options = ['Coupons', 'Brands', 'Users'];
 
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
-  const anchorRef = React.useRef(null);
-  const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [filterMenu, setFilterMenu] = React.useState(null);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-
-  // Search filter handle dropdown
-
-  const handleClose = (event) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return;
-    }
-    setOpen(false)
-  };
-
-  const handleMenuItemClick = (event, index) => {
-    setSelectedIndex(index);
-    setOpen(false);
-  };
-
-  const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
-
-  const handleClick = () => {
-    console.info(`You clicked ${options[selectedIndex]}`);
-  };
 
   //Mobile menu handle dropdown (for nav icons)
 
@@ -136,8 +106,7 @@ export default function PrimarySearchAppBar() {
 
   //Filter menu handle dropdown 
 
-
-  const menuOpen = Boolean(filterMenu);
+  const menuOpen = Boolean(filterMenu)
 
   const handleFilterMenuClose = () => {
     setFilterMenu(null);
@@ -155,6 +124,7 @@ export default function PrimarySearchAppBar() {
     console.log(event.target[1].value)
     console.log(event.target[2].value)
   }
+
 
   // Profile menu dropdown 
 
@@ -240,6 +210,28 @@ export default function PrimarySearchAppBar() {
   );
 
 
+  //Filter Menu render
+
+  const renderFilterMenu = (
+    <Popover
+    className={classes.sectionMobile2}
+    anchorEl={filterMenu}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'left',
+    }}
+    keepMounted
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'left',
+    }}
+    open={menuOpen}
+    onClose={handleFilterMenuClose}
+  >
+    <FilterMenu />
+    </Popover>
+  );
+
   return (
     <div className={classes.grow}>
       <AppBar position="static">
@@ -260,50 +252,30 @@ export default function PrimarySearchAppBar() {
               />
             </div>
 
+            {/* Mobile SearchBar */}
+
+            <div className={classes.sectionMobile2}>
+              <IconButton
+                edge="end"
+                color="inherit"
+              aria-label="account of current user"
+              aria-haspopup="true"
+                onClick={handleFilterMenuOpen}>
+                <Fab size="medium" color="secondary" aria-label="add">
+                  <AddCircleIcon />
+                </Fab>
+              </IconButton>
+              <IconButton edge="end" color="inherit">
+                <Fab size="medium" color="primary" aria-label="add">
+                  <SearchIcon />
+                </Fab>
+              </IconButton>
+            </div>
+
             {/* Search Filters (Dropdown) */}
 
             <div className={classes.filter}>
-              <ButtonGroup variant="contained" color="primary" ref={anchorRef} aria-label="split button">
-                <Button onClick={handleClick}>{options[selectedIndex]}</Button>
-                <Button
-                  color="primary"
-                  size="small"
-                  aria-controls={open ? 'split-button-menu' : undefined}
-                  aria-expanded={open ? 'true' : undefined}
-                  aria-label="select merge strategy"
-                  aria-haspopup="menu"
-                  onClick={handleToggle}
-                >
-                  <ArrowDropDownIcon />
-                </Button>
-              </ButtonGroup>
-
-              <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
-                {({ TransitionProps, placement }) => (
-                  <Grow
-                    {...TransitionProps}
-                    style={{
-                      transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
-                    }}
-                  >
-                    <Paper>
-                      <ClickAwayListener onClickAway={handleClose}>
-                        <MenuList id="split-button-menu">
-                          {options.map((option, index) => (
-                            <MenuItem
-                              key={option}
-                              selected={index === selectedIndex}
-                              onClick={(event) => handleMenuItemClick(event, index)}
-                            >
-                              {option}
-                            </MenuItem>
-                          ))}
-                        </MenuList>
-                      </ClickAwayListener>
-                    </Paper>
-                  </Grow>
-                )}
-              </Popper>
+             <FilterMenu />
               <Button type="submit" startIcon={<SearchIcon />} className={classes.submitButton}
                 size="medium" variant="contained" color="primary"> Search</Button>
             </div>
@@ -355,6 +327,7 @@ export default function PrimarySearchAppBar() {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
+      {renderFilterMenu}
     </div>
   );
 
