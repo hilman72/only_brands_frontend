@@ -1,10 +1,11 @@
 import React from "react";
 import "./MyCouponPage.style.scss";
 import CouponList from "../../Components/CouponList/CouponList.component";
+import Header from "../../Components/Header/Header.component";
 
 const MyCouponPage = () => (
   <div>
-    <h1>Header</h1>
+    <Header />
     <CouponList />
   </div>
 );

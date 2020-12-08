@@ -3,6 +3,7 @@ import React from "react";
 import "./BusinessProfiles.style.scss";
 import BusinessDetail from "../../Components/Business-detail/Business-detail.component";
 import BusinessWindows from "../../Components/Business-windows/Business-windows.component";
+import Header from "../../Components/Header/Header.component";
 
 class BusinessProfiles extends React.Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class BusinessProfiles extends React.Component {
   render() {
     return (
       <div>
-        <div className="header"> header</div>
+        <Header />
         <div className="B-body">
           <BusinessDetail />
           <BusinessWindows />
