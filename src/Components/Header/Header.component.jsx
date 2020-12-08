@@ -17,13 +17,15 @@ import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import HomeIcon from '@material-ui/icons/Home';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Logo from '../../Images/logo.png'
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import MenuList from '@material-ui/core/MenuList';
+import { Popover } from '@material-ui/core';
+import { NoMeetingRoom } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -67,7 +69,9 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: `calc(1em + ${theme.spacing(1)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
+    display: 'none',
     [theme.breakpoints.up('md')]: {
+       display: 'block',
       width: '30ch',
     },
   },
@@ -93,6 +97,8 @@ export default function PrimarySearchAppBar() {
   const [selectedIndex, setSelectedIndex] = React.useState(1);
   const anchorRef = React.useRef(null);
   const [open, setOpen] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [filterMenu, setFilterMenu] = React.useState(null);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
 
@@ -128,7 +134,18 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  //Filter menu handle dropdown 
 
+
+  const menuOpen = Boolean(filterMenu);
+
+  const handleFilterMenuClose = () => {
+    setFilterMenu(null);
+  };
+
+  const handleFilterMenuOpen = (event) => {
+    setFilterMenu(event.currentTarget);
+  };
 
 
   const handleSubmit = (event) => {
@@ -139,6 +156,43 @@ export default function PrimarySearchAppBar() {
     console.log(event.target[2].value)
   }
 
+  // Profile menu dropdown 
+
+  const isMenuOpen = Boolean(anchorEl);
+
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+
+
+  // Profile menu dropdown render 
+
+  const menuId = 'primary-search-account-menu';
+  const renderMenu = (
+    <Popover
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'left',
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'left',
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+    </Popover>
+  );
 
   //Mobile Menu render (for nav icons)
 
@@ -156,9 +210,9 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-      <IconButton  color="inherit">
+        <IconButton color="inherit">
           <Badge color="secondary">
-            <HomeIcon/>
+            <HomeIcon />
           </Badge>
         </IconButton>
         <p>Home</p>
@@ -171,7 +225,7 @@ export default function PrimarySearchAppBar() {
         </IconButton>
         <p>Coupons</p>
       </MenuItem>
-      <MenuItem>
+      <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
@@ -182,16 +236,9 @@ export default function PrimarySearchAppBar() {
         </IconButton>
         <p>Profile</p>
       </MenuItem>
-      <MenuItem>
-        <IconButton color="inherit">
-          <Badge>
-            <ExitToAppIcon />
-          </Badge>
-        </IconButton>
-        <p>Logout</p>
-      </MenuItem>
     </Menu>
   );
+
 
   return (
     <div className={classes.grow}>
@@ -211,16 +258,6 @@ export default function PrimarySearchAppBar() {
                 }}
                 inputProps={{ 'aria-label': 'search' }}
               />
-            </div>
-
-            {/* Mobile SearchBar */}
-
-            <div className={classes.sectionMobile}>
-              <IconButton edge="end" color="inherit">
-                <Fab size="medium" color="primary" aria-label="add">
-                <SearchIcon />
-                </Fab>
-              </IconButton>
             </div>
 
             {/* Search Filters (Dropdown) */}
@@ -293,14 +330,10 @@ export default function PrimarySearchAppBar() {
               aria-label="account of current user"
               aria-haspopup="true"
               color="inherit"
+              onClick={handleProfileMenuOpen}
             >
               <Fab size="medium" color="primary" aria-label="add">
                 <AccountCircle />
-              </Fab>
-            </IconButton>
-            <IconButton edge="end" color="inherit">
-              <Fab size="medium" color="primary" aria-label="add">
-                <ExitToAppIcon />
               </Fab>
             </IconButton>
           </div>
@@ -321,6 +354,7 @@ export default function PrimarySearchAppBar() {
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
+      {renderMenu}
     </div>
   );
 
