@@ -6,6 +6,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import Grid from "@material-ui/core/Grid";
 
 import "./Business-diff-com.style.scss";
 import BusinessCoupon from "../Business-Coupon/Business-Coupon.component";
