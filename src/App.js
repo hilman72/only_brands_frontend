@@ -1,6 +1,12 @@
 import "./App.css";
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
+import { connect } from "react-redux";
 
 import UserProfile from "./Pages/UserProfile/UserProfile.components";
 import BusinessProfiles from "./Pages/BusinessProfiles/BusinessProfiles.components";
@@ -16,19 +22,54 @@ class App extends React.Component {
     super();
     this.state = {};
   }
+
   render() {
+    const PurePrivateRoute = ({ component, isAuthenticated, ...rest }) => {
+      const Component = component;
+      if (Component != null) {
+        return (
+          <Route
+            {...rest}
+            render={(props) =>
+              isAuthenticated ? (
+                <Component {...props} />
+              ) : (
+                <Redirect
+                  to={{
+                    pathname: "/LoginPage",
+                  }}
+                />
+              )
+            }
+          />
+        );
+      } else {
+        return null;
+      }
+    };
+
+    const PrivateRoute = connect((state) => ({
+      isAuthenticated: state.authStore.isAuthenticated,
+    }))(PurePrivateRoute);
+
     return (
       <div>
-        <Switch>
-          <Route path="/UserProfiles" component={UserProfile} />
-          <Route exact path="/" component={LandingPage} />
-          <Route path="/BusinessProfiles" component={BusinessProfiles} />
-          <Route path="/MyCouponPage" component={MyCouponPage} />
-          <Route path="/LoginPage" component={LoginPage} />
-          <Route path="/CouponSearch" component={CouponSearch} />
-          <Route path="/HomePage" component={HomePage} />
-          <Route path="/RegisterPage" component={RegisterPage} />
-        </Switch>
+        <Router>
+          <Switch>
+            <Route exact path="/" component={LandingPage} />
+            <Route path="/LoginPage" component={LoginPage} />
+            <PrivateRoute path="/UserProfiles" component={UserProfile} />
+            <PrivateRoute
+              path="/BusinessProfiles"
+              component={BusinessProfiles}
+            />
+            <PrivateRoute path="/MyCouponPage" component={MyCouponPage} />
+            <PrivateRoute path="/LoginPage" component={LoginPage} />
+            <PrivateRoute path="/CouponSearch" component={CouponSearch} />
+            <PrivateRoute path="/HomePage" component={HomePage} />
+            <PrivateRoute path="/RegisterPage" component={RegisterPage} />
+          </Switch>
+        </Router>
       </div>
     );
   }
