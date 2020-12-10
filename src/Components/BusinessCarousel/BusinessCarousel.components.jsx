@@ -10,18 +10,17 @@ import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
 
 // import Swiper core and required components
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, EffectCoverflow } from 'swiper';
+import SwiperCore, { Navigation, Pagination, EffectCoverflow } from 'swiper';
 
 
-SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, EffectCoverflow]);
+SwiperCore.use([Navigation, Pagination, EffectCoverflow]);
 
 function BusinessCarousel() {
 
     return (
         <div className="BusinessCarousel">
             <Swiper
-                effect="coverflow"
-                spaceBetween={30}
+                spaceBetween={20}
                 slidesPerView={3}
                 navigation
                 scrollbar={{ draggable: true }}
