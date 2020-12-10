@@ -1,14 +1,11 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 
 import thunk from "redux-thunk";
-
-import { linkReducer } from "./Links/reducers";
-import { authReducer } from "./Auth/reducers";
+import { authReducer } from "./reducers";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-  linkStore: linkReducer,
   authStore: authReducer,
 });
 

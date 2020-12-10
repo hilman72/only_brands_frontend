@@ -1,24 +1,29 @@
-import React from 'react';
-import './Header.style.scss'
-import { fade, makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Fab from '@material-ui/core/Fab';
-import Button from '@material-ui/core/Button'
-import HomeIcon from '@material-ui/icons/Home';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
-import MoreIcon from '@material-ui/icons/MoreVert';
-import Logo from '../../Assets/Images/logo.png'
-import { Popover } from '@material-ui/core';
-import FilterMenu from '../FilterMenu/FilterMenu.components'
+
+import React from "react";
+import { connect } from "react-redux";
+import { logoutNowThunk } from "../../Redux/actions";
+
+import "./Header.style.scss";
+import { fade, makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import InputBase from "@material-ui/core/InputBase";
+import Badge from "@material-ui/core/Badge";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
+import SearchIcon from "@material-ui/icons/Search";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import Fab from "@material-ui/core/Fab";
+import Button from "@material-ui/core/Button";
+import HomeIcon from "@material-ui/icons/Home";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+import LocalOfferIcon from "@material-ui/icons/LocalOffer";
+import MoreIcon from "@material-ui/icons/MoreVert";
+import Logo from "../../Images/logo.png";
+import { Popover } from "@material-ui/core";
+import FilterMenu from "../FilterMenu/FilterMenu.components";
+
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -26,73 +31,72 @@ const useStyles = makeStyles((theme) => ({
   },
   submitButton: {
     marginLeft: theme.spacing(3),
-    borderRadius: theme.shape.borderRadius
+    borderRadius: theme.shape.borderRadius,
   },
   filter: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex'
-    }
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+    },
   },
   title: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
+    display: "none",
+    [theme.breakpoints.up("sm")]: {
+      display: "block",
     },
   },
   search: {
-    position: 'relative',
+    position: "relative",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
+    "&:hover": {
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
     marginRight: theme.spacing(2),
     marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(3),
-      width: 'auto',
+      width: "auto",
     },
   },
   inputRoot: {
-    color: 'inherit',
+    color: "inherit",
   },
   inputInput: {
     paddingLeft: `calc(1em + ${theme.spacing(1)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '30ch',
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "30ch",
     },
   },
   sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
     },
   },
   sectionMobile: {
-    display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
+    display: "flex",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
     },
   },
   sectionMobile2: {
-    display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
+    display: "flex",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
     },
-  }
+  },
 }));
 
-export default function PrimarySearchAppBar() {
+const PrimarySearchAppBar = (props) => {
   const classes = useStyles();
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [filterMenu, setFilterMenu] = React.useState(null);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
 
   //Mobile menu handle dropdown (for nav icons)
 
@@ -104,9 +108,9 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  //Filter menu handle dropdown 
+  //Filter menu handle dropdown
 
-  const menuOpen = Boolean(filterMenu)
+  const menuOpen = Boolean(filterMenu);
 
   const handleFilterMenuClose = () => {
     setFilterMenu(null);
@@ -116,17 +120,15 @@ export default function PrimarySearchAppBar() {
     setFilterMenu(event.currentTarget);
   };
 
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event)
-    console.log(event.target[0].value)
-    console.log(event.target[1].value)
-    console.log(event.target[2].value)
-  }
+    console.log(event);
+    console.log(event.target[0].value);
+    console.log(event.target[1].value);
+    console.log(event.target[2].value);
+  };
 
-
-  // Profile menu dropdown 
+  // Profile menu dropdown
 
   const isMenuOpen = Boolean(anchorEl);
 
@@ -139,43 +141,47 @@ export default function PrimarySearchAppBar() {
     handleMobileMenuClose();
   };
 
+  const handleLogout = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+    props.logoutRedux();
+  };
 
-  // Profile menu dropdown render 
+  // Profile menu dropdown render
 
-  const menuId = 'primary-search-account-menu';
+  const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Popover
       anchorEl={anchorEl}
       anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'left',
+        vertical: "bottom",
+        horizontal: "left",
       }}
       id={menuId}
       keepMounted
       transformOrigin={{
-        vertical: 'top',
-        horizontal: 'left',
+        vertical: "top",
+        horizontal: "left",
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Popover>
   );
 
   //Mobile Menu render (for nav icons)
 
-
-  const mobileMenuId = 'primary-search-account-menu-mobile';
+  const mobileMenuId = "primary-search-account-menu-mobile";
 
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={mobileMenuId}
       keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
@@ -209,26 +215,25 @@ export default function PrimarySearchAppBar() {
     </Menu>
   );
 
-
   //Filter Menu render
 
   const renderFilterMenu = (
     <Popover
-    className={classes.sectionMobile2}
-    anchorEl={filterMenu}
-    anchorOrigin={{
-      vertical: 'bottom',
-      horizontal: 'left',
-    }}
-    keepMounted
-    transformOrigin={{
-      vertical: 'top',
-      horizontal: 'left',
-    }}
-    open={menuOpen}
-    onClose={handleFilterMenuClose}
-  >
-    <FilterMenu />
+      className={classes.sectionMobile2}
+      anchorEl={filterMenu}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "left",
+      }}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "left",
+      }}
+      open={menuOpen}
+      onClose={handleFilterMenuClose}
+    >
+      <FilterMenu />
     </Popover>
   );
 
@@ -248,7 +253,7 @@ export default function PrimarySearchAppBar() {
                   root: classes.inputRoot,
                   input: classes.inputInput,
                 }}
-                inputProps={{ 'aria-label': 'search' }}
+                inputProps={{ "aria-label": "search" }}
               />
             </div>
 
@@ -258,9 +263,10 @@ export default function PrimarySearchAppBar() {
               <IconButton
                 edge="end"
                 color="inherit"
-              aria-label="account of current user"
-              aria-haspopup="true"
-                onClick={handleFilterMenuOpen}>
+                aria-label="account of current user"
+                aria-haspopup="true"
+                onClick={handleFilterMenuOpen}
+              >
                 <Fab size="medium" color="secondary" aria-label="add">
                   <AddCircleIcon />
                 </Fab>
@@ -275,9 +281,18 @@ export default function PrimarySearchAppBar() {
             {/* Search Filters (Dropdown) */}
 
             <div className={classes.filter}>
-             <FilterMenu />
-              <Button type="submit" startIcon={<SearchIcon />} className={classes.submitButton}
-                size="medium" variant="contained" color="primary"> Search</Button>
+              <FilterMenu />
+              <Button
+                type="submit"
+                startIcon={<SearchIcon />}
+                className={classes.submitButton}
+                size="medium"
+                variant="contained"
+                color="primary"
+              >
+                {" "}
+                Search
+              </Button>
             </div>
           </form>
 
@@ -287,7 +302,7 @@ export default function PrimarySearchAppBar() {
           <div className={classes.sectionDesktop}>
             <IconButton edge="end" color="inherit">
               <Fab size="medium" color="primary" aria-label="add">
-                < HomeIcon />
+                <HomeIcon />
               </Fab>
             </IconButton>
             <IconButton edge="end" color="inherit">
@@ -330,5 +345,21 @@ export default function PrimarySearchAppBar() {
       {renderFilterMenu}
     </div>
   );
+};
 
-}
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logoutRedux: () => {
+      dispatch(logoutNowThunk());
+    },
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PrimarySearchAppBar);
