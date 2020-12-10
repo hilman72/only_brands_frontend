@@ -10,6 +10,7 @@ function UserInfoCard(){
         <h3>UserName</h3>
         <p>description</p>
         <Button>Follow</Button>
+        <Button>Unfollow</Button>
     </div>
     )
 }
