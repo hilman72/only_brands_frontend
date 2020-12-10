@@ -32,10 +32,10 @@ export default function ImgMediaCard() {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="h2">
-          Coupon
+          ALL YOU CAN DRINK FOR $250
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-          Coupon Detail
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
         </Typography>
       </CardContent>
 
