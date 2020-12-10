@@ -1,6 +1,19 @@
 .RecommendationCard{
-    height: 10rem;
-    width: 30rem;
     border: 2px solid black;
-    margin: 1rem;
+}
+
+.image{
+    height: 10rem;
+}
+
+.box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: pink
+}
+
+.header {
+    padding: 0 !important;
+    margin: 0 !important;
 }
