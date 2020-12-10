@@ -1,7 +1,6 @@
 import React from 'react';
 import './PointsCarousel.style.scss';
 import PointsCards from '../PointsCards/PointsCards.components'
-import Grid from '@material-ui/core/Grid'
 
 //Swiper 
 import { Swiper, SwiperSlide} from 'swiper/react';
@@ -13,17 +12,17 @@ import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
 
 // import Swiper core and required components
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y} from 'swiper';
+import SwiperCore, {Navigation, Autoplay} from 'swiper';
 
 
-SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
+SwiperCore.use([Navigation, Autoplay]);
 
 function PointsCarousel(){
 
     return(
         <div className="CardContainer">
           <Swiper
-                spaceBetween={30}
+                spaceBetween={10}
                 slidesPerView={5}
                 navigation
                 scrollbar={{ draggable: true }}

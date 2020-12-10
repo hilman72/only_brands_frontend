@@ -11,3 +11,75 @@ body {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
   }
+
+  @font-face {
+    font-family: "Raleway";
+    src: local("Raleway"),
+      url("../src/Assets/Fonts/Raleway/Raleway-Regular.ttf") format("truetype");
+    font-weight: normal;
+  }
+
+  @font-face {
+    font-family: "PeaceSans";
+    src: local("PeaceSans"),
+      url("../src/Assets/Fonts/PeaceSans/Peace\ Sans\ Webfont.ttf") format("truetype");
+    font-weight: normal;
+  }
+
+  @font-face {
+    font-family: "LeagueSpartan";
+    src: local("LeagueSpartan"),
+      url("../src/Assets/Fonts/LeagueSpartan/leaguespartan-bold.ttf") format("truetype");
+    font-weight: normal;
+  }
+
+  @font-face {
+    font-family: "MontserratSemiBold";
+    src: local("Montserrat"),
+      url("../src/Assets/Fonts/MontserratSemiBold/Montserrat-SemiBold.ttf") format("truetype");
+    font-weight: normal;
+  }
+
+  @font-face {
+    font-family: "MontserratRegular";
+    src: local("Montserrat"),
+      url("../src/Assets/Fonts/MontserratRegular/Montserrat-Regular.ttf") format("truetype");
+    font-weight: normal;
+  }
+
+  h1 {
+    font-family: PeaceSans !important;
+    font-weight: 400 !important;
+    font-size: 3rem !important;
+  }
+
+  h2 {
+    font-family: MontserratSemiBold !important;
+    font-weight: 600 !important;
+    font-size: 1.3rem !important;
+  }
+
+  h5 {
+    font-family: LeagueSpartan !important;
+    font-weight: 600 !important;
+    font-size: 2rem !important;
+  }
+
+  /* h6 {
+    font-family: Raleway !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+  } */
+
+  h6 {
+    font-family: MontserratRegular !important;
+    font-weight: 200 !important;
+    font-size: 1rem !important;
+  }
+
+  p {
+      font-family: MontserratRegular !important;
+      font-weight: 200 !important;
+      font-size: 0.8rem !important;
+  }
+
