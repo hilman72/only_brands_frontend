@@ -22,8 +22,10 @@ function PointsCarousel(){
     return(
         <div className="CardContainer">
           <Swiper
-                spaceBetween={10}
-                slidesPerView={5}
+                spaceBetween={30}
+                slidesPerView={2}
+                slidesPerColumnFill={2}
+                slidesPerColumn={3}
                 navigation
                 scrollbar={{ draggable: true }}
                 onSlideChange={() => console.log('slide change')}

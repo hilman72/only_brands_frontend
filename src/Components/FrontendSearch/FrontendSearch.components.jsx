@@ -1,4 +1,5 @@
 import React from 'react';
+import './FrontendSearch.styles.scss'
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -7,7 +8,8 @@ import FormLabel from '@material-ui/core/FormLabel';
 
 export default function FrontendSearch() {
     return (
-        <FormControl component="fieldset">
+        <div className="search">
+                 <FormControl component="fieldset">
             <FormLabel component="legend">FrontEndSearch Results Rearrangement</FormLabel>
             <RadioGroup row aria-label="position" name="position" defaultValue="top">
                 <FormControlLabel
@@ -31,5 +33,6 @@ export default function FrontendSearch() {
 
             </RadioGroup>
         </FormControl>
+        </div>
     );
 }
