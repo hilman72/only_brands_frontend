@@ -58,6 +58,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={LandingPage} />
             <Route path="/LoginPage" component={LoginPage} />
+            <Route path="/RegisterPage" component={RegisterPage} />
             <PrivateRoute path="/UserProfiles" component={UserProfile} />
             <PrivateRoute
               path="/BusinessProfiles"
@@ -67,7 +68,6 @@ class App extends React.Component {
             <PrivateRoute path="/LoginPage" component={LoginPage} />
             <PrivateRoute path="/CouponSearch" component={CouponSearch} />
             <PrivateRoute path="/HomePage" component={HomePage} />
-            <PrivateRoute path="/RegisterPage" component={RegisterPage} />
           </Switch>
         </Router>
       </div>
