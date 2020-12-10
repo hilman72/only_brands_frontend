@@ -1,4 +1,3 @@
-
 import React from "react";
 import { connect } from "react-redux";
 import { logoutNowThunk } from "../../Redux/actions";
@@ -20,10 +19,9 @@ import HomeIcon from "@material-ui/icons/Home";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import LocalOfferIcon from "@material-ui/icons/LocalOffer";
 import MoreIcon from "@material-ui/icons/MoreVert";
-import Logo from "../../Images/logo.png";
+import Logo from "../../Assets/Images/logo.png";
 import { Popover } from "@material-ui/core";
 import FilterMenu from "../FilterMenu/FilterMenu.components";
-
 
 const useStyles = makeStyles((theme) => ({
   grow: {
