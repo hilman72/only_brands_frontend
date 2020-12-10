@@ -22,7 +22,9 @@ function CouponCarousel() {
     <div className="CouponContainer">
       <Swiper
         spaceBetween={30}
-        slidesPerView={7}
+        slidesPerView={2}
+        slidesPerColumnFill={2}
+        slidesPerColumn={2}
         navigation
         scrollbar={{ draggable: true }}
         onSlideChange={() => console.log("slide change")}
