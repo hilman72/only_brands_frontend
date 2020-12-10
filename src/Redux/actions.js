@@ -16,11 +16,11 @@ function loginFailureActionCreator(message) {
   };
 }
 
-export function loginUserThunk(email, password) {
+export function loginUserThunk(username, password) {
   return (dispatch) => {
     return axios
-      .post(`${process.env.REACT_APP_API_SERVER}/api/login`, {
-        email: email,
+      .post(`http://localhost:5000/api/login`, {
+        username: username,
         password: password,
       })
       .then((response) => {
@@ -35,6 +35,7 @@ export function loginUserThunk(email, password) {
         } else {
           localStorage.setItem("token", response.data.token);
           dispatch(loginSuccessActionCreator());
+          console.log(response.data.token);
         }
       })
       .catch((err) => console.log("Error: " + err));

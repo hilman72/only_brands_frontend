@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import "./LandingPage.style.scss";
 import Grid from "@material-ui/core/Grid";
 import CouponCarousel from "../../Components/CouponCarousel/CouponCarousel.components";
@@ -6,6 +7,7 @@ import Footer from "../../Components/Footer/Footer.components";
 import Button from "@material-ui/core/Button";
 
 function LandingPage() {
+  const history = useHistory();
   return (
     <div>
       <div className="HeaderContainer">
@@ -23,6 +25,9 @@ function LandingPage() {
                 size="large"
                 className="LoginButton"
                 color="primary"
+                onClick={() => {
+                  history.push("/LoginPage");
+                }}
               >
                 Login
               </Button>
