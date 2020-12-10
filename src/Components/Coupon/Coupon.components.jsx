@@ -143,7 +143,7 @@ function Coupon() {
                     </Grid>
                     <Grid item xs={4}>
                     <div className="buttonContainer">
-                        <Button className="button" variant="contained" size="small">Details</Button>
+                        <Button className="button" size="small">Details</Button>
                         </div>
                     </Grid>
                 </Grid>

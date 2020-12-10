@@ -31,11 +31,8 @@ const theme = createMuiTheme({
     },
   },
   overrides: {
-    // Style sheet name ⚛️
     MuiButton: {
-      // Name of the rule
       text: {
-        // Some CSS
         background: '#ff4c6c',
         borderRadius: '15px',
         border: '0.2rem solid #8deadb',
@@ -48,8 +45,6 @@ const theme = createMuiTheme({
   },
 });
 
-
-
 ReactDOM.render(
   <Provider store={store}>
   <ThemeProvider theme={theme}>
@@ -58,6 +53,7 @@ ReactDOM.render(
     </BrowserRouter>
   </ThemeProvider>
   </Provider>,
+
 
 
   document.getElementById("root")
