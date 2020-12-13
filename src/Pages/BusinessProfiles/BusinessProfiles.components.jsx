@@ -5,13 +5,7 @@ import BusinessDetail from "../../Components/Business-detail/Business-detail.com
 import BusinessWindows from "../../Components/Business-windows/Business-windows.component";
 import Header from "../../Components/Header/Header.component";
 
-class BusinessProfiles extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
+function BusinessProfiles(){
     return (
       <div>
         <Header />
@@ -21,7 +15,6 @@ class BusinessProfiles extends React.Component {
         </div>
       </div>
     );
-  }
 }
 
 export default BusinessProfiles;
