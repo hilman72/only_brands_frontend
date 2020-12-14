@@ -2,8 +2,6 @@ import React from "react";
 import "./UserProfile.style.scss";
 
 import UserInfoCard from "../../Components/UserInfoCard/UserInfoCard.components";
-import BioCard from "../../Components/BioCard/BioCard.components";
-import BusinessCarousel from "../../Components/BusinessCarousel/BusinessCarousel.components"
 import RecommendationCarousel from "../../Components/RecommendationCarousel/RecommendationCarousel.components";
 import CouponCarousel from "../../Components/CouponCarousel/CouponCarousel.components";
 import Header from "../../Components/Header/Header.component";
@@ -29,20 +27,13 @@ function UserProfile() {
               justify="center"
               alignItems="center"
               spacing={2}>
-              <Grid item xs={6}>
-                <UserInfoCard />
-              </Grid>
               <Grid container
                 direction="row"
                 justify="center"
                 alignItems="center"
-                xs={6}>
+                xs={12}>
                 <Grid item xs={12}>
-                <BioCard />
-                </Grid>
-                <Grid item xs={12}>
-                <p>Favourite Brands</p>
-                <BusinessCarousel />
+                  <UserInfoCard />
                 </Grid>
               </Grid>
               <Grid item xs={12}>

@@ -13,6 +13,7 @@ import BusinessCoupon from "../Business-Coupon/Business-Coupon.component";
 import BusinessTopFans from "../Business-topfans/Business-topfans.component";
 import BusinessTiers from "../Business-tiers/Business-tiers.component";
 import BusinessRecom from "../Business-recom/Business-recom.component";
+import CreateCoupon from "../CreateCoupon/CreateCoupon.component";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -62,6 +63,7 @@ const BusinessDiffCom = () => {
     setValue(newValue);
   };
 
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -77,7 +79,14 @@ const BusinessDiffCom = () => {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <BusinessCoupon />
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <CreateCoupon />
+          </Grid>
+          <Grid item xs={12}>
+            <BusinessCoupon />
+          </Grid>
+        </Grid>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <BusinessTopFans />
