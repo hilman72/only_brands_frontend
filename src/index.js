@@ -13,6 +13,7 @@ import '../src/Assets/Fonts/MontserratSemiBold/Montserrat-SemiBold.ttf';
 import '../src/Assets/Fonts/MontserratRegular/Montserrat-Regular.ttf';
 import '../src/Assets/Fonts/PeaceSans/Peace Sans Webfont.ttf';
 import '../src/Assets/Fonts/LeagueSpartan/leaguespartan-bold.ttf';
+import '../src/Assets/Fonts/MontserratMedium/Montserrat-Medium.ttf';
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 // import Button from '@material-ui/core/Button';

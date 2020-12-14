@@ -12,11 +12,12 @@ import {
 import { useGalaxyInfoStyles } from '@mui-treasury/styles/info/galaxy';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
 
+import RestaurantMenuRoundedIcon from '@material-ui/icons/RestaurantMenuRounded';
+
 const useStyles = makeStyles(() => ({
   card: {
-    borderRadius: '1rem',
+    borderRadius: '1rem !important',
     boxShadow: 'none',
-    position: 'relative',
     minWidth: 150,
     minHeight: 150,
     '&:after': {
@@ -27,7 +28,8 @@ const useStyles = makeStyles(() => ({
       height: '100%',
       bottom: 0,
       zIndex: 1,
-      background: 'linear-gradient(to top, #000, rgba(0,0,0,0))',
+      backgroundColor: 'rgba(255, 76, 109, 0.2) !important',
+      backgroundBlendMode: 'multiply !important',
     },
   },
   content: {
@@ -35,6 +37,15 @@ const useStyles = makeStyles(() => ({
     zIndex: 2,
     bottom: 0,
     width: '100%',
+  },
+  icon: {
+    position: 'absolute',
+    bottom: '-1.4rem',
+    right: '-1.4rem',
+    display: 'block',
+    zIndex: '0 !important' ,
+    color:'rgba(255,255,255,0.5)',
+    fontSize: '7rem',
   },
 }));
 
@@ -56,6 +67,7 @@ export const GalaxyCardDemo = React.memo(function GalaxyCard() {
             {/* <InfoCaption>Perfect for everyone</InfoCaption> */}
           </Info>
         </Box>
+        <RestaurantMenuRoundedIcon className={styles.icon}/>
       </Card>
   );
 });

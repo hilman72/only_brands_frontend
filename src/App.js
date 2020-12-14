@@ -16,6 +16,7 @@ import LandingPage from "./Pages/LandingPage/LandingPage.components";
 import CouponSearch from "./Pages/CouponSearch/CouponSearch.components";
 import HomePage from "./Pages/HomePage/HomePage.components";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage.component";
+import TestingPage from "./Pages/TestingPage/TestingPage.jsx";
 
 class App extends React.Component {
   constructor() {
@@ -59,6 +60,7 @@ class App extends React.Component {
             <Route exact path="/" component={LandingPage} />
             <Route path="/LoginPage" component={LoginPage} />
             <Route path="/RegisterPage" component={RegisterPage} />
+            <Route path="/TestingPage" component={TestingPage} />
             <PrivateRoute path="/UserProfiles" component={UserProfile} />
             <PrivateRoute
               path="/BusinessProfiles"
