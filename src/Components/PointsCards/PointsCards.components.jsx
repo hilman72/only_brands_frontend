@@ -9,36 +9,39 @@ import Button from '@material-ui/core/Button';
 import { Column, Item } from '@mui-treasury/components/flex';
 import { Info, InfoTitle, InfoSubtitle } from '@mui-treasury/components/info';
 import { useSoftRiseShadowStyles } from '@mui-treasury/styles/shadow/softRise'
+import LoyaltyRoundedIcon from '@material-ui/icons/LoyaltyRounded';
 
-const family = 'Rubik';
+const family = 'PeaceSans';
 
 const useStyles = makeStyles(() => ({
   card: {
     position: 'relative',
     borderRadius: 16,
     padding: 5,
-    backgroundColor: '#e5fcfb',
-    minWidth: 250,
+    backgroundColor: '#8eebdc',
+    minWidth: 100,
   },
-  learnMore: {
-    backgroundColor: '#fff !important',
-    color: '#fb703c',
-    boxShadow: '0 2px 6px #d0efef',
-    borderRadius: 12,
-    minWidth: 120,
-    minHeight: 42,
-    fontFamily: family,
-    textTransform: 'initial',
-    fontSize: '0.875rem',
-    fontWeight: 700,
-    letterSpacing: 0,
-  },
-  img: {
+  // learnMore: {
+  //   backgroundColor: '#fff !important',
+  //   color: '#fb703c',
+  //   boxShadow: '0 2px 6px #d0efef',
+  //   borderRadius: 12,
+  //   minWidth: 120,
+  //   minHeight: 42,
+  //   fontFamily: family,
+  //   textTransform: 'initial',
+  //   fontSize: '0.875rem',
+  //   fontWeight: 700,
+  //   letterSpacing: 0,
+  // },
+  icon: {
     position: 'absolute',
-    height: 100,
-    bottom: 0,
-    right: 0,
+    bottom: '-1.4rem',
+    right: '-1.4rem',
     display: 'block',
+    zIndex: 0,
+    color:'#c1ffff',
+    fontSize: '7rem',
   },
   shell: {
     position: 'absolute',
@@ -61,18 +64,42 @@ const useStyles = makeStyles(() => ({
       backgroundColor: 'rgba(71, 167, 162, 0.08)',
     }
   },
+  // h1: {
+  //   fontSize:"2rem !important",
+  //   color:"#ff4c6d",
+  // },
+  ptsTitle:{
+    color: '#ff4c6d',
+    fontSize: '2rem',
+    margin: 0,
+    zIndex: 10,
+    position: 'relative',
+  },
+  pts:{
+    color: '#ff4c6d',
+    fontSize: '1rem',
+    margin: 0,
+    zIndex: 10,
+    position: 'relative',
+  },
+  ptsBrand:{
+    color: '#c60042',
+    margin: 0,
+    zIndex: 9,
+    position: 'relative',
+  }
 }));
 
 const useOfferInfoStyles = makeStyles(() => {
   return {
     title: {
-      color: '#fb703c',
-      fontFamily: family,
-      fontSize: '1.4rem',
+      color: '#ff4c6d',
+      fontFamily: 'PeaceSans',
+      fontSize: '2.5rem',
       fontWeight: 700,
     },
     subtitle: {
-      color: '#48bbb5',
+      color: '#c60042',
       fontFamily: family,
       fontSize: '1.1rem',
       fontWeight: 500,
@@ -85,22 +112,27 @@ function PointsCard() {
   const shadowStyles = useSoftRiseShadowStyles();
   return (
       <Card className={cx(styles.card, shadowStyles.root)}>
-        <Column gap={2} mr={2}>
+        <LoyaltyRoundedIcon className={styles.icon} />
+        <Column gap={2}>
           <Info position={'middle'} useStyles={useOfferInfoStyles}>
-            <InfoTitle>20 Points Earned</InfoTitle>
-            <InfoSubtitle>Outback Steakhouse</InfoSubtitle>
+            {/* <InfoTitle>20 Pts</InfoTitle>
+            <InfoSubtitle>Outback Steakhouse</InfoSubtitle> */}
+            <h1 className={styles.ptsTitle}>20</h1>
+            <p className={styles.pts}>pts</p>
+            <p className={styles.ptsBrand}>Outback Steakhouse</p>
           </Info>
-          <Item mt={2}>
-            <Button className={styles.learnMore}>Visit Brand</Button>
-          </Item>
+          {/* <Item mt={2}>
+            <Button>Visit Brand</Button>
+          </Item> */}
         </Column>
-        <img
+        {/* <img
           className={styles.img}
           alt={''}
           src={
             'https://www.clipartmax.com/png/full/12-127462_online-share-trading-6-star-ratings-and-award-report-reward-png.png'
           }
-        />
+        /> */}
+        {/* <LoyaltyRoundedIcon className={styles.icon} /> */}
         <div className={styles.shell} />
       </Card>
   );
