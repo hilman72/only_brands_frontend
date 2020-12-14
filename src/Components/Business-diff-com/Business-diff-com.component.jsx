@@ -58,19 +58,9 @@ const useStyles = makeStyles((theme) => ({
 const BusinessDiffCom = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  const [open, setOpen] = React.useState(false);
-
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-
-  const handleClickOpen = () => {
-      setOpen(true);
-  };
-
-  const handleClose = () => {
-      setOpen(false);
   };
 
 
