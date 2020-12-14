@@ -9,6 +9,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import VerticalTicketRip from '@mui-treasury/components/rip/verticalTicket';
 import { useVerticalRipStyles } from '@mui-treasury/styles/rip/vertical';
 import Button from '@material-ui/core/Button';
+import ConfirmationNumberRoundedIcon from '@material-ui/icons/ConfirmationNumberRounded';
 
 const mainColor = '#ff829b';
 const lightColor = '#ff4c6d';
@@ -36,6 +37,7 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
         [breakpoints.up('sm')]: {
             minWidth: 400,
         },
+        position: 'relative',
     },
     left: {
         borderTopLeftRadius: borderRadius,
@@ -49,6 +51,7 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
         width: 80,
         height: 80,
         borderRadius: '50%',
+        border: '4px solid #8eebdc',
     },
     right: {
         borderTopRightRadius: borderRadius,
@@ -59,10 +62,12 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
         alignItems: 'center',
         textAlign: 'center',
         backgroundColor: '#ff829b',
+        position: 'relative',
+        overflow: 'hidden',
     },
     label: {
         padding: '2px 8px',
-        backgroundColor: '#c60042'
+        // backgroundColor: '#c60042'
     },
     heading: {
         fontSize: 20,
@@ -70,14 +75,17 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
         textTransform: 'uppercase',
         letterSpacing: 1,
         margin: 0,
-        marginBottom: 4
+        marginBottom: 4,
+        position: 'relative',
+        textAlign: 'center',
+        textShadow: '2px 0 0 #8eebdc, -2px 0 0 #8eebdc, 0 2px 0 #8eebdc, 0 -2px 0 #8eebdc, 1px 1px #8eebdc, -1px -1px 0 #8eebdc, 1px -1px 0 #8eebdc, -1px 1px 0 #8eebdc',
     },
     subheader: {
         fontSize: 15,
         textTransform: 'uppercase',
         color: palette.text.secondary,
         letterSpacing: 2,
-        textAlign: 'left'
+        textAlign: 'left',
     },
     text: {
         fontSize: 10,
@@ -101,6 +109,20 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
     },
     moveLeft: {},
     moveRight: {},
+    icon: {
+        position: 'absolute',
+        bottom: '-1.4rem',
+        right: '-1.4rem',
+        display: 'block',
+        zIndex: '0 !important' ,
+        color:'#ffb4cc',
+        fontSize: '7rem',
+        transform: 'rotate(45deg)',
+      },
+    button:{
+        position: 'relative',
+        zIndex: 1,
+    }
 }));
 
 function Coupon() {
@@ -113,6 +135,7 @@ function Coupon() {
 
     return (
         <Card className={styles.card} elevation={0}>
+
             <div className={cx(styles.left, styles.moveLeft)}>
                 <CardMedia
                     className={styles.media}
@@ -130,6 +153,7 @@ function Coupon() {
             />
             <div className={cx(styles.right, styles.moveRight)}>
                 <Grid container>
+                <ConfirmationNumberRoundedIcon className={styles.icon}/>
                     <Grid item xs={12}>
                         <div className={styles.label}>
                             <h2 className={styles.heading}>25% Off Any Order</h2>
@@ -137,7 +161,7 @@ function Coupon() {
                     </Grid>
                     <Grid item xs={8}>
                         <div className="brandInfo">
-                        <h3 className={styles.subheader}>Outback Steakhouse</h3>
+                        <h4 className={styles.subheader}>Outback Steakhouse</h4>
                         <p className={styles.text}>Valid from: 09/12/20 - 02/02/21</p>
                         </div>
                     </Grid>
@@ -146,6 +170,7 @@ function Coupon() {
                         <Button className="button" size="small">Details</Button>
                         </div>
                     </Grid>
+                    {/* <ConfirmationNumberRoundedIcon className={styles.icon}/> */}
                 </Grid>
             </div>
         </Card>

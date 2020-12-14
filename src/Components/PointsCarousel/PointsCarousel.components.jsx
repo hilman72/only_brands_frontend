@@ -24,9 +24,9 @@ function PointsCarousel(){
           <Swiper
 
                 spaceBetween={30}
-                slidesPerView={2}
+                slidesPerView={3}
                 slidesPerColumnFill={2}
-                slidesPerColumn={3}
+                slidesPerColumn={2}
 
                 navigation
                 scrollbar={{ draggable: true }}

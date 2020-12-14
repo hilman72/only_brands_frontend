@@ -34,8 +34,7 @@ function BusinessCarousel() {
             <SwiperSlide><BrandCards /></SwiperSlide>
             <SwiperSlide><BrandCards /></SwiperSlide>
             <SwiperSlide><BrandCards /></SwiperSlide>
-                 </Swiper>
-           
+            </Swiper>
         </div >
     )
 }
