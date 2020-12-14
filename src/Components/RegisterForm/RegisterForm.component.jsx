@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 import "./RegisterForm.style.scss";
 
@@ -8,6 +9,7 @@ const RegisterForm = () => {
   const [password, setPassword] = useState("");
   const [password_again, setPassword_again] = useState("");
   const [error, setError] = useState(false);
+  const [register, setRegister] = useState(false);
 
   const handleChange_username = (e) => {
     setUsername(e.target.value);
@@ -30,7 +32,6 @@ const RegisterForm = () => {
     if (password !== password_again) {
       setError(true);
     } else {
-      console.log(username);
       await fetch(`http://localhost:5000/api/signup`, {
         method: "POST",
         headers: { "content-Type": "application/json" },
@@ -39,11 +40,18 @@ const RegisterForm = () => {
           email: email,
           password: password,
         }),
-      }).then((response) => {
-        console.log(response);
-      });
+      }).then(setRegister(true));
     }
   };
+
+  const history = useHistory();
+
+  useEffect(() => {
+    if (register === true) {
+      console.log("hello");
+      history.push("/");
+    }
+  }, [register, history]);
 
   return (
     <div>
