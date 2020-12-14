@@ -3,13 +3,14 @@ import { useHistory } from "react-router-dom";
 
 import "./RegisterForm.style.scss";
 
-const RegisterForm = () => {
+const RegisterForm = (props) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password_again, setPassword_again] = useState("");
   const [error, setError] = useState(false);
   const [register, setRegister] = useState(false);
+  const [who, setWho] = useState("");
 
   const handleChange_username = (e) => {
     setUsername(e.target.value);
@@ -32,26 +33,40 @@ const RegisterForm = () => {
     if (password !== password_again) {
       setError(true);
     } else {
-      await fetch(`http://localhost:5000/api/signup`, {
-        method: "POST",
-        headers: { "content-Type": "application/json" },
-        body: JSON.stringify({
-          username: username,
-          email: email,
-          password: password,
-        }),
-      }).then(setRegister(true));
+      if (who === "user") {
+        await fetch(`http://localhost:5000/api/signup/user`, {
+          method: "POST",
+          headers: { "content-Type": "application/json" },
+          body: JSON.stringify({
+            username: username,
+            email: email,
+            password: password,
+          }),
+        }).then(setRegister(true));
+      } else if (who === "business") {
+        await fetch(`http://localhost:5000/api/signup/business`, {
+          method: "POST",
+          headers: { "content-Type": "application/json" },
+          body: JSON.stringify({
+            username: username,
+            email: email,
+            password: password,
+          }),
+        }).then(setRegister(true));
+      }
     }
   };
 
   const history = useHistory();
 
   useEffect(() => {
+    setWho(props.who);
+
     if (register === true) {
       console.log("hello");
       history.push("/");
     }
-  }, [register, history]);
+  }, [register, history, props.who]);
 
   return (
     <div>
