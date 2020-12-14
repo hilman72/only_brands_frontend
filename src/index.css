@@ -47,34 +47,56 @@ body {
     font-weight: normal;
   }
 
+  @font-face {
+    font-family: "MontserratMedium";
+    src: local("Montserrat"),
+      url("../src/Assets/Fonts/MontserratMedium/Montserrat-Medium.ttf") format("truetype");
+    font-weight: normal;
+  }
+
   h1 {
     font-family: PeaceSans !important;
     font-weight: 400 !important;
-    font-size: 3rem !important;
+    font-size: 2rem !important;
+    letter-spacing: 0.5rem;
+    text-transform: uppercase;
   }
 
   h2 {
-    font-family: MontserratSemiBold !important;
-    font-weight: 600 !important;
-    font-size: 1.3rem !important;
-  }
-
-  h5 {
     font-family: LeagueSpartan !important;
     font-weight: 600 !important;
-    font-size: 2rem !important;
+    font-size: 1.2rem !important;
+    color: #282828;
+    letter-spacing: 0.1rem;
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
   }
 
-  /* h6 {
-    font-family: Raleway !important;
+
+  h3 {
+    font-family: MontserratSemiBold !important;
+    font-weight: 600 !important;
+    font-size: 1.2rem !important;
+    margin: 0;
+    color: #282828;
+    letter-spacing: 0.1rem;
+  }
+
+  h4{
+    font-family: MontserratMedium !important;
     font-weight: 600 !important;
     font-size: 1rem !important;
-  } */
+    margin: 0;
+    color: #282828;
+    letter-spacing: 0.1rem;
+  }
+
 
   h6 {
     font-family: MontserratRegular !important;
     font-weight: 200 !important;
     font-size: 1rem !important;
+    color: #282828;
   }
 
   p {

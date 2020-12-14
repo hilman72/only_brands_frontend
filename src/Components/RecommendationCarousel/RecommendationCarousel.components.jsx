@@ -24,7 +24,8 @@ function RecommendationCarousel(){
         <div className="RecommendationCarousel">
             <Swiper
                 spaceBetween={30}
-                slidesPerView={2}
+                slidesPerColumnFill={1}
+                slidesPerColumn={2}
                 navigation
                 scrollbar={{ draggable: true }}
                 onSlideChange={() => console.log('slide change')}
