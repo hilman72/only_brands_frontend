@@ -13,6 +13,7 @@ import BusinessCoupon from "../Business-Coupon/Business-Coupon.component";
 import BusinessTopFans from "../Business-topfans/Business-topfans.component";
 import BusinessTiers from "../Business-tiers/Business-tiers.component";
 import BusinessRecom from "../Business-recom/Business-recom.component";
+import CreateCoupon from "../CreateCoupon/CreateCoupon.component";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -57,10 +58,21 @@ const useStyles = makeStyles((theme) => ({
 const BusinessDiffCom = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const [open, setOpen] = React.useState(false);
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const handleClickOpen = () => {
+      setOpen(true);
+  };
+
+  const handleClose = () => {
+      setOpen(false);
+  };
+
 
   return (
     <div className={classes.root}>
@@ -77,7 +89,14 @@ const BusinessDiffCom = () => {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <BusinessCoupon />
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <CreateCoupon />
+          </Grid>
+          <Grid item xs={12}>
+            <BusinessCoupon />
+          </Grid>
+        </Grid>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <BusinessTopFans />
