@@ -2,8 +2,7 @@ import React from "react";
 import "./UserProfile.style.scss";
 
 import UserInfoCard from "../../Components/UserInfoCard/UserInfoCard.components";
-import FavouriteCateCard from "../../Components/FavouriteCateCard/FavouriteCateCard.components";
-import BadgeCard from "../../Components/BadgeCard/BadgeCard.components";
+import BioCard from "../../Components/BioCard/BioCard.components";
 import BusinessCarousel from "../../Components/BusinessCarousel/BusinessCarousel.components"
 import RecommendationCarousel from "../../Components/RecommendationCarousel/RecommendationCarousel.components";
 import CouponCarousel from "../../Components/CouponCarousel/CouponCarousel.components";
@@ -20,7 +19,7 @@ function UserProfile() {
           Gutter
           </Grid>
         <Grid item xs={8}>
-            <Grid item xs={12}>
+          <Grid item xs={12}>
             Gutter
             </Grid>
           <Paper elevation={20}>
@@ -38,11 +37,13 @@ function UserProfile() {
                 justify="center"
                 alignItems="center"
                 xs={6}>
-                <FavouriteCateCard />
-                <BadgeCard />
-              </Grid>
-              <Grid item xs={12}>
+                <Grid item xs={12}>
+                <BioCard />
+                </Grid>
+                <Grid item xs={12}>
+                <p>Favourite Brands</p>
                 <BusinessCarousel />
+                </Grid>
               </Grid>
               <Grid item xs={12}>
                 <p>Recent Recommendations</p>
