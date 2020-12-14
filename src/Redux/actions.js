@@ -34,6 +34,7 @@ export function loginUserThunk(username, password) {
           );
         } else {
           localStorage.setItem("token", response.data.token);
+          localStorage.setItem("ob_id", response.data.id);
           dispatch(loginSuccessActionCreator());
           console.log(response.data.token);
         }
@@ -53,6 +54,7 @@ export function logoutSuccessActionCreator() {
 export function logoutNowThunk() {
   return (dispatch) => {
     localStorage.removeItem("token");
+    localStorage.removeItem("ob_id");
     dispatch(logoutSuccessActionCreator());
   };
 }
