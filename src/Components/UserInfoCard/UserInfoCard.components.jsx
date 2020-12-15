@@ -25,6 +25,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
+import BrandCards from "../../Components/BrandCards/BrandCards.components"
+import { Paper } from '@material-ui/core';
 
 
 const useStyles = makeStyles(({ palette }) => ({
@@ -190,10 +192,20 @@ function UserInfoCard() {
                             />
                         </CardContent>
                     </Grid>
-                    <Grid item
+                    <Grid container
                         xs={12}>
                         <p>Favourite Brands</p>
-                        <BusinessCarousel />
+                        <Grid container xs={12} spacing={3}>
+                            <Grid item xs={4}>
+                                <BrandCards />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <BrandCards />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <BrandCards />
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>
@@ -230,8 +242,13 @@ function UserInfoCard() {
                         Update
                     </Button>
                     <Button onClick={handleClose}>
+                        Update
+          </Button>
+                    <Button onClick={handleClose}>
                         Cancel
-                    </Button>
+          </Button>
+
+
                 </DialogActions>
             </Dialog>
         </Card>
