@@ -137,7 +137,6 @@ const BusinessDetail = (props) => {
                 </Box>
               </Box>
             </Box>
-          </Box>
         </Grid>
       </Grid>
       <Grid container
@@ -171,7 +170,6 @@ const BusinessDetail = (props) => {
           </Grid>
         </Grid>
       </Grid>
-    </Grid>
     </Card>
   );
 };
