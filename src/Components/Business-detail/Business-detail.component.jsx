@@ -16,12 +16,14 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import "./Business-detail.style.scss";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import TextField from "@material-ui/core/TextField";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField';
+import BusinessInfoModal from "../BusinessInfoModal/BusinessInfoModal.component";
+
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
@@ -135,28 +137,27 @@ const BusinessDetail = (props) => {
                 </Box>
               </Box>
             </Box>
-          </Grid>
+          </Box>
         </Grid>
-        <Grid container className={styles.container} xs={6}>
-          <Grid item className={styles.editButton} xs={12}>
-            {who === "user" ? (
-              <div></div>
-            ) : (
-              <Button className="edit" onClick={handleClickOpen}>
-                Edit Profile
-              </Button>
-            )}
-          </Grid>
-          <Grid item={12}>
-            <CardContent className={styles.content}>
-              <TextInfoContent
-                classes={textCardContentStyles}
-                heading={"Description/Bio"}
-                body={
-                  "We are going to learn different kinds of species in nature that live together to form amazing environment."
-                }
-              />
-            </CardContent>
+      </Grid>
+      <Grid container
+        className={styles.container}
+        xs={6}>
+        <Grid item
+          className={styles.editButton}
+          xs={12}>
+          <BusinessInfoModal />
+        </Grid>
+        <Grid item={12}>
+          <CardContent className={styles.content}>
+            <TextInfoContent
+              classes={textCardContentStyles}
+              heading={'Description/Bio'}
+              body={
+                'We are going to learn different kinds of species in nature that live together to form amazing environment.'
+              }
+            />
+          </CardContent>
           </Grid>
           <Grid container xs={12}>
             <Grid item xs={6}>
@@ -170,36 +171,7 @@ const BusinessDetail = (props) => {
           </Grid>
         </Grid>
       </Grid>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">Edit Profile Details</DialogTitle>
-        <DialogContent>
-          <DialogContentText>Enter Details Below</DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="location"
-            label="Location"
-            type="text"
-            fullWidth
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="description"
-            label="Description"
-            type="text"
-            fullWidth
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Update</Button>
-          <Button onClick={handleClose}>Cancel</Button>
-        </DialogActions>
-      </Dialog>
+    </Grid>
     </Card>
   );
 };
