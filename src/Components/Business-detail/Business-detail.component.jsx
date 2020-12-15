@@ -4,6 +4,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Divider from "@material-ui/core/Divider";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import { makeStyles } from "@material-ui/core/styles";
@@ -16,12 +17,14 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import "./Business-detail.style.scss";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import TextField from "@material-ui/core/TextField";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField';
+import ChatIcon from "@material-ui/icons/Chat";
+import BusinessInfoModal from "../BusinessInfoModal/BusinessInfoModal.component";
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
@@ -33,14 +36,19 @@ const useStyles = makeStyles(({ palette }) => ({
     borderRadius: 12,
     minWidth: 256,
     textAlign: "center",
+    border: "5px solid #ff4c6d",
+    overflow: "visible",
   },
   content: {
     padding: 24,
   },
   avatar: {
-    width: 120,
-    height: 120,
+    width: 150,
+    height: 150,
     margin: "auto",
+    border: "5px solid #8eebdc",
+    borderRadius: "50%",
+    // transform: 'translate(0,-6rem)'
   },
   heading: {
     fontSize: 18,
@@ -66,7 +74,25 @@ const useStyles = makeStyles(({ palette }) => ({
     marginBottom: 4,
     letterSpacing: "1px",
   },
+  button: {
+    padding: "1rem",
+    borderRadius: "1.5rem",
+  },
+  editButton: {
+    padding: "0.5rem",
+    borderRadius: "1rem",
+    float: "right",
+  },
+  SMIcon: {
+    height: "1rem",
+    width: "1rem",
+    color: "",
+  },
+  buttonGroup: {
+    borderRadius: "1.5rem",
+  },
 }));
+
 
 const BusinessDetail = (props) => {
   const [follow, setFollow] = React.useState(false);
@@ -100,6 +126,92 @@ const BusinessDetail = (props) => {
   return (
     <Card className={cx(styles.card, shadowStyles.root)}>
       <Grid container>
+        <Grid container xs={12}>
+          {/* --------- row for avatar --------- */}
+          <Grid item xs={12}>
+            <Avatar
+              className={styles.avatar}
+              src={
+                "https://image.shutterstock.com/image-photo/funny-cow-kaisergebirge-mountain-260nw-737751640.jpg"
+              }
+            />
+          </Grid>
+          {/* --------- row for name and description --------- */}
+          <Grid container item xs={12}>
+            <Grid item xs={4}>
+              <h3 className={styles.heading}>Outback Steakhouse</h3>
+              <span className={styles.subheader}>Hong Kong</span>
+              <Divider light />
+            </Grid>
+            <Grid item xs={12}>
+              <CardContent className={styles.content}>
+                <TextInfoContent
+                  classes={textCardContentStyles}
+                  heading={"Description/Bio"}
+                  body={
+                    "We are going to learn different kinds of species in nature that live together to form amazing environment."
+                  }
+                />
+              </CardContent>
+            </Grid>
+          </Grid>
+          {/* --------- row for the buttons --------- */}
+          <Grid container item xs={12}>
+            <Grid item xs={3}>
+              <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
+                <p className={styles.statLabel}>Followers</p>
+                <p className={styles.statValue}>6941</p>
+              </Box>
+            </Grid>
+            <Grid item xs={3}>
+              <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
+                  <Box p={1} flex={"auto"}>
+                    {follow ? (
+                      <Button onClick={handleClick} className={styles.button}>
+                        Follow
+                      </Button>
+                    ) : (
+                      <Box flex={"auto"}>
+                        <Button onClick={handleClick} className={styles.button}>
+                          Followed
+                        </Button>
+                        <br />
+                        <br />
+                        <Button onClick={handleClick} className={styles.button}>
+                          UnFollow
+                        </Button>
+                      </Box>
+                    )}
+                  </Box>
+                </Box>
+            </Grid>
+            <Grid item xs={3}>
+              <Button startIcon={<ChatIcon />} className={styles.button}>
+                  Chat With Us
+              </Button>
+            </Grid>
+            <Grid item xs={3}>
+              <ButtonGroup
+                  color="primary"
+                  aria-label="large contained primary button group"
+                  variant="contained"
+                >
+                  <Button className="button1">
+                    <FacebookIcon />
+                  </Button>
+                  <Button className="button2">
+                    <TwitterIcon />
+                  </Button>
+                  <Button className="button3">
+                    <InstagramIcon />
+                  </Button>
+                </ButtonGroup>
+            </Grid>
+          </Grid>
+        </Grid>
+
+        {/* ---------------- Original Grid System ---------------- */}
+
         <Grid container xs={6}>
           <Grid item xs={12}>
             <CardContent>
@@ -123,13 +235,20 @@ const BusinessDetail = (props) => {
               <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
                 <Box p={1} flex={"auto"}>
                   {follow ? (
-                    <Button onClick={handleClick}>Follow</Button>
+                    <Button onClick={handleClick} className={styles.button}>
+                      Follow
+                    </Button>
                   ) : (
                     <Box flex={"auto"}>
-                      <Button onClick={handleClick}>Followed</Button>
+                      <Button onClick={handleClick} className={styles.button}>
+                        Followed
+                      </Button>
                       <br />
                       <br />
-                      <Button onClick={handleClick}>UnFollow</Button>
+                      <Button onClick={handleClick} className={styles.button}>
+                        UnFollow
+                      </Button>
+
                     </Box>
                   )}
                 </Box>
@@ -139,13 +258,13 @@ const BusinessDetail = (props) => {
         </Grid>
         <Grid container className={styles.container} xs={6}>
           <Grid item className={styles.editButton} xs={12}>
-            {who === "user" ? (
-              <div></div>
-            ) : (
-              <Button className="edit" onClick={handleClickOpen}>
-                Edit Profile
-              </Button>
-            )}
+            <Button
+              className="edit"
+              onClick={handleClickOpen}
+              className={styles.editButton}
+            >
+              Edit Profile
+            </Button>
           </Grid>
           <Grid item={12}>
             <CardContent className={styles.content}>
@@ -160,46 +279,33 @@ const BusinessDetail = (props) => {
           </Grid>
           <Grid container xs={12}>
             <Grid item xs={6}>
-              <Button>Chat With Us</Button>
+              <Button startIcon={<ChatIcon />} className={styles.button}>
+                Chat With Us
+              </Button>
             </Grid>
             <Grid item xs={6}>
-              <FacebookIcon />
-              <TwitterIcon />
-              <InstagramIcon />
+              <ButtonGroup
+                color="primary"
+                aria-label="large contained primary button group"
+                variant="contained"
+              >
+                <Button className="button1">
+                  <FacebookIcon />
+                </Button>
+                <Button className="button2">
+                  <TwitterIcon />
+                </Button>
+                <Button className="button3">
+                  <InstagramIcon />
+                </Button>
+              </ButtonGroup>
+              {/* <FacebookIcon className={styles.SMIcon}/>
+            <TwitterIcon className={styles.SMIcon}/>
+            <InstagramIcon className={styles.SMIcon}/> */}
             </Grid>
           </Grid>
         </Grid>
       </Grid>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">Edit Profile Details</DialogTitle>
-        <DialogContent>
-          <DialogContentText>Enter Details Below</DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="location"
-            label="Location"
-            type="text"
-            fullWidth
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="description"
-            label="Description"
-            type="text"
-            fullWidth
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Update</Button>
-          <Button onClick={handleClose}>Cancel</Button>
-        </DialogActions>
-      </Dialog>
     </Card>
   );
 };

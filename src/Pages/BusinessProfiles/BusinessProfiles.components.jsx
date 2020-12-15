@@ -1,4 +1,8 @@
+
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
+
 
 import "./BusinessProfiles.style.scss";
 import BusinessDetail from "../../Components/Business-detail/Business-detail.component";
@@ -7,7 +11,17 @@ import Header from "../../Components/Header/Header.component";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
+const useStyles = makeStyles(({ palette }) => ({
+  background: {
+    backgroundColor: "#f0f0f0",
+  },
+}));
+
 function BusinessProfiles() {
+
+
+  const styles = useStyles();
+
   const [who, setWho] = useState("");
 
   useEffect(() => {
@@ -15,10 +29,11 @@ function BusinessProfiles() {
     setWho(x);
   }, [who]);
 
+
   return (
     <div>
       <Header />
-      <Grid container>
+      <Grid container className={styles.background}>
         <Grid className="bannerImg" item xs={12}>
           Banner Photo
         </Grid>
