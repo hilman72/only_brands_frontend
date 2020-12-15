@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { logoutNowThunk } from "../../Redux/actions";
+import { useHistory } from "react-router-dom";
 
 import "./Header.style.scss";
 import { fade, makeStyles } from "@material-ui/core/styles";
@@ -90,11 +91,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PrimarySearchAppBar = (props) => {
+  const history = useHistory();
   const classes = useStyles();
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [filterMenu, setFilterMenu] = React.useState(null);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const [who, setWho] = React.useState("");
 
   //Mobile menu handle dropdown (for nav icons)
 
@@ -145,6 +148,31 @@ const PrimarySearchAppBar = (props) => {
     props.logoutRedux();
   };
 
+  const toProfile = (event) => {
+    event.preventDefault();
+    if (who === "user") {
+      history.push("/UserProfiles");
+    } else if (who === "business") {
+      history.push("/BusinessProfiles");
+    }
+    handleMenuClose();
+  };
+
+  const toHome = (event) => {
+    event.preventDefault();
+    history.push("/HomePage");
+  };
+
+  const toCoupon = (event) => {
+    event.preventDefault();
+    history.push("/MyCouponPage");
+  };
+
+  useEffect(() => {
+    let x = localStorage.getItem("ob_who");
+    setWho(x);
+  }, [who]);
+
   // Profile menu dropdown render
 
   const menuId = "primary-search-account-menu";
@@ -164,7 +192,7 @@ const PrimarySearchAppBar = (props) => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={toProfile}>Profile</MenuItem>
       <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Popover>
   );
@@ -183,7 +211,7 @@ const PrimarySearchAppBar = (props) => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+      <MenuItem onClick={toHome}>
         <IconButton color="inherit">
           <Badge color="secondary">
             <HomeIcon />
@@ -191,7 +219,7 @@ const PrimarySearchAppBar = (props) => {
         </IconButton>
         <p>Home</p>
       </MenuItem>
-      <MenuItem>
+      <MenuItem onClick={toCoupon}>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
             <LocalOfferIcon />
@@ -298,12 +326,12 @@ const PrimarySearchAppBar = (props) => {
 
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton edge="end" color="inherit">
+            <IconButton edge="end" color="inherit" onClick={toHome}>
               <Fab size="medium" color="primary" aria-label="add">
                 <HomeIcon />
               </Fab>
             </IconButton>
-            <IconButton edge="end" color="inherit">
+            <IconButton edge="end" color="inherit" onClick={toCoupon}>
               <Fab size="medium" color="primary" aria-label="add">
                 <Badge badgeContent={17} color="secondary">
                   <LocalOfferIcon />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import cx from "clsx";
 import Avatar from "@material-ui/core/Avatar";
 import Divider from "@material-ui/core/Divider";
@@ -17,13 +17,14 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import "./Business-detail.style.scss";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import TextField from "@material-ui/core/TextField";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField';
 import ChatIcon from "@material-ui/icons/Chat";
+import BusinessInfoModal from "../BusinessInfoModal/BusinessInfoModal.component";
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
@@ -92,7 +93,8 @@ const useStyles = makeStyles(({ palette }) => ({
   },
 }));
 
-const BusinessDetail = () => {
+
+const BusinessDetail = (props) => {
   const [follow, setFollow] = React.useState(false);
   const styles = useStyles();
   const textCardContentStyles = useN01TextInfoContentStyles();
@@ -103,6 +105,7 @@ const BusinessDetail = () => {
   });
 
   const [open, setOpen] = React.useState(false);
+  const [who, setWho] = React.useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -115,6 +118,10 @@ const BusinessDetail = () => {
   function handleClick() {
     setFollow(!follow);
   }
+
+  useEffect(() => {
+    setWho(props.who);
+  }, [props.who]);
 
   return (
     <Card className={cx(styles.card, shadowStyles.root)}>
@@ -241,6 +248,7 @@ const BusinessDetail = () => {
                       <Button onClick={handleClick} className={styles.button}>
                         UnFollow
                       </Button>
+
                     </Box>
                   )}
                 </Box>
@@ -298,39 +306,6 @@ const BusinessDetail = () => {
           </Grid>
         </Grid>
       </Grid>
-
-{/* ---------------- Modal ---------------- */}
-
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">Edit Profile Details</DialogTitle>
-        <DialogContent>
-          <DialogContentText>Enter Details Below</DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="location"
-            label="Location"
-            type="text"
-            fullWidth
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="description"
-            label="Description"
-            type="text"
-            fullWidth
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Update</Button>
-          <Button onClick={handleClose}>Cancel</Button>
-        </DialogActions>
-      </Dialog>
     </Card>
   );
 };
