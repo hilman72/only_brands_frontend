@@ -41,8 +41,7 @@ function CreateCoupon() {
     setOpen(false);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     const b_id = localStorage.getItem("ob_id");
     await fetch(`http://localhost:5000/api/createCoupon`, {
       method: "POST",
@@ -54,15 +53,14 @@ function CreateCoupon() {
         limit: coupLimit,
         account_business_id: b_id,
       }),
-    });
-    setCreate(true);
+    }).then(handleClose());
   };
 
-  useEffect(() => {
-    if (create === true) {
-      setOpen(false);
-    }
-  }, [create]);
+  //   useEffect(() => {
+  //     if (create === true) {
+  //       setOpen(false);
+  //     }
+  //   }, [create]);
 
   const couponLimit = [
     {
