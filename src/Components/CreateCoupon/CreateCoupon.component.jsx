@@ -9,13 +9,12 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
 
-function CreateCoupon() {
+function CreateCoupon(props) {
   const [open, setOpen] = useState(false);
   const [coupLimit, setCoupLimit] = useState("");
   const [date, setDate] = useState("");
   const [offer, setOffer] = useState("");
   const [detail, setDetail] = useState("");
-  const [create, setCreate] = useState(false);
 
   const handleChange_date = (event) => {
     setDate(event.target.value);
@@ -39,6 +38,7 @@ function CreateCoupon() {
 
   const handleClose = () => {
     setOpen(false);
+    props.create();
   };
 
   const handleSubmit = async () => {
