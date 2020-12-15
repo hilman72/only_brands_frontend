@@ -163,6 +163,11 @@ const PrimarySearchAppBar = (props) => {
     history.push("/HomePage");
   };
 
+  const toCoupon = (event) => {
+    event.preventDefault();
+    history.push("/MyCouponPage");
+  };
+
   useEffect(() => {
     let x = localStorage.getItem("ob_who");
     setWho(x);
@@ -206,7 +211,7 @@ const PrimarySearchAppBar = (props) => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+      <MenuItem onClick={toHome}>
         <IconButton color="inherit">
           <Badge color="secondary">
             <HomeIcon />
@@ -214,7 +219,7 @@ const PrimarySearchAppBar = (props) => {
         </IconButton>
         <p>Home</p>
       </MenuItem>
-      <MenuItem>
+      <MenuItem onClick={toCoupon}>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
             <LocalOfferIcon />
@@ -326,7 +331,7 @@ const PrimarySearchAppBar = (props) => {
                 <HomeIcon />
               </Fab>
             </IconButton>
-            <IconButton edge="end" color="inherit">
+            <IconButton edge="end" color="inherit" onClick={toCoupon}>
               <Fab size="medium" color="primary" aria-label="add">
                 <Badge badgeContent={17} color="secondary">
                   <LocalOfferIcon />
