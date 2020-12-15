@@ -66,9 +66,24 @@ function CouponModal() {
                 Details
       </Button>
             <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-                <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+                <Grid container 
+                 justify="space-between"
+                 alignItems="center"
+                xs={12}>
+                    <Grid item xs={9}>
+                    <DialogTitle id="customized-dialog-title" onClose={handleClose} gutterBottom>
                     25% Off Any Orders
                 </DialogTitle>
+                    </Grid>
+                    <Grid item xs={3}>
+                    <Button>Claim Now</Button>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography variant="h2" align="center" gutterBottom>
+                            Outback Steakhouse
+                        </Typography>
+                    </Grid>
+                </Grid>
                 <DialogContent dividers>
                     <Typography variant="h2" gutterBottom>
                         Offer Details:
@@ -92,9 +107,11 @@ function CouponModal() {
                     dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
                     sunt in culpa qui officia deserunt mollit anim id est laborum
                     </Typography>
-                    <DialogActions>
+                </DialogContent>
+                <DialogContent dividers>
+                <DialogActions>
                         <Button autoFocus onClick={handleClose}>
-                            Confirm
+                            Visit Brand Profile
                          </Button>
                     </DialogActions>
                 </DialogContent>
