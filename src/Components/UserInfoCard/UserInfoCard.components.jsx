@@ -18,14 +18,19 @@ import { useGutterBorderedGridStyles } from '@mui-treasury/styles/grid/gutterBor
 
 const useStyles = makeStyles(({ palette }) => ({
     card: {
-        borderRadius: 12,
-        minWidth: 256,
+        borderRadius: '1rem',
+        // minWidth: 256,
         textAlign: 'center',
+        boxShadow: 'none',
+        margin: 0,
+        padding: '0.5rem',
     },
     avatar: {
         width: 150,
         height: 150,
-        margin: 'auto'
+        margin: 'auto',
+        border: '4px solid #8eebdc',
+        // transform: 'translate(0, -5rem)',
     },
     heading: {
         fontSize: 18,
@@ -41,7 +46,7 @@ const useStyles = makeStyles(({ palette }) => ({
     },
     statLabel: {
         fontSize: '15px !important',
-        letterSpacing: 2,
+        // letterSpacing: 2,
         color: palette.grey[500],
         margin: 0,
     },
@@ -51,6 +56,14 @@ const useStyles = makeStyles(({ palette }) => ({
         marginBottom: 4,
         letterSpacing: '1px',
     },
+    button:{
+        height: '5rem',
+        width:'5rem',
+        borderRadius:'50%',
+    },
+    divider:{
+        backgroundColor: '#ff829b',
+    }
 }));
 
 function UserInfoCard() {
@@ -61,25 +74,28 @@ function UserInfoCard() {
         height: '40%',
     });
     return (
-        <Card className={cx(styles.card, shadowStyles.root)}>
+        <Card className={cx(styles.card
+        // ,shadowStyles.root
+        )}>
             <CardContent>
                 <Avatar className={styles.avatar} src={'https://media-exp1.licdn.com/dms/image/C5103AQFacNueL86flw/profile-displayphoto-shrink_800_800/0/1556346841861?e=1613001600&v=beta&t=e4hrgaisSOyFA5btttYksuOQ23kZGEVxGfgn2HwGZGU'} />
                 <h3 className={styles.heading}>Designer Darian</h3>
                 <span className={styles.subheader}>Hong Kong</span>
             </CardContent>
-            <Divider light />
+            <Divider className={styles.divider}/>
             <Box display={'flex'}>
                 <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
                     <p className={styles.statLabel}>Followers</p>
                     <p className={styles.statValue}>6941</p>
                 </Box>
-                <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
+                <Box p={2} flex={'auto'} className={borderedGridStyles.item} component="span">
                     <Box p={1} flex={'auto'} className={borderedGridStyles.item}>
-                        <Button>Follow</Button>
+                        <Button className={styles.button}>Follow</Button>
+                        <Button className={styles.button}>Unfollow</Button>
                     </Box>
-                    <Box p={1} flex={'auto'} className={borderedGridStyles.item}>
-                        <Button>Unfollow</Button>
-                    </Box>
+                    {/* <Box p={1} flex={'auto'} className={borderedGridStyles.item}>
+                        <Button className={styles.button}>Unfollow</Button>
+                    </Box> */}
                 </Box>
             </Box>
         </Card>

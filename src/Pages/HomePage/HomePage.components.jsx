@@ -21,11 +21,14 @@ function HomePage() {
           <Grid item xs={2}>
             Guttter
           </Grid>
-          <Grid item xs={8}>
-            <Grid container class="viewHeightContainer">
+
+          {/* ---------------- Content Container ---------------- */}
+          <Grid container item xs={8}>
+          {/* ---------------- Container if there is a "Your Coupon Section in Home" ---------------- */}
+            {/* <Grid container> */}
 
               {/* ---------------- Brands Recommendations ---------------- */}
-              <Grid container justify="flex-start" >
+              <Grid container spacing={2} alignItems="flex-end">
                 <Grid item xs={6}>
                   <h2>Hottest Brands</h2>
                   <BusinessCarousel />
@@ -36,30 +39,30 @@ function HomePage() {
                 </Grid>
               </Grid>
 
-              <Grid container>
+              <Grid container spacing={2}>
                 <Grid item xs={9}>
                   {/* ---------------- New Offers from Brands You Follow ---------------- */}
                   <Grid container item xs={12}>
-                    <Grid item xs={10}>
+                    {/* <Grid item xs={10}> */}
                       <h2 className="CouponSectionHeaders">
                         New Offers from Brands You Follow
                       </h2>
-                    </Grid>
-                    <Grid item xs={2}>
+                    {/* </Grid>
+                    <Grid item xs={2}> */}
                       <Button>More</Button>
-                    </Grid>
+                    {/* </Grid> */}
                   </Grid>
                   <Grid item xs={12}>
                     <CouponCarousel />
                   </Grid>
                 </Grid>
                 {/* ---------------- Refer a Frend Button ---------------- */}
-                <Grid item xs={3}>
+                <Grid container item xs={3} justify="center" alignItems="center">
                   <Grid item xs={12}>
-                    <div className="ReferFriendContainer">
                       <h2>Refer A Friend</h2>
-                      <h2>Explore New Brands</h2>
-                    </div>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <h2>Explore New Brands</h2>
                   </Grid>
                 </Grid>
               </Grid>
@@ -69,12 +72,12 @@ function HomePage() {
                   {/* ---------------- Earned Points ---------------- */}
                   <Grid item xs={6}>
                     <Grid container item xs={12}>
-                      <Grid item xs={10}>
+                      {/* <Grid item xs={10}> */}
                         <h2 className="CouponSectionHeaders">Earned Points</h2>
-                      </Grid>
-                      <Grid item xs={2}>
+                      {/* </Grid> */}
+                      {/* <Grid item xs={2}> */}
                         <Button>More</Button>
-                      </Grid>
+                      {/* </Grid> */}
                     </Grid>
                     <Grid item xs={12}>
                       <PointsCarousel />
@@ -83,14 +86,14 @@ function HomePage() {
                   {/* ---------------- Recommendations From Friends ---------------- */}
                   <Grid item xs={6}>
                     <Grid container item xs={12}>
-                      <Grid item xs={10}>
+                      {/* <Grid item xs={10}> */}
                         <h2 className="CouponSectionHeaders">
                           Recommendations From Friends
                         </h2>
-                      </Grid>
-                      <Grid item xs={2}>
+                      {/* </Grid> */}
+                      {/* <Grid item xs={2}> */}
                         <Button>More</Button>
-                      </Grid>
+                      {/* </Grid> */}
                     </Grid>
                     <Grid item xs={12}>
                       <RecommendationCarousel />
@@ -98,12 +101,12 @@ function HomePage() {
                   </Grid>
                 </Grid>
               </Grid>
-
-            </Grid>
+          {/* ---------------- Container if there is a "Your Coupon Section in Home" ---------------- */}
+            {/* </Grid> */}
 
 
             {/* ---------------- Your Coupons ---------------- */}
-            <Grid container>
+            {/* <Grid container>
               <Grid item xs={12}>
                 <Grid container item xs={12}>
                   <Grid item xs={10}>
@@ -117,8 +120,10 @@ function HomePage() {
                   <CouponCarousel />
                 </Grid>
               </Grid>
-            </Grid>
+            </Grid> */}
+            
           </Grid>
+
           <Grid item xs={2}>
             Guttter
           </Grid>
