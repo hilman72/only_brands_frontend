@@ -22,6 +22,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
+import BusinessInfoModal from "../BusinessInfoModal/BusinessInfoModal.component";
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
@@ -137,7 +138,7 @@ const BusinessDetail = () => {
         <Grid item
           className={styles.editButton}
           xs={12}>
-          <Button className="edit" onClick={handleClickOpen}>Edit Profile</Button>
+          <BusinessInfoModal />
         </Grid>
         <Grid item={12}>
           <CardContent className={styles.content}>
@@ -163,38 +164,6 @@ const BusinessDetail = () => {
         </Grid>
       </Grid>
     </Grid>
-    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Edit Profile Details</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        Enter Details Below
-          </DialogContentText>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="location"
-                        label="Location"
-                        type="text"
-                        fullWidth
-                    />
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="description"
-                        label="Description"
-                        type="text"
-                        fullWidth
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose}>
-                     Update
-          </Button>
-                    <Button onClick={handleClose}>
-                       Cancel
-          </Button>
-                </DialogActions>
-            </Dialog>
     </Card>
   )
 };
