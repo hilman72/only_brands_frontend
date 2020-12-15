@@ -28,6 +28,7 @@ import TextField from '@material-ui/core/TextField';
 import BrandCards from "../../Components/BrandCards/BrandCards.components"
 import { Paper } from '@material-ui/core';
 
+
 const useStyles = makeStyles(({ palette }) => ({
     card: {
         borderRadius: 12,
@@ -86,6 +87,14 @@ function UserInfoCard() {
     });
     const [open, setOpen] = React.useState(false);
 
+    // State to store uploaded file
+    const importantid = (localStorage.getItem("ob_id"))
+    console.log(importantid)
+    const [name, setName] = React.useState("User Input");
+    const [photofile, setphotoFile] = React.useState("");
+
+    //End of state i used 
+
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -97,6 +106,33 @@ function UserInfoCard() {
 
     function handleClick() {
         setFollow(!follow)
+    }
+
+    // Handles file upload event and updates state // done
+    const handleUpload = (event) => {
+        const formdata = new FormData()
+        formdata.append("image", event.target.files[0])
+        fetch("https://api.imgur.com/3/image", {
+            method: "post",
+            headers: {
+                Authorization: "Client-ID 0dfb916cd7c1ca8"
+            }
+            , body: formdata
+        }).then(data => data.json()).then(data => {
+            console.log(data.data.link);
+            alert("File Upload success");
+            setphotoFile(data.data.link)
+        })
+    }
+
+    //Send the form data to the backend
+    const on99 = async (e) => {
+        e.preventDefault();
+        await fetch('http://localhost:5000/edit', {
+            method: "post",
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ name: name, photo: photofile, id: importantid })
+        })
     }
 
     return (
@@ -178,7 +214,7 @@ function UserInfoCard() {
                 <DialogContent>
                     <DialogContentText>
                         Enter Details Below
-          </DialogContentText>
+                </DialogContentText>
                     <TextField
                         autoFocus
                         margin="dense"
@@ -195,14 +231,24 @@ function UserInfoCard() {
                         type="text"
                         fullWidth
                     />
+                    {/* this is for the normal text input */}
+                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                    <br></br>
+                    {/* this is for the photo input */}
+                    <input type="file" onChange={handleUpload} />
                 </DialogContent>
                 <DialogActions>
+                    <Button onClick={on99}>
+                        Update
+                    </Button>
                     <Button onClick={handleClose}>
                         Update
           </Button>
                     <Button onClick={handleClose}>
                         Cancel
           </Button>
+
+
                 </DialogActions>
             </Dialog>
         </Card>
