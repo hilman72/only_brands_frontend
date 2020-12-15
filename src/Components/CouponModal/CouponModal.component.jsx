@@ -1,70 +1,97 @@
-import React from "react";
-import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Modal from '@material-ui/core/Modal';
+import Dialog from '@material-ui/core/Dialog';
+import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import MuiDialogContent from '@material-ui/core/DialogContent';
+import MuiDialogActions from '@material-ui/core/DialogActions';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid'
 
-//function rand() {
-//    return Math.round(Math.random() * 20) - 10;
-//}
-
-function getModalStyle() {
-    const top = 50;
-    const left = 50;
-    return {
-        top: `${top}%`,
-        left: `${left}%`,
-        transform: `translate(-${top}%, -${left}%)`,
-    };
-}
-
-const useStyles = makeStyles(theme => ({
-    modal: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+const styles = (theme) => ({
+    root: {
+        margin: 0,
+        padding: theme.spacing(2),
     },
-    paper: {
+    closeButton: {
         position: 'absolute',
-        width: 450,
-        backgroundColor: theme.palette.background.paper,
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
+        right: theme.spacing(1),
+        top: theme.spacing(1),
+        color: theme.palette.grey[500],
     },
-}));
+});
 
+const DialogTitle = withStyles(styles)((props) => {
+    const { children, classes, onClose, ...other } = props;
+    return (
+        <MuiDialogTitle className={classes.root} {...other}>
+            <Typography variant="h1">{children}</Typography>
+            {onClose ? (
+                <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
+                    <CloseIcon />
+                </IconButton>
+            ) : null}
+        </MuiDialogTitle>
+    );
+});
 
-export default function CouponModal() {
-    const classes = useStyles();
-    const [modalStyle] = React.useState(getModalStyle);
+const DialogContent = withStyles((theme) => ({
+    root: {
+        padding: theme.spacing(2),
+    },
+}))(MuiDialogContent);
+
+const DialogActions = withStyles((theme) => ({
+    root: {
+        margin: 0,
+        padding: theme.spacing(1),
+    },
+}))(MuiDialogActions);
+
+function CouponModal() {
     const [open, setOpen] = React.useState(false);
 
-    const handleOpen = () => {
+    const handleClickOpen = () => {
         setOpen(true);
     };
-
     const handleClose = () => {
         setOpen(false);
     };
 
     return (
         <div>
-            <div>
-                <Button variant="contained" color="primary" onClick={handleOpen}>
-                    Open Modal
-            </Button>
-
-                <Modal
-                    aria-labelledby="simple-modal-title"
-                    aria-describedby="simple-modal-description"
-                    open={open}
-                    onClose={handleClose}
-                >
-                    <div style={modalStyle} className={classes.paper}>
-                        <h2>Simple React Modal Opened</h2>
-                        <p>textarea</p>
-                    </div>
-                </Modal>
-            </div>
+            <Button onClick={handleClickOpen}>
+                Details
+      </Button>
+            <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+                <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+                    25% Off Any Orders
+                </DialogTitle>
+                <DialogContent dividers>
+                    <Typography variant="h2" gutterBottom>
+                        Offer Details:
+                        25% off any orders on the regular menu from monday - friday
+                    </Typography>
+                    <Typography variant="h4" gutterBottom>
+                        Valid Period: 25/09/20 - 12/21/20
+                    </Typography>
+                </DialogContent>
+                <DialogContent dividers>
+                    <Typography variant="h2" gutterBottom>
+                        Coupon Code: XXXXXX
+                    </Typography>
+                    <DialogActions>
+                        <Button autoFocus onClick={handleClose}>
+                            Confirm
+                         </Button>
+                    </DialogActions>
+                </DialogContent>
+            </Dialog>
         </div>
     );
 }
+
+
+export default CouponModal; 
