@@ -10,6 +10,9 @@ import VerticalTicketRip from '@mui-treasury/components/rip/verticalTicket';
 import { useVerticalRipStyles } from '@mui-treasury/styles/rip/vertical';
 import Button from '@material-ui/core/Button';
 import ConfirmationNumberRoundedIcon from '@material-ui/icons/ConfirmationNumberRounded';
+import CardActions from '@material-ui/core/CardActions';
+import ClaimCouponModal from '../../Components/ClaimCouponModal/ClaimCouponModal.component'
+
 
 const mainColor = '#ff829b';
 const lightColor = '#ff4c6d';
@@ -114,12 +117,12 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
         bottom: '-1.4rem',
         right: '-1.4rem',
         display: 'block',
-        zIndex: '0 !important' ,
-        color:'#ffb4cc',
+        zIndex: '0 !important',
+        color: '#ffb4cc',
         fontSize: '7rem',
         transform: 'rotate(45deg)',
-      },
-    button:{
+    },
+    button: {
         position: 'relative',
         zIndex: 1,
     }
@@ -153,7 +156,7 @@ function Coupon() {
             />
             <div className={cx(styles.right, styles.moveRight)}>
                 <Grid container>
-                <ConfirmationNumberRoundedIcon className={styles.icon}/>
+                    <ConfirmationNumberRoundedIcon className={styles.icon} />
                     <Grid item xs={12}>
                         <div className={styles.label}>
                             <h2 className={styles.heading}>25% Off Any Order</h2>
@@ -161,13 +164,15 @@ function Coupon() {
                     </Grid>
                     <Grid item xs={8}>
                         <div className="brandInfo">
-                        <h4 className={styles.subheader}>Outback Steakhouse</h4>
-                        <p className={styles.text}>Valid from: 09/12/20 - 02/02/21</p>
+                            <h4 className={styles.subheader}>Outback Steakhouse</h4>
+                            <p className={styles.text}>Valid from: 09/12/20 - 02/02/21</p>
                         </div>
                     </Grid>
                     <Grid item xs={4}>
-                    <div className="buttonContainer">
-                        <Button className="button" size="small">Details</Button>
+                        <div className="buttonContainer">
+                            <CardActions>
+                                <ClaimCouponModal />
+                            </CardActions>
                         </div>
                     </Grid>
                     {/* <ConfirmationNumberRoundedIcon className={styles.icon}/> */}
