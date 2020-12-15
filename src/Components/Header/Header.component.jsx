@@ -155,6 +155,7 @@ const PrimarySearchAppBar = (props) => {
     } else if (who === "business") {
       history.push("/BusinessProfiles");
     }
+    handleMenuClose();
   };
 
   const toHome = (event) => {
@@ -186,7 +187,7 @@ const PrimarySearchAppBar = (props) => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={toProfile}>Profile</MenuItem>
       <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Popover>
   );
@@ -325,7 +326,7 @@ const PrimarySearchAppBar = (props) => {
                 <HomeIcon />
               </Fab>
             </IconButton>
-            <IconButton edge="end" color="inherit" onClick={toProfile}>
+            <IconButton edge="end" color="inherit">
               <Fab size="medium" color="primary" aria-label="add">
                 <Badge badgeContent={17} color="secondary">
                   <LocalOfferIcon />
