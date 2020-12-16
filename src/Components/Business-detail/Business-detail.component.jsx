@@ -92,9 +92,7 @@ const useStyles = makeStyles(({ palette }) => ({
 
   bottomRow:{
     backgroundColor: '#a4efef',
-    borderRadius: '0.5rem',
-    // height: '5rem',
-    // margin: 
+    borderRadius: '0rem 0rem 0.5rem 0.5rem',
   },
   followButtonContainer:{
     padding: 0,
