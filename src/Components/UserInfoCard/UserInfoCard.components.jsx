@@ -1,9 +1,8 @@
 // import Fab from '@material-ui/core/Fab'
-
 // <Button>Follow</Button>
 // <Button>Unfollow</Button>
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./UserInfoCard.components.scss"
 import cx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -25,6 +24,11 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
+//TM REDUX ,selector is to grab store data to state
+import { useSelector, useDispatch } from "react-redux";
+import { upload } from "../../Redux/Actions/TMactions";
+import Axios from 'axios';
+
 
 
 const useStyles = makeStyles(({ palette }) => ({
@@ -84,12 +88,18 @@ function UserInfoCard() {
         height: '70%',
     });
     const [open, setOpen] = React.useState(false);
+    //TM
+    const dispatch = useDispatch();
 
     // State to store uploaded file
     const importantid = (localStorage.getItem("ob_id"))
     console.log(importantid)
-    const [name, setName] = React.useState("User Input");
+    const [name, setName] = React.useState("Initial Bio");
     const [photofile, setphotoFile] = React.useState("");
+    const [photofile2, setphotoFile2] = React.useState("")
+    const TMB = useSelector((state) => state.userInfoUploadStore);
+    //b.success = true
+    const { loading, success, userInfoUploadObject } = TMB;
 
     //End of state i used 
 
@@ -123,15 +133,31 @@ function UserInfoCard() {
         })
     }
 
+    useEffect(async () => {
+        let c = localStorage.getItem("ob_id");
+        const response = await Axios.get(`http://localhost:5000/photo/${c}`);
+        console.log(response)
+        //problem: if there is no data within the photo this will be done 
+        setphotoFile(response.data[0].photo);
+
+        //if (userInfoUploadObject) { photofile = userInfoUploadObject.photo 
+    }, [success])
+
     //Send the form data to the backend
     const on99 = async (e) => {
         e.preventDefault();
-        await fetch('http://localhost:5000/edit', {
-            method: "post",
-            headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({ name: name, photo: photofile, id: importantid })
-        })
+        //TM 
+        dispatch(upload(name, photofile, importantid));
+        //redux TM actions
+        //let a = await fetch('http://localhost:5000/edit/', {
+        //    method: "post",
+        //    headers: { 'content-type': 'application/json' },
+        //    body: JSON.stringify({ name: name, photo: photofile, id: importantid })
+        //})
+        //console.log(a)
+
     }
+
 
     return (
         <Card className={cx(styles.card
@@ -142,7 +168,7 @@ function UserInfoCard() {
                     xs={6}>
                     <Grid item xs={12}>
                         <CardContent>
-                            <Avatar className={styles.avatar} src={'https://media-exp1.licdn.com/dms/image/C5103AQFacNueL86flw/profile-displayphoto-shrink_800_800/0/1556346841861?e=1613001600&v=beta&t=e4hrgaisSOyFA5btttYksuOQ23kZGEVxGfgn2HwGZGU'} />
+                            <Avatar className={styles.avatar} src={photofile} />
                             <h3 className={styles.heading}>Designer Darian</h3>
                             <span className={styles.subheader}>Hong Kong</span>
                         </CardContent>
@@ -220,7 +246,7 @@ function UserInfoCard() {
                         fullWidth
                     />
                     {/* this is for the normal text input */}
-                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                    <TextField autoFocus margin="dense" label="description" id="description" type="text" value={name} onChange={(e) => setName(e.target.value)} fullWidth />
                     <br></br>
                     {/* this is for the photo input */}
                     <input type="file" onChange={handleUpload} />
