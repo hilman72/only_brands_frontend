@@ -14,6 +14,9 @@ const useStyles = makeStyles(({ palette }) => ({
   background: {
     backgroundColor: "#f0f0f0",
   },
+  bottomContainer:{
+    borderTop: "1rem",
+  }
 }));
 
 function BusinessProfiles() {
@@ -49,7 +52,7 @@ function BusinessProfiles() {
             </Grid>
             <Grid item xs={12}>
               <Paper elevation={2}>
-                <BusinessWindows who={who} />
+                <BusinessWindows who={who} className={styles.bottomContainer}/>
               </Paper>
             </Grid>
           </Grid>

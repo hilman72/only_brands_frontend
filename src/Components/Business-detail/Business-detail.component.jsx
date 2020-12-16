@@ -31,7 +31,7 @@ const useStyles = makeStyles(({ palette }) => ({
     borderRadius: 12,
     minWidth: 256,
     textAlign: "center",
-    border: "5px solid #ff4c6d",
+    border: "4px solid #ff4c6d",
     overflow: "visible",
   },
   content: {
@@ -43,7 +43,7 @@ const useStyles = makeStyles(({ palette }) => ({
     margin: "auto",
     border: "5px solid #8eebdc",
     borderRadius: "50%",
-    transform: 'translate(-315px,-70px)'
+    transform: 'translate(0px,-5rem)',
   },
   heading: {
     fontSize: 18,
@@ -66,7 +66,7 @@ const useStyles = makeStyles(({ palette }) => ({
   statValue: {
     fontSize: "20px !important",
     fontWeight: "bold",
-    marginBottom: 4,
+    // marginBottom: 4,
     letterSpacing: "1px",
   },
   button: {
@@ -87,7 +87,22 @@ const useStyles = makeStyles(({ palette }) => ({
     borderRadius: "1.5rem",
   },
   shrink: {
-    maxHeight: 60 
+    maxHeight: '3.5rem', 
+  },
+
+  bottomRow:{
+    backgroundColor: '#a4efef',
+    borderRadius: '0.5rem',
+    // height: '5rem',
+    // margin: 
+  },
+  followButtonContainer:{
+    padding: 0,
+    margin: 0,
+  },
+  noPadding:{
+    padding:'0 !important',
+    margin:'0 !important',
   }
 }));
 
@@ -126,10 +141,7 @@ const BusinessDetail = (props) => {
       <Grid container>
         <Grid container xs={12}>
           {/* --------- row for avatar --------- */}
-          <Grid item className={styles.editButton} xs={12}>
-            <BusinessInfoModal />
-          </Grid>
-          <Grid item className={styles.shrink} xs={12}>
+          <Grid item className={styles.shrink} xs={4}>
             <Avatar
               className={styles.avatar}
               src={
@@ -137,6 +149,11 @@ const BusinessDetail = (props) => {
               }
             />
           </Grid>
+          <Grid item xs={6}></Grid>
+          <Grid item className={styles.editButton} xs={2}>
+            <BusinessInfoModal />
+          </Grid>
+        </Grid>
           {/* --------- row for name and description --------- */}
           <Grid container
             direction="row"
@@ -153,14 +170,13 @@ const BusinessDetail = (props) => {
             </Grid>
             <Grid item xs={8} >
               <CardContent className={styles.content}>
-                <Typography>
+                {/* <Typography>
                   <h2 className={styles.heading}>Description/Bio</h2>
-                </Typography>
+                </Typography> */}
                 <Typography>
                   <p>What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry
                 Lorem Ipsum has been the industry's standard dummy text ever since the 1500s </p>
                 </Typography>
-                <Divider variant="middle" />
               </CardContent>
             </Grid>
           </Grid>
@@ -169,16 +185,22 @@ const BusinessDetail = (props) => {
             direction="row"
             justify="center"
             alignItems="center"
-            xs={12}>
+            xs={12} className={styles.bottomRow}>
             <Grid item xs={3}>
-              <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
+              {/* <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
                 <p className={styles.statLabel}>Followers</p>
                 <p className={styles.statValue}>6941</p>
-              </Box>
+              </Box> */}
+              <Grid xs={12}>
+                <h6 className={styles.noPadding}>Followers</h6>
+              </Grid>
+              <Grid xs={12}>
+                <h4>903K</h4>
+              </Grid>
             </Grid>
             <Grid item xs={3}>
               <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
-                <Box p={1} flex={"auto"}>
+                <Box p={1} flex={"auto"} className={styles.followButtonContainer}>
                   {follow ? (
                     <Button onClick={handleClick} className={styles.button}>
                       Follow
@@ -221,8 +243,6 @@ const BusinessDetail = (props) => {
               </ButtonGroup>
             </Grid>
           </Grid>
-        </Grid>
-
         {/* ---------------- Original Grid System ---------------- */}
       </Grid>
     </Card>
