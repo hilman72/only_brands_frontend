@@ -168,7 +168,7 @@ function UserInfoCard() {
                         <CardContent className={styles.content}>
                             <TextInfoContent
                                 classes={textCardContentStyles}
-                                heading={'Description/Bio'}
+                                heading={'About Me'}
                                 body={
                                     'We are going to learn different kinds of species in nature that live together to form amazing environment.'
                                 }
