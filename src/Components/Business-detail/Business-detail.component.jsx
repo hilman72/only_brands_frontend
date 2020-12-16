@@ -17,15 +17,9 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import "./Business-detail.style.scss";
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import TextField from '@material-ui/core/TextField';
 import ChatIcon from "@material-ui/icons/Chat";
-import BusinessInfoModal from "../BusinessInfoModal/BusinessInfoModal.component";
 import { Typography } from "@material-ui/core";
+import BusinessInfoModal from "../BusinessInfoModal/BusinessInfoModal.component";
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
@@ -49,7 +43,7 @@ const useStyles = makeStyles(({ palette }) => ({
     margin: "auto",
     border: "5px solid #8eebdc",
     borderRadius: "50%",
-    transform: 'translate(-250px,-70px)'
+    transform: 'translate(-315px,-70px)'
   },
   heading: {
     fontSize: 18,
@@ -92,6 +86,9 @@ const useStyles = makeStyles(({ palette }) => ({
   buttonGroup: {
     borderRadius: "1.5rem",
   },
+  shrink: {
+    maxHeight: 60 
+  }
 }));
 
 
@@ -129,7 +126,10 @@ const BusinessDetail = (props) => {
       <Grid container>
         <Grid container xs={12}>
           {/* --------- row for avatar --------- */}
-          <Grid item xs={12}>
+          <Grid item className={styles.editButton} xs={12}>
+            <BusinessInfoModal />
+          </Grid>
+          <Grid item className={styles.shrink} xs={12}>
             <Avatar
               className={styles.avatar}
               src={
@@ -151,7 +151,7 @@ const BusinessDetail = (props) => {
                 <span className={styles.subheader}>Hong Kong</span>
               </CardContent>
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={8} >
               <CardContent className={styles.content}>
                 <Typography>
                   <h2 className={styles.heading}>Description/Bio</h2>
@@ -160,7 +160,7 @@ const BusinessDetail = (props) => {
                   <p>What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry
                 Lorem Ipsum has been the industry's standard dummy text ever since the 1500s </p>
                 </Typography>
-
+                <Divider variant="middle" />
               </CardContent>
             </Grid>
           </Grid>
