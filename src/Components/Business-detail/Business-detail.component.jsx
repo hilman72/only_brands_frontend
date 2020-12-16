@@ -17,13 +17,8 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import "./Business-detail.style.scss";
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import TextField from '@material-ui/core/TextField';
 import ChatIcon from "@material-ui/icons/Chat";
+import { Typography } from "@material-ui/core";
 import BusinessInfoModal from "../BusinessInfoModal/BusinessInfoModal.component";
 
 const useStyles = makeStyles(({ palette }) => ({
@@ -48,7 +43,7 @@ const useStyles = makeStyles(({ palette }) => ({
     margin: "auto",
     border: "5px solid #8eebdc",
     borderRadius: "50%",
-    // transform: 'translate(0,-6rem)'
+    transform: 'translate(-315px,-70px)'
   },
   heading: {
     fontSize: 18,
@@ -91,6 +86,9 @@ const useStyles = makeStyles(({ palette }) => ({
   buttonGroup: {
     borderRadius: "1.5rem",
   },
+  shrink: {
+    maxHeight: 60 
+  }
 }));
 
 
@@ -128,7 +126,10 @@ const BusinessDetail = (props) => {
       <Grid container>
         <Grid container xs={12}>
           {/* --------- row for avatar --------- */}
-          <Grid item xs={12}>
+          <Grid item className={styles.editButton} xs={12}>
+            <BusinessInfoModal />
+          </Grid>
+          <Grid item className={styles.shrink} xs={12}>
             <Avatar
               className={styles.avatar}
               src={
@@ -137,26 +138,38 @@ const BusinessDetail = (props) => {
             />
           </Grid>
           {/* --------- row for name and description --------- */}
-          <Grid container item xs={12}>
+          <Grid container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            xs={12}>
             <Grid item xs={4}>
-              <h3 className={styles.heading}>Outback Steakhouse</h3>
-              <span className={styles.subheader}>Hong Kong</span>
-              <Divider light />
+              <CardContent>
+                <Typography align="center">
+                  <h2 className={styles.heading}>Outback Steakhouse</h2>
+                </Typography>
+                <span className={styles.subheader}>Hong Kong</span>
+              </CardContent>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={8} >
               <CardContent className={styles.content}>
-                <TextInfoContent
-                  classes={textCardContentStyles}
-                  heading={"Description/Bio"}
-                  body={
-                    "We are going to learn different kinds of species in nature that live together to form amazing environment."
-                  }
-                />
+                <Typography>
+                  <h2 className={styles.heading}>Description/Bio</h2>
+                </Typography>
+                <Typography>
+                  <p>What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s </p>
+                </Typography>
+                <Divider variant="middle" />
               </CardContent>
             </Grid>
           </Grid>
           {/* --------- row for the buttons --------- */}
-          <Grid container item xs={12}>
+          <Grid container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            xs={12}>
             <Grid item xs={3}>
               <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
                 <p className={styles.statLabel}>Followers</p>
@@ -165,12 +178,12 @@ const BusinessDetail = (props) => {
             </Grid>
             <Grid item xs={3}>
               <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
-                  <Box p={1} flex={"auto"}>
-                    {follow ? (
-                      <Button onClick={handleClick} className={styles.button}>
-                        Follow
-                      </Button>
-                    ) : (
+                <Box p={1} flex={"auto"}>
+                  {follow ? (
+                    <Button onClick={handleClick} className={styles.button}>
+                      Follow
+                    </Button>
+                  ) : (
                       <Box flex={"auto"}>
                         <Button onClick={handleClick} className={styles.button}>
                           Followed
@@ -182,108 +195,15 @@ const BusinessDetail = (props) => {
                         </Button>
                       </Box>
                     )}
-                  </Box>
-                </Box>
-            </Grid>
-            <Grid item xs={3}>
-              <Button startIcon={<ChatIcon />} className={styles.button}>
-                  Chat With Us
-              </Button>
-            </Grid>
-            <Grid item xs={3}>
-              <ButtonGroup
-                  color="primary"
-                  aria-label="large contained primary button group"
-                  variant="contained"
-                >
-                  <Button className="button1">
-                    <FacebookIcon />
-                  </Button>
-                  <Button className="button2">
-                    <TwitterIcon />
-                  </Button>
-                  <Button className="button3">
-                    <InstagramIcon />
-                  </Button>
-                </ButtonGroup>
-            </Grid>
-          </Grid>
-        </Grid>
-
-        {/* ---------------- Original Grid System ---------------- */}
-
-        <Grid container xs={6}>
-          <Grid item xs={12}>
-            <CardContent>
-              <Avatar
-                className={styles.avatar}
-                src={
-                  "https://image.shutterstock.com/image-photo/funny-cow-kaisergebirge-mountain-260nw-737751640.jpg"
-                }
-              />
-              <h3 className={styles.heading}>Outback Steakhouse</h3>
-              <span className={styles.subheader}>Hong Kong</span>
-            </CardContent>
-            <Divider light />
-          </Grid>
-          <Grid item xs={12}>
-            <Box display={"flex"}>
-              <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
-                <p className={styles.statLabel}>Followers</p>
-                <p className={styles.statValue}>6941</p>
-              </Box>
-              <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
-                <Box p={1} flex={"auto"}>
-                  {follow ? (
-                    <Button onClick={handleClick} className={styles.button}>
-                      Follow
-                    </Button>
-                  ) : (
-                    <Box flex={"auto"}>
-                      <Button onClick={handleClick} className={styles.button}>
-                        Followed
-                      </Button>
-                      <br />
-                      <br />
-                      <Button onClick={handleClick} className={styles.button}>
-                        UnFollow
-                      </Button>
-
-                    </Box>
-                  )}
                 </Box>
               </Box>
-            </Box>
-          </Grid>
-        </Grid>
-        <Grid container className={styles.container} xs={6}>
-          <Grid item className={styles.editButton} xs={12}>
-            <Button
-              className="edit"
-              onClick={handleClickOpen}
-              className={styles.editButton}
-            >
-              Edit Profile
-            </Button>
-          </Grid>
-          <Grid item={12}>
-            <CardContent className={styles.content}>
-              <TextInfoContent
-                classes={textCardContentStyles}
-                heading={"Description/Bio"}
-                body={
-                  "We are going to learn different kinds of species in nature that live together to form amazing environment."
-                }
-              />
-            </CardContent>
-          </Grid>
-          <Grid container xs={12}>
-            <Grid item xs={6}>
+            </Grid>
+            <Grid item xs={3}>
               <Button startIcon={<ChatIcon />} className={styles.button}>
                 Chat With Us
               </Button>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={3}>
               <ButtonGroup
                 color="primary"
                 aria-label="large contained primary button group"
@@ -299,12 +219,11 @@ const BusinessDetail = (props) => {
                   <InstagramIcon />
                 </Button>
               </ButtonGroup>
-              {/* <FacebookIcon className={styles.SMIcon}/>
-            <TwitterIcon className={styles.SMIcon}/>
-            <InstagramIcon className={styles.SMIcon}/> */}
             </Grid>
           </Grid>
         </Grid>
+
+        {/* ---------------- Original Grid System ---------------- */}
       </Grid>
     </Card>
   );
