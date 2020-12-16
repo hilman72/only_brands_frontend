@@ -1,6 +1,6 @@
 import React from "react";
 import "./CouponCarousel.style.scss";
-import Coupon from "../Coupon/Coupon.components";
+import Coupon from "../../Components/User-Coupon/Coupon.component"
 // import Grid from '@material-ui/core/Grid';
 
 //Swiper
