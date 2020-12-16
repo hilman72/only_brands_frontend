@@ -52,7 +52,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
+    borderRadius: '0.5rem 0.5rem 0rem 0rem'
   },
+  appBar: {
+    borderRadius: '0.5rem 0.5rem 0rem 0rem'
+  }
 }));
 
 const BusinessDiffCom = (props) => {
@@ -82,7 +86,7 @@ const BusinessDiffCom = (props) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar className={classes.appBar} position="static">
         <Tabs
           value={value}
           onChange={handleChange}

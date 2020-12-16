@@ -157,7 +157,8 @@ function Coupon(props) {
           <ConfirmationNumberRoundedIcon className={styles.icon} />
           <Grid item xs={12}>
             <div className={styles.label}>
-              <h2 className={styles.heading}>{props.data.discount}</h2>
+              <h2 className={styles.heading}>
+                  {props.data.discount}</h2>
             </div>
           </Grid>
           <Grid item xs={8}>

@@ -12,6 +12,15 @@ const useStyles = makeStyles(({ palette }) => ({
   background: {
     backgroundColor: "#f0f0f0",
   },
+  bottomContainer:{
+    paddingTop: "1rem",
+  },
+  cover: {
+    height: 6
+  },
+  paper: {
+    borderRadius: '1rem'
+  }
 }));
 
 function BusinessProfiles() {
@@ -36,15 +45,14 @@ function BusinessProfiles() {
             Gutter
           </Grid>
           <Grid container xs={8}>
-            <Grid item xs={12}>
-              Cover Photo
+            <Grid className={styles.cover} item xs={12}>
             </Grid>
             <Grid item xs={12}>
               <BusinessDetail who={who} />
             </Grid>
-            <Grid item xs={12}>
-              <Paper elevation={2}>
-                <BusinessWindows who={who} />
+            <Grid item className={styles.bottomContainer} xs={12}>
+              <Paper className={styles.paper} elevation={2}>
+                <BusinessWindows who={who}/>
               </Paper>
             </Grid>
           </Grid>

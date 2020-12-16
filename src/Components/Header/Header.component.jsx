@@ -23,6 +23,9 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import Logo from "../../Assets/Images/logo.png";
 import { Popover } from "@material-ui/core";
 import FilterMenu from "../FilterMenu/FilterMenu.components";
+import Axios from "axios";
+
+import { useHistory } from "react-router-dom"
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -121,12 +124,14 @@ const PrimarySearchAppBar = (props) => {
     setFilterMenu(event.currentTarget);
   };
 
-  const handleSubmit = (event) => {
+  const history = useHistory();
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(event);
-    console.log(event.target[0].value);
-    console.log(event.target[1].value);
-    console.log(event.target[2].value);
+    let different = localStorage.getItem("filter");
+    //let a = await Axios.get(`http://localhost:5000/api/search/${different}/${event.target[0].value}`)
+    localStorage.setItem("searchlink", `http://localhost:5000/api/search/${different}/${event.target[0].value}`)
+    // console.log("success", searchlink);
+    history.push("/CouponSearch");
   };
 
   // Profile menu dropdown
