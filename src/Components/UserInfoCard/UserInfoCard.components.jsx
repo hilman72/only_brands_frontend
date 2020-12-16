@@ -20,7 +20,7 @@ import { useN01TextInfoContentStyles } from '@mui-treasury/styles/textInfoConten
 import BusinessCarousel from "../../Components/BusinessCarousel/BusinessCarousel.components"
 import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import BrandCards from "../../Components/BrandCards/BrandCards.components"
-import { Paper } from '@material-ui/core';
+import { Paper, Typography } from '@material-ui/core';
 import UserInfoModal from '../UserInfoModal/UserInfoModal.components';
 
 
@@ -30,7 +30,7 @@ const useStyles = makeStyles(({ palette }) => ({
         minWidth: 256,
         textAlign: 'center',
         padding: '0.5rem',
-        border:'5px solid #ff4c6d',
+        border: '5px solid #ff4c6d',
     },
     avatar: {
         width: 150,
@@ -68,26 +68,27 @@ const useStyles = makeStyles(({ palette }) => ({
         padding: 24,
     },
     container: {
-        // width: '50%'
-        margin: 'auto',
-        padding: '0.5rem',
+        margin: 'auto'
     },
-    leftContainer:{
-        padding: '0.5rem',
+    leftContainer: {
     },
     editButton: {
         padding: '0.5rem',
         borderRadius: '1rem',
         float: 'right',
     },
-    button:{
-        padding:'1rem',
-        borderRadius:'1.5rem',
+    button: {
+        padding: '1rem',
+        borderRadius: '1.5rem',
     },
-    favBrandsContainer:{
-        paddingTop:'1rem',
+    favBrandsContainer: {
+        paddingTop: '1rem',
         overflow: 'scroll',
     },
+    noPadding: {
+        padding: '0 !important',
+        margin: '0 !important',
+    }
 }));
 
 
@@ -116,17 +117,28 @@ function UserInfoCard() {
                     xs={5}>
                     <Grid item xs={12}>
                         <CardContent>
-                            <Avatar className={styles.avatar} src={'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftheblogofkevin.files.wordpress.com%2F2011%2F04%2Fdonkey-shrek-iphone-4-wallpaper-320x480.jpg&f=1&nofb=1'} />
-                            <h3 className={styles.heading}>Designer Darian</h3>
-                            <span className={styles.subheader}>Hong Kong</span>
+                            <Grid item xs={12}>
+                                <Avatar className={styles.avatar}
+                                    src={'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftheblogofkevin.files.wordpress.com%2F2011%2F04%2Fdonkey-shrek-iphone-4-wallpaper-320x480.jpg&f=1&nofb=1'} />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <h3 className={styles.heading}>Designer Darian</h3>
+                                <span className={styles.subheader}>Hong Kong</span>
+                            </Grid>
                         </CardContent>
                         <Divider light />
                         <Grid item xs={12}>
                             <Box display={'flex'}>
-                                <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
-                                    <h4 className={styles.statLabel}>Followers</h4>
-                                    <p className={styles.statValue}>6941</p>
-                                </Box>
+                                <Grid
+                                    direction="row"
+                                    justify="center"
+                                    alignItems="center"
+                                    container>
+                                    <Grid item xs={12}>
+                                        <h6 className={styles.noPadding}>Followers</h6>
+                                        <h4>903K</h4>
+                                    </Grid>
+                                </Grid>
                                 <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
                                     <Box p={1} flex={'auto'} >
                                         {follow
@@ -144,7 +156,7 @@ function UserInfoCard() {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Divider orientation="vertical" flexItem varient="middle"/>
+                <Divider orientation="vertical" flexItem varient="middle" />
                 <Grid container
                     className={styles.container}
                     xs={6}>
@@ -156,17 +168,19 @@ function UserInfoCard() {
                         <CardContent className={styles.content}>
                             <TextInfoContent
                                 classes={textCardContentStyles}
-                                heading={'Description/Bio'}  
+                                heading={'Description/Bio'}
                                 body={
                                     'We are going to learn different kinds of species in nature that live together to form amazing environment.'
                                 }
                             />
                         </CardContent>
-                        <Divider varient="middle"/>
+                        <Divider varient="middle" />
                     </Grid>
-                  
+
                     <Grid container xs={12} className={styles.favBrandsContainer}>
-                        <h4>Favourite Brands</h4>
+                        <Typography variant="h4" gutterBottom>
+                            <h4>Favourite Brands</h4>
+                        </Typography>
                         <Grid container xs={12} spacing={2} >
                             <Grid item xs={4}>
                                 <BrandCards />
