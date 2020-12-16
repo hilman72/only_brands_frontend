@@ -64,7 +64,7 @@ const RegisterForm = (props) => {
 
     if (register === true) {
       console.log("hello");
-      history.push("/");
+      history.push("/After");
     }
   }, [register, history, props.who]);
 

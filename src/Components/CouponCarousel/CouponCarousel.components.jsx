@@ -1,6 +1,6 @@
 import React from "react";
 import "./CouponCarousel.style.scss";
-import Coupon from "../Coupon/Coupon.components";
+import Coupon from "../User-Coupon/Coupon.component";
 // import Grid from '@material-ui/core/Grid';
 
 //Swiper
@@ -23,10 +23,8 @@ function CouponCarousel() {
       <Swiper
         spaceBetween={30}
         slidesPerView={2}
-
         slidesPerColumnFill={2}
         slidesPerColumn={2}
-
         navigation
         scrollbar={{ draggable: true }}
         onSlideChange={() => console.log("slide change")}

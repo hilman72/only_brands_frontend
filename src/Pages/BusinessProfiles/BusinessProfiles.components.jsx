@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 1ad1caef2d39976be96b11911089d694e1ecdc4e
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
 
