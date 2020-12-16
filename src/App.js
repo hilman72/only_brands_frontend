@@ -63,7 +63,7 @@ class App extends React.Component {
             <Route path="/TestingPage" component={TestingPage} />
             <PrivateRoute path="/UserProfiles" component={UserProfile} />
             <PrivateRoute
-              path="/BusinessProfiles"
+              path="/BusinessProfiles/:name"
               component={BusinessProfiles}
             />
             <PrivateRoute path="/MyCouponPage" component={MyCouponPage} />
