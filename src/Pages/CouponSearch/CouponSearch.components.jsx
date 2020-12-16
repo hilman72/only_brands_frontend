@@ -4,11 +4,19 @@ import Grid from "@material-ui/core/Grid"
 import Header from "../../Components/Header/Header.component";
 import Coupons from "../../Components/Coupon/Coupon.components"
 import Paper from "@material-ui/core/Paper"
-
+import { makeStyles } from "@material-ui/core/styles"
 import "./CouponSearch.style.scss";
 import Axios from "axios";
 
+const useStyles = makeStyles({
+  box: {
+    padding: 20,
+    margin: 20
+  }
+})
+
 const CouponSearch = () => {
+
   const [first, setFirst] = useState(false);
   const [finaldisplay, setFinaldisplay] = useState([]);
 
@@ -26,6 +34,11 @@ const CouponSearch = () => {
       })
     }
   }, [first])
+
+
+  const classes = useStyles();
+
+
   return (
     <div>
       <Header />
@@ -43,7 +56,7 @@ const CouponSearch = () => {
                 Gutter
               </Grid>
               <Grid item xs={8}>
-                <Paper elevation={5}>
+                <Paper className={classes.box} elevation={5}>
                   <FrontendSearch />
                 </Paper>
               </Grid>

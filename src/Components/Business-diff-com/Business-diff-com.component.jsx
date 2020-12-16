@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -52,21 +52,41 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
+    borderRadius: '0.5rem 0.5rem 0rem 0rem'
   },
+  appBar: {
+    borderRadius: '0.5rem 0.5rem 0rem 0rem'
+  }
 }));
 
-const BusinessDiffCom = () => {
+const BusinessDiffCom = (props) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const [coupon, setCoupon] = React.useState([]);
+  const [create, setCreate] = React.useState(false);
+  const [who, setWho] = React.useState("");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  const whenCreate = () => {
+    setCreate(true);
+  };
+
+  useEffect(() => {
+    let x = localStorage.getItem("ob_id");
+    fetch(`http://localhost:5000/api/getCoupon/${x}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setCoupon([...data]);
+        setWho(props.who);
+      });
+  }, [create, props.who]);
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar className={classes.appBar} position="static">
         <Tabs
           value={value}
           onChange={handleChange}
@@ -80,11 +100,16 @@ const BusinessDiffCom = () => {
       </AppBar>
       <TabPanel value={value} index={0}>
         <Grid container spacing={3}>
+          {who === "business" ? (
+            <Grid item xs={12}>
+              <CreateCoupon create={whenCreate} />
+            </Grid>
+          ) : (
+            <div></div>
+          )}
+
           <Grid item xs={12}>
-            <CreateCoupon />
-          </Grid>
-          <Grid item xs={12}>
-            <BusinessCoupon />
+            <BusinessCoupon coupon={coupon} />
           </Grid>
         </Grid>
       </TabPanel>

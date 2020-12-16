@@ -1,0 +1,13 @@
+.swiper-button-prev {
+    color: #FF4C6D !important; 
+    font-weight: 1000 !important;
+}
+
+.swiper-button-next {
+    color:#FF4C6D !important; 
+    font-weight: 1000 !important;
+}
+
+.swiper-container {
+    padding: 0.5rem !important;
+  }
