@@ -22,8 +22,8 @@ function BusinessCarousel() {
             <Swiper
                 spaceBetween={20}
                 slidesPerView={3}
+                loop={true}
                 navigation
-                scrollbar={{ draggable: true }}
                 onSlideChange={() => console.log('slide change')}
                 onSwiper={(swiper) => console.log(swiper)}
             >

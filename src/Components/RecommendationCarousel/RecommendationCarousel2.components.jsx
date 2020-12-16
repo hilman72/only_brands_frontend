@@ -24,7 +24,8 @@ function RecommendationCarousel(){
         <div className="RecommendationCarousel">
             <Swiper
                 spaceBetween={30}
-                slidesPerColumnFill={1}
+                slidesPerView={2}
+                slidesPerColumnFill={2}
                 slidesPerColumn={2}
                 loop={true}
                 navigation
