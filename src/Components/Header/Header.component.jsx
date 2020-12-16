@@ -25,8 +25,6 @@ import { Popover } from "@material-ui/core";
 import FilterMenu from "../FilterMenu/FilterMenu.components";
 import Axios from "axios";
 
-import { useHistory } from "react-router-dom"
-
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -124,12 +122,14 @@ const PrimarySearchAppBar = (props) => {
     setFilterMenu(event.currentTarget);
   };
 
-  const history = useHistory();
   const handleSubmit = async (event) => {
     event.preventDefault();
     let different = localStorage.getItem("filter");
     //let a = await Axios.get(`http://localhost:5000/api/search/${different}/${event.target[0].value}`)
-    localStorage.setItem("searchlink", `http://localhost:5000/api/search/${different}/${event.target[0].value}`)
+    localStorage.setItem(
+      "searchlink",
+      `http://localhost:5000/api/search/${different}/${event.target[0].value}`
+    );
     // console.log("success", searchlink);
     history.push("/CouponSearch");
   };
