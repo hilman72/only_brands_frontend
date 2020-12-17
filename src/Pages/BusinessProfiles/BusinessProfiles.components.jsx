@@ -1,7 +1,5 @@
-
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
-
 
 import "./BusinessProfiles.style.scss";
 import BusinessDetail from "../../Components/Business-detail/Business-detail.component";
@@ -26,8 +24,6 @@ const useStyles = makeStyles(({ palette }) => ({
 }));
 
 function BusinessProfiles() {
-
-
   const styles = useStyles();
 
   const [who, setWho] = useState("");
@@ -36,7 +32,6 @@ function BusinessProfiles() {
     let x = localStorage.getItem("ob_who");
     setWho(x);
   }, [who]);
-
 
   return (
     <div>

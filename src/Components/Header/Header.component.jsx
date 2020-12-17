@@ -23,6 +23,7 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import Logo from "../../Assets/Images/logo.png";
 import { Popover } from "@material-ui/core";
 import FilterMenu from "../FilterMenu/FilterMenu.components";
+import Axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -98,6 +99,7 @@ const PrimarySearchAppBar = (props) => {
   const [filterMenu, setFilterMenu] = React.useState(null);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [who, setWho] = React.useState("");
+  const [name, setName] = React.useState("");
 
   //Mobile menu handle dropdown (for nav icons)
 
@@ -121,12 +123,16 @@ const PrimarySearchAppBar = (props) => {
     setFilterMenu(event.currentTarget);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(event);
-    console.log(event.target[0].value);
-    console.log(event.target[1].value);
-    console.log(event.target[2].value);
+    let different = localStorage.getItem("filter");
+    //let a = await Axios.get(`http://localhost:5000/api/search/${different}/${event.target[0].value}`)
+    localStorage.setItem(
+      "searchlink",
+      `http://localhost:5000/api/search/${different}/${event.target[0].value}`
+    );
+    // console.log("success", searchlink);
+    history.push("/CouponSearch");
   };
 
   // Profile menu dropdown
@@ -151,9 +157,9 @@ const PrimarySearchAppBar = (props) => {
   const toProfile = (event) => {
     event.preventDefault();
     if (who === "user") {
-      history.push("/UserProfiles");
+      history.push(`/UserProfiles/${name}`);
     } else if (who === "business") {
-      history.push("/BusinessProfiles");
+      history.push(`/BusinessProfiles/${name}`);
     }
     handleMenuClose();
   };
@@ -170,8 +176,10 @@ const PrimarySearchAppBar = (props) => {
 
   useEffect(() => {
     let x = localStorage.getItem("ob_who");
+    let y = localStorage.getItem("ob_username");
     setWho(x);
-  }, [who]);
+    setName(y);
+  }, [who, name]);
 
   // Profile menu dropdown render
 
