@@ -34,6 +34,7 @@ const RegisterForm = (props) => {
       setError(true);
     } else {
       if (who === "user") {
+        console.log("hi_user");
         await fetch(`http://localhost:5000/api/signup/user`, {
           method: "POST",
           headers: { "content-Type": "application/json" },
@@ -44,6 +45,7 @@ const RegisterForm = (props) => {
           }),
         }).then(setRegister(true));
       } else if (who === "business") {
+        console.log("hi_business");
         await fetch(`http://localhost:5000/api/signup/business`, {
           method: "POST",
           headers: { "content-Type": "application/json" },
@@ -63,7 +65,6 @@ const RegisterForm = (props) => {
     setWho(props.who);
 
     if (register === true) {
-      console.log("hello");
       history.push("/After");
     }
   }, [register, history, props.who]);
