@@ -22,7 +22,7 @@ const useStyles = makeStyles(() => ({
   },
   button: {
     float: 'right'
-  },
+  }
 }));
 
 function HomePage() {
@@ -84,7 +84,12 @@ function HomePage() {
                             <div className="wrap">
                               <button className="referButton"><h2>Refer A Friend</h2></button>
                             </div>
-
+                    </Grid>
+                    <Grid
+                      item xs={12}>
+                            <div className="wrap">
+                              <button className="referButton"><h2>Explore Offers</h2></button>
+                            </div>
                     </Grid>
                   </Grid>
                 </Grid>

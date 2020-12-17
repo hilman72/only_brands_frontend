@@ -34,11 +34,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0 !important;
+    margin: 0 !important;
   }
+
+.none {
+    padding: 0 !important;
+    margin: 0 !important;
+}
   
   .referButton {
-    min-width: 200px;
-    min-height: 60px;
+    min-width: 10vw;
+    min-height: 5vh;
     font-family: 'Nunito', sans-serif;
     font-size: 18px;
     text-transform: uppercase;
@@ -47,6 +54,7 @@
     color: #313133;
     background: #4FD1C5;
   background: linear-gradient(90deg, rgba(129,230,217,1) 0%, rgba(79,209,197,1) 100%);
+    border: none;
     border-radius: 1000px !important;
     box-shadow: 12px 12px 24px rgba(79,209,197,.64);
     transition: all 0.3s ease-in-out 0s;
@@ -59,9 +67,9 @@
   .referButton::before {
   content: '';
     border-radius: 1000px;
-    min-width: calc(200px + 40px);
-    min-height: calc(60px + 40px);
-    border: 6px solid #00FFCB;
+    min-width: calc(10vw + 4vw);
+    min-height: calc(5vh + 8vh);
+    border: 6px solid #ff829b;
     box-shadow: 0 0 60px rgba(0,255,203,.64);
     position: absolute;
     top: 50%;
@@ -84,7 +92,7 @@
     content: '';
     width: 60px; height: 60px;
     border-radius: 100%;
-    border: 6px solid #00FFCB;
+    border: 6px solid #ff829b;
     position: absolute;
     z-index: -1;
     top: 50%;

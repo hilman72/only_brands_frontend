@@ -9,6 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Divider from '@material-ui/core/Divider';
 import KeyboardArrowRightRounded from '@material-ui/icons/KeyboardArrowRightRounded';
+import Avatar from '@material-ui/core/Avatar';
 import ModeComment from '@material-ui/icons/ModeComment';
 import Favorite from '@material-ui/icons/Favorite';
 
@@ -26,9 +27,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 12,
     boxShadow: '0 2px 8px 0 #c1c9d7, 0 -2px 8px 0 #cce1e9',
   },
-
   content: {
     padding: theme.spacing(0, 2, 0, 0),
+    marginRight: '-2rem'
   },
   heading: {
     fontSize: 17,
@@ -60,6 +61,14 @@ const useStyles = makeStyles((theme) => ({
     verticalAlign: 'middle',
     color: "grey",
   },
+  avatar: {
+    width: 60,
+    height: 60,
+    top: 0,
+    border: '3px solid #8eebdc',
+    borderRadius: '50%',
+    transform: 'translate(2rem,-0.5rem)' 
+},
 }));
 
 function RecommendationCards() {
@@ -89,6 +98,8 @@ function RecommendationCards() {
           </Link>
         </Box>
       </CardContent>
+      <Avatar className={styles.avatar}
+                                    src={'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftheblogofkevin.files.wordpress.com%2F2011%2F04%2Fdonkey-shrek-iphone-4-wallpaper-320x480.jpg&f=1&nofb=1'} /> 
       <CardMedia className={styles.media} image="https://source.unsplash.com/random"/>
     </Card>
   );
