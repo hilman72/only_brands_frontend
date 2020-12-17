@@ -30,85 +30,101 @@ import { useSelector, useDispatch } from "react-redux";
 import { upload } from "../../Redux/Actions/TMactions";
 import Axios from "axios";
 
+
+//new updates 
+import Input from '@material-ui/core/Input';
+
+
+const useStyles = makeStyles(({ palette }) => ({
+    card: {
+        borderRadius: 12,
+        minWidth: 256,
+        textAlign: 'center',
+        padding: '0.5rem',
+        border: '5px solid #ff4c6d',
+    },
+    avatar: {
+        width: 150,
+        height: 150,
+        margin: 'auto',
+        border: '5px solid #8eebdc',
+        borderRadius: '50%',
+    },
+    heading: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        letterSpacing: '0.5px',
+        marginTop: 8,
+        marginBottom: 0,
+    },
+    subheader: {
+        fontSize: 14,
+        color: palette.grey[500],
+        marginBottom: '0.875em',
+    },
+    statLabel: {
+        fontFamily: 'MontserratMedium !important',
+        fontSize: '1rem !important',
+        letterSpacing: 2,
+        // color: palette.grey[500],
+        margin: 0,
+    },
+    statValue: {
+        fontSize: '20px !important',
+        fontWeight: 'bold',
+        marginBottom: 4,
+        letterSpacing: '1px',
+    },
+    content: {
+        padding: 24,
+    },
+    container: {
+        margin: 'auto'
+    },
+    leftContainer: {
+    },
+    editButton: {
+        padding: '0.5rem',
+        borderRadius: '1rem',
+        float: 'right',
+    },
+    button: {
+        padding: '1rem',
+        borderRadius: '1.5rem',
+    },
+    favBrandsContainer: {
+        paddingTop: '1rem',
+        overflow: 'scroll',
+    },
+    noPadding: {
+        padding: '0 !important',
+        margin: '0 !important',
+    },
+    imgBtn: {
+        float: 'left'
+    }
+
 import BrandCards from "../../Components/BrandCards/BrandCards.components";
 import { Paper, Typography } from "@material-ui/core";
 import UserInfoModal from "../UserInfoModal/UserInfoModal.components";
 
-const useStyles = makeStyles(({ palette }) => ({
-  card: {
-    borderRadius: 12,
-    minWidth: 256,
-    textAlign: "center",
-    padding: "0.5rem",
-    border: "5px solid #ff4c6d",
-  },
-  avatar: {
-    width: 150,
-    height: 150,
-    margin: "auto",
-    border: "5px solid #8eebdc",
-    borderRadius: "50%",
-  },
-  heading: {
-    fontSize: 18,
-    fontWeight: "bold",
-    letterSpacing: "0.5px",
-    marginTop: 8,
-    marginBottom: 0,
-  },
-  subheader: {
-    fontSize: 14,
-    color: palette.grey[500],
-    marginBottom: "0.875em",
-  },
-  statLabel: {
-    fontFamily: "MontserratMedium !important",
-    fontSize: "1rem !important",
-    letterSpacing: 2,
-    // color: palette.grey[500],
-    margin: 0,
-  },
-  statValue: {
-    fontSize: "20px !important",
-    fontWeight: "bold",
-    marginBottom: 4,
-    letterSpacing: "1px",
-  },
-  content: {
-    padding: 24,
-  },
-  container: {
-    margin: "auto",
-  },
-  leftContainer: {},
-  editButton: {
-    padding: "0.5rem",
-    borderRadius: "1rem",
-    float: "right",
-  },
-  button: {
-    padding: "1rem",
-    borderRadius: "1.5rem",
-  },
-  favBrandsContainer: {
-    paddingTop: "1rem",
-    overflow: "scroll",
-  },
-  noPadding: {
-    padding: "0 !important",
-    margin: "0 !important",
-  },
-}));
+
 
 function UserInfoCard() {
-  const [follow, setFollow] = React.useState(false);
-  const styles = useStyles();
-  const textCardContentStyles = useN01TextInfoContentStyles({});
+
+    // for the problem of potentially undefined photo(useEffect)
+    const [havephoto, setHavephoto] = React.useState(false)
+    const [follow, setFollow] = React.useState(false)
+    const styles = useStyles();
+    const textCardContentStyles = useN01TextInfoContentStyles({});
+
+
   const shadowStyles = useFadedShadowStyles();
   const borderedGridStyles = useGutterBorderedGridStyles({
     borderColor: "rgba(0, 0, 0, 0.08)",
     height: "70%",
   });
+
 
   const [open, setOpen] = React.useState(false);
   //TM
@@ -171,11 +187,47 @@ function UserInfoCard() {
     //if (userInfoUploadObject) { photofile = userInfoUploadObject.photo
   }, [success]);
 
-  //Send the form data to the backend
-  const on99 = async (e) => {
-    e.preventDefault();
-    //TM
-    dispatch(upload(name, photofile, importantid));
+
+    // Handles file upload event and updates state // done
+    const handleUpload = (ev) => {
+        console.log(ev.target.files)
+        const formdata = new FormData()
+        formdata.append("image", ev.target.files[0])
+        fetch("https://api.imgur.com/3/image", {
+            method: "post",
+            headers: {
+                Authorization: "Client-ID 0dfb916cd7c1ca8"
+            }
+            , body: formdata
+        }).then(data => data.json()).then(data => {
+            console.log(data.data.link, importantid);
+            alert("File Upload success");
+            setphotoFile(data.data.link)
+            dispatch(upload(data.data.link, importantid))
+        })
+    }
+
+    useEffect(async () => {
+        let c = localStorage.getItem("ob_id");
+        const response = await Axios.get(`http://localhost:5000/photo/${c}`);
+        console.log(response)
+        if (response !== null || response !== undefined) {
+            setHavephoto(true);
+            setphotoFile(response.data[0].photo);
+        }
+        else { setphotoFile("") }
+        //problem: if there is no data within the photo this will be done 
+        // if (havephoto) { setphotoFile(response.data[0].photo); } time lapsed
+
+        //if (userInfoUploadObject) { photofile = userInfoUploadObject.photo 
+    }, [success])
+
+    //Send the form data to the backend
+    //const on99 = async (e) => {
+    //e.preventDefault();
+    //TM 
+    //dispatch(upload(name, photofile, importantid));
+
     //redux TM actions
     //let a = await fetch('http://localhost:5000/edit/', {
     //    method: "post",
@@ -183,84 +235,86 @@ function UserInfoCard() {
     //    body: JSON.stringify({ name: name, photo: photofile, id: importantid })
     //})
     //console.log(a)
-  };
 
-  return (
-    <Card className={cx(styles.card, shadowStyles.root)}>
-      <Grid container>
-        <Grid container className={styles.leftContainer} xs={5}>
-          <Grid item xs={12}>
-            <CardContent>
-              <Grid item xs={12}>
-                <Avatar
-                  className={styles.avatar}
-                  src={
-                    "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftheblogofkevin.files.wordpress.com%2F2011%2F04%2Fdonkey-shrek-iphone-4-wallpaper-320x480.jpg&f=1&nofb=1"
-                  }
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <h3 className={styles.heading}>Designer Darian</h3>
-                <span className={styles.subheader}>Hong Kong</span>
-              </Grid>
-            </CardContent>
-            <Divider light />
-            <Grid item xs={12}>
-              <Box display={"flex"}>
-                <Grid
-                  direction="row"
-                  justify="center"
-                  alignItems="center"
-                  container
-                >
-                  <Grid item xs={12}>
-                    <h6 className={styles.noPadding}>Followers</h6>
-                    <h4>903K</h4>
-                  </Grid>
+
+    //}
+
+
+    return (
+        <Card className={cx(styles.card
+            , shadowStyles.root
+        )}>
+            <Grid container>
+                <Grid container className={styles.leftContainer}
+                    xs={5}>
+                    <Grid item xs={12}>
+                        <CardContent>
+                            <Grid container>
+                                <Grid item xs={12}>
+                                    <input className={styles.imgBtn} type="file" onChange={handleUpload} />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Avatar className={styles.avatar}
+                                        src={photofile} />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <h3 className={styles.heading}>Designer Darian</h3>
+                                    {/* <span className={styles.subheader}>Kowloon</span> */}
+                                </Grid>
+                            </Grid>
+                        </CardContent>
+                        <Divider light />
+                        <Grid item xs={12}>
+                            <Box display={'flex'}>
+                                <Grid
+                                    direction="row"
+                                    justify="center"
+                                    alignItems="center"
+                                    container>
+                                    <Grid item xs={12}>
+                                        <h6 className={styles.noPadding}>Followers</h6>
+                                        <h4>903K</h4>
+                                    </Grid>
+                                </Grid>
+                                <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
+                                    <Box p={1} flex={'auto'} >
+                                        {follow
+                                            ? <Button onClick={handleClick} className={styles.button}>Follow</Button>
+                                            :
+                                            <Box flex={'auto'}>
+                                                <Button onClick={handleClick} className={styles.button}>Followed</Button>
+                                                <br />
+                                                <br />
+                                                <Button onClick={handleClick} className={styles.button}>UnFollow</Button>
+                                            </Box>}
+                                    </Box>
+                                </Box>
+                            </Box>
+                        </Grid>
+                    </Grid>
                 </Grid>
-                <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
-                  <Box p={1} flex={"auto"}>
-                    {follow ? (
-                      <Button onClick={handleClick} className={styles.button}>
-                        Follow
-                      </Button>
-                    ) : (
-                      <Box flex={"auto"}>
-                        <Button onClick={handleClick} className={styles.button}>
-                          Followed
-                        </Button>
-                        <br />
-                        <br />
-                        <Button onClick={handleClick} className={styles.button}>
-                          UnFollow
-                        </Button>
-                      </Box>
-                    )}
-                  </Box>
-                </Box>
-              </Box>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Divider orientation="vertical" flexItem varient="middle" />
-        <Grid container className={styles.container} xs={6}>
-          <Grid item xs={12}>
-            <UserInfoModal />
-          </Grid>
-          <Grid item={12}>
-            <CardContent className={styles.content}>
-              <TextInfoContent
-                classes={textCardContentStyles}
-                heading={"About Me"}
-                body={
-                  "We are going to learn different kinds of species in nature that live together to form amazing environment."
-                }
-              />
-            </CardContent>
-            <Divider varient="middle" />
-          </Grid>
-
-          <Grid container xs={12} className={styles.favBrandsContainer}>
+                <Divider orientation="vertical" flexItem varient="middle" />
+                <Grid container
+                    className={styles.container}
+                    xs={6}>
+                    <Grid item
+                        xs={12}>
+                        <UserInfoModal />
+                    </Grid>
+                    <Grid item={12}>
+                        <CardContent className={styles.content}>
+                            <TextInfoContent
+                                classes={textCardContentStyles}
+                                heading={'About Me'}
+                                body={
+                                    'We are going to learn different kinds of species in nature that live together to form amazing environment.'
+                                }
+                            />
+                        </CardContent>
+                        <Divider varient="middle" />
+                    </Grid>
+                  
+                  <Grid container xs={12} className={styles.favBrandsContainer}>
             <Typography variant="h4" gutterBottom>
               <h4>Favourite Brands</h4>
             </Typography>
@@ -279,50 +333,41 @@ function UserInfoCard() {
         </Grid>
       </Grid>
 
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">Edit Profile Details</DialogTitle>
-        <DialogContent>
-          <DialogContentText>Enter Details Below </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="location"
-            label="Location"
-            type="text"
-            fullWidth
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="description"
-            label="Description"
-            type="text"
-            fullWidth
-          />
-          {/* this is for the normal text input */}
-          <TextField
-            autoFocus
-            margin="dense"
-            label="description"
-            id="description"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            fullWidth
-          />
-          <br></br>
-          {/* this is for the photo input */}
-          <input type="file" onChange={handleUpload} />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={on99}>Update</Button>
-          <Button onClick={handleClose}>Cancel</Button>
-        </DialogActions>
-      </Dialog>
+
+
+            {/* <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title">gg Profile Details</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Enter Details Below
+                </DialogContentText>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="location"
+                        label="Location"
+                        type="text"
+                        fullWidth
+                    />
+
+                    <br></br>
+                    this is for the photo input
+                    <input type="file" onChange={handleUpload} />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={on99}>
+                        wtf
+                    </Button>
+                    <Button onClick={handleClose}>
+                        Cancel
+                    </Button>
+                </DialogActions>
+            </Dialog> */}
+
+          
+
+
+     
     </Card>
   );
 }
