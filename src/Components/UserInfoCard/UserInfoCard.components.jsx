@@ -2,38 +2,33 @@
 // <Button>Follow</Button>
 // <Button>Unfollow</Button>
 
-import React, { useEffect } from 'react';
-import "./UserInfoCard.components.scss"
-import cx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button'
-import Grid from '@material-ui/core/Grid'
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Avatar from '@material-ui/core/Avatar';
-import Divider from '@material-ui/core/Divider';
-import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
-import { useGutterBorderedGridStyles } from '@mui-treasury/styles/grid/gutterBordered';
-import { useN01TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n01';
-import BusinessCarousel from "../../Components/BusinessCarousel/BusinessCarousel.components"
-import TextInfoContent from '@mui-treasury/components/content/textInfo';
+import React, { useEffect } from "react";
+import "./UserInfoCard.components.scss";
+import cx from "clsx";
+import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Avatar from "@material-ui/core/Avatar";
+import Divider from "@material-ui/core/Divider";
+import { useFadedShadowStyles } from "@mui-treasury/styles/shadow/faded";
+import { useGutterBorderedGridStyles } from "@mui-treasury/styles/grid/gutterBordered";
+import { useN01TextInfoContentStyles } from "@mui-treasury/styles/textInfoContent/n01";
+import BusinessCarousel from "../../Components/BusinessCarousel/BusinessCarousel.components";
+import TextInfoContent from "@mui-treasury/components/content/textInfo";
 
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import TextField from '@material-ui/core/TextField';
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import TextField from "@material-ui/core/TextField";
 //TM REDUX ,selector is to grab store data to state
 import { useSelector, useDispatch } from "react-redux";
 import { upload } from "../../Redux/Actions/TMactions";
-import Axios from 'axios';
-
-
-import BrandCards from "../../Components/BrandCards/BrandCards.components"
-import { Paper, Typography } from '@material-ui/core';
-import UserInfoModal from '../UserInfoModal/UserInfoModal.components';
+import Axios from "axios";
 
 
 //new updates 
@@ -108,51 +103,89 @@ const useStyles = makeStyles(({ palette }) => ({
     imgBtn: {
         float: 'left'
     }
-}));
+
+import BrandCards from "../../Components/BrandCards/BrandCards.components";
+import { Paper, Typography } from "@material-ui/core";
+import UserInfoModal from "../UserInfoModal/UserInfoModal.components";
+
 
 
 function UserInfoCard() {
+
     // for the problem of potentially undefined photo(useEffect)
     const [havephoto, setHavephoto] = React.useState(false)
     const [follow, setFollow] = React.useState(false)
     const styles = useStyles();
-    const textCardContentStyles = useN01TextInfoContentStyles({
-
-    });
-    const shadowStyles = useFadedShadowStyles();
-    const borderedGridStyles = useGutterBorderedGridStyles({
-        borderColor: 'rgba(0, 0, 0, 0.08)',
-        height: '70%',
-    });
-
-    const [open, setOpen] = React.useState(false);
-    //TM
-    const dispatch = useDispatch();
-
-    // State to store uploaded file
-    const importantid = (localStorage.getItem("ob_id"))
-    console.log(importantid)
-    const [name, setName] = React.useState("Initial Bio");
-    const [photofile, setphotoFile] = React.useState("");
-    const [photofile2, setphotoFile2] = React.useState("")
-    const TMB = useSelector((state) => state.userInfoUploadStore);
-    //b.success = true
-    const { loading, success, userInfoUploadObject } = TMB;
-
-    //End of state i used 
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
+    const textCardContentStyles = useN01TextInfoContentStyles({});
 
 
-    function handleClick() {
-        setFollow(!follow)
+  const shadowStyles = useFadedShadowStyles();
+  const borderedGridStyles = useGutterBorderedGridStyles({
+    borderColor: "rgba(0, 0, 0, 0.08)",
+    height: "70%",
+  });
+
+
+  const [open, setOpen] = React.useState(false);
+  //TM
+  const dispatch = useDispatch();
+
+  // State to store uploaded file
+  const importantid = localStorage.getItem("ob_id");
+  console.log(importantid);
+  const [name, setName] = React.useState("Initial Bio");
+  const [photofile, setphotoFile] = React.useState("");
+  const [photofile2, setphotoFile2] = React.useState("");
+  const TMB = useSelector((state) => state.userInfoUploadStore);
+  //b.success = true
+  const { loading, success, userInfoUploadObject } = TMB;
+
+  //End of state i used
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  function handleClick() {
+    setFollow(!follow);
+  }
+
+  // Handles file upload event and updates state // done
+  const handleUpload = (event) => {
+    const formdata = new FormData();
+    formdata.append("image", event.target.files[0]);
+    fetch("https://api.imgur.com/3/image", {
+      method: "post",
+      headers: {
+        Authorization: "Client-ID 0dfb916cd7c1ca8",
+      },
+      body: formdata,
+    })
+      .then((data) => data.json())
+      .then((data) => {
+        console.log(data.data.link);
+        alert("File Upload success");
+        setphotoFile(data.data.link);
+      });
+  };
+
+  useEffect(async () => {
+    let c = localStorage.getItem("ob_id");
+    const response = await Axios.get(`http://localhost:5000/photo/${c}`);
+    console.log(response);
+    //problem: if there is no data within the photo this will be done
+    if (response.data[0] !== null && response.data[0] !== undefined) {
+      setphotoFile(response.data[0].photo);
+    } else {
+      console.log("oops");
     }
+
+    //if (userInfoUploadObject) { photofile = userInfoUploadObject.photo
+  }, [success]);
 
 
     // Handles file upload event and updates state // done
@@ -194,6 +227,7 @@ function UserInfoCard() {
     //e.preventDefault();
     //TM 
     //dispatch(upload(name, photofile, importantid));
+
     //redux TM actions
     //let a = await fetch('http://localhost:5000/edit/', {
     //    method: "post",
@@ -201,6 +235,7 @@ function UserInfoCard() {
     //    body: JSON.stringify({ name: name, photo: photofile, id: importantid })
     //})
     //console.log(a)
+
 
     //}
 
@@ -278,25 +313,27 @@ function UserInfoCard() {
                         </CardContent>
                         <Divider varient="middle" />
                     </Grid>
-
-                    <Grid container xs={12} className={styles.favBrandsContainer}>
-                        <Typography variant="h4" gutterBottom>
-                            <h4>Favourite Brands</h4>
-                        </Typography>
-                        <Grid container xs={12} spacing={2} >
-                            <Grid item xs={4}>
-                                <BrandCards />
-                            </Grid>
-                            <Grid item xs={4}>
-                                <BrandCards />
-                            </Grid>
-                            <Grid item xs={4}>
-                                <BrandCards />
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </Grid>
+                  
+                  <Grid container xs={12} className={styles.favBrandsContainer}>
+            <Typography variant="h4" gutterBottom>
+              <h4>Favourite Brands</h4>
+            </Typography>
+            <Grid container xs={12} spacing={2}>
+              <Grid item xs={4}>
+                <BrandCards />
+              </Grid>
+              <Grid item xs={4}>
+                <BrandCards />
+              </Grid>
+              <Grid item xs={4}>
+                <BrandCards />
+              </Grid>
             </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+
+
 
             {/* <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">gg Profile Details</DialogTitle>
@@ -327,8 +364,12 @@ function UserInfoCard() {
                 </DialogActions>
             </Dialog> */}
 
-        </Card>
-    );
-};
+          
+
+
+     
+    </Card>
+  );
+}
 
 export default UserInfoCard;

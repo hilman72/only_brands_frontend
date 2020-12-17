@@ -28,10 +28,9 @@ const BusinessCoupon = (props) => {
       setFirst(true);
     }
     if (first === true) {
-      console.log(x);
       setCou([...x]);
     }
-  }, [first, props.coupon]);
+  }, [first, props.coupon, cou]);
 
   return (
     <div className={classes.root}>

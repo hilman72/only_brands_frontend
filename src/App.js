@@ -67,7 +67,7 @@ class App extends React.Component {
             <Route path="/After" component={AfterRegister} />
             <Route path="/Error" component={Error} />
             <PrivateRoute path="/UserProfiles" component={UserProfile} />
-            <PrivateRoute path="/NotYet" component={UserProfile} />
+            <PrivateRoute path="/NotYet" component={NotYet} />
             <PrivateRoute
               path="/BusinessProfiles/:name"
               component={BusinessProfiles}

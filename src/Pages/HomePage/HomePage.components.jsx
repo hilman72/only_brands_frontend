@@ -22,13 +22,13 @@ const useStyles = makeStyles(() => ({
   },
   button: {
     float: 'right'
-  },
+  }
 }));
 
 function HomePage() {
 
   const classes = useStyles()
-;
+    ;
   return (
     <div>
       <div>
@@ -38,104 +38,105 @@ function HomePage() {
         <Grid container>
           {/* ---------------- Gutter ---------------- */}
           <Grid item xs={2}>
-            Guttter
+
           </Grid>
           <Grid item xs={8}>
-            <Paper elevation={4}> 
-            <Grid container>
-
-              {/* ---------------- Brands Recommendations ---------------- */}
-              <Grid container justify="flex-start" >
-                <Grid item className={classes.container} xs={6}>
-                  <h2>Hottest Brands</h2>
-                  <BusinessCarousel />
-                </Grid>
-                <Grid justify="flex-start" className={classes.container}  item xs={6}>
-                  <h2>Newest Brands</h2>
-                  <BusinessCarousel />
-                </Grid>
-              </Grid>
-              
+            <Paper elevation={4}>
               <Grid container>
-                <Grid item className={classes.container} xs={9}>
-                  {/* ---------------- New Offers from Brands You Follow ---------------- */}
-                  <Grid container item xs={12}>
-                    <Grid item xs={10}>
-                      <h2 className="CouponSectionHeaders">
-                        New Offers from Brands You Follow
-                      </h2>
-                    </Grid>
-                    <Grid item xs={2}>
-                      <Button className={classes.button}>More</Button>
-                    </Grid>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <CouponCarousel />
-                  </Grid>
-                </Grid>
-                {/* ---------------- Refer a Frend Button ---------------- */}
-                <Grid container  
-                justify="center"
-                alignItems="center"
-                className={classes.container} 
-                xs={3}>
-                <Grid
-                 item xs={12}>
-                   <Card>
-                     <CardContent>
-                     <Typography variant="h2">
-                        Refer A Friend
-                    </Typography>
-                     </CardContent>
-                   </Card>
-    
-                  </Grid>
-                </Grid>
-              </Grid>
 
-              <Grid container>
-                <Grid container xs={12}>
-                  {/* ---------------- Earned Points ---------------- */}
+                {/* ---------------- Brands Recommendations ---------------- */}
+                <Grid container justify="flex-start" >
                   <Grid item className={classes.container} xs={6}>
-                    <Grid container item xs={12}>
-                      <Grid item xs={10}>
-                        <h2 className="CouponSectionHeaders">Earned Points</h2>
-                      </Grid>
-                      <Grid item xs={2}>
-                        <Button className={classes.button} >More</Button>
-                      </Grid>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <PointsCarousel />
-                    </Grid>
+                    <h2>Hottest Brands</h2>
+                    <BusinessCarousel />
                   </Grid>
-                  {/* ---------------- Recommendations From Friends ---------------- */}
-                  <Grid item className={classes.container} xs={6}>
+                  <Grid justify="flex-start" className={classes.container} item xs={6}>
+                    <h2>Newest Brands</h2>
+                    <BusinessCarousel />
+                  </Grid>
+                </Grid>
+
+                <Grid container>
+                  <Grid item className={classes.container} xs={9}>
+                    {/* ---------------- New Offers from Brands You Follow ---------------- */}
                     <Grid container item xs={12}>
                       <Grid item xs={10}>
                         <h2 className="CouponSectionHeaders">
-                          Recommendations From Friends
-                        </h2>
+                          New Offers from Brands You Follow
+                      </h2>
                       </Grid>
                       <Grid item xs={2}>
-                        <Button className={classes.button} >More</Button>
+                        <Button className={classes.button}>More</Button>
                       </Grid>
                     </Grid>
                     <Grid item xs={12}>
-                      <RecommendationCarousel />
+                      <CouponCarousel />
+                    </Grid>
+                  </Grid>
+                  {/* ---------------- Refer a Frend Button ---------------- */}
+                  <Grid container
+                    justify="center"
+                    alignItems="center"
+                    className={classes.container}
+                    xs={3}>
+                    <Grid
+                      item xs={12}>
+                            <div className="wrap">
+                              <button className="referButton"><h2>Refer A Friend</h2></button>
+                            </div>
+                    </Grid>
+                    <Grid
+                      item xs={12}>
+                            <div className="wrap">
+                              <button className="referButton"><h2>Explore Offers</h2></button>
+                            </div>
+                    </Grid>
+                  </Grid>
+                </Grid>
+
+                <Grid container>
+                  <Grid container xs={12}>
+                    {/* ---------------- Earned Points ---------------- */}
+                    <Grid item className={classes.container} xs={6}>
+                      <Grid container item xs={12}>
+                        <Grid item xs={10}>
+                          <h2 className="CouponSectionHeaders">Earned Points</h2>
+                        </Grid>
+                        <Grid item xs={2}>
+                          <Button className={classes.button} >More</Button>
+                        </Grid>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <PointsCarousel />
+                      </Grid>
+                    </Grid>
+                    {/* ---------------- Recommendations From Friends ---------------- */}
+                    <Grid item className={classes.container} xs={6}>
+                      <Grid container item xs={12}>
+                        <Grid item xs={10}>
+                          <h2 className="CouponSectionHeaders">
+                            Recommendations From Friends
+                        </h2>
+                        </Grid>
+                        <Grid item xs={2}>
+                          <Button className={classes.button} >More</Button>
+                        </Grid>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <RecommendationCarousel />
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
               </Grid>
-            </Grid>
 
-          </Paper>
+            </Paper>
 
 
 
           </Grid>
           <Grid item xs={2}>
-            Gutter
+
           </Grid>
         </Grid>
       </div>
