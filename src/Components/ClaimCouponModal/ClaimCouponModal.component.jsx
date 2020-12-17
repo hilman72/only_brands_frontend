@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -55,7 +55,8 @@ const DialogActions = withStyles((theme) => ({
 }))(MuiDialogActions);
 
 function CouponModal(props) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [who, setWho] = useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -63,6 +64,20 @@ function CouponModal(props) {
   const handleClose = () => {
     setOpen(false);
   };
+  const y = localStorage.getItem("ob_who");
+  const you = localStorage.getItem("ob_username");
+
+  const handleClaim = async () => {
+    await fetch(`http://localhost:5000/api/claimCoupon/${you}`, {
+      method: "post",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ id: props.pastData.id }),
+    });
+  };
+
+  useEffect(() => {
+    setWho(y);
+  }, [who]);
 
   return (
     <div>
@@ -83,7 +98,11 @@ function CouponModal(props) {
             </DialogTitle>
           </Grid>
           <Grid item xs={3}>
-            <Button>Claim Now</Button>
+            {who === "user" ? (
+              <Button onClick={handleClaim}>Claim Now</Button>
+            ) : (
+              <div></div>
+            )}
           </Grid>
           <Grid item xs={12}>
             <Typography variant="h2" align="center" gutterBottom>

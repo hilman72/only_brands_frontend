@@ -7,31 +7,49 @@ import BusinessWindows from "../../Components/Business-windows/Business-windows.
 import Header from "../../Components/Header/Header.component";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+import axios from "axios";
 
 const useStyles = makeStyles(({ palette }) => ({
   background: {
     backgroundColor: "#f0f0f0",
   },
-  bottomContainer:{
+  bottomContainer: {
     paddingTop: "1rem",
   },
   cover: {
-    height: 6
+    height: 6,
   },
   paper: {
-    borderRadius: '1rem'
-  }
+    borderRadius: "1rem",
+  },
 }));
 
 function BusinessProfiles() {
   const styles = useStyles();
-
   const [who, setWho] = useState("");
+  const [render, setRender] = useState("");
+  const [detail, setDetail] = useState([]);
+
+  const x = window.location.href.replaceAll("/", " ").split(" ");
+  const render_user = x[x.length - 1];
+
+  const y = localStorage.getItem("ob_who");
+
+  const getData = async () => {
+    await axios
+      .get(`http://localhost:5000/api/getBusinessDetail/${render}`)
+      .then((res) => {
+        let x = res.data;
+        setDetail([...x]);
+      })
+      .catch((error) => console.log(error));
+  };
 
   useEffect(() => {
-    let x = localStorage.getItem("ob_who");
-    setWho(x);
-  }, [who]);
+    setWho(y);
+    setRender(render_user);
+    getData();
+  }, [render_user, who]);
 
   return (
     <div>
@@ -45,14 +63,13 @@ function BusinessProfiles() {
             Gutter
           </Grid>
           <Grid container xs={8}>
-            <Grid className={styles.cover} item xs={12}>
-            </Grid>
+            <Grid className={styles.cover} item xs={12}></Grid>
             <Grid item xs={12}>
-              <BusinessDetail who={who} />
+              <BusinessDetail who={who} detail={detail} />
             </Grid>
             <Grid item className={styles.bottomContainer} xs={12}>
               <Paper className={styles.paper} elevation={2}>
-                <BusinessWindows who={who}/>
+                <BusinessWindows who={who} detail={detail} />
               </Paper>
             </Grid>
           </Grid>

@@ -43,7 +43,7 @@ const useStyles = makeStyles(({ palette }) => ({
     margin: "auto",
     border: "5px solid #8eebdc",
     borderRadius: "50%",
-    transform: 'translate(0px,-5rem)',
+    transform: "translate(0px,-5rem)",
   },
   heading: {
     fontSize: 18,
@@ -87,23 +87,22 @@ const useStyles = makeStyles(({ palette }) => ({
     borderRadius: "1.5rem",
   },
   shrink: {
-    maxHeight: '3.5rem', 
+    maxHeight: "3.5rem",
   },
 
-  bottomRow:{
-    backgroundColor: '#a4efef',
-    borderRadius: '0rem 0rem 0.5rem 0.5rem',
+  bottomRow: {
+    backgroundColor: "#a4efef",
+    borderRadius: "0rem 0rem 0.5rem 0.5rem",
   },
-  followButtonContainer:{
+  followButtonContainer: {
     padding: 0,
     margin: 0,
   },
-  noPadding:{
-    padding:'0 !important',
-    margin:'0 !important',
-  }
+  noPadding: {
+    padding: "0 !important",
+    margin: "0 !important",
+  },
 }));
-
 
 const BusinessDetail = (props) => {
   const [follow, setFollow] = React.useState(false);
@@ -117,6 +116,8 @@ const BusinessDetail = (props) => {
 
   const [open, setOpen] = React.useState(false);
   const [who, setWho] = React.useState("");
+  const [detail, setDetail] = React.useState([]);
+  const [first, setFirst] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -132,7 +133,15 @@ const BusinessDetail = (props) => {
 
   useEffect(() => {
     setWho(props.who);
-  }, [props.who]);
+    let x = props.detail;
+    if (x.length > 0) {
+      setFirst(true);
+      console.log(x);
+    }
+    if (first === true) {
+      setDetail([...x]);
+    }
+  }, [props.who, props.detail, first]);
 
   return (
     <Card className={cx(styles.card, shadowStyles.root)}>
@@ -152,95 +161,105 @@ const BusinessDetail = (props) => {
             <BusinessInfoModal />
           </Grid>
         </Grid>
-          {/* --------- row for name and description --------- */}
-          <Grid container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            xs={12}>
-            <Grid item xs={4}>
-              <CardContent>
-                <Typography align="center">
-                  <h2 className={styles.heading}>Outback Steakhouse</h2>
-                </Typography>
-                <span className={styles.subheader}>Hong Kong</span>
-              </CardContent>
-            </Grid>
-            <Grid item xs={8} >
-              <CardContent className={styles.content}>
-                {/* <Typography>
+        {/* --------- row for name and description --------- */}
+        <Grid
+          container
+          direction="row"
+          justify="center"
+          alignItems="center"
+          xs={12}
+        >
+          <Grid item xs={4}>
+            <CardContent>
+              <Typography align="center">
+                <h2 className={styles.heading}>
+                  {detail && detail[0] && detail[0].business_name}
+                </h2>
+              </Typography>
+              <span className={styles.subheader}>Hong Kong</span>
+            </CardContent>
+          </Grid>
+          <Grid item xs={8}>
+            <CardContent className={styles.content}>
+              {/* <Typography>
                   <h2 className={styles.heading}>Description/Bio</h2>
                 </Typography> */}
-                <Typography>
-                  <p>What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s </p>
-                </Typography>
-              </CardContent>
-            </Grid>
+              <Typography>
+                <p>
+                  What is Lorem Ipsum Lorem Ipsum is simply dummy text of the
+                  printing and typesetting industry Lorem Ipsum has been the
+                  industry's standard dummy text ever since the 1500s{" "}
+                </p>
+              </Typography>
+            </CardContent>
           </Grid>
-          {/* --------- row for the buttons --------- */}
-          <Grid container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            xs={12} className={styles.bottomRow}>
-            <Grid item xs={3}>
-              {/* <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
+        </Grid>
+        {/* --------- row for the buttons --------- */}
+        <Grid
+          container
+          direction="row"
+          justify="center"
+          alignItems="center"
+          xs={12}
+          className={styles.bottomRow}
+        >
+          <Grid item xs={3}>
+            {/* <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
                 <p className={styles.statLabel}>Followers</p>
                 <p className={styles.statValue}>6941</p>
               </Box> */}
-              <Grid xs={12}>
-                <h6 className={styles.noPadding}>Followers</h6>
-              </Grid>
-              <Grid xs={12}>
-                <h4>903K</h4>
-              </Grid>
+            <Grid xs={12}>
+              <h6 className={styles.noPadding}>Followers</h6>
             </Grid>
-            <Grid item xs={3}>
-              <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
-                <Box p={1} flex={"auto"} className={styles.followButtonContainer}>
-                  {follow ? (
-                    <Button onClick={handleClick} className={styles.button}>
-                      Follow
-                    </Button>
-                  ) : (
-                      <Box flex={"auto"}>
-                        <Button onClick={handleClick} className={styles.button}>
-                          Followed
-                        </Button>
-                        <br />
-                        <br />
-                        <Button onClick={handleClick} className={styles.button}>
-                          UnFollow
-                        </Button>
-                      </Box>
-                    )}
-                </Box>
-              </Box>
-            </Grid>
-            <Grid item xs={3}>
-              <Button startIcon={<ChatIcon />} className={styles.button}>
-                Chat With Us
-              </Button>
-            </Grid>
-            <Grid item xs={3}>
-              <ButtonGroup
-                color="primary"
-                aria-label="large contained primary button group"
-                variant="contained"
-              >
-                <Button className="button1">
-                  <FacebookIcon />
-                </Button>
-                <Button className="button2">
-                  <TwitterIcon />
-                </Button>
-                <Button className="button3">
-                  <InstagramIcon />
-                </Button>
-              </ButtonGroup>
+            <Grid xs={12}>
+              <h4>903K</h4>
             </Grid>
           </Grid>
+          <Grid item xs={3}>
+            <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
+              <Box p={1} flex={"auto"} className={styles.followButtonContainer}>
+                {follow ? (
+                  <Button onClick={handleClick} className={styles.button}>
+                    Follow
+                  </Button>
+                ) : (
+                  <Box flex={"auto"}>
+                    <Button onClick={handleClick} className={styles.button}>
+                      Followed
+                    </Button>
+                    <br />
+                    <br />
+                    <Button onClick={handleClick} className={styles.button}>
+                      UnFollow
+                    </Button>
+                  </Box>
+                )}
+              </Box>
+            </Box>
+          </Grid>
+          <Grid item xs={3}>
+            <Button startIcon={<ChatIcon />} className={styles.button}>
+              Chat With Us
+            </Button>
+          </Grid>
+          <Grid item xs={3}>
+            <ButtonGroup
+              color="primary"
+              aria-label="large contained primary button group"
+              variant="contained"
+            >
+              <Button className="button1">
+                <FacebookIcon />
+              </Button>
+              <Button className="button2">
+                <TwitterIcon />
+              </Button>
+              <Button className="button3">
+                <InstagramIcon />
+              </Button>
+            </ButtonGroup>
+          </Grid>
+        </Grid>
         {/* ---------------- Original Grid System ---------------- */}
       </Grid>
     </Card>

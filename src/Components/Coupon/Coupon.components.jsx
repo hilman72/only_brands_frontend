@@ -157,13 +157,12 @@ function Coupon(props) {
           <ConfirmationNumberRoundedIcon className={styles.icon} />
           <Grid item xs={12}>
             <div className={styles.label}>
-              <h2 className={styles.heading}>
-                  {props.data.discount}</h2>
+              <h2 className={styles.heading}>{props.data.discount}</h2>
             </div>
           </Grid>
           <Grid item xs={8}>
             <div className="brandInfo">
-              <h4 className={styles.subheader}>Outback Steakhouse</h4>
+              <h4 className={styles.subheader}>{props.data.business_name}</h4>
               <p className={styles.text}>
                 Valid Until: {props.data.finished_date}
               </p>
