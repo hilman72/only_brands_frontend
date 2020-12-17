@@ -43,6 +43,7 @@ function CreateCoupon(props) {
 
   const handleSubmit = async () => {
     const b_id = localStorage.getItem("ob_id");
+    const b_name = localStorage.getItem("ob_username");
     await fetch(`http://localhost:5000/api/createCoupon`, {
       method: "POST",
       headers: { "content-Type": "application/json" },
@@ -52,15 +53,10 @@ function CreateCoupon(props) {
         discount: offer,
         limit: coupLimit,
         account_business_id: b_id,
+        business_name: b_name,
       }),
     }).then(handleClose());
   };
-
-  //   useEffect(() => {
-  //     if (create === true) {
-  //       setOpen(false);
-  //     }
-  //   }, [create]);
 
   const couponLimit = [
     {

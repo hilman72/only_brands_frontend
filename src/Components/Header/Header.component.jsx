@@ -99,6 +99,7 @@ const PrimarySearchAppBar = (props) => {
   const [filterMenu, setFilterMenu] = React.useState(null);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [who, setWho] = React.useState("");
+  const [name, setName] = React.useState("");
 
   //Mobile menu handle dropdown (for nav icons)
 
@@ -156,9 +157,9 @@ const PrimarySearchAppBar = (props) => {
   const toProfile = (event) => {
     event.preventDefault();
     if (who === "user") {
-      history.push("/UserProfiles");
+      history.push(`/UserProfiles/${name}`);
     } else if (who === "business") {
-      history.push("/BusinessProfiles");
+      history.push(`/BusinessProfiles/${name}`);
     }
     handleMenuClose();
   };
@@ -175,8 +176,10 @@ const PrimarySearchAppBar = (props) => {
 
   useEffect(() => {
     let x = localStorage.getItem("ob_who");
+    let y = localStorage.getItem("ob_username");
     setWho(x);
-  }, [who]);
+    setName(y);
+  }, [who, name]);
 
   // Profile menu dropdown render
 
