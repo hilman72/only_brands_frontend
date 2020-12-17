@@ -5,6 +5,10 @@
 import React, { useEffect } from "react";
 import "./UserInfoCard.components.scss";
 import cx from "clsx";
+
+import BrandCards from "../../Components/BrandCards/BrandCards.components";
+import { Paper, Typography } from "@material-ui/core";
+import UserInfoModal from "../UserInfoModal/UserInfoModal.components";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
@@ -104,11 +108,7 @@ const useStyles = makeStyles(({ palette }) => ({
         float: 'left'
     }
 
-import BrandCards from "../../Components/BrandCards/BrandCards.components";
-import { Paper, Typography } from "@material-ui/core";
-import UserInfoModal from "../UserInfoModal/UserInfoModal.components";
-
-
+}));
 
 function UserInfoCard() {
 
@@ -154,24 +154,6 @@ function UserInfoCard() {
     setFollow(!follow);
   }
 
-  // Handles file upload event and updates state // done
-  const handleUpload = (event) => {
-    const formdata = new FormData();
-    formdata.append("image", event.target.files[0]);
-    fetch("https://api.imgur.com/3/image", {
-      method: "post",
-      headers: {
-        Authorization: "Client-ID 0dfb916cd7c1ca8",
-      },
-      body: formdata,
-    })
-      .then((data) => data.json())
-      .then((data) => {
-        console.log(data.data.link);
-        alert("File Upload success");
-        setphotoFile(data.data.link);
-      });
-  };
 
   useEffect(async () => {
     let c = localStorage.getItem("ob_id");
