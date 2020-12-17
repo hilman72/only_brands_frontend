@@ -12,7 +12,7 @@ import Paper from '@material-ui/core/Paper'
 import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles(({ palette }) => ({
-  UserProfile:{
+  UserProfile: {
     backgroundColor: 'black',
   },
   divider: {
@@ -45,7 +45,7 @@ function UserProfile() {
         </Grid>
         <Grid item xs={8}>
           <Grid className={styles.gutter} item xs={12}>
-            </Grid>
+          </Grid>
           <Paper elevation={20}>
             <Grid
               container
@@ -63,24 +63,24 @@ function UserProfile() {
                 </Grid>
               </Grid>
               <Grid container className={styles.container}>
-              <Grid item xs={12}>
-              <Typography variant="h2" gutterBottom>
-              Recent Recommendations
+                <Grid item xs={12}>
+                  <Typography variant="h2" gutterBottom>
+                    Recent Recommendations
                 </Typography>
-                <RecommendationCarousel />
-              </Grid>
-              <Grid item className={styles.container2} xs={12}>
-                <Typography variant="h2" gutterBottom>
-                Recent Coupons Claimed
+                  <RecommendationCarousel />
+                </Grid>
+                <Grid item className={styles.container2} xs={12}>
+                  <Typography variant="h2" gutterBottom>
+                    Recent Coupons Claimed
                 </Typography>
-                <CouponCarousel />
-              </Grid>
+                  <CouponCarousel />
+                </Grid>
               </Grid>
             </Grid>
           </Paper>
         </Grid>
         <Grid item xs={2}>
-        
+
         </Grid>
       </Grid>
     </div>
