@@ -44,7 +44,7 @@ function UserInfoModal() {
 
     return (
         <div>
-            <Button className="edit" onClick={handleClickOpen}>gg Edit Profile</Button>
+            <Button className="edit" onClick={handleClickOpen}>Edit Profile</Button>
 
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Edit Profile Details</DialogTitle>

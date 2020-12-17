@@ -119,55 +119,55 @@ function UserInfoCard() {
     const textCardContentStyles = useN01TextInfoContentStyles({});
 
 
-  const shadowStyles = useFadedShadowStyles();
-  const borderedGridStyles = useGutterBorderedGridStyles({
-    borderColor: "rgba(0, 0, 0, 0.08)",
-    height: "70%",
-  });
+    const shadowStyles = useFadedShadowStyles();
+    const borderedGridStyles = useGutterBorderedGridStyles({
+        borderColor: "rgba(0, 0, 0, 0.08)",
+        height: "70%",
+    });
 
 
-  const [open, setOpen] = React.useState(false);
-  //TM
-  const dispatch = useDispatch();
+    const [open, setOpen] = React.useState(false);
+    //TM
+    const dispatch = useDispatch();
 
-  // State to store uploaded file
-  const importantid = localStorage.getItem("ob_id");
-  console.log(importantid);
-  const [name, setName] = React.useState("Initial Bio");
-  const [photofile, setphotoFile] = React.useState("");
-  const [photofile2, setphotoFile2] = React.useState("");
-  const TMB = useSelector((state) => state.userInfoUploadStore);
-  //b.success = true
-  const { loading, success, userInfoUploadObject } = TMB;
+    // State to store uploaded file
+    const importantid = localStorage.getItem("ob_id");
+    console.log(importantid);
+    const [name, setName] = React.useState("Initial Bio");
+    const [photofile, setphotoFile] = React.useState("");
+    const [photofile2, setphotoFile2] = React.useState("");
+    const TMB = useSelector((state) => state.userInfoUploadStore);
+    //b.success = true
+    const { loading, success, userInfoUploadObject } = TMB;
 
-  //End of state i used
+    //End of state i used
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+    const handleClose = () => {
+        setOpen(false);
+    };
 
-  function handleClick() {
-    setFollow(!follow);
-  }
-
-
-  useEffect(async () => {
-    let c = localStorage.getItem("ob_id");
-    const response = await Axios.get(`http://localhost:5000/photo/${c}`);
-    console.log(response);
-    //problem: if there is no data within the photo this will be done
-    if (response.data[0] !== null && response.data[0] !== undefined) {
-      setphotoFile(response.data[0].photo);
-    } else {
-      console.log("oops");
+    function handleClick() {
+        setFollow(!follow);
     }
 
-    //if (userInfoUploadObject) { photofile = userInfoUploadObject.photo
-  }, [success]);
+
+    useEffect(async () => {
+        let c = localStorage.getItem("ob_id");
+        const response = await Axios.get(`http://localhost:5000/photo/${c}`);
+        console.log(response);
+        //problem: if there is no data within the photo this will be done
+        if (response.data[0] !== null && response.data[0] !== undefined) {
+            setphotoFile(response.data[0].photo);
+        } else {
+            console.log("oops");
+        }
+
+        //if (userInfoUploadObject) { photofile = userInfoUploadObject.photo
+    }, [success]);
 
 
     // Handles file upload event and updates state // done
@@ -233,7 +233,18 @@ function UserInfoCard() {
                         <CardContent>
                             <Grid container>
                                 <Grid item xs={12}>
-                                    <input className={styles.imgBtn} type="file" onChange={handleUpload} />
+                                    <Button
+                                        className={styles.imgBtn} 
+                                        component="label"
+                                    >
+                                        Upload Image
+                                     <input
+                                            type="file"
+                                            hidden
+                                            onChange={handleUpload}
+                                        />
+                                    </Button>
+                                    {/* <input type="file" onChange={handleUpload} /> */}
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Avatar className={styles.avatar}
@@ -241,7 +252,7 @@ function UserInfoCard() {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <h3 className={styles.heading}>Designer Darian</h3>
-                                    {/* <span className={styles.subheader}>Kowloon</span> */}
+                                    <span className={styles.subheader}>Kowloon</span>
                                 </Grid>
                             </Grid>
                         </CardContent>
@@ -295,25 +306,25 @@ function UserInfoCard() {
                         </CardContent>
                         <Divider varient="middle" />
                     </Grid>
-                  
-                  <Grid container xs={12} className={styles.favBrandsContainer}>
-            <Typography variant="h4" gutterBottom>
-              <h4>Favourite Brands</h4>
-            </Typography>
-            <Grid container xs={12} spacing={2}>
-              <Grid item xs={4}>
-                <BrandCards />
-              </Grid>
-              <Grid item xs={4}>
-                <BrandCards />
-              </Grid>
-              <Grid item xs={4}>
-                <BrandCards />
-              </Grid>
+
+                    <Grid container xs={12} className={styles.favBrandsContainer}>
+                        <Typography variant="h4" gutterBottom>
+                            <h4>Favourite Brands</h4>
+                        </Typography>
+                        <Grid container xs={12} spacing={2}>
+                            <Grid item xs={4}>
+                                <BrandCards />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <BrandCards />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <BrandCards />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
             </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
 
 
 
@@ -346,12 +357,12 @@ function UserInfoCard() {
                 </DialogActions>
             </Dialog> */}
 
-          
 
 
-     
-    </Card>
-  );
+
+
+        </Card>
+    );
 }
 
 export default UserInfoCard;
