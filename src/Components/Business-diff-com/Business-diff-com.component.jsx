@@ -52,11 +52,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
-    borderRadius: '0.5rem 0.5rem 0rem 0rem'
+    borderRadius: "0.5rem 0.5rem 0rem 0rem",
   },
   appBar: {
-    borderRadius: '0.5rem 0.5rem 0rem 0rem'
-  }
+    borderRadius: "0.5rem 0.5rem 0rem 0rem",
+  },
 }));
 
 const BusinessDiffCom = (props) => {
@@ -76,11 +76,11 @@ const BusinessDiffCom = (props) => {
 
   useEffect(() => {
     let x = localStorage.getItem("ob_id");
+    setWho(props.who);
     fetch(`http://localhost:5000/api/getCoupon/${x}`)
       .then((res) => res.json())
       .then((data) => {
         setCoupon([...data]);
-        setWho(props.who);
       });
   }, [create, props.who]);
 
