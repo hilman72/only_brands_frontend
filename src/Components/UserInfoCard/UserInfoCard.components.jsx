@@ -119,55 +119,51 @@ function UserInfoCard() {
     const textCardContentStyles = useN01TextInfoContentStyles({});
 
 
-  const shadowStyles = useFadedShadowStyles();
-  const borderedGridStyles = useGutterBorderedGridStyles({
-    borderColor: "rgba(0, 0, 0, 0.08)",
-    height: "70%",
-  });
+    const shadowStyles = useFadedShadowStyles();
+    const borderedGridStyles = useGutterBorderedGridStyles({
+        borderColor: "rgba(0, 0, 0, 0.08)",
+        height: "70%",
+    });
 
 
-  const [open, setOpen] = React.useState(false);
-  //TM
-  const dispatch = useDispatch();
+    const [open, setOpen] = React.useState(false);
+    //TM
+    const dispatch = useDispatch();
 
-  // State to store uploaded file
-  const importantid = localStorage.getItem("ob_id");
-  console.log(importantid);
-  const [name, setName] = React.useState("Initial Bio");
-  const [photofile, setphotoFile] = React.useState("");
-  const [photofile2, setphotoFile2] = React.useState("");
-  const TMB = useSelector((state) => state.userInfoUploadStore);
-  //b.success = true
-  const { loading, success, userInfoUploadObject } = TMB;
+    // State to store uploaded file
+    const importantid = localStorage.getItem("ob_id");
+    console.log(importantid);
+    const [photofile, setphotoFile] = React.useState("");
+    const [photofile2, setphotoFile2] = React.useState("");
 
-  //End of state i used
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  function handleClick() {
-    setFollow(!follow);
-  }
+    //description state
+    const [description, setDescription] = React.useState("");
+    const [havedescription, setHavedescription] = React.useState(false);
+    const TMB = useSelector((state) => state.userInfoUploadStore);
+    //b.success = true
+    const { loading, success: success1, userInfoUploadObject } = TMB;
 
 
-  useEffect(async () => {
-    let c = localStorage.getItem("ob_id");
-    const response = await Axios.get(`http://localhost:5000/photo/${c}`);
-    console.log(response);
-    //problem: if there is no data within the photo this will be done
-    if (response.data[0] !== null && response.data[0] !== undefined) {
-      setphotoFile(response.data[0].photo);
-    } else {
-      console.log("oops");
+    //End of state i used
+
+    //another store
+    const breakdescription = useSelector(state => state.userInfoUploadDetailsStore)
+    const { loading: loading2, sucess: success2, uploadedObject: description2 } = breakdescription
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    function handleClick() {
+        setFollow(!follow);
     }
 
-    //if (userInfoUploadObject) { photofile = userInfoUploadObject.photo
-  }, [success]);
+
+
 
 
     // Handles file upload event and updates state // done
@@ -198,11 +194,16 @@ function UserInfoCard() {
             setphotoFile(response.data[0].photo);
         }
         else { setphotoFile("") }
-        //problem: if there is no data within the photo this will be done 
-        // if (havephoto) { setphotoFile(response.data[0].photo); } time lapsed
+        const response2 = await Axios.get(`http://localhost:5000/textdescription/${c}`);
+        console.log(response2.data[0].description)
+        if (response2 !== null || response2 !== undefined) {
+            setHavedescription(true);
+            setDescription(response2.data[0].description);
 
-        //if (userInfoUploadObject) { photofile = userInfoUploadObject.photo 
-    }, [success])
+        }
+
+
+    }, [success1, success2])
 
     //Send the form data to the backend
     //const on99 = async (e) => {
@@ -288,32 +289,30 @@ function UserInfoCard() {
                             <TextInfoContent
                                 classes={textCardContentStyles}
                                 heading={'About Me'}
-                                body={
-                                    'We are going to learn different kinds of species in nature that live together to form amazing environment.'
-                                }
                             />
+                            <h2>{description}</h2>
                         </CardContent>
                         <Divider varient="middle" />
                     </Grid>
-                  
-                  <Grid container xs={12} className={styles.favBrandsContainer}>
-            <Typography variant="h4" gutterBottom>
-              <h4>Favourite Brands</h4>
-            </Typography>
-            <Grid container xs={12} spacing={2}>
-              <Grid item xs={4}>
-                <BrandCards />
-              </Grid>
-              <Grid item xs={4}>
-                <BrandCards />
-              </Grid>
-              <Grid item xs={4}>
-                <BrandCards />
-              </Grid>
+
+                    <Grid container xs={12} className={styles.favBrandsContainer}>
+                        <Typography variant="h4" gutterBottom>
+                            <h4>Favourite Brands</h4>
+                        </Typography>
+                        <Grid container xs={12} spacing={2}>
+                            <Grid item xs={4}>
+                                <BrandCards />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <BrandCards />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <BrandCards />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
             </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
 
 
 
@@ -346,12 +345,12 @@ function UserInfoCard() {
                 </DialogActions>
             </Dialog> */}
 
-          
 
 
-     
-    </Card>
-  );
+
+
+        </Card>
+    );
 }
 
 export default UserInfoCard;
