@@ -17,21 +17,41 @@ function LandingPage() {
               <h1 className="LogoHeader">OnlyBrands</h1>
             </div>
           </Grid>
-          <Grid item xs={6}>
-            <div className="LoginContainer">
+          <Grid
+            container xs={6} spacing={3}>
+            <Grid item xs={12}>
               <h2>Rewards, Recommendations & Referrals</h2>
+            </Grid>
+            <Grid
+              className="RegisterBtnContainer"
+              container spacing={3}>
+              <Grid item 
+              className="RegisterBtnContainer" xs={12}>
+                <Button
+                  variant="contained"
+                  size="large"
+                  className="LoginButton"
+                  color="primary"
+                  onClick={() => {
+                    history.push("/LoginPage");
+                  }}
+                >
+                  Login
+               </Button>
+              </Grid>
+              <Grid 
+              className="RegisterBtnContainer" item xs={12}>
               <Button
-                variant="contained"
-                size="large"
-                className="LoginButton"
-                color="primary"
-                onClick={() => {
-                  history.push("/LoginPage");
-                }}
-              >
-                Login
-              </Button>
-            </div>
+              variant="contained"
+              size="large"
+              className="LoginButton"
+              color="secondary"
+              >Register</Button>
+              </Grid>
+            </Grid>
+
+
+
           </Grid>
         </Grid>
       </div>
@@ -90,37 +110,6 @@ function LandingPage() {
           </Grid>
           <Grid item xs={4}>
             <div className="HowItWorkSteps">Step 3</div>
-          </Grid>
-        </Grid>
-      </div>
-      <div className="RegisterContainer">
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <h1>Join The OnlyBrands Network</h1>
-          </Grid>
-          <Grid item xs={6}>
-            <div className="RegisterBtnContainer">
-              <Button
-                variant="contained"
-                size="large"
-                className="RegisterButton"
-                color="secondary"
-              >
-                Register As a User
-              </Button>
-            </div>
-          </Grid>
-          <Grid item xs={6}>
-            <div className="RegisterBtnContainer">
-              <Button
-                variant="contained"
-                size="large"
-                className="RegisterButton"
-                color="secondary"
-              >
-                Register As A Business
-              </Button>
-            </div>
           </Grid>
         </Grid>
       </div>

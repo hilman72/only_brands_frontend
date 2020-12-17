@@ -74,10 +74,14 @@ const BusinessDiffCom = (props) => {
     setCreate(true);
   };
 
+  const x = window.location.href.replaceAll("/", " ").split(" ");
+  const render_user = x[x.length - 1];
+
+  const you = localStorage.getItem("ob_username");
+
   useEffect(() => {
-    let x = localStorage.getItem("ob_id");
     setWho(props.who);
-    fetch(`http://localhost:5000/api/getCoupon/${x}`)
+    fetch(`http://localhost:5000/api/getCoupon/${render_user}`)
       .then((res) => res.json())
       .then((data) => {
         setCoupon([...data]);
@@ -100,7 +104,7 @@ const BusinessDiffCom = (props) => {
       </AppBar>
       <TabPanel value={value} index={0}>
         <Grid container spacing={3}>
-          {who === "business" ? (
+          {who === "business" && you === render_user ? (
             <Grid item xs={12}>
               <CreateCoupon create={whenCreate} />
             </Grid>

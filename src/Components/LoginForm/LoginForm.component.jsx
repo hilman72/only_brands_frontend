@@ -54,24 +54,29 @@ const LoginForm = (props) => {
   }, [login, history, props.isAuthenticated]);
 
   return (
-    <div>
-      <form className="loginForm">
-        <label>UserName</label>
+    <div className="loginForm">
+      <form>
+      <h2>User Login</h2>
+      <h2>Brands Logina</h2>
+      <span>blahblahblah</span>
+        {/* <label>UserName</label> */}
         <input
           type="text"
           name="username"
           onChange={handleChange_username}
+          placeholder="User Name"
         ></input>
-        <label>Password</label>
+        {/* <label>Password</label> */}
         <input
           type="password"
           name="password"
           onChange={handleChange_password}
+          placeholder="Password"
         ></input>
         <br />
         <input
           type="submit"
-          value="send"
+          value="Sign In"
           onClick={handleSubmit}
           to="/HomePage"
         />

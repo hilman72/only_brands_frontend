@@ -133,6 +133,7 @@ function UserInfoCard() {
     // State to store uploaded file
     const importantid = localStorage.getItem("ob_id");
     console.log(importantid);
+
     const [photofile, setphotoFile] = React.useState("");
     const [photofile2, setphotoFile2] = React.useState("");
 
@@ -149,6 +150,7 @@ function UserInfoCard() {
     //another store
     const breakdescription = useSelector(state => state.userInfoUploadDetailsStore)
     const { loading: loading2, sucess: success2, uploadedObject: description2 } = breakdescription
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -234,7 +236,18 @@ function UserInfoCard() {
                         <CardContent>
                             <Grid container>
                                 <Grid item xs={12}>
-                                    <input className={styles.imgBtn} type="file" onChange={handleUpload} />
+                                    <Button
+                                        className={styles.imgBtn} 
+                                        component="label"
+                                    >
+                                        Upload Image
+                                     <input
+                                            type="file"
+                                            hidden
+                                            onChange={handleUpload}
+                                        />
+                                    </Button>
+                                    {/* <input type="file" onChange={handleUpload} /> */}
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Avatar className={styles.avatar}
@@ -242,7 +255,7 @@ function UserInfoCard() {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <h3 className={styles.heading}>Designer Darian</h3>
-                                    {/* <span className={styles.subheader}>Kowloon</span> */}
+                                    <span className={styles.subheader}>Kowloon</span>
                                 </Grid>
                             </Grid>
                         </CardContent>

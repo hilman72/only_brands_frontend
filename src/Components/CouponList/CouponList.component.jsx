@@ -10,6 +10,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box';
 
 function TabPanel(props) {
@@ -74,7 +75,28 @@ export default function CouponList() {
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
-                <Coupon />
+                <Grid container spacing={3}>
+                    <Grid item xs={6}>
+                    <Coupon />
+                    </Grid>
+                    <Grid item xs={6}>
+                    <Coupon />
+                    </Grid>
+                    <Grid item xs={6}>
+                    <Coupon />
+                    </Grid>
+                    <Grid item xs={6}>
+                    <Coupon />
+                    </Grid>
+                    <Grid item xs={6}>
+                    <Coupon />
+                    </Grid>
+                    <Grid item xs={6}>
+                    <Coupon />
+                    </Grid>
+
+                </Grid>
+
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <Coupon />
