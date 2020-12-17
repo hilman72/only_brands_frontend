@@ -38,12 +38,12 @@ class App extends React.Component {
               isAuthenticated ? (
                 <Component {...props} />
               ) : (
-                <Redirect
-                  to={{
-                    pathname: "/LoginPage",
-                  }}
-                />
-              )
+                  <Redirect
+                    to={{
+                      pathname: "/LoginPage",
+                    }}
+                  />
+                )
             }
           />
         );

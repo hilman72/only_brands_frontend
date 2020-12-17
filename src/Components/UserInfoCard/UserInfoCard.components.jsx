@@ -36,6 +36,9 @@ import { Paper, Typography } from '@material-ui/core';
 import UserInfoModal from '../UserInfoModal/UserInfoModal.components';
 
 
+//new updates 
+import Input from '@material-ui/core/Input';
+
 
 const useStyles = makeStyles(({ palette }) => ({
     card: {
@@ -101,11 +104,16 @@ const useStyles = makeStyles(({ palette }) => ({
     noPadding: {
         padding: '0 !important',
         margin: '0 !important',
+    },
+    imgBtn: {
+        float: 'left'
     }
 }));
 
 
 function UserInfoCard() {
+    // for the problem of potentially undefined photo(useEffect)
+    const [havephoto, setHavephoto] = React.useState(false)
     const [follow, setFollow] = React.useState(false)
     const styles = useStyles();
     const textCardContentStyles = useN01TextInfoContentStyles({
@@ -148,9 +156,10 @@ function UserInfoCard() {
 
 
     // Handles file upload event and updates state // done
-    const handleUpload = (event) => {
+    const handleUpload = (ev) => {
+        console.log(ev.target.files)
         const formdata = new FormData()
-        formdata.append("image", event.target.files[0])
+        formdata.append("image", ev.target.files[0])
         fetch("https://api.imgur.com/3/image", {
             method: "post",
             headers: {
@@ -158,9 +167,10 @@ function UserInfoCard() {
             }
             , body: formdata
         }).then(data => data.json()).then(data => {
-            console.log(data.data.link);
+            console.log(data.data.link, importantid);
             alert("File Upload success");
             setphotoFile(data.data.link)
+            dispatch(upload(data.data.link, importantid))
         })
     }
 
@@ -168,26 +178,31 @@ function UserInfoCard() {
         let c = localStorage.getItem("ob_id");
         const response = await Axios.get(`http://localhost:5000/photo/${c}`);
         console.log(response)
+        if (response !== null || response !== undefined) {
+            setHavephoto(true);
+            setphotoFile(response.data[0].photo);
+        }
+        else { setphotoFile("") }
         //problem: if there is no data within the photo this will be done 
-        setphotoFile(response.data[0].photo);
+        // if (havephoto) { setphotoFile(response.data[0].photo); } time lapsed
 
         //if (userInfoUploadObject) { photofile = userInfoUploadObject.photo 
     }, [success])
 
     //Send the form data to the backend
-    const on99 = async (e) => {
-        e.preventDefault();
-        //TM 
-        dispatch(upload(name, photofile, importantid));
-        //redux TM actions
-        //let a = await fetch('http://localhost:5000/edit/', {
-        //    method: "post",
-        //    headers: { 'content-type': 'application/json' },
-        //    body: JSON.stringify({ name: name, photo: photofile, id: importantid })
-        //})
-        //console.log(a)
+    //const on99 = async (e) => {
+    //e.preventDefault();
+    //TM 
+    //dispatch(upload(name, photofile, importantid));
+    //redux TM actions
+    //let a = await fetch('http://localhost:5000/edit/', {
+    //    method: "post",
+    //    headers: { 'content-type': 'application/json' },
+    //    body: JSON.stringify({ name: name, photo: photofile, id: importantid })
+    //})
+    //console.log(a)
 
-    }
+    //}
 
 
     return (
@@ -199,16 +214,19 @@ function UserInfoCard() {
                     xs={5}>
                     <Grid item xs={12}>
                         <CardContent>
-
-                            <Grid item xs={12}>
-                                <Avatar className={styles.avatar}
-                                    src={'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftheblogofkevin.files.wordpress.com%2F2011%2F04%2Fdonkey-shrek-iphone-4-wallpaper-320x480.jpg&f=1&nofb=1'} />
+                            <Grid container>
+                                <Grid item xs={12}>
+                                    <input className={styles.imgBtn} type="file" onChange={handleUpload} />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Avatar className={styles.avatar}
+                                        src={photofile} />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <h3 className={styles.heading}>Designer Darian</h3>
+                                    {/* <span className={styles.subheader}>Kowloon</span> */}
+                                </Grid>
                             </Grid>
-                            <Grid item xs={12}>
-                                <h3 className={styles.heading}>Designer Darian</h3>
-                                <span className={styles.subheader}>Hong Kong</span>
-                            </Grid>
-
                         </CardContent>
                         <Divider light />
                         <Grid item xs={12}>
@@ -280,8 +298,8 @@ function UserInfoCard() {
                 </Grid>
             </Grid>
 
-            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Edit Profile Details</DialogTitle>
+            {/* <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title">gg Profile Details</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         Enter Details Below
@@ -294,29 +312,20 @@ function UserInfoCard() {
                         type="text"
                         fullWidth
                     />
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="description"
-                        label="Description"
-                        type="text"
-                        fullWidth
-                    />
-                    {/* this is for the normal text input */}
-                    <TextField autoFocus margin="dense" label="description" id="description" type="text" value={name} onChange={(e) => setName(e.target.value)} fullWidth />
+
                     <br></br>
-                    {/* this is for the photo input */}
+                    this is for the photo input
                     <input type="file" onChange={handleUpload} />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={on99}>
-                        Update
+                        wtf
                     </Button>
                     <Button onClick={handleClose}>
                         Cancel
                     </Button>
                 </DialogActions>
-            </Dialog>
+            </Dialog> */}
 
         </Card>
     );

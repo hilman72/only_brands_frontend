@@ -8,32 +8,27 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
 
+//redux
+import { useSelector, useDispatch } from "react-redux";
+import { upload } from "../../Redux/Actions/TMactions";
+import Axios from 'axios';
+
 function UserInfoModal() {
 
     // State to store uploaded file
     const importantid = (localStorage.getItem("ob_id"))
     console.log(importantid)
-
     const [open, setOpen] = React.useState(false);
     const [name, setName] = React.useState("User Input");
     const [photofile, setphotoFile] = React.useState("");
 
-    // Handles file upload event and updates state // done
-    const handleUpload = (event) => {
-        const formdata = new FormData()
-        formdata.append("image", event.target.files[0])
-        fetch("https://api.imgur.com/3/image", {
-            method: "post",
-            headers: {
-                Authorization: "Client-ID 0dfb916cd7c1ca8"
-            }
-            , body: formdata
-        }).then(data => data.json()).then(data => {
-            console.log(data.data.link);
-            alert("File Upload success");
-            setphotoFile(data.data.link)
-        })
-    }
+    const [photofile2, setphotoFile2] = React.useState("")
+    const TMB = useSelector((state) => state.userInfoUploadStore);
+    const { loading, success, userInfoUploadObject } = TMB;
+
+    const dispatch = useDispatch();
+
+
 
     //End of state i used 
 
@@ -46,20 +41,10 @@ function UserInfoModal() {
     };
 
 
-    //Send the form data to the backend
-    const on99 = async (e) => {
-        e.preventDefault();
-        await fetch('http://localhost:5000/edit', {
-            method: "post",
-            headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({ name: name, photo: photofile, id: importantid })
-        })
-    }
-
 
     return (
         <div>
-            <Button className="edit" onClick={handleClickOpen}>Edit Profile</Button>
+            <Button className="edit" onClick={handleClickOpen}>gg Edit Profile</Button>
 
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Edit Profile Details</DialogTitle>
@@ -86,20 +71,20 @@ function UserInfoModal() {
                     <TextField
                         autoFocus
                         margin="dense"
-                        id="description"
+                        id="name"
                         label="Change Name"
                         value={name}
                         type="text"
                         fullWidth
                         onChange={(e) => setName(e.target.value)}
                     />
-                    {/* this is for the photo input */}
-                    <Button type="file" onChange={handleUpload}> 
-                    Upload Image
-                    </Button>
+                    {/* this is for the photo input 
+                    <Button type="file" onClick={handleUpload}>
+                        Upload Image
+                    </Button> */}
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={on99}>
+                    <Button >
                         Update
                 </Button>
                     <Button onClick={handleClose}>
