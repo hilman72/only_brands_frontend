@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
   filter: {
     display: "none",
+    zIndex: 1000,
     [theme.breakpoints.up("md")]: {
       display: "flex",
     },
