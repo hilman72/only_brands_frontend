@@ -67,7 +67,7 @@
   .referButton::before {
   content: '';
     border-radius: 1000px;
-    min-width: calc(10vw + 4vw);
+    min-width: calc(10vw + 5vw);
     min-height: calc(5vh + 8vh);
     border: 6px solid #ff829b;
     box-shadow: 0 0 60px rgba(0,255,203,.64);
@@ -108,12 +108,12 @@
   
   @keyframes ring {
     0% {
-      width: 5vw;
+      width: 6vw;
       height: 10vh;
       opacity: 1;
     }
     100% {
-      width: 10vw;
+      width: 11vw;
       height: 25vh;
       opacity: 0;
     }
