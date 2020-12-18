@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -13,6 +13,7 @@ import BusinessCoupon from "../Business-Coupon/Business-Coupon.component";
 import BusinessTopFans from "../Business-topfans/Business-topfans.component";
 import BusinessTiers from "../Business-tiers/Business-tiers.component";
 import BusinessRecom from "../Business-recom/Business-recom.component";
+import CreateCoupon from "../CreateCoupon/CreateCoupon.component";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -51,20 +52,45 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
+    borderRadius: "0.5rem 0.5rem 0rem 0rem",
+  },
+  appBar: {
+    borderRadius: "0.5rem 0.5rem 0rem 0rem",
   },
 }));
 
-const BusinessDiffCom = () => {
+const BusinessDiffCom = (props) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const [coupon, setCoupon] = React.useState([]);
+  const [create, setCreate] = React.useState(false);
+  const [who, setWho] = React.useState("");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  const whenCreate = () => {
+    setCreate(true);
+  };
+
+  const x = window.location.href.replaceAll("/", " ").split(" ");
+  const render_user = x[x.length - 1];
+
+  const you = localStorage.getItem("ob_username");
+
+  useEffect(() => {
+    setWho(props.who);
+    fetch(`http://localhost:5000/api/getCoupon/${render_user}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setCoupon([...data]);
+      });
+  }, [create, props.who]);
+
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar className={classes.appBar} position="static">
         <Tabs
           value={value}
           onChange={handleChange}
@@ -77,7 +103,19 @@ const BusinessDiffCom = () => {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <BusinessCoupon />
+        <Grid container spacing={3}>
+          {who === "business" && you === render_user ? (
+            <Grid item xs={12}>
+              <CreateCoupon create={whenCreate} />
+            </Grid>
+          ) : (
+            <div></div>
+          )}
+
+          <Grid item xs={12}>
+            <BusinessCoupon coupon={coupon} />
+          </Grid>
+        </Grid>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <BusinessTopFans />

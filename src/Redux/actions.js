@@ -34,6 +34,9 @@ export function loginUserThunk(username, password) {
           );
         } else {
           localStorage.setItem("token", response.data.token);
+          localStorage.setItem("ob_id", response.data.id);
+          localStorage.setItem("ob_who", response.data.identity);
+          localStorage.setItem("ob_username", response.data.username);
           dispatch(loginSuccessActionCreator());
           console.log(response.data.token);
         }
@@ -53,6 +56,9 @@ export function logoutSuccessActionCreator() {
 export function logoutNowThunk() {
   return (dispatch) => {
     localStorage.removeItem("token");
+    localStorage.removeItem("ob_id");
+    localStorage.removeItem("ob_who");
+    localStorage.removeItem("ob_username");
     dispatch(logoutSuccessActionCreator());
   };
 }

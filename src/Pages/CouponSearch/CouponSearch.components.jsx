@@ -1,13 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import FrontendSearch from "../../Components/FrontendSearch/FrontendSearch.components";
 import Grid from "@material-ui/core/Grid"
 import Header from "../../Components/Header/Header.component";
 import Coupons from "../../Components/Coupon/Coupon.components"
 import Paper from "@material-ui/core/Paper"
-
+import { makeStyles } from "@material-ui/core/styles"
 import "./CouponSearch.style.scss";
+import Axios from "axios";
+
+const useStyles = makeStyles({
+  box: {
+    padding: 20,
+    margin: 20
+  }
+})
 
 const CouponSearch = () => {
+
+  const [first, setFirst] = useState(false);
+  const [finaldisplay, setFinaldisplay] = useState([]);
+
+  useEffect(async () => {
+    let b = localStorage.getItem('searchlink')
+    //await Axios.get(`http://localhost:5000/api/search/${different}/${event.target[0].value}`)
+    if (b !== null || b !== undefined) {
+      setFirst(true)
+    }
+    if (first === true) {
+      Axios.get(b).then(data => {
+        let a = data.data;
+        console.log(a)
+        setFinaldisplay([...a])
+      })
+    }
+  }, [first])
+
+
+  const classes = useStyles();
+
+
   return (
     <div>
       <Header />
@@ -25,7 +56,7 @@ const CouponSearch = () => {
                 Gutter
               </Grid>
               <Grid item xs={8}>
-                <Paper elevation={5}>
+                <Paper className={classes.box} elevation={5}>
                   <FrontendSearch />
                 </Paper>
               </Grid>
@@ -34,36 +65,22 @@ const CouponSearch = () => {
               </Grid>
               <Paper elevation={10}>
                 <Grid container xs={12} spacing={3}>
-                  <Grid item xs={6}>
-                    <Coupons />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Coupons />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Coupons />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Coupons />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Coupons />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Coupons />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Coupons />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Coupons />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Coupons />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Coupons />
-                  </Grid>
+
+                  {finaldisplay && finaldisplay.length > 0 ? (
+                    finaldisplay.map((data, i) => {
+                      return (
+                        <Grid item s={6}>
+                          <Coupons key={i} data={data} />
+                        </Grid>
+                      );
+                    })
+                  ) : (
+                      <div>Sorry No Coupon</div>
+                    )}
+
+                  {/* <Grid item xs={6}>
+                   <Coupons />
+                </Grid> */}
                 </Grid>
               </Paper>
             </Grid>

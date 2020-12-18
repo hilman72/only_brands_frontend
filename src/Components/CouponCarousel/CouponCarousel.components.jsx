@@ -1,6 +1,8 @@
 import React from "react";
 import "./CouponCarousel.style.scss";
-import Coupon from "../Coupon/Coupon.components";
+
+import Coupon from "../../Components/Coupon/Coupon.components";
+
 // import Grid from '@material-ui/core/Grid';
 
 //Swiper
@@ -21,57 +23,16 @@ function CouponCarousel() {
   return (
     <div className="CouponContainer">
       <Swiper
-        spaceBetween={30}
+        spaceBetween={20}
         slidesPerView={2}
-
         slidesPerColumnFill={2}
         slidesPerColumn={2}
-
+        loop={true}
         navigation
-        scrollbar={{ draggable: true }}
         onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => console.log(swiper)}
       >
-        <SwiperSlide>
-          {" "}
-          <Coupon />{" "}
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <Coupon />{" "}
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <Coupon />{" "}
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <Coupon />{" "}
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <Coupon />{" "}
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <Coupon />{" "}
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <Coupon />{" "}
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <Coupon />{" "}
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <Coupon />{" "}
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <Coupon />{" "}
-        </SwiperSlide>
+        <SwiperSlide> {/* <Coupon />{" "} */}</SwiperSlide>
       </Swiper>
     </div>
   );

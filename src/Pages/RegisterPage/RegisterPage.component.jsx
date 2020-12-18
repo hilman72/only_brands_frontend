@@ -9,12 +9,12 @@ const RegisterPage = () => {
     <div>
       <div>
         User Register
-        <RegisterForm />
+        <RegisterForm who={"user"} />
       </div>
       <br />
       <div>
         Business Register
-        <RegisterForm />
+        <RegisterForm who={"business"} />
       </div>
     </div>
   );

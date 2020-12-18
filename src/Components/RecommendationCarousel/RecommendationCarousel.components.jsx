@@ -26,8 +26,8 @@ function RecommendationCarousel(){
                 spaceBetween={30}
                 slidesPerColumnFill={1}
                 slidesPerColumn={2}
+                loop={true}
                 navigation
-                scrollbar={{ draggable: true }}
                 onSlideChange={() => console.log('slide change')}
                 onSwiper={(swiper) => console.log(swiper)}
             >

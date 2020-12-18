@@ -16,6 +16,9 @@ import LandingPage from "./Pages/LandingPage/LandingPage.components";
 import CouponSearch from "./Pages/CouponSearch/CouponSearch.components";
 import HomePage from "./Pages/HomePage/HomePage.components";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage.component";
+import AfterRegister from "./Pages/AfterRegisterPage/after_register.component";
+import Error from "./Pages/errorPage/error.component";
+import NotYet from "./Pages/Notyet_verifyPage/notyet_verify.component";
 import TestingPage from "./Pages/TestingPage/TestingPage.jsx";
 
 class App extends React.Component {
@@ -61,12 +64,15 @@ class App extends React.Component {
             <Route path="/LoginPage" component={LoginPage} />
             <Route path="/RegisterPage" component={RegisterPage} />
             <Route path="/TestingPage" component={TestingPage} />
-            <PrivateRoute path="/UserProfiles" component={UserProfile} />
+            <Route path="/After" component={AfterRegister} />
+            <Route path="/Error" component={Error} />
+            <PrivateRoute path="/UserProfiles/:name" component={UserProfile} />
+            <PrivateRoute path="/NotYet" component={NotYet} />
             <PrivateRoute
-              path="/BusinessProfiles"
+              path="/BusinessProfiles/:name"
               component={BusinessProfiles}
             />
-            <PrivateRoute path="/MyCouponPage" component={MyCouponPage} />
+            <PrivateRoute path="/MyCouponPage/:name" component={MyCouponPage} />
             <PrivateRoute path="/LoginPage" component={LoginPage} />
             <PrivateRoute path="/CouponSearch" component={CouponSearch} />
             <PrivateRoute path="/HomePage" component={HomePage} />

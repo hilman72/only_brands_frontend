@@ -1,3 +1,26 @@
 .B-detail{
     border: 3px solid black
 }
+
+.MuiButtonGroup-root{
+    border-radius: 1rem !important;
+}
+
+.button1 {
+    border-radius: 1rem 0rem 0rem 1rem !important;
+    border-left: 3px solid #8eebdc !important;
+    border-top: 3px solid #8eebdc !important;
+    border-bottom: 3px solid #8eebdc !important;
+}
+
+.button2 {
+    border-top: 3px solid #8eebdc !important;
+    border-bottom: 3px solid #8eebdc !important;
+}
+
+.button3 {
+    border-radius: 0rem 1rem 1rem 0rem !important;
+    border-right: 3px solid #8eebdc !important;
+    border-top: 3px solid #8eebdc !important;
+    border-bottom: 3px solid #8eebdc !important;
+}

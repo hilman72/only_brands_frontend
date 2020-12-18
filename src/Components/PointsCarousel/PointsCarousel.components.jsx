@@ -29,7 +29,6 @@ function PointsCarousel(){
                 slidesPerColumn={2}
 
                 navigation
-                scrollbar={{ draggable: true }}
                 onSlideChange={() => console.log('slide change')}
                 onSwiper={(swiper) => console.log(swiper)}
             >
