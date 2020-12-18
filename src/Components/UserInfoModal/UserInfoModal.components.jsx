@@ -23,13 +23,13 @@ import { useSelector, useDispatch } from "react-redux";
 import Axios from 'axios';
 import { uploaddetails } from '../../Redux/Actions/EditNameactions'
 
-function UserInfoModal() {
+function UserInfoModal(props) {
 
     // State to store uploaded file
     const importantid = (localStorage.getItem("ob_id"))
     console.log(importantid)
     const [open, setOpen] = React.useState(false);
-    const [description, setDescription] = React.useState("this is the bio");
+    const [description, setDescription] = React.useState("");
     const [category, setCategory] = React.useState("")
 
 
@@ -60,6 +60,7 @@ function UserInfoModal() {
     const uploaddetailsfunction = () => {
         dispatch(uploaddetails(category, description, importantid))
         console.log("it starts redux now")
+        props.pass()
         handleClose()
     }
 
