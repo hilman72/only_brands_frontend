@@ -133,14 +133,24 @@ function UserInfoCard() {
     // State to store uploaded file
     const importantid = localStorage.getItem("ob_id");
     console.log(importantid);
-    const [name, setName] = React.useState("Initial Bio");
+
     const [photofile, setphotoFile] = React.useState("");
     const [photofile2, setphotoFile2] = React.useState("");
+
+    //description state
+    const [description, setDescription] = React.useState("");
+    const [havedescription, setHavedescription] = React.useState(false);
     const TMB = useSelector((state) => state.userInfoUploadStore);
     //b.success = true
-    const { loading, success, userInfoUploadObject } = TMB;
+    const { loading, success: success1, userInfoUploadObject } = TMB;
+
 
     //End of state i used
+
+    //another store
+    const breakdescription = useSelector(state => state.userInfoUploadDetailsStore)
+    const { loading: loading2, sucess: success2, uploadedObject: description2 } = breakdescription
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -155,19 +165,7 @@ function UserInfoCard() {
     }
 
 
-    useEffect(async () => {
-        let c = localStorage.getItem("ob_id");
-        const response = await Axios.get(`http://localhost:5000/photo/${c}`);
-        console.log(response);
-        //problem: if there is no data within the photo this will be done
-        if (response.data[0] !== null && response.data[0] !== undefined) {
-            setphotoFile(response.data[0].photo);
-        } else {
-            console.log("oops");
-        }
 
-        //if (userInfoUploadObject) { photofile = userInfoUploadObject.photo
-    }, [success]);
 
 
     // Handles file upload event and updates state // done
@@ -198,11 +196,16 @@ function UserInfoCard() {
             setphotoFile(response.data[0].photo);
         }
         else { setphotoFile("") }
-        //problem: if there is no data within the photo this will be done 
-        // if (havephoto) { setphotoFile(response.data[0].photo); } time lapsed
+        const response2 = await Axios.get(`http://localhost:5000/textdescription/${c}`);
+        console.log(response2.data[0].description)
+        if (response2 !== null || response2 !== undefined) {
+            setHavedescription(true);
+            setDescription(response2.data[0].description);
 
-        //if (userInfoUploadObject) { photofile = userInfoUploadObject.photo 
-    }, [success])
+        }
+
+
+    }, [success1, success2])
 
     //Send the form data to the backend
     //const on99 = async (e) => {
@@ -299,10 +302,8 @@ function UserInfoCard() {
                             <TextInfoContent
                                 classes={textCardContentStyles}
                                 heading={'About Me'}
-                                body={
-                                    'We are going to learn different kinds of species in nature that live together to form amazing environment.'
-                                }
                             />
+                            <h2>{description}</h2>
                         </CardContent>
                         <Divider varient="middle" />
                     </Grid>

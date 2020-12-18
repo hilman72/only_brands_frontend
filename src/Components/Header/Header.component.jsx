@@ -23,7 +23,6 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import Logo from "../../Assets/Images/logo.png";
 import { Popover } from "@material-ui/core";
 import FilterMenu from "../FilterMenu/FilterMenu.components";
-import Axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -172,7 +171,7 @@ const PrimarySearchAppBar = (props) => {
 
   const toCoupon = (event) => {
     event.preventDefault();
-    history.push("/MyCouponPage");
+    history.push(`/MyCouponPage/${name}`);
   };
 
   useEffect(() => {

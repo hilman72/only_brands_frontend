@@ -38,12 +38,12 @@ class App extends React.Component {
               isAuthenticated ? (
                 <Component {...props} />
               ) : (
-                  <Redirect
-                    to={{
-                      pathname: "/LoginPage",
-                    }}
-                  />
-                )
+                <Redirect
+                  to={{
+                    pathname: "/LoginPage",
+                  }}
+                />
+              )
             }
           />
         );
@@ -66,13 +66,13 @@ class App extends React.Component {
             <Route path="/TestingPage" component={TestingPage} />
             <Route path="/After" component={AfterRegister} />
             <Route path="/Error" component={Error} />
-            <PrivateRoute path="/UserProfiles" component={UserProfile} />
+            <PrivateRoute path="/UserProfiles/:name" component={UserProfile} />
             <PrivateRoute path="/NotYet" component={NotYet} />
             <PrivateRoute
               path="/BusinessProfiles/:name"
               component={BusinessProfiles}
             />
-            <PrivateRoute path="/MyCouponPage" component={MyCouponPage} />
+            <PrivateRoute path="/MyCouponPage/:name" component={MyCouponPage} />
             <PrivateRoute path="/LoginPage" component={LoginPage} />
             <PrivateRoute path="/CouponSearch" component={CouponSearch} />
             <PrivateRoute path="/HomePage" component={HomePage} />

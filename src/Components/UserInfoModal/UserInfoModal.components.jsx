@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './UserInfoModal.style.scss'
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -8,10 +8,20 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
 
+
+//style for the category selection 
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
 //redux
 import { useSelector, useDispatch } from "react-redux";
-import { upload } from "../../Redux/Actions/TMactions";
+// import { upload } from "../../Redux/Actions/TMactions";
 import Axios from 'axios';
+import { uploaddetails } from '../../Redux/Actions/EditNameactions'
 
 function UserInfoModal() {
 
@@ -19,15 +29,22 @@ function UserInfoModal() {
     const importantid = (localStorage.getItem("ob_id"))
     console.log(importantid)
     const [open, setOpen] = React.useState(false);
-    const [name, setName] = React.useState("User Input");
-    const [photofile, setphotoFile] = React.useState("");
+    const [description, setDescription] = React.useState("this is the bio");
+    const [category, setCategory] = React.useState("")
 
-    const [photofile2, setphotoFile2] = React.useState("")
-    const TMB = useSelector((state) => state.userInfoUploadStore);
-    const { loading, success, userInfoUploadObject } = TMB;
+
 
     const dispatch = useDispatch();
 
+    const handleCategoryChange = (event) => {
+        setCategory(event.target.value);
+        console.log(event.target.value)
+    };
+
+    const handleBioChange = (event) => {
+        setDescription(event.target.value)
+        console.log(event.target.value)
+    }
 
 
     //End of state i used 
@@ -40,7 +57,18 @@ function UserInfoModal() {
         setOpen(false);
     };
 
+    const uploaddetailsfunction = () => {
+        dispatch(uploaddetails(category, description, importantid))
+        console.log("it starts redux now")
+        handleClose()
+    }
 
+
+
+
+    //pick up the thing we got from redux store 
+    const breakstore = useSelector(state => state.userInfoUploadDetailsStore);
+    const { loading, success, uploadedObject } = breakstore
 
     return (
         <div>
@@ -52,14 +80,22 @@ function UserInfoModal() {
                     <DialogContentText>
                         Enter Details Below
             </DialogContentText>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="location"
-                        label="Location"
-                        type="text"
-                        fullWidth
-                    />
+                    {/* <FormControl className={classes.formControl}>
+                        <InputLabel id="demo-simple-select-label">favourite category </InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            autoFocus
+                            margin="dense"
+                            id="demo-simple-select"
+                            value={category}
+                            onChange={handleCategoryChange}
+                        >
+                            <MenuItem value={"No_preference"}>No preference</MenuItem>
+                            <MenuItem value={"Italian"}>Italian</MenuItem>
+                            <MenuItem value={"Chinese"}>Chinese</MenuItem>
+                            <MenuItem value={"Japanese"}>Japanese</MenuItem>
+                        </Select>
+                    </FormControl> */}
                     <TextField
                         autoFocus
                         margin="dense"
@@ -67,24 +103,18 @@ function UserInfoModal() {
                         label="Description"
                         type="text"
                         fullWidth
+                        value={description}
+                        onChange={handleBioChange}
                     />
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        label="Change Name"
-                        value={name}
-                        type="text"
-                        fullWidth
-                        onChange={(e) => setName(e.target.value)}
-                    />
+
+
                     {/* this is for the photo input 
                     <Button type="file" onClick={handleUpload}>
                         Upload Image
                     </Button> */}
                 </DialogContent>
                 <DialogActions>
-                    <Button >
+                    <Button onClick={uploaddetailsfunction}>
                         Update
                 </Button>
                     <Button onClick={handleClose}>

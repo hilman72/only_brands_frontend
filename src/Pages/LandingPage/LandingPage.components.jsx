@@ -28,16 +28,12 @@ function LandingPage() {
               <h1 className="LogoHeader">OnlyBrands</h1>
             </div>
           </Grid>
-          <Grid
-            container xs={6} spacing={3}>
+          <Grid container xs={6} spacing={3}>
             <Grid item xs={12}>
               <h2>Rewards, Recommendations & Referrals</h2>
             </Grid>
-            <Grid
-              className="RegisterBtnContainer"
-              container spacing={3}>
-              <Grid item 
-              className="RegisterBtnContainer" xs={12}>
+            <Grid className="RegisterBtnContainer" container spacing={3}>
+              <Grid item className="RegisterBtnContainer" xs={12}>
                 <Button
                   variant="contained"
                   size="large"
@@ -48,16 +44,20 @@ function LandingPage() {
                   }}
                 >
                   Login
-               </Button>
+                </Button>
               </Grid>
-              <Grid 
-              className="RegisterBtnContainer" item xs={12}>
-              <Button
-              variant="contained"
-              size="large"
-              className="LoginButton"
-              color="secondary"
-              >Register</Button>
+              <Grid className="RegisterBtnContainer" item xs={12}>
+                <Button
+                  variant="contained"
+                  size="large"
+                  className="LoginButton"
+                  color="secondary"
+                  onClick={() => {
+                    history.push("/RegisterPage");
+                  }}
+                >
+                  Register
+                </Button>
               </Grid>
             </Grid>
           </Grid>
