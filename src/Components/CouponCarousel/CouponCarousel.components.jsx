@@ -1,7 +1,7 @@
 import React from "react";
 import "./CouponCarousel.style.scss";
 
-import Coupon from "../User-Coupon/Coupon.component";
+import Coupon from "../../Components/Coupon/Coupon.components"
 
 // import Grid from '@material-ui/core/Grid';
 

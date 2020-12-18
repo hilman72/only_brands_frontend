@@ -1,4 +1,7 @@
 import React from "react";
+import useWindowSize from 'react-use/lib/useWindowSize'
+import Confetti from 'react-confetti'
+
 import { useHistory } from "react-router-dom";
 import "./LandingPage.style.scss";
 import Grid from "@material-ui/core/Grid";
@@ -8,9 +11,17 @@ import Button from "@material-ui/core/Button";
 
 function LandingPage() {
   const history = useHistory();
+  const { width, height } = useWindowSize()
+
   return (
     <div>
       <div className="HeaderContainer">
+      <Confetti
+      opacity={1}
+      width={width}
+      height={height}
+      color={'#e91e63'}
+      />
         <Grid container spacing={3}>
           <Grid item xs={6}>
             <div className="Logo">
