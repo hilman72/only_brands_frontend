@@ -162,13 +162,23 @@ function UserInfoCard() {
         setOpen(false);
     };
 
-    function handleClick() {
+    const handleClick = async (e) => {
         setFollow(!follow);
+
+        console.log(e)
+        const url = e.target.baseURI
+
+        const pathname = new URL(url).pathname.split('/');
+        const username = pathname[2]
+        console.log(username)
     }
+    
     const realdescriptionset = () => {
         setRealdescription(true);
     }
 
+        await Axios.post('http://localhost:5000/api/followers', { username: username})
+    }
 
 
 
@@ -207,7 +217,6 @@ function UserInfoCard() {
         if (response2 !== null || response2 !== undefined) {
             setHavedescription(true);
             setDescription(response2.data[0].description);
-
         }
 
 
@@ -284,9 +293,6 @@ function UserInfoCard() {
                                             ? <Button onClick={handleClick} className={styles.button}>Follow</Button>
                                             :
                                             <Box flex={'auto'}>
-                                                <Button onClick={handleClick} className={styles.button}>Followed</Button>
-                                                <br />
-                                                <br />
                                                 <Button onClick={handleClick} className={styles.button}>UnFollow</Button>
                                             </Box>}
                                     </Box>
