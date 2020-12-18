@@ -65,6 +65,9 @@ function CouponModal(props) {
     setOpen(false);
   };
 
+  const x = window.location.href.replaceAll("/", " ").split(" ");
+  const render_user = x[x.length - 1];
+
   const y = localStorage.getItem("ob_who");
   const you = localStorage.getItem("ob_username");
 
@@ -74,7 +77,12 @@ function CouponModal(props) {
 
   return (
     <div>
-      <Button onClick={handleClickOpen}>Details</Button>
+      {you === render_user ? (
+        <Button onClick={handleClickOpen}>Details</Button>
+      ) : (
+        <div></div>
+      )}
+
       <Dialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"

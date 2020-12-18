@@ -12,7 +12,6 @@ const MyCouponPage = (props) => {
   const render_user = x[x.length - 1];
 
   const you_who = localStorage.getItem("ob_who");
-  const you = localStorage.getItem("ob_username");
 
   useEffect(() => {
     setWho(you_who);
