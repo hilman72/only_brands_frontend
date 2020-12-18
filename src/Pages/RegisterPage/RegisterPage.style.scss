@@ -1,0 +1,244 @@
+/* ---------------  CORE ELEMENTS STYLING --------------- */
+
+// * {
+//     box-sizing: border-box;
+//     margin: 0;
+//   }
+  
+.registerBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .registerP {
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    margin: 20px 0 30px;
+    color: #282828;
+  }
+
+  .registerH2{
+    color: #323232;
+  }
+  
+  // .registerSpan {
+  //   font-size: 13px;
+  //   font-weight: 350;
+  //   margin: 15px 0;
+  // }
+  
+  // .iconKiwi{
+  //   color: #fff;
+  //   font-size: 2rem;
+  // }
+  
+  /* ---------------  CONTAINERS STYLING  --------------- */
+  
+  .registerContainer {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    position: relative;
+    overflow: hidden;
+    width: 800px;
+    max-width: 100%;
+    min-height: 480px;
+  }
+  
+  .registerForm-container form {
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+    text-align: center;
+  }
+  
+  .registerForm-container input {
+    background: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 12px 0;
+    width: 100%;
+  }
+  
+  .registerButton {
+    border-radius: 20px;
+    border: 1px solid #282828 !important;
+    background-color: #8eebdc;
+    color: #282828;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    margin: 10px 0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+  }
+  
+  .registerButton:active {
+    transform: scale(0.95);
+  }
+  
+  .registerButton:focus {
+    outline: none;
+  }
+  
+  .registerButton.ghost {
+    background: transparent;
+    border-color: #fff;
+  }
+  
+  /* ---------------  POSITIONING  --------------- */
+  .registerForm-container {
+    position: absolute;
+    top: 60px;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+  }
+  
+  /* ---------------  SIGN UP SIGN IN FORMS  --------------- */
+  
+  .registerSign-in-container {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+  }
+  
+  .registerSign-up-container {
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+  }
+  
+  /* ---------------  OVERLAYS  --------------- */
+  
+  .registerOverlay-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 100;
+  }
+  
+  .registerOverlay {
+    // background: linear-gradient(
+    //     217deg,
+    //     rgba(255, 15, 123, 0.9),
+    //     rgba(255, 15, 123, 0) 70.71%
+    //   ),
+    //   linear-gradient(127deg, rgba(250, 55, 50, 0.9), rgba(250, 55, 50, 0) 70.71%),
+    //   linear-gradient(
+    //     336deg,
+    //     rgba(255, 150, 21, 0.9),
+    //     rgba(255, 150, 21, 0) 70.71%
+    //   );
+    color: #fff;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+    animation: backgroundBlinkingRegister 2s infinite;
+    animation-timing-function: ease-in-out;
+    animation-direction: alternate;
+  }
+
+  @keyframes backgroundBlinkingRegister {
+    0% {
+      background-color: #c1ffff;
+      // border: 5px solid #871924;
+    }
+    // 25% {
+    //   background-color: #8eebdc;
+    //   // border: 5px solid #126620;
+    // }
+    // 50% {
+    //   background-color: #5bb7a9;
+    //   // border: 5px solid #6565f2;
+    // }
+    // 75% {
+    //   background-color: #8eebdc;
+    //   // border: 5px solid #6565f2;
+    // }
+    100% {
+      background-color: #8eebdc;
+      // border: 5px solid #6565f2;
+    }
+  }
+  
+  .registerOverlay-panel {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+    height: 100%;
+    width: 50%;
+    text-align: center;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+    box-sizing: border-box;
+    margin: 0;
+  }
+  
+  .registerOverlay-right {
+    right: 0;
+    transform: translateX(0);
+  }
+  
+  .registerOverlay-left {
+    transform: translateX(-20%);
+  }
+  
+  /* ---------------  ANIMATION  --------------- */
+  
+  /* ---------------  MOVING THE CONTAINERS AND PANELS  --------------- */
+  
+  /* ---------------  MOVE SIGNIN TO RIGHT  --------------- */
+  /* when (.right-panel-active) is added, edit the (.sign-in-container) */
+  .registerContainer.registerRight-panel-active .registerSign-in-container {
+    transform: translateX(100%);
+  }
+  
+  /* ---------------  MOVE OVERLAY TO LEFT  --------------- */
+  
+  .registerContainer.registerRight-panel-active .registerOverlay-container {
+    transform: translateX(-100%);
+  }
+  
+  /* ---------------  BRING SIGN UP OVER SIGN IN  --------------- */
+  .registerContainer.registerRight-panel-active .registerSign-up-container {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+  }
+  
+  /* ---------------  MOVE OVERLAY BACK TO THE RIGHT  --------------- */
+  .registerContainer.registerRight-panel-active .registerOverlay {
+    transform: translateX(50%);
+  }
+  
+  /* ---------------  ANIMATIONS OF THE CONTENTS  --------------- */
+  
+  .registerContainer.registerRight-panel-active .registerOverlay-left {
+    transform: translateX(0);
+  }
+  
+  .registerContainer.registerRight-panel-active .registerOverlay-right {
+    transform: translateX(20%);
+  }
