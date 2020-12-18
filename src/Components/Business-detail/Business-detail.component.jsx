@@ -136,7 +136,6 @@ const BusinessDetail = (props) => {
     let x = props.detail;
     if (x.length > 0) {
       setFirst(true);
-      console.log(x);
     }
     if (first === true) {
       setDetail([...x]);
