@@ -22,13 +22,12 @@ import { useSelector, useDispatch } from "react-redux";
 import Axios from "axios";
 import { uploaddetails } from "../../Redux/Actions/EditNameactions";
 
-<<<<<<< HEAD
-function UserInfoModal() {
+function UserInfoModal(props) {
   // State to store uploaded file
   const importantid = localStorage.getItem("ob_id");
   console.log(importantid);
   const [open, setOpen] = React.useState(false);
-  const [description, setDescription] = React.useState("this is the bio");
+  const [description, setDescription] = React.useState("");
   const [category, setCategory] = React.useState("");
 
   const dispatch = useDispatch();
@@ -56,13 +55,9 @@ function UserInfoModal() {
   const uploaddetailsfunction = () => {
     dispatch(uploaddetails(category, description, importantid));
     console.log("it starts redux now");
+    props.pass();
     handleClose();
   };
-
-  const x = window.location.href.replaceAll("/", " ").split(" ");
-  const render_user = x[x.length - 1];
-
-  const you = localStorage.getItem("ob_username");
 
   //pick up the thing we got from redux store
   const breakstore = useSelector((state) => state.userInfoUploadDetailsStore);
@@ -70,13 +65,9 @@ function UserInfoModal() {
 
   return (
     <div>
-      {render_user === you ? (
-        <Button className="edit" onClick={handleClickOpen}>
-          Edit Profile
-        </Button>
-      ) : (
-        <div></div>
-      )}
+      <Button className="edit" onClick={handleClickOpen}>
+        Edit Profile
+      </Button>
 
       <Dialog
         open={open}
@@ -87,67 +78,6 @@ function UserInfoModal() {
         <DialogContent>
           <DialogContentText>Enter Details Below</DialogContentText>
           {/* <FormControl className={classes.formControl}>
-=======
-function UserInfoModal(props) {
-
-    // State to store uploaded file
-    const importantid = (localStorage.getItem("ob_id"))
-    console.log(importantid)
-    const [open, setOpen] = React.useState(false);
-    const [description, setDescription] = React.useState("");
-    const [category, setCategory] = React.useState("")
-
-
-
-    const dispatch = useDispatch();
-
-    const handleCategoryChange = (event) => {
-        setCategory(event.target.value);
-        console.log(event.target.value)
-    };
-
-    const handleBioChange = (event) => {
-        setDescription(event.target.value)
-        console.log(event.target.value)
-    }
-
-
-    //End of state i used 
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
-    const uploaddetailsfunction = () => {
-        dispatch(uploaddetails(category, description, importantid))
-        console.log("it starts redux now")
-        props.pass()
-        handleClose()
-    }
-
-
-
-
-    //pick up the thing we got from redux store 
-    const breakstore = useSelector(state => state.userInfoUploadDetailsStore);
-    const { loading, success, uploadedObject } = breakstore
-
-    return (
-        <div>
-            <Button className="edit" onClick={handleClickOpen}>Edit Profile</Button>
-
-            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Edit Profile Details</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        Enter Details Below
-            </DialogContentText>
-                    {/* <FormControl className={classes.formControl}>
->>>>>>> 46c6d40ca00295951435476f37101876b113514b
                         <InputLabel id="demo-simple-select-label">favourite category </InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
