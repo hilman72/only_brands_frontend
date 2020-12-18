@@ -56,15 +56,14 @@ const LoginForm = (props) => {
   return (
     <div className="loginForm">
       <form>
-      <h2>User Login</h2>
-      <h2>Brands Logina</h2>
-      <span>blahblahblah</span>
+      <h2>{props.id} Login</h2>
+      {/* <span>blahblahblah</span> */}
         {/* <label>UserName</label> */}
         <input
           type="text"
           name="username"
           onChange={handleChange_username}
-          placeholder="User Name"
+          placeholder={props.id2}
         ></input>
         {/* <label>Password</label> */}
         <input
