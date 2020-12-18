@@ -6,90 +6,71 @@ import LoginForm from "../../Components/LoginForm/LoginForm.component";
 
 const LoginPage = () => {
 
-  const [div, setDiv] = React.useState("container")
+  const [div, setDiv] = React.useState("loginContainer")
+  const [id, setId] = React.useState("User")
+  const [id2, setId2] = React.useState("User Name")
 
   function handleChange(){
-      console.log("Hello")
-      setDiv("container right-panel-active container")
+    setDiv("loginContainer loginRight-panel-active loginContainer")
+
+    setTimeout(function(){
+      setId("Brands")
+      setId2("Brand Name")
+    }, 300)
   }
 
   function handleSwitch(){
-    console.log("Hello")
-    setDiv("container")
+    setDiv("loginContainer")
+
+    setTimeout(function(){
+      setId("User")
+      setId2("User Name")
+    }, 300)
   }
 
   return (
-    <div>
-      {/* <div>
-        User Login
-        <LoginForm />
-      </div>
-      <br />
-      <div>
-        Business Login
-        <LoginForm />
-      </div> */}
 
-      <div class={div} id="container">
-      {/* <!----------------- SIGN UP FORM -----------------> */}
+      <div class="loginBody">
 
-      <div class="form-container sign-up-container">
 
-      <LoginForm />
+        <div class={div} id="loginContainer">
+        {/* <!----------------- SIGN UP FORM -----------------> */}
 
-        {/* <form action="/signup" method="POST">
-          <h2>Create Account</h2>
-          <span>You are one step away from knowing your next best friend!</span> */}
+        <div class="loginForm-container loginSign-up-container">
 
-          {/* <!--<input type="text" placeholder="Name" />!--> */}
-          {/* <input type="email" placeholder="Email" name="username" />
-          <input type="password" placeholder="Password" name="password" />
-          <div><input type="submit" value="SignUp" /></div>
-        </form> */}
-      </div>
+        <LoginForm id={id} id2={id2}/>
 
-      {/* <!----------------- SIGN IN FORM -----------------> */}
+        </div>
 
-      <div class="form-container sign-in-container">
+        {/* <!----------------- SIGN IN FORM -----------------> */}
 
-        <LoginForm />
+        <div class="loginForm-container loginSign-in-container">
 
-        {/* <form action="/login" method="POST">
-          <h2>Sign in</h2>
-          <span>Welcome Back! We are excited for your next Instances
-            adventure!
-          </span>
+        <LoginForm id={id} id2={id2}/>
 
-          <input
-            type="email"
-            placeholder="Email"
-            name="username"
-            id="username"
-          />
-          <input type="password" placeholder="Password" name="password" />
-          <div><input type="submit" value="Login" /></div>
-        </form> */}
-      </div>
+        </div>
 
-      {/* <!----------------- OVERLAY -----------------> */}
 
-      <div class="overlay-container">
-        <div class="overlay">
-          <div class="overlay-panel overlay-left">
-            <h2>Users Account?</h2>
-            <p>Sign in to get sweet offets!</p>
-            <button onClick={handleSwitch} class="ghost" id="signIn">Sign In</button>
-          </div>
-          <div class="overlay-panel overlay-right">
-            <h2>Brands looking for more customers?</h2>
-            <p>Sign In to create offers!</p>
-            <button onClick={handleChange} class="ghost" id="signUp">Sign In as Brands Account</button>
+        {/* <!----------------- OVERLAY -----------------> */}
+
+        <div class="loginOverlay-container">
+          <div class="loginOverlay">
+            <div class="loginOverlay-panel loginOverlay-left">
+              <h2 class="loginH2">Users Account?</h2>
+              <p class="loginP">Sign in to get sweet offets!</p>
+              <button onClick={handleSwitch} class="ghost loginButton" id="signIn">Sign In</button>
+            </div>
+            <div class="loginOverlay-panel loginOverlay-right">
+              <h2 class="loginH2">Brands looking for more customers?</h2>
+              <p class="loginP">Sign In to create offers!</p>
+              <button onClick={handleChange} class="ghost loginButton" id="signUp">Sign In as Brands Account</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    </div>
+      </div>
+
   );
 };
 

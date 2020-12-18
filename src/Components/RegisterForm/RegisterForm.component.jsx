@@ -70,46 +70,59 @@ const RegisterForm = (props) => {
   }, [register, history, props.who]);
 
   return (
+
     <div>
+      
       {error === true ? (
         <div>plz input the same password fku</div>
       ) : (
         <div></div>
       )}
+    <div>
 
-      <form className="registerForm">
-        <label>UserName</label>
+    <div className="registerForm">
+      <form>
+        {/* <label>UserName</label> */}
+        <h2 class="registerH2">{props.id} Register</h2>
         <input
           type="text"
           name="username"
           id="username"
+          placeholder={props.id2}
           onChange={handleChange_username}
         ></input>
-        <label>Email</label>
+        {/* <label>Email</label> */}
         <input
           type="email"
           name="email"
           id="email"
+          placeholder="Email"
           onChange={handleChange_email}
         ></input>
-        <label>Password</label>
+        {/* <label>Password</label> */}
         <input
           type="password"
           name="password"
           id="password"
+          placeholder="Password"
           onChange={handleChange_password}
         ></input>
-        <label>Password Again you Motherfucker</label>
+        {/* <label>Password Again you Motherfucker</label> */}
         <input
           type="password"
           name="password_again"
           id="password_again"
+          placeholder="Confirm Password"
           onChange={handleChange_password_again}
         ></input>
         <br />
-        <input type="submit" value="send" onClick={handleSubmit} />
+        <input type="submit" value="send" onClick={handleSubmit} class="registerFormButton registerButton" />
       </form>
     </div>
+
+</div>
+</div>
+
   );
 };
 

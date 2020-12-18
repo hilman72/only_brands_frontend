@@ -20,17 +20,17 @@ const useStyles = makeStyles((theme) => ({
 const BusinessCoupon = (props) => {
   const classes = useStyles();
   const [cou, setCou] = useState([]);
-  const [first, setFirst] = useState(true);
+  const [first, setFirst] = useState(false);
 
   useEffect(() => {
     let x = props.coupon;
     if (x.length > 0) {
       setFirst(true);
-    }
-    if (first === true) {
       setCou([...x]);
     }
-  }, [first, props.coupon, cou]);
+    if (first === true) {
+    }
+  }, [first, props.coupon]);
 
   return (
     <div className={classes.root}>

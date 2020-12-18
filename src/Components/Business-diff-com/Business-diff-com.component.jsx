@@ -86,7 +86,7 @@ const BusinessDiffCom = (props) => {
       .then((data) => {
         setCoupon([...data]);
       });
-  }, [create, props.who]);
+  }, [create, props.who, render_user]);
 
   return (
     <div className={classes.root}>

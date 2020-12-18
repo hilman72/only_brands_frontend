@@ -1,211 +1,234 @@
 // /* ---------------  CORE ELEMENTS STYLING --------------- */
 
-// * {
-//     box-sizing: border-box;
-//     margin: 0;
-//   }
+.loginBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
   
-//   body {
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//     align-items: center;
-//     height: 100vh;
-//   }
+  .loginP {
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    margin: 20px 0 30px;
+  }
   
-//   p {
-//     font-size: 14px;
-//     font-weight: 100;
-//     line-height: 20px;
-//     letter-spacing: 0.5px;
-//     margin: 20px 0 30px;
-//   }
+  // span {
+  //   font-size: 13px;
+  //   font-weight: 350;
+  //   margin: 15px 0;
+  // }
   
-//   span {
-//     font-size: 13px;
-//     font-weight: 350;
-//     margin: 15px 0;
-//   }
+  // .iconKiwi{
+  //   color: #fff;
+  //   font-size: 2rem;
+  // }
   
-//   .iconKiwi{
-//     color: #fff;
-//     font-size: 2rem;
-//   }
+  /* ---------------  CONTAINERS STYLING  --------------- */
   
-//   /* ---------------  CONTAINERS STYLING  --------------- */
+  .loginContainer {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    position: relative;
+    overflow: hidden;
+    width: 800px;
+    max-width: 100%;
+    min-height: 480px;
+  }
   
-//   .container {
-//     background: #fff;
-//     border-radius: 10px;
-//     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-//     position: relative;
-//     overflow: hidden;
-//     width: 800px;
-//     max-width: 100%;
-//     min-height: 480px;
-//   }
+  .loginForm-container form {
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+    text-align: center;
+  }
   
-//   .form-container form {
-//     background-color: #ffffff;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     flex-direction: column;
-//     padding: 0 50px;
-//     height: 100%;
-//     text-align: center;
-//   }
+  .loginForm-container input {
+    background: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 12px 0;
+    width: 100%;
+  }
   
-//   .form-container input {
-//     background: #eee;
-//     border: none;
-//     padding: 12px 15px;
-//     margin: 12px 0;
-//     width: 100%;
-//   }
+  .loginButton {
+    border-radius: 20px;
+    border: 1px solid #ff4c6d;
+    background-color: #ff4c6d;
+    color: #ffffff ;
+    font-size: 12px ;
+    font-weight: bold ;
+    padding: 12px 45px ;
+    margin: 10px 0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+  }
   
-//   button {
-//     border-radius: 20px;
-//     border: 1px solid #ff4b2b;
-//     background-color: rgb(255, 55, 100);
-//     color: #ffffff;
-//     font-size: 12px;
-//     font-weight: bold;
-//     padding: 12px 45px;
-//     margin: 10px 0;
-//     letter-spacing: 1px;
-//     text-transform: uppercase;
-//     transition: transform 80ms ease-in;
-//   }
+  .loginButton:active {
+    transform: scale(0.95);
+  }
   
-//   button:active {
-//     transform: scale(0.95);
-//   }
+  .loginButton:focus {
+    outline: none;
+  }
   
-//   button:focus {
-//     outline: none;
-//   }
+  .loginButton.ghost {
+    background: transparent;
+    border-color: #fff;
+  }
   
-//   button.ghost {
-//     background: transparent;
-//     border-color: #fff;
-//   }
+  /* ---------------  POSITIONING  --------------- */
+  .loginForm-container {
+    position: absolute;
+    top: 60px;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+  }
   
-//   /* ---------------  POSITIONING  --------------- */
-//   .form-container {
-//     position: absolute;
-//     top: 60px;
-//     height: 100%;
-//     transition: all 0.6s ease-in-out;
-//   }
+  /* ---------------  SIGN UP SIGN IN FORMS  --------------- */
   
-//   /* ---------------  SIGN UP SIGN IN FORMS  --------------- */
+  .loginSign-in-container {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+  }
   
-//   .sign-in-container {
-//     left: 0;
-//     width: 50%;
-//     z-index: 2;
-//   }
+  .loginSign-up-container {
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+  }
   
-//   .sign-up-container {
-//     left: 0;
-//     width: 50%;
-//     opacity: 0;
-//     z-index: 1;
-//   }
+  /* ---------------  OVERLAYS  --------------- */
   
-//   /* ---------------  OVERLAYS  --------------- */
+  .loginOverlay-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 100;
+  }
   
-//   .overlay-container {
-//     position: absolute;
-//     top: 0;
-//     left: 50%;
-//     width: 50%;
-//     height: 100%;
-//     overflow: hidden;
-//     transition: transform 0.6s ease-in-out;
-//     z-index: 100;
-//   }
+  .loginOverlay {
+    // background: linear-gradient(
+    //     217deg,
+    //     rgba(255, 15, 123, 0.9),
+    //     rgba(255, 15, 123, 0) 70.71%
+    //   ),
+    //   linear-gradient(127deg, rgba(250, 55, 50, 0.9), rgba(250, 55, 50, 0) 70.71%),
+    //   linear-gradient(
+    //     336deg,
+    //     rgba(255, 150, 21, 0.9),
+    //     rgba(255, 150, 21, 0) 70.71%
+    //   );
+    color: #fff;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+    animation: backgroundBlinkingLogin 2s infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+  }
+
+  @keyframes backgroundBlinkingLogin {
+    0% {
+      background-color: #ff829b;
+      // border: 5px solid #871924;
+    }
+    // 25% {
+    //   background-color: #ff4c6d;
+    //   // border: 5px solid #126620;
+    // }
+    // 50% {
+    //   background-color: #c60042;
+    //   // border: 5px solid #6565f2;
+    // }
+    // 75% {
+    //   background-color: #ff4c6d;
+    //   // border: 5px solid #6565f2;
+    // }
+    100% {
+      background-color: #ff4c6d;
+      // border: 5px solid #6565f2;
+    }
+  }
   
-//   .overlay {
-//     background: linear-gradient(
-//         217deg,
-//         rgba(255, 15, 123, 0.9),
-//         rgba(255, 15, 123, 0) 70.71%
-//       ),
-//       linear-gradient(127deg, rgba(250, 55, 50, 0.9), rgba(250, 55, 50, 0) 70.71%),
-//       linear-gradient(
-//         336deg,
-//         rgba(255, 150, 21, 0.9),
-//         rgba(255, 150, 21, 0) 70.71%
-//       );
-//     color: #fff;
-//     position: relative;
-//     left: -100%;
-//     height: 100%;
-//     width: 200%;
-//     transform: translateX(0);
-//     transition: transform 0.6s ease-in-out;
-//   }
+  .loginOverlay-panel {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+    height: 100%;
+    width: 50%;
+    text-align: center;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+    box-sizing: border-box;
+    margin: 0;
+  }
   
-//   .overlay-panel {
-//     position: absolute;
-//     top: 0;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//     align-items: center;
-//     padding: 0 40px;
-//     height: 100%;
-//     width: 50%;
-//     text-align: center;
-//     transform: translateX(0);
-//     transition: transform 0.6s ease-in-out;
-//   }
+  .loginOverlay-right {
+    right: 0;
+    transform: translateX(0);
+  }
   
-//   .overlay-right {
-//     right: 0;
-//     transform: translateX(0);
-//   }
+  .loginOverlay-left {
+    transform: translateX(-20%);
+  }
   
-//   .overlay-left {
-//     transform: translateX(-20%);
-//   }
+  /* ---------------  ANIMATION  --------------- */
   
-//   /* ---------------  ANIMATION  --------------- */
+  /* ---------------  MOVING THE CONTAINERS AND PANELS  --------------- */
   
-//   /* ---------------  MOVING THE CONTAINERS AND PANELS  --------------- */
+  /* ---------------  MOVE SIGNIN TO RIGHT  --------------- */
+  /* when (.right-panel-active) is added, edit the (.sign-in-container) */
+  .loginContainer.loginRight-panel-active .loginSign-in-container {
+    transform: translateX(100%);
+  }
   
-//   /* ---------------  MOVE SIGNIN TO RIGHT  --------------- */
-//   /* when (.right-panel-active) is added, edit the (.sign-in-container) */
-//   .container.right-panel-active .sign-in-container {
-//     transform: translateX(100%);
-//   }
+  /* ---------------  MOVE OVERLAY TO LEFT  --------------- */
   
-//   /* ---------------  MOVE OVERLAY TO LEFT  --------------- */
+  .loginContainer.loginRight-panel-active .loginOverlay-container {
+    transform: translateX(-100%);
+  }
   
-//   .container.right-panel-active .overlay-container {
-//     transform: translateX(-100%);
-//   }
+  /* ---------------  BRING SIGN UP OVER SIGN IN  --------------- */
+  .loginContainer.loginRight-panel-active .loginSign-up-container {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+  }
   
-//   /* ---------------  BRING SIGN UP OVER SIGN IN  --------------- */
-//   .container.right-panel-active .sign-up-container {
-//     transform: translateX(100%);
-//     opacity: 1;
-//     z-index: 5;
-//   }
+  /* ---------------  MOVE OVERLAY BACK TO THE RIGHT  --------------- */
+  .loginContainer.loginRight-panel-active .loginOverlay {
+    transform: translateX(50%);
+  }
   
-//   /* ---------------  MOVE OVERLAY BACK TO THE RIGHT  --------------- */
-//   .container.right-panel-active .overlay {
-//     transform: translateX(50%);
-//   }
+  /* ---------------  ANIMATIONS OF THE CONTENTS  --------------- */
   
-//   /* ---------------  ANIMATIONS OF THE CONTENTS  --------------- */
+  .loginContainer.loginRight-panel-active .loginOverlay-left {
+    transform: translateX(0);
+  }
   
-//   .container.right-panel-active .overlay-left {
-//     transform: translateX(0);
-//   }
-  
-//   .container.right-panel-active .overlay-right {
-//     transform: translateX(20%);
-//   }
+  .loginContainer.loginRight-panel-active .loginOverlay-right {
+    transform: translateX(20%);
+  }
