@@ -159,18 +159,26 @@ function UserInfoCard() {
     setOpen(false);
   };
 
-  const handleClick = async (e) => {
+  const handleClick = () => {
+      setFollow(!follow)
+  }
+
+  const handleClick2 = async (e) => {
     setFollow(!follow);
+
 
     console.log(e);
     const url = e.target.baseURI;
+
+    const ownUser = localStorage.getItem("ob_id");
 
     const pathname = new URL(url).pathname.split("/");
     const username = pathname[2];
     console.log(username);
 
     await Axios.post("http://localhost:5000/api/followers", {
-      username: username,
+      username: username, 
+      ownUser: ownUser
     });
   };
 
@@ -293,7 +301,7 @@ function UserInfoCard() {
                 <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
                   <Box p={1} flex={"auto"}>
                     {follow ? (
-                      <Button onClick={handleClick} className={styles.button}>
+                      <Button onClick={handleClick2} className={styles.button}>
                         Follow
                       </Button>
                     ) : (
@@ -377,3 +385,6 @@ function UserInfoCard() {
 }
 
 export default UserInfoCard;
+
+
+
