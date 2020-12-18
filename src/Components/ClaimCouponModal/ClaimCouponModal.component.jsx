@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -9,6 +10,7 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
+import axios from "axios";
 
 const styles = (theme) => ({
   root: {
@@ -67,12 +69,27 @@ function CouponModal(props) {
   const y = localStorage.getItem("ob_who");
   const you = localStorage.getItem("ob_username");
 
-  const handleClaim = async () => {
-    await fetch(`http://localhost:5000/api/claimCoupon/${you}`, {
-      method: "post",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ id: props.pastData.id }),
-    });
+  const history = useHistory();
+
+  const handleClaim = () => {
+    axios
+      .post(`http://localhost:5000/api/claimCoupon/${you}`, {
+        business_id: props.pastData.account_business_id,
+        date: props.pastData.finished_date,
+        description: props.pastData.description,
+        title: props.pastData.discount,
+        number: props.pastData.claim_number,
+        id: props.pastData.id,
+        name: props.pastData.business_name,
+      })
+      .then((data) => {
+        let x = data.data;
+        if (x === "error") {
+          history.push("/HomePage");
+        } else if (x === "ok") {
+          history.push(`/MyCouponPage/${you}`);
+        }
+      });
   };
 
   useEffect(() => {
