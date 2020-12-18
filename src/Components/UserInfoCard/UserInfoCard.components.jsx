@@ -138,12 +138,13 @@ function UserInfoCard() {
     const [photofile2, setphotoFile2] = React.useState("");
 
     //description state
+
+    const [realdescription, setRealdescription] = React.useState(false);
     const [description, setDescription] = React.useState("");
     const [havedescription, setHavedescription] = React.useState(false);
     const TMB = useSelector((state) => state.userInfoUploadStore);
     //b.success = true
     const { loading, success: success1, userInfoUploadObject } = TMB;
-
 
     //End of state i used
 
@@ -163,7 +164,9 @@ function UserInfoCard() {
     function handleClick() {
         setFollow(!follow);
     }
-
+    const realdescriptionset = () => {
+        setRealdescription(true);
+    }
 
 
 
@@ -188,6 +191,7 @@ function UserInfoCard() {
     }
 
     useEffect(async () => {
+        setRealdescription(false);
         let c = localStorage.getItem("ob_id");
         const response = await Axios.get(`http://localhost:5000/photo/${c}`);
         console.log(response)
@@ -196,6 +200,7 @@ function UserInfoCard() {
             setphotoFile(response.data[0].photo);
         }
         else { setphotoFile("") }
+
         const response2 = await Axios.get(`http://localhost:5000/textdescription/${c}`);
         console.log(response2.data[0].description)
         if (response2 !== null || response2 !== undefined) {
@@ -205,7 +210,7 @@ function UserInfoCard() {
         }
 
 
-    }, [success1, success2])
+    }, [success1, success2, realdescription])
 
     //Send the form data to the backend
     //const on99 = async (e) => {
@@ -237,7 +242,7 @@ function UserInfoCard() {
                             <Grid container>
                                 <Grid item xs={12}>
                                     <Button
-                                        className={styles.imgBtn} 
+                                        className={styles.imgBtn}
                                         component="label"
                                     >
                                         Upload Image
@@ -295,7 +300,7 @@ function UserInfoCard() {
                     xs={6}>
                     <Grid item
                         xs={12}>
-                        <UserInfoModal />
+                        <UserInfoModal pass={realdescriptionset} />
                     </Grid>
                     <Grid item={12}>
                         <CardContent className={styles.content}>
