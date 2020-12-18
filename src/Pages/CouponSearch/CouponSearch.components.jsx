@@ -3,6 +3,7 @@ import FrontendSearch from "../../Components/FrontendSearch/FrontendSearch.compo
 import Grid from "@material-ui/core/Grid"
 import Header from "../../Components/Header/Header.component";
 import Coupons from "../../Components/Coupon/Coupon.components"
+import UserCards from '../../Components/UserCards/UserCards.components'
 import Paper from "@material-ui/core/Paper"
 import { makeStyles } from "@material-ui/core/styles"
 import "./CouponSearch.style.scss";
@@ -66,7 +67,7 @@ const CouponSearch = () => {
               <Paper elevation={10}>
                 <Grid container xs={12} spacing={3}>
 
-                  {finaldisplay && finaldisplay.length > 0 ? (
+                  {/* {finaldisplay && finaldisplay.length > 0 ? (
                     finaldisplay.map((data, i) => {
                       return (
                         <Grid item s={6}>
@@ -76,11 +77,14 @@ const CouponSearch = () => {
                     })
                   ) : (
                       <div>Sorry No Coupon</div>
-                    )}
+                    )} */}
+
+                    <UserCards />
 
                   {/* <Grid item xs={6}>
                    <Coupons />
                 </Grid> */}
+
                 </Grid>
               </Paper>
             </Grid>

@@ -41,8 +41,8 @@ import Input from '@material-ui/core/Input';
 
 const useStyles = makeStyles(({ palette }) => ({
     card: {
-        borderRadius: 12,
-        minWidth: 256,
+        borderRadius: '1rem',
+        // minWidth: 256,
         textAlign: 'center',
         padding: '0.5rem',
         border: '5px solid #ff4c6d',
@@ -53,6 +53,7 @@ const useStyles = makeStyles(({ palette }) => ({
         margin: 'auto',
         border: '5px solid #8eebdc',
         borderRadius: '50%',
+
     },
     heading: {
         fontSize: 18,
@@ -138,12 +139,13 @@ function UserInfoCard() {
     const [photofile2, setphotoFile2] = React.useState("");
 
     //description state
+
+    const [realdescription, setRealdescription] = React.useState(false);
     const [description, setDescription] = React.useState("");
     const [havedescription, setHavedescription] = React.useState(false);
     const TMB = useSelector((state) => state.userInfoUploadStore);
     //b.success = true
     const { loading, success: success1, userInfoUploadObject } = TMB;
-
 
     //End of state i used
 
@@ -160,11 +162,23 @@ function UserInfoCard() {
         setOpen(false);
     };
 
-    function handleClick() {
+    const handleClick = async (e) => {
         setFollow(!follow);
+
+        console.log(e)
+        const url = e.target.baseURI
+
+        const pathname = new URL(url).pathname.split('/');
+        const username = pathname[2]
+        console.log(username)
+    }
+    
+    const realdescriptionset = () => {
+        setRealdescription(true);
     }
 
-
+        await Axios.post('http://localhost:5000/api/followers', { username: username})
+    }
 
 
 
@@ -188,6 +202,7 @@ function UserInfoCard() {
     }
 
     useEffect(async () => {
+        setRealdescription(false);
         let c = localStorage.getItem("ob_id");
         const response = await Axios.get(`http://localhost:5000/photo/${c}`);
         console.log(response)
@@ -196,16 +211,16 @@ function UserInfoCard() {
             setphotoFile(response.data[0].photo);
         }
         else { setphotoFile("") }
+
         const response2 = await Axios.get(`http://localhost:5000/textdescription/${c}`);
         console.log(response2.data[0].description)
         if (response2 !== null || response2 !== undefined) {
             setHavedescription(true);
             setDescription(response2.data[0].description);
-
         }
 
 
-    }, [success1, success2])
+    }, [success1, success2, realdescription])
 
     //Send the form data to the backend
     //const on99 = async (e) => {
@@ -237,7 +252,7 @@ function UserInfoCard() {
                             <Grid container>
                                 <Grid item xs={12}>
                                     <Button
-                                        className={styles.imgBtn} 
+                                        className={styles.imgBtn}
                                         component="label"
                                     >
                                         Upload Image
@@ -278,9 +293,6 @@ function UserInfoCard() {
                                             ? <Button onClick={handleClick} className={styles.button}>Follow</Button>
                                             :
                                             <Box flex={'auto'}>
-                                                <Button onClick={handleClick} className={styles.button}>Followed</Button>
-                                                <br />
-                                                <br />
                                                 <Button onClick={handleClick} className={styles.button}>UnFollow</Button>
                                             </Box>}
                                     </Box>
@@ -295,7 +307,7 @@ function UserInfoCard() {
                     xs={6}>
                     <Grid item
                         xs={12}>
-                        <UserInfoModal />
+                        <UserInfoModal pass={realdescriptionset} />
                     </Grid>
                     <Grid item={12}>
                         <CardContent className={styles.content}>
@@ -357,11 +369,6 @@ function UserInfoCard() {
                     </Button>
                 </DialogActions>
             </Dialog> */}
-
-
-
-
-
         </Card>
     );
 }
