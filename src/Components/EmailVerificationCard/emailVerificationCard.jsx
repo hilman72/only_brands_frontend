@@ -54,7 +54,7 @@ function EmailVerificationCard() {
                 </Grid>
                 <Grid item xs={12} className={styles.gutter}></Grid>
                 <Grid item xs={12}>
-                    <h2>Email Sent</h2>
+                    <h2>Email Sent asdhufasdhflaisudh</h2>
                 </Grid>
                 <Grid item xs={12}>
                     <p>We have sent an email to verify registered email lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
