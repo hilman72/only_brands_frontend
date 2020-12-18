@@ -41,8 +41,8 @@ import Input from '@material-ui/core/Input';
 
 const useStyles = makeStyles(({ palette }) => ({
     card: {
-        borderRadius: 12,
-        minWidth: 256,
+        borderRadius: '1rem',
+        // minWidth: 256,
         textAlign: 'center',
         padding: '0.5rem',
         border: '5px solid #ff4c6d',
@@ -53,6 +53,7 @@ const useStyles = makeStyles(({ palette }) => ({
         margin: 'auto',
         border: '5px solid #8eebdc',
         borderRadius: '50%',
+
     },
     heading: {
         fontSize: 18,
@@ -362,11 +363,6 @@ function UserInfoCard() {
                     </Button>
                 </DialogActions>
             </Dialog> */}
-
-
-
-
-
         </Card>
     );
 }
