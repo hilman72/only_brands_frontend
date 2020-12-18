@@ -278,9 +278,6 @@ function UserInfoCard() {
                                             ? <Button onClick={handleClick} className={styles.button}>Follow</Button>
                                             :
                                             <Box flex={'auto'}>
-                                                <Button onClick={handleClick} className={styles.button}>Followed</Button>
-                                                <br />
-                                                <br />
                                                 <Button onClick={handleClick} className={styles.button}>UnFollow</Button>
                                             </Box>}
                                     </Box>
