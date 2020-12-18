@@ -160,11 +160,18 @@ function UserInfoCard() {
         setOpen(false);
     };
 
-    function handleClick() {
+    const handleClick = async (e) => {
         setFollow(!follow);
+
+        console.log(e)
+        const url = e.target.baseURI
+
+        const pathname = new URL(url).pathname.split('/');
+        const username = pathname[2]
+        console.log(username)
+
+        await Axios.post('http://localhost:5000/api/followers', { username: username})
     }
-
-
 
 
 
@@ -193,18 +200,14 @@ function UserInfoCard() {
         console.log(response)
         if (response !== null || response !== undefined) {
             setHavephoto(true);
-            setphotoFile(response.data[0].photo);
-        }
-        else { setphotoFile("") }
+            setphotoFile(response.data[0].photo)}
+        else { setphotoFile(" ") }
         const response2 = await Axios.get(`http://localhost:5000/textdescription/${c}`);
         console.log(response2.data[0].description)
         if (response2 !== null || response2 !== undefined) {
             setHavedescription(true);
             setDescription(response2.data[0].description);
-
         }
-
-
     }, [success1, success2])
 
     //Send the form data to the backend
@@ -237,7 +240,7 @@ function UserInfoCard() {
                             <Grid container>
                                 <Grid item xs={12}>
                                     <Button
-                                        className={styles.imgBtn} 
+                                        className={styles.imgBtn}
                                         component="label"
                                     >
                                         Upload Image
