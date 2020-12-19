@@ -3,6 +3,7 @@
 // <Button>Unfollow</Button>
 
 import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import "./UserInfoCard.components.scss";
 import cx from "clsx";
 
@@ -299,6 +300,11 @@ function UserInfoCard() {
 
   //}
 
+  const x = window.location.href.replaceAll("/", " ").split(" ");
+  const render_user = x[x.length - 1];
+
+  const you = localStorage.getItem("ob_username");
+
   return (
     <Card className={cx(styles.card, shadowStyles.root)}>
       <Grid container>
@@ -307,10 +313,15 @@ function UserInfoCard() {
             <CardContent>
               <Grid container>
                 <Grid item xs={12}>
-                  <Button className={styles.imgBtn} component="label">
-                    Upload Image
-                    <input type="file" hidden onChange={handleUpload} />
-                  </Button>
+                  {render_user === you ? (
+                    <Button className={styles.imgBtn} component="label">
+                      Upload Image
+                      <input type="file" hidden onChange={handleUpload} />
+                    </Button>
+                  ) : (
+                    <div></div>
+                  )}
+
                   {/* <input type="file" onChange={handleUpload} /> */}
                 </Grid>
                 <Grid item xs={12}>
@@ -337,19 +348,26 @@ function UserInfoCard() {
                   </Grid>
                 </Grid>
                 <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
-                  <Box p={1} flex={"auto"}>
-                    {follow ? (
-                      <Button onClick={handleFollow} className={styles.button}>
-                        Follow
-                      </Button>
-                    ) : (
-                      <Box flex={"auto"}>
-                        <Button onClick={handleUnfollow} className={styles.button}>
-                          UnFollow
+{render_user === you ? (
+                    <div></div>
+                  ) : (
+                    <Box p={1} flex={"auto"}>
+                      {follow ? (
+                        <Button onClick={handleClick} className={styles.button}>
+                          Follow
                         </Button>
-                      </Box>
-                    )}
-                  </Box>
+                      ) : (
+                        <Box flex={"auto"}>
+                          <Button
+                            onClick={handleClick}
+                            className={styles.button}
+                          >
+                            UnFollow
+                          </Button>
+                        </Box>
+                      )}
+                    </Box>
+                  )}
                 </Box>
               </Box>
             </Grid>
