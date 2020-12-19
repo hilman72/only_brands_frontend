@@ -125,7 +125,7 @@ function UserInfoCard() {
 
   // State to store uploaded file
   const importantid = localStorage.getItem("ob_id");
-  console.log(importantid);
+//   console.log(importantid);
 
   const [photofile, setphotoFile] = React.useState("");
   const [photofile2, setphotoFile2] = React.useState("");
@@ -138,6 +138,10 @@ function UserInfoCard() {
   const TMB = useSelector((state) => state.userInfoUploadStore);
   //b.success = true
   const { loading, success: success1, userInfoUploadObject } = TMB;
+
+  //Follower Count 
+
+  const [followers, setFollowers] = React.useState(0)
 
   //End of state i used
 
@@ -159,11 +163,26 @@ function UserInfoCard() {
     setOpen(false);
   };
 
-  const handleClick = () => {
+  const handleUnfollow = async (e) => {
       setFollow(!follow)
+
+      console.log(e);
+    const url = e.target.baseURI;
+
+    const ownUser = localStorage.getItem("ob_id");
+
+    const pathname = new URL(url).pathname.split("/");
+    const username = pathname[2];
+    // console.log(username);
+
+    await Axios.post("http://localhost:5000/api/unfollow", {
+      username: username, 
+      ownUser: ownUser
+    })
+
   }
 
-  const handleClick2 = async (e) => {
+  const handleFollow = async (e) => {
     setFollow(!follow);
 
 
@@ -174,12 +193,16 @@ function UserInfoCard() {
 
     const pathname = new URL(url).pathname.split("/");
     const username = pathname[2];
-    console.log(username);
+    // console.log(username);
 
     await Axios.post("http://localhost:5000/api/followers", {
       username: username, 
       ownUser: ownUser
-    });
+    })
+    .then((data) => {
+        console.log(data)
+        alert(data.data)
+    })
   };
 
   const realdescriptionset = () => {
@@ -188,7 +211,7 @@ function UserInfoCard() {
 
   // Handles file upload event and updates state // done
   const handleUpload = (ev) => {
-    console.log(ev.target.files);
+    // console.log(ev.target.files);
     const formdata = new FormData();
     formdata.append("image", ev.target.files[0]);
     fetch("https://api.imgur.com/3/image", {
@@ -200,7 +223,7 @@ function UserInfoCard() {
     })
       .then((data) => data.json())
       .then((data) => {
-        console.log(data.data.link, importantid);
+        // console.log(data.data.link, importantid);
         alert("File Upload success");
         setphotoFile(data.data.link);
         dispatch(upload(data.data.link, importantid));
@@ -224,10 +247,25 @@ function UserInfoCard() {
   //}
 
   useEffect(async () => {
-    setRealdescription(false);
+
     let c = localStorage.getItem("ob_id");
+    console.log(c)
+
+    //Add followers -> Adrian's
+
+    const followerGrab = await Axios.get(`http://localhost:5000/api/followersAdd/${c}`)
+    console.log(followerGrab.data)
+    if(followerGrab !== null || followerGrab !== undefined ){
+        setFollowers(followerGrab.data)
+    } else {
+        setFollowers(0)
+    }
+    
+    //Finished func
+
+    setRealdescription(false);
     const response = await Axios.get(`http://localhost:5000/photo/${c}`);
-    console.log(response);
+    // console.log(response);
     if (response !== null || response !== undefined) {
       setHavephoto(true);
       setphotoFile(response.data[0].photo);
@@ -238,12 +276,12 @@ function UserInfoCard() {
     const response2 = await Axios.get(
       `http://localhost:5000/textdescription/${c}`
     );
-    console.log(response2.data[0].description);
+    // console.log(response2.data[0].description);
     if (response2 !== null || response2 !== undefined) {
       setHavedescription(true);
       setDescription(response2.data[0].description);
     }
-  }, [success1, success2, realdescription]);
+  }, [success1, success2, realdescription, followers]);
 
   //Send the form data to the backend
   //const on99 = async (e) => {
@@ -295,18 +333,18 @@ function UserInfoCard() {
                 >
                   <Grid item xs={12}>
                     <h6 className={styles.noPadding}>Followers</h6>
-                    <h4>903K</h4>
+                        <h4>{followers}</h4>
                   </Grid>
                 </Grid>
                 <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
                   <Box p={1} flex={"auto"}>
                     {follow ? (
-                      <Button onClick={handleClick2} className={styles.button}>
+                      <Button onClick={handleFollow} className={styles.button}>
                         Follow
                       </Button>
                     ) : (
                       <Box flex={"auto"}>
-                        <Button onClick={handleClick} className={styles.button}>
+                        <Button onClick={handleUnfollow} className={styles.button}>
                           UnFollow
                         </Button>
                       </Box>
