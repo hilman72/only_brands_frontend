@@ -25,7 +25,7 @@ import { uploaddetails } from "../../Redux/Actions/EditNameactions";
 function UserInfoModal(props) {
   // State to store uploaded file
   const importantid = localStorage.getItem("ob_id");
-  console.log(importantid);
+  // console.log(importantid);
   const [open, setOpen] = React.useState(false);
   const [description, setDescription] = React.useState("");
   const [category, setCategory] = React.useState("");
