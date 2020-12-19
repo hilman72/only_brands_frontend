@@ -9,6 +9,7 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
+import axios from "axios";
 
 const styles = (theme) => ({
   root: {
@@ -63,6 +64,17 @@ function CouponModal(props) {
   };
   const handleClose = () => {
     setOpen(false);
+    props.update();
+  };
+
+  const handleConfirm = () => {
+    axios
+      .post(`http://localhost:5000/api/confirmCoupon/`, {
+        u_name: props.pastData.user_name,
+        b_name: props.pastData.business_name,
+        id: props.pastData.coupon_id,
+      })
+      .then(handleClose());
   };
 
   const x = window.location.href.replaceAll("/", " ").split(" ");
@@ -73,11 +85,13 @@ function CouponModal(props) {
 
   useEffect(() => {
     setWho(y);
-  }, [who]);
+  }, [who, open]);
 
   return (
     <div>
-      {you === render_user ? (
+      {you === render_user &&
+      props.pastData.used === false &&
+      props.pastData.expired === false ? (
         <Button onClick={handleClickOpen}>Details</Button>
       ) : (
         <div></div>
@@ -117,7 +131,7 @@ function CouponModal(props) {
           </Typography>
           <DialogActions>
             {who === "business" ? (
-              <Button autoFocus onClick={handleClose}>
+              <Button autoFocus onClick={handleConfirm}>
                 Confirm
               </Button>
             ) : (
