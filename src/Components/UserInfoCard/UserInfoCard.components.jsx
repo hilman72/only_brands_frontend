@@ -126,7 +126,7 @@ function UserInfoCard() {
 
   // State to store uploaded file
   const importantid = localStorage.getItem("ob_id");
-//   console.log(importantid);
+  //   console.log(importantid);
 
   const [photofile, setphotoFile] = React.useState("");
   const [photofile2, setphotoFile2] = React.useState("");
@@ -140,9 +140,9 @@ function UserInfoCard() {
   //b.success = true
   const { loading, success: success1, userInfoUploadObject } = TMB;
 
-  //Follower Count 
+  //Follower Count
 
-  const [followers, setFollowers] = React.useState(0)
+  const [followers, setFollowers] = React.useState(0);
 
   //End of state i used
 
@@ -165,9 +165,9 @@ function UserInfoCard() {
   };
 
   const handleUnfollow = async (e) => {
-      setFollow(!follow)
+    setFollow(!follow);
 
-      console.log(e);
+    console.log(e);
     const url = e.target.baseURI;
 
     const ownUser = localStorage.getItem("ob_id");
@@ -177,15 +177,13 @@ function UserInfoCard() {
     // console.log(username);
 
     await Axios.post("http://localhost:5000/api/unfollow", {
-      username: username, 
-      ownUser: ownUser
-    })
-
-  }
+      username: username,
+      ownUser: ownUser,
+    });
+  };
 
   const handleFollow = async (e) => {
     setFollow(!follow);
-
 
     console.log(e);
     const url = e.target.baseURI;
@@ -197,13 +195,12 @@ function UserInfoCard() {
     // console.log(username);
 
     await Axios.post("http://localhost:5000/api/followers", {
-      username: username, 
-      ownUser: ownUser
-    })
-    .then((data) => {
-        console.log(data)
-        alert(data.data)
-    })
+      username: username,
+      ownUser: ownUser,
+    }).then((data) => {
+      console.log(data);
+      alert(data.data);
+    });
   };
 
   const realdescriptionset = () => {
@@ -248,20 +245,21 @@ function UserInfoCard() {
   //}
 
   useEffect(async () => {
-
     let c = localStorage.getItem("ob_id");
-    console.log(c)
+    console.log(c);
 
     //Add followers -> Adrian's
 
-    const followerGrab = await Axios.get(`http://localhost:5000/api/followersAdd/${c}`)
-    console.log(followerGrab.data)
-    if(followerGrab !== null || followerGrab !== undefined ){
-        setFollowers(followerGrab.data)
+    const followerGrab = await Axios.get(
+      `http://localhost:5000/api/followersAdd/${c}`
+    );
+    console.log(followerGrab.data);
+    if (followerGrab !== null || followerGrab !== undefined) {
+      setFollowers(followerGrab.data);
     } else {
-        setFollowers(0)
+      setFollowers(0);
     }
-    
+
     //Finished func
 
     setRealdescription(false);
@@ -344,22 +342,25 @@ function UserInfoCard() {
                 >
                   <Grid item xs={12}>
                     <h6 className={styles.noPadding}>Followers</h6>
-                        <h4>{followers}</h4>
+                    <h4>{followers}</h4>
                   </Grid>
                 </Grid>
                 <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
-{render_user === you ? (
+                  {render_user === you ? (
                     <div></div>
                   ) : (
                     <Box p={1} flex={"auto"}>
                       {follow ? (
-                        <Button onClick={handleClick} className={styles.button}>
+                        <Button
+                          onClick={handleFollow}
+                          className={styles.button}
+                        >
                           Follow
                         </Button>
                       ) : (
                         <Box flex={"auto"}>
                           <Button
-                            onClick={handleClick}
+                            onClick={handleUnfollow}
                             className={styles.button}
                           >
                             UnFollow
@@ -441,6 +442,3 @@ function UserInfoCard() {
 }
 
 export default UserInfoCard;
-
-
-
