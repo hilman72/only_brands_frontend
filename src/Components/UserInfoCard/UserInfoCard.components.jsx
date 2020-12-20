@@ -317,8 +317,8 @@ function UserInfoCard() {
                       <input type="file" hidden onChange={handleUpload} />
                     </Button>
                   ) : (
-                    <div></div>
-                  )}
+                      <div></div>
+                    )}
 
                   {/* <input type="file" onChange={handleUpload} /> */}
                 </Grid>
@@ -349,26 +349,26 @@ function UserInfoCard() {
                   {render_user === you ? (
                     <div></div>
                   ) : (
-                    <Box p={1} flex={"auto"}>
-                      {follow ? (
-                        <Button
-                          onClick={handleFollow}
-                          className={styles.button}
-                        >
-                          Follow
-                        </Button>
-                      ) : (
-                        <Box flex={"auto"}>
+                      <Box p={1} flex={"auto"}>
+                        {follow ? (
                           <Button
-                            onClick={handleUnfollow}
+                            onClick={handleFollow}
                             className={styles.button}
                           >
-                            UnFollow
+                            Follow
                           </Button>
-                        </Box>
-                      )}
-                    </Box>
-                  )}
+                        ) : (
+                            <Box flex={"auto"}>
+                              <Button
+                                onClick={handleUnfollow}
+                                className={styles.button}
+                              >
+                                UnFollow
+                          </Button>
+                            </Box>
+                          )}
+                      </Box>
+                    )}
                 </Box>
               </Box>
             </Grid>

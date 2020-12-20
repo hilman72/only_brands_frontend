@@ -20,6 +20,7 @@ import "./Business-detail.style.scss";
 import ChatIcon from "@material-ui/icons/Chat";
 import { Typography } from "@material-ui/core";
 import BusinessInfoModal from "../BusinessInfoModal/BusinessInfoModal.component";
+import CreateBrandReviewModal from '../CreateBrandsReviewModal/CreateBrandsReview.components'
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
@@ -222,24 +223,22 @@ const BusinessDetail = (props) => {
                     Follow
                   </Button>
                 ) : (
-                  <Box flex={"auto"}>
-                    <Button onClick={handleClick} className={styles.button}>
-                      Followed
+                    <Box flex={"auto"}>
+                      <Button onClick={handleClick} className={styles.button}>
+                        Followed
                     </Button>
-                    <br />
-                    <br />
-                    <Button onClick={handleClick} className={styles.button}>
-                      UnFollow
+                      <br />
+                      <br />
+                      <Button onClick={handleClick} className={styles.button}>
+                        UnFollow
                     </Button>
-                  </Box>
-                )}
+                    </Box>
+                  )}
               </Box>
             </Box>
           </Grid>
           <Grid item xs={3}>
-            <Button startIcon={<ChatIcon />} className={styles.button}>
-              Chat With Us
-            </Button>
+            <CreateBrandReviewModal />
           </Grid>
           <Grid item xs={3}>
             <ButtonGroup
