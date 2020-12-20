@@ -42,10 +42,12 @@ const useStyles = makeStyles(({ palette }) => ({
 }));
 
 const RegisterPage = () => {
+  const [div, setDiv] = React.useState("registerContainer");
+  const [id, setId] = React.useState("User");
+  const [id2, setId2] = React.useState("User Name");
 
-  const [div, setDiv] = React.useState("registerContainer")
-  const [id, setId] = React.useState("User")
-  const [id2, setId2] = React.useState("User Name")
+  function handleChange() {
+    setDiv("registerContainer registerRight-panel-active");
 
   const styles = useStyles();
 
@@ -66,17 +68,15 @@ const RegisterPage = () => {
       setId("Brands")
       setId2("Brand Name")
     }, 300)
-    
   }
 
-  function handleSwitch(){
-    setDiv("registerContainer")
-    
-    setTimeout(function(){
-      setId("User")
-      setId2("User Name")
-    }, 300)
-    
+  function handleSwitch() {
+    setDiv("registerContainer");
+
+    setTimeout(function () {
+      setId("User");
+      setId2("User Name");
+    }, 300);
   }
 
   return (
@@ -84,27 +84,19 @@ const RegisterPage = () => {
 
       <img src={logo} onClick={navigateToHome} className={styles.logo}/>
 
-
       <div class={div} id="registerContainer">
+        {/* <!----------------- SIGN IN FORM -----------------> */}
 
+        <div class="registerForm-container registerSign-in-container">
+          <RegisterForm who={"user"} id={id} id2={id2} />
+        </div>
 
-      {/* <!----------------- SIGN IN FORM -----------------> */}
+        {/* <!----------------- SIGN UP FORM -----------------> */}
 
-      <div class="registerForm-container registerSign-in-container">
+        <div class="registerForm-container registerSign-up-container">
+          <RegisterForm who={"business"} id={id} id2={id2} />
+        </div>
 
-      <RegisterForm who={'business'} id={id} id2={id2}/>
-
-      </div>
-
-      {/* <!----------------- SIGN UP FORM -----------------> */}
-
-      <div class="registerForm-container registerSign-up-container">
-
-      <RegisterForm who={'user'} id={id} id2={id2}/>
-
-      </div>
-
-      {/* <!----------------- OVERLAY -----------------> */}
 
       <div class="registerOverlay-container">
         <div class="registerOverlay">
@@ -122,8 +114,6 @@ const RegisterPage = () => {
           </div>
         </div>
       </div>
-    </div>
-
     </div>
   );
 };

@@ -25,7 +25,7 @@ import { uploaddetails } from "../../Redux/Actions/EditNameactions";
 function UserInfoModal(props) {
   // State to store uploaded file
   const importantid = localStorage.getItem("ob_id");
-  console.log(importantid);
+  // console.log(importantid);
   const [open, setOpen] = React.useState(false);
   const [description, setDescription] = React.useState("");
   const [category, setCategory] = React.useState("");
@@ -59,15 +59,24 @@ function UserInfoModal(props) {
     handleClose();
   };
 
+  const x = window.location.href.replaceAll("/", " ").split(" ");
+  const render_user = x[x.length - 1];
+
+  const you = localStorage.getItem("ob_username");
+
   //pick up the thing we got from redux store
   const breakstore = useSelector((state) => state.userInfoUploadDetailsStore);
   const { loading, success, uploadedObject } = breakstore;
 
   return (
     <div>
-      <Button className="edit" onClick={handleClickOpen}>
-        Edit Profile
-      </Button>
+      {render_user === you ? (
+        <Button className="edit" onClick={handleClickOpen}>
+          Edit Profile
+        </Button>
+      ) : (
+        <div></div>
+      )}
 
       <Dialog
         open={open}

@@ -188,6 +188,10 @@ function Coupon(props) {
     tearColor: mainColor,
   });
 
+  const whenUpdate = () => {
+    props.passUpdate();
+  };
+
   return (
     <Card className={styles.card} elevation={0}>
       <div className={cx(styles.left, styles.moveLeft)}>
@@ -228,7 +232,7 @@ function Coupon(props) {
           <Grid item xs={4}>
             <div className="buttonContainer">
               <CardActions>
-                <CouponModal pastData={props.data} />
+                <CouponModal pastData={props.data} update={whenUpdate} />
               </CardActions>
             </div>
           </Grid>

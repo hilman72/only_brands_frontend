@@ -29,8 +29,8 @@ function CouponCarousel() {
         slidesPerColumn={2}
         loop={true}
         navigation
-        onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => console.log(swiper)}
+        onSlideChange={() => {}}
+        onSwiper={(swiper) => {}}
       >
         <SwiperSlide> {/* <Coupon />{" "} */}</SwiperSlide>
       </Swiper>
