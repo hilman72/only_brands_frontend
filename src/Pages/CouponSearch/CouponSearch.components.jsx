@@ -13,6 +13,12 @@ const useStyles = makeStyles({
   box: {
     padding: 20,
     margin: 20
+  },
+  cardPaper:{
+    boxShadow:'none',
+  },
+  body:{
+    backgroundColor:'#f0f0f0',
   }
 })
 
@@ -41,7 +47,7 @@ const CouponSearch = () => {
 
 
   return (
-    <div>
+    <div className={classes.body}>
       <Header />
       <Grid container spacing={3}>
         <Grid item xs={2}>
@@ -64,7 +70,7 @@ const CouponSearch = () => {
               <Grid item xs={2}>
                 Gutter
               </Grid>
-              <Paper elevation={10}>
+              <Paper className={classes.cardPaper}>
                 <Grid container xs={12} spacing={3}>
 
                   {/* {finaldisplay && finaldisplay.length > 0 ? (
