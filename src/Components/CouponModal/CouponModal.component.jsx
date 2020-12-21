@@ -8,8 +8,6 @@ import MuiDialogActions from "@material-ui/core/DialogActions";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
-
-import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 
 
@@ -76,7 +74,7 @@ function CouponModal(props) {
         b_name: props.pastData.business_name,
         id: props.pastData.coupon_id,
       })
-      .then(handleClose());
+      .then(handleClose(), console.log("hi"));
   };
 
   const x = window.location.href.replaceAll("/", " ").split(" ");
