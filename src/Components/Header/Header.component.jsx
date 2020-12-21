@@ -23,6 +23,10 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import Logo from "../../Assets/Images/logo.png";
 import { Popover } from "@material-ui/core";
 import FilterMenu from "../FilterMenu/FilterMenu.components";
+//for Redux
+import { useSelector, useDispatch } from "react-redux";
+import { search } from "../../Redux/Actions/Searchaction";
+import Axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -101,6 +105,8 @@ const PrimarySearchAppBar = (props) => {
   const [who, setWho] = React.useState("");
   const [name, setName] = React.useState("");
 
+  const dispatch = useDispatch();
+
   //Mobile menu handle dropdown (for nav icons)
 
   const handleMobileMenuClose = () => {
@@ -131,7 +137,9 @@ const PrimarySearchAppBar = (props) => {
       "searchlink",
       `http://localhost:5000/api/search/${different}/${event.target[0].value}`
     );
-    // console.log("success", searchlink);
+    let searchgglink = localStorage.getItem('searchlink')
+    dispatch(search(searchgglink));
+
     history.push("/CouponSearch");
   };
 

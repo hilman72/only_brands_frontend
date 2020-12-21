@@ -8,40 +8,46 @@ import Paper from "@material-ui/core/Paper"
 import { makeStyles } from "@material-ui/core/styles"
 import "./CouponSearch.style.scss";
 import Axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+
 
 const useStyles = makeStyles({
   box: {
     padding: 20,
     margin: 20
+  },
+  cardPaper: {
+    boxShadow: 'none',
+  },
+  body: {
+    backgroundColor: '#f0f0f0',
   }
 })
 
 const CouponSearch = () => {
 
-  const [first, setFirst] = useState(false);
   const [finaldisplay, setFinaldisplay] = useState([]);
+  const choosesearchstate = useSelector((state) => state.searchStore)
+  const { loading, success: success1, searchdata } = choosesearchstate;
+
 
   useEffect(async () => {
-    let b = localStorage.getItem('searchlink')
-    //await Axios.get(`http://localhost:5000/api/search/${different}/${event.target[0].value}`)
-    if (b !== null || b !== undefined) {
-      setFirst(true)
+
+    if (searchdata !== null || searchdata !== undefined) {
+      console.log(searchdata)
+      // setFinaldisplay([...a])
+    } else {
+      setFinaldisplay("")
     }
-    if (first === true) {
-      Axios.get(b).then(data => {
-        let a = data.data;
-        console.log(a)
-        setFinaldisplay([...a])
-      })
-    }
-  }, [first])
+
+  }, [success1])
 
 
   const classes = useStyles();
 
 
   return (
-    <div>
+    <div className={classes.body}>
       <Header />
       <Grid container spacing={3}>
         <Grid item xs={2}>
@@ -64,7 +70,7 @@ const CouponSearch = () => {
               <Grid item xs={2}>
                 Gutter
               </Grid>
-              <Paper elevation={10}>
+              <Paper className={classes.cardPaper}>
                 <Grid container xs={12} spacing={3}>
 
                   {/* {finaldisplay && finaldisplay.length > 0 ? (
@@ -79,7 +85,7 @@ const CouponSearch = () => {
                       <div>Sorry No Coupon</div>
                     )} */}
 
-                    <UserCards />
+                  <UserCards />
 
                   {/* <Grid item xs={6}>
                    <Coupons />

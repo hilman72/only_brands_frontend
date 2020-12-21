@@ -3,7 +3,7 @@
 // <Button>Unfollow</Button>
 
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import "./UserInfoCard.components.scss";
 import cx from "clsx";
 
@@ -140,11 +140,19 @@ function UserInfoCard() {
   //b.success = true
   const { loading, success: success1, userInfoUploadObject } = TMB;
 
+
   //Follower Count
 
   const [followers, setFollowers] = React.useState(0);
 
+  const [followers2, setFollowers2] = React.useState(0)
+
   //End of state i used
+
+  //get URL
+  let location = useLocation();
+  const pathname = location.pathname.split("/");
+  const TMusername = pathname[2];
 
   //another store
   const breakdescription = useSelector(
@@ -170,10 +178,11 @@ function UserInfoCard() {
     console.log(e);
     const url = e.target.baseURI;
 
-    const ownUser = localStorage.getItem("ob_id");
-
     const pathname = new URL(url).pathname.split("/");
     const username = pathname[2];
+
+    const ownUser = localStorage.getItem("ob_id");
+
     // console.log(username);
 
     await Axios.post("http://localhost:5000/api/unfollow", {
@@ -185,10 +194,12 @@ function UserInfoCard() {
   const handleFollow = async (e) => {
     setFollow(!follow);
 
+
+    const ownUser = localStorage.getItem("ob_id");
+
     console.log(e);
     const url = e.target.baseURI;
 
-    const ownUser = localStorage.getItem("ob_id");
 
     const pathname = new URL(url).pathname.split("/");
     const username = pathname[2];
@@ -244,27 +255,57 @@ function UserInfoCard() {
 
   //}
 
+  const url = useLocation();
+
   useEffect(async () => {
     let c = localStorage.getItem("ob_id");
-    console.log(c);
+
+    let user = localStorage.getItem("ob_username")
+
+
+    // console.log(url)
+
+    const pathname = url.pathname.split("/");
+    const username = pathname[2];
+    console.log(username)
 
     //Add followers -> Adrian's
 
-    const followerGrab = await Axios.get(
-      `http://localhost:5000/api/followersAdd/${c}`
-    );
-    console.log(followerGrab.data);
+
+    const followerGrab = await Axios.get(`http://localhost:5000/api/followersAdd/${c}`)
+    // console.log(followerGrab.data)
     if (followerGrab !== null || followerGrab !== undefined) {
-      setFollowers(followerGrab.data);
+      setFollowers(followerGrab.data)
     } else {
       setFollowers(0);
     }
 
-    //Finished func
+    //Count followers 
 
+
+    const countFollowers = await Axios.get(`http://localhost:5000/api/countFollowers/${username}`)
+    console.log(countFollowers)
+
+
+    // const countFollowers = await Axios.get(`http://localhost:5000/api/countFollowers/${user}`)
+    // console.log(countFollowers)
+
+    //Check if followed
+
+    const checkFollowed = await Axios.get(`http://localhost:5000/api/checkFollowed/${username}/${c}`)
+    // console.log(checkFollowed)
+
+    let checked = checkFollowed.data
+    console.log(checked)
+
+    if (checkFollowed !== null || checkFollowed !== undefined) {
+      setFollow(checked)
+    }
+
+    //Photo
     setRealdescription(false);
-    const response = await Axios.get(`http://localhost:5000/photo/${c}`);
-    // console.log(response);
+    const response = await Axios.get(`http://localhost:5000/photo/${TMusername}`);
+    console.log(response);
     if (response !== null || response !== undefined) {
       setHavephoto(true);
       setphotoFile(response.data[0].photo);
@@ -280,7 +321,7 @@ function UserInfoCard() {
       setHavedescription(true);
       setDescription(response2.data[0].description);
     }
-  }, [success1, success2, realdescription, followers]);
+  }, [success1, success2, realdescription, follow]);
 
   //Send the form data to the backend
   //const on99 = async (e) => {
@@ -342,7 +383,7 @@ function UserInfoCard() {
                 >
                   <Grid item xs={12}>
                     <h6 className={styles.noPadding}>Followers</h6>
-                    <h4>{followers}</h4>
+                    <h4>{followers2}</h4>
                   </Grid>
                 </Grid>
                 <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
@@ -352,18 +393,18 @@ function UserInfoCard() {
                       <Box p={1} flex={"auto"}>
                         {follow ? (
                           <Button
-                            onClick={handleFollow}
+                            onClick={handleUnfollow}
                             className={styles.button}
                           >
-                            Follow
+                            Unfollow
                           </Button>
                         ) : (
                             <Box flex={"auto"}>
                               <Button
-                                onClick={handleUnfollow}
+                                onClick={handleFollow}
                                 className={styles.button}
                               >
-                                UnFollow
+                                Follow
                           </Button>
                             </Box>
                           )}

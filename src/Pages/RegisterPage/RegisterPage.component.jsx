@@ -44,11 +44,11 @@ const useStyles = makeStyles(({ palette }) => ({
 const RegisterPage = () => {
   const [div, setDiv] = React.useState("registerContainer");
   const [id, setId] = React.useState("User");
-  const [id2, setId2] = React.useState("User Name");
+  const [inputHidden, setInput] = React.useState(true);
 
   const history = useHistory();
 
-    function navigateToHome() {
+  function navigateToHome() {
     history.push("/");
   }
 
@@ -61,7 +61,7 @@ const RegisterPage = () => {
 
     setTimeout(function () {
       setId("Brands");
-      setId2("Brand Name");
+      setInput(false);
     }, 300);
   }
 
@@ -71,11 +71,12 @@ const RegisterPage = () => {
 
     setTimeout(function () {
       setId("User");
-      setId2("User Name");
+      setInput(true);
     }, 300);
   }
 
   const styles = useStyles();
+
 
   return (
     <div class="registerBody">
@@ -85,46 +86,45 @@ const RegisterPage = () => {
         {/* <!----------------- SIGN IN FORM -----------------> */}
 
         <div class="registerForm-container registerSign-in-container">
-          <RegisterForm who={"user"} id={id} id2={id2} />
+          <RegisterForm who={"user"} id={id} input={inputHidden} />
         </div>
 
         {/* <!----------------- SIGN UP FORM -----------------> */}
-
         <div class="registerForm-container registerSign-up-container">
-          <RegisterForm who={"business"} id={id} id2={id2} />
+          <RegisterForm who={"business"} id={id} input={inputHidden} />
         </div>
 
-      <div class="registerOverlay-container">
-        <div class="registerOverlay">
-          <div class="registerOverlay-panel registerOverlay-left">
-            <h2 class="registerH2">Looking for discounts in your favourite restaurant?</h2>
-            <p class="registerP">Join OnlyBrands to get sweet offets!</p>
-            <button
-              onClick={handleSwitch}
-              class="ghost registerButton"
-              id="signIn"
-            >
-              Register
+        <div class="registerOverlay-container">
+          <div class="registerOverlay">
+            <div class="registerOverlay-panel registerOverlay-left">
+              <h2 class="registerH2">Looking for discounts in your favourite restaurant?</h2>
+              <p class="registerP">Join OnlyBrands to get sweet offets!</p>
+              <button
+                onClick={handleSwitch}
+                class="ghost registerButton"
+                id="signIn"
+              >
+                Register as a User
             </button>
-            <p onClick={navigateToLogin} className={styles.toLogin}>
-              {" "}
+              <p onClick={navigateToLogin} className={styles.toLogin}>
+                {" "}
               Have an account already? Click me to login!
             </p>
-          </div>
-          <div class="registerOverlay-panel registerOverlay-right">
-            <h2 class="registerH2">Brands looking for more customers?</h2>
-            <p class="registerP">Create your fanbase on OnlyBrands!</p>
-            <button
-              onClick={handleChange}
-              class="ghost registerButton"
-              id="signUp"
-            >
-              Register a Brands Account
+            </div>
+            <div class="registerOverlay-panel registerOverlay-right">
+              <h2 class="registerH2">Brands looking for more customers?</h2>
+              <p class="registerP">Create your fanbase on OnlyBrands!</p>
+              <button
+                onClick={handleChange}
+                class="ghost registerButton"
+                id="signUp"
+              >
+                Register a Brands Account
             </button>
-            <p onClick={navigateToLogin} className={styles.toLogin}>
-              {" "}
-              Have an account already? Click me to login!
-            </p>
+              <p onClick={navigateToLogin} className={styles.toLogin}>
+                {" "}
+                Have an account already? Click me to login!
+              </p>
             </div>
           </div>
         </div>
