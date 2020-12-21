@@ -104,7 +104,7 @@ const CouponList = (props) => {
               if (data.used === false && data.expired === false) {
                 return (
                   <Grid item xs={12} sm={6}>
-                    <Coupon key={i} data={data} />
+                    <Coupon key={i} data={data} passUpdate={needUpdate} />
                   </Grid>
                 );
               } else {

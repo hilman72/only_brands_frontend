@@ -75,7 +75,10 @@ const RegisterPage = () => {
     }, 300);
   }
 
+      <RegisterForm who={'user'} id={id} id2={id2}/>
+  
   const styles = useStyles();
+
 
   return (
     <div class="registerBody">
@@ -89,7 +92,6 @@ const RegisterPage = () => {
         </div>
 
         {/* <!----------------- SIGN UP FORM -----------------> */}
-
         <div class="registerForm-container registerSign-up-container">
           <RegisterForm who={"business"} id={id} input={inputHidden} />
         </div>
