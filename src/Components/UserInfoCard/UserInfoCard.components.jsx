@@ -143,6 +143,8 @@ function UserInfoCard() {
 
   const [followers, setFollowers] = React.useState(0)
 
+  const [followers2, setFollowers2] = React.useState(0)
+
   //End of state i used
 
   //another store
@@ -185,11 +187,11 @@ function UserInfoCard() {
   const handleFollow = async (e) => {
     setFollow(!follow);
 
+    const ownUser = localStorage.getItem("ob_id");
 
     console.log(e);
     const url = e.target.baseURI;
 
-    const ownUser = localStorage.getItem("ob_id");
 
     const pathname = new URL(url).pathname.split("/");
     const username = pathname[2];
@@ -249,19 +251,32 @@ function UserInfoCard() {
   useEffect(async () => {
 
     let c = localStorage.getItem("ob_id");
+    let user = localStorage.getItem("ob_username")
     console.log(c)
+    console.log(user)
 
     //Add followers -> Adrian's
 
     const followerGrab = await Axios.get(`http://localhost:5000/api/followersAdd/${c}`)
-    console.log(followerGrab.data)
+    // console.log(followerGrab.data)
     if(followerGrab !== null || followerGrab !== undefined ){
         setFollowers(followerGrab.data)
     } else {
         setFollowers(0)
     }
     
-    //Finished func
+    //Count followers 
+
+    const countFollowers = await Axios.get(`http://localhost:5000/api/countFollowers/${user}`)
+    console.log(countFollowers)
+
+    if(countFollowers !== null || countFollowers !== undefined ){
+      setFollowers2(countFollowers.data)
+  } else {
+      setFollowers2(0)
+  }
+
+  //
 
     setRealdescription(false);
     const response = await Axios.get(`http://localhost:5000/photo/${c}`);
@@ -281,7 +296,7 @@ function UserInfoCard() {
       setHavedescription(true);
       setDescription(response2.data[0].description);
     }
-  }, [success1, success2, realdescription, followers]);
+  }, [success1, success2, realdescription, follow]);
 
   //Send the form data to the backend
   //const on99 = async (e) => {
@@ -333,7 +348,7 @@ function UserInfoCard() {
                 >
                   <Grid item xs={12}>
                     <h6 className={styles.noPadding}>Followers</h6>
-                        <h4>{followers}</h4>
+                        <h4>{followers2}</h4>
                   </Grid>
                 </Grid>
                 <Box p={2} flex={"auto"} className={borderedGridStyles.item}>

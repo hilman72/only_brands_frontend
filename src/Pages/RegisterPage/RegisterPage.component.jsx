@@ -41,7 +41,7 @@ const RegisterPage = () => {
 
       <div class="registerForm-container registerSign-in-container">
 
-      <RegisterForm who={'business'} id={id} id2={id2}/>
+      <RegisterForm who={'user'} id={id} id2={id2}/>
 
       </div>
 
@@ -49,7 +49,7 @@ const RegisterPage = () => {
 
       <div class="registerForm-container registerSign-up-container">
 
-      <RegisterForm who={'user'} id={id} id2={id2}/>
+      <RegisterForm who={'business'} id={id} id2={id2}/>
 
       </div>
 
