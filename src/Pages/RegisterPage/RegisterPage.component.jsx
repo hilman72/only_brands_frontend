@@ -44,7 +44,7 @@ const useStyles = makeStyles(({ palette }) => ({
 const RegisterPage = () => {
   const [div, setDiv] = React.useState("registerContainer");
   const [id, setId] = React.useState("User");
-  const [id2, setId2] = React.useState("User Name");
+  const [inputHidden, setInput] = React.useState(true);
 
   const history = useHistory();
 
@@ -61,7 +61,7 @@ const RegisterPage = () => {
 
     setTimeout(function () {
       setId("Brands");
-      setId2("Brand Name");
+      setInput(false);
     }, 300);
   }
 
@@ -71,7 +71,7 @@ const RegisterPage = () => {
 
     setTimeout(function () {
       setId("User");
-      setId2("User Name");
+      setInput(true);
     }, 300);
   }
 
@@ -85,12 +85,12 @@ const RegisterPage = () => {
         {/* <!----------------- SIGN IN FORM -----------------> */}
 
         <div class="registerForm-container registerSign-in-container">
-          <RegisterForm who={"user"} id={id} id2={id2} />
+          <RegisterForm who={"user"} id={id} input={inputHidden} />
         </div>
 
         {/* <!----------------- SIGN UP FORM -----------------> */}
         <div class="registerForm-container registerSign-up-container">
-          <RegisterForm who={"business"} id={id} id2={id2} />
+          <RegisterForm who={"business"} id={id} input={inputHidden} />
         </div>
 
       <div class="registerOverlay-container">
@@ -103,7 +103,7 @@ const RegisterPage = () => {
               class="ghost registerButton"
               id="signIn"
             >
-              Register
+              Register as a User
             </button>
             <p onClick={navigateToLogin} className={styles.toLogin}>
               {" "}
@@ -120,10 +120,10 @@ const RegisterPage = () => {
             >
               Register a Brands Account
             </button>
-            <p onClick={navigateToLogin} className={styles.toLogin}>
-              {" "}
-              Have an account already? Click me to login!
-            </p>
+              <p onClick={navigateToLogin} className={styles.toLogin}>
+                {" "}
+                Have an account already? Click me to login!
+              </p>
             </div>
           </div>
         </div>
