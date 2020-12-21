@@ -12,6 +12,7 @@ import axios from "axios";
 const useStyles = makeStyles(({ palette }) => ({
   background: {
     backgroundColor: "#f0f0f0",
+    // height: '100vh',
   },
   bottomContainer: {
     paddingTop: "1rem",
@@ -52,9 +53,9 @@ function BusinessProfiles() {
   }, [render_user, who]);
 
   return (
-    <div>
+    <div className={styles.background}>
       <Header />
-      <Grid container className={styles.background}>
+      <Grid container>
         <Grid className="bannerImg" item xs={12}>
           Banner Photo
         </Grid>
