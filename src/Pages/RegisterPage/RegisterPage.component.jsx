@@ -75,7 +75,7 @@ const RegisterPage = () => {
     }, 300);
   }
 
-      <RegisterForm who={'user'} id={id} id2={id2}/>
+      
   
   const styles = useStyles();
 
