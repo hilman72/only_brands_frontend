@@ -3,6 +3,7 @@
 // <Button>Unfollow</Button>
 
 import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import "./UserInfoCard.components.scss";
 import cx from "clsx";
 
@@ -125,7 +126,7 @@ function UserInfoCard() {
 
   // State to store uploaded file
   const importantid = localStorage.getItem("ob_id");
-//   console.log(importantid);
+  //   console.log(importantid);
 
   const [photofile, setphotoFile] = React.useState("");
   const [photofile2, setphotoFile2] = React.useState("");
@@ -139,9 +140,10 @@ function UserInfoCard() {
   //b.success = true
   const { loading, success: success1, userInfoUploadObject } = TMB;
 
-  //Follower Count 
 
-  const [followers, setFollowers] = React.useState(0)
+  //Follower Count
+
+  const [followers, setFollowers] = React.useState(0);
 
   const [followers2, setFollowers2] = React.useState(0)
 
@@ -166,9 +168,9 @@ function UserInfoCard() {
   };
 
   const handleUnfollow = async (e) => {
-      setFollow(!follow)
+    setFollow(!follow);
 
-      console.log(e);
+    console.log(e);
     const url = e.target.baseURI;
 
     const ownUser = localStorage.getItem("ob_id");
@@ -178,14 +180,14 @@ function UserInfoCard() {
     // console.log(username);
 
     await Axios.post("http://localhost:5000/api/unfollow", {
-      username: username, 
-      ownUser: ownUser
-    })
-
-  }
+      username: username,
+      ownUser: ownUser,
+    });
+  };
 
   const handleFollow = async (e) => {
     setFollow(!follow);
+
 
     const ownUser = localStorage.getItem("ob_id");
 
@@ -198,13 +200,12 @@ function UserInfoCard() {
     // console.log(username);
 
     await Axios.post("http://localhost:5000/api/followers", {
-      username: username, 
-      ownUser: ownUser
-    })
-    .then((data) => {
-        console.log(data)
-        alert(data.data)
-    })
+      username: username,
+      ownUser: ownUser,
+    }).then((data) => {
+      console.log(data);
+      alert(data.data);
+    });
   };
 
   const realdescriptionset = () => {
@@ -249,8 +250,8 @@ function UserInfoCard() {
   //}
 
   useEffect(async () => {
-
     let c = localStorage.getItem("ob_id");
+
     let user = localStorage.getItem("ob_username")
     console.log(c)
     console.log(user)
@@ -262,8 +263,9 @@ function UserInfoCard() {
     if(followerGrab !== null || followerGrab !== undefined ){
         setFollowers(followerGrab.data)
     } else {
-        setFollowers(0)
+      setFollowers(0);
     }
+
     
     //Count followers 
 
@@ -314,6 +316,11 @@ function UserInfoCard() {
 
   //}
 
+  const x = window.location.href.replaceAll("/", " ").split(" ");
+  const render_user = x[x.length - 1];
+
+  const you = localStorage.getItem("ob_username");
+
   return (
     <Card className={cx(styles.card, shadowStyles.root)}>
       <Grid container>
@@ -322,10 +329,15 @@ function UserInfoCard() {
             <CardContent>
               <Grid container>
                 <Grid item xs={12}>
-                  <Button className={styles.imgBtn} component="label">
-                    Upload Image
-                    <input type="file" hidden onChange={handleUpload} />
-                  </Button>
+                  {render_user === you ? (
+                    <Button className={styles.imgBtn} component="label">
+                      Upload Image
+                      <input type="file" hidden onChange={handleUpload} />
+                    </Button>
+                  ) : (
+                      <div></div>
+                    )}
+
                   {/* <input type="file" onChange={handleUpload} /> */}
                 </Grid>
                 <Grid item xs={12}>
@@ -352,19 +364,29 @@ function UserInfoCard() {
                   </Grid>
                 </Grid>
                 <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
-                  <Box p={1} flex={"auto"}>
-                    {follow ? (
-                      <Button onClick={handleFollow} className={styles.button}>
-                        Follow
-                      </Button>
-                    ) : (
-                      <Box flex={"auto"}>
-                        <Button onClick={handleUnfollow} className={styles.button}>
-                          UnFollow
-                        </Button>
+                  {render_user === you ? (
+                    <div></div>
+                  ) : (
+                      <Box p={1} flex={"auto"}>
+                        {follow ? (
+                          <Button
+                            onClick={handleFollow}
+                            className={styles.button}
+                          >
+                            Follow
+                          </Button>
+                        ) : (
+                            <Box flex={"auto"}>
+                              <Button
+                                onClick={handleUnfollow}
+                                className={styles.button}
+                              >
+                                UnFollow
+                          </Button>
+                            </Box>
+                          )}
                       </Box>
                     )}
-                  </Box>
                 </Box>
               </Box>
             </Grid>
@@ -438,6 +460,3 @@ function UserInfoCard() {
 }
 
 export default UserInfoCard;
-
-
-

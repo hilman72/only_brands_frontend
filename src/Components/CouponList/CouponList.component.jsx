@@ -12,6 +12,7 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
+import { TrendingUpOutlined } from "@material-ui/icons";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -59,20 +60,29 @@ const CouponList = (props) => {
   const [value, setValue] = useState(0);
   const [cou, setCou] = useState([]);
   const [first, setFirst] = useState(false);
+  const [update, setUpdate] = useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  useEffect(() => {
-    let x = props.coupon;
-    if (x.length > 0) {
-      setFirst(true);
-    }
-    if (first === true) {
-      setCou([...x]);
-    }
-  }, [first, props.coupon]);
+  const needUpdate = () => {
+    setUpdate(true);
+  };
+
+  useEffect(
+    () => {
+      let x = props.coupon;
+      if (x.length > 0) {
+        setFirst(true);
+      }
+      if (first === true) {
+        setCou([...x]);
+      }
+    },
+    [first, props.coupon],
+    update
+  );
 
   return (
     <div className={classes.root}>
@@ -82,8 +92,8 @@ const CouponList = (props) => {
           onChange={handleChange}
           aria-label="simple tabs example"
         >
-          <Tab label="Unexpired" {...a11yProps(0)} />
-          <Tab label="Expired" {...a11yProps(1)} />
+          <Tab label="Current Coupon" {...a11yProps(0)} />
+          <Tab label="Used or Expired Coupon" {...a11yProps(1)} />
           <Tab label="Referals" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
@@ -91,11 +101,15 @@ const CouponList = (props) => {
         <Grid container spacing={3}>
           {cou && cou.length > 0 ? (
             cou.map((data, i) => {
-              return (
-                <Grid item xs={12} sm={6}>
-                  <Coupon key={i} data={data} />
-                </Grid>
-              );
+              if (data.used === false && data.expired === false) {
+                return (
+                  <Grid item xs={12} sm={6}>
+                    <Coupon key={i} data={data} passUpdate={needUpdate} />
+                  </Grid>
+                );
+              } else {
+                return <div></div>;
+              }
             })
           ) : (
             <div>Sorry No Coupon</div>
@@ -104,9 +118,21 @@ const CouponList = (props) => {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Grid container spacing={3}>
-          <Grid item xs={6}>
-            <Coupon />
-          </Grid>
+          {cou && cou.length > 0 ? (
+            cou.map((data, i) => {
+              if (data.used === true || data.expired === TrendingUpOutlined) {
+                return (
+                  <Grid item xs={12} sm={6}>
+                    <Coupon key={i} data={data} passUpdate={needUpdate} />
+                  </Grid>
+                );
+              } else {
+                return <div></div>;
+              }
+            })
+          ) : (
+            <div>Sorry No Coupon</div>
+          )}
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={2}>
