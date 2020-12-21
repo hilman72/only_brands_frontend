@@ -21,6 +21,9 @@ import ChatIcon from "@material-ui/icons/Chat";
 import { Typography } from "@material-ui/core";
 import BusinessInfoModal from "../BusinessInfoModal/BusinessInfoModal.component";
 import CreateBrandReviewModal from '../CreateBrandsReviewModal/CreateBrandsReview.components'
+import { useSelector, useDispatch } from "react-redux";
+import { businessupload } from "../../Redux/Actions/BusinessPhotoaction"
+import Axios from 'axios';
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
@@ -119,6 +122,43 @@ const BusinessDetail = (props) => {
   const [who, setWho] = React.useState("");
   const [detail, setDetail] = React.useState([]);
   const [first, setFirst] = React.useState(false);
+  const [businesssmallphoto, setBusinesssmallphoto] = React.useState("")
+  const importantid = localStorage.getItem("ob_id");
+  const dispatch = useDispatch();
+
+  //useSelector for redux
+  const choosestore = useSelector((state) => state.businessInfoUploadStore)
+  const { loading, success: success1, userInfoUploadObject } = choosestore
+
+  useEffect(async () => {
+    console.log(importantid)
+    const response = await Axios.get(`http://localhost:5000/api/getbusinessphoto/${importantid}`);
+    if (response !== null || response !== undefined) {
+      setBusinesssmallphoto(response.data[0].photo);
+    } else {
+      setBusinesssmallphoto("");
+    }
+  }, [success1])
+
+
+  const handleBusinessPhotoUpload = (ev) => {
+    const formdata = new FormData();
+    formdata.append("image", ev.target.files[0]);
+    fetch("https://api.imgur.com/3/image", {
+      method: "post",
+      headers: {
+        Authorization: "Client-ID 0dfb916cd7c1ca8",
+      },
+      body: formdata,
+    })
+      .then((data) => data.json())
+      .then((data) => {
+        // console.log(data.data.link, importantid);
+        alert("File Upload success");
+        setBusinesssmallphoto(data.data.link);
+        dispatch(businessupload(data.data.link, importantid));
+      });
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -151,10 +191,12 @@ const BusinessDetail = (props) => {
           <Grid item className={styles.shrink} xs={4}>
             <Avatar
               className={styles.avatar}
-              src={
-                "https://image.shutterstock.com/image-photo/funny-cow-kaisergebirge-mountain-260nw-737751640.jpg"
-              }
+              src={businesssmallphoto}
             />
+            <Button className={styles.imgBtn} component="label">
+              Upload Image
+                      <input type="file" hidden onChange={handleBusinessPhotoUpload} />
+            </Button>
           </Grid>
           <Grid item xs={6}></Grid>
           <Grid item className={styles.editButton} xs={2}>
