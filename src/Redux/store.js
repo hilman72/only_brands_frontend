@@ -10,6 +10,9 @@ import logger from "redux-logger";
 //EditName reducers import
 import { userInfoDetailsUploadReducer } from './Reducers/EditNamereducers'
 
+//Review reducers import 
+import { reviewReducer } from './Reducers/Reivewreducers'
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
@@ -18,7 +21,10 @@ const rootReducer = combineReducers({
   userInfoUploadStore: userInfoUploadReducer,
 
   //Edit Details(text)
-  userInfoUploadDetailsStore: userInfoDetailsUploadReducer
+  userInfoUploadDetailsStore: userInfoDetailsUploadReducer,
+
+  //review
+  reviewStore: reviewReducer,
 });
 
 export const store = createStore(

@@ -74,7 +74,7 @@ const RegisterForm = (props) => {
     <div>
       
       {error === true ? (
-        <div>plz input the same password fku</div>
+        <div>Please input the same password</div>
       ) : (
         <div></div>
       )}
