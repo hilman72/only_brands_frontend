@@ -3,7 +3,7 @@
 // <Button>Unfollow</Button>
 
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "./UserInfoCard.components.scss";
 import cx from "clsx";
 
@@ -173,10 +173,11 @@ function UserInfoCard() {
     console.log(e);
     const url = e.target.baseURI;
 
-    const ownUser = localStorage.getItem("ob_id");
-
     const pathname = new URL(url).pathname.split("/");
     const username = pathname[2];
+
+    const ownUser = localStorage.getItem("ob_id");
+
     // console.log(username);
 
     await Axios.post("http://localhost:5000/api/unfollow", {
@@ -249,12 +250,18 @@ function UserInfoCard() {
 
   //}
 
+  const url = useLocation();
+
   useEffect(async () => {
     let c = localStorage.getItem("ob_id");
 
     let user = localStorage.getItem("ob_username")
-    console.log(c)
-    console.log(user)
+  
+    // console.log(url)
+
+    const pathname = url.pathname.split("/");
+    const username = pathname[2];
+    console.log(username)
 
     //Add followers -> Adrian's
 
@@ -265,11 +272,10 @@ function UserInfoCard() {
     } else {
       setFollowers(0);
     }
-
     
     //Count followers 
 
-    const countFollowers = await Axios.get(`http://localhost:5000/api/countFollowers/${user}`)
+    const countFollowers = await Axios.get(`http://localhost:5000/api/countFollowers/${username}`)
     console.log(countFollowers)
 
     if(countFollowers !== null || countFollowers !== undefined ){
@@ -278,7 +284,17 @@ function UserInfoCard() {
       setFollowers2(0)
   }
 
-  //
+  //Check if followed
+
+  const checkFollowed = await Axios.get(`http://localhost:5000/api/checkFollowed/${username}/${c}`)
+  // console.log(checkFollowed)
+
+  let checked = checkFollowed.data
+  console.log(checked)
+
+  if(checkFollowed !== null || checkFollowed !== undefined ){
+      setFollow(checked)
+    } 
 
     setRealdescription(false);
     const response = await Axios.get(`http://localhost:5000/photo/${c}`);
@@ -370,18 +386,18 @@ function UserInfoCard() {
                       <Box p={1} flex={"auto"}>
                         {follow ? (
                           <Button
-                            onClick={handleFollow}
+                            onClick={handleUnfollow}
                             className={styles.button}
                           >
-                            Follow
+                            Unfollow
                           </Button>
                         ) : (
                             <Box flex={"auto"}>
                               <Button
-                                onClick={handleUnfollow}
+                                onClick={handleFollow}
                                 className={styles.button}
                               >
-                                UnFollow
+                                Follow
                           </Button>
                             </Box>
                           )}
