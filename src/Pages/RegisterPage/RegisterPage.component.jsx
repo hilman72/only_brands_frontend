@@ -89,7 +89,6 @@ const RegisterPage = () => {
         </div>
 
         {/* <!----------------- SIGN UP FORM -----------------> */}
-
         <div class="registerForm-container registerSign-up-container">
           <RegisterForm who={"business"} id={id} id2={id2} />
         </div>
