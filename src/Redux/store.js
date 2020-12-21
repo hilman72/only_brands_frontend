@@ -4,14 +4,16 @@ import thunk from "redux-thunk";
 import { authReducer } from "./reducers";
 
 //TM
-import { userInfoUploadReducer } from './Reducers/TMreducers'
+import { userInfoUploadReducer } from "./Reducers/TMreducers";
 import logger from "redux-logger";
 
 //EditName reducers import
-import { userInfoDetailsUploadReducer } from './Reducers/EditNamereducers'
+import { userInfoDetailsUploadReducer } from "./Reducers/EditNamereducers";
 
-//Review reducers import 
-import { reviewReducer } from './Reducers/Reivewreducers'
+//Review reducers import
+import { reviewReducer } from "./Reducers/Reivewreducers";
+
+import { getRefReducer } from "./Reducers/referal_coupon";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -25,6 +27,9 @@ const rootReducer = combineReducers({
 
   //review
   reviewStore: reviewReducer,
+
+  // getrefcoupon
+  getRefStore: getRefReducer,
 });
 
 export const store = createStore(
