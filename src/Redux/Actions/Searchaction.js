@@ -4,7 +4,7 @@ export const SEARCH_SUCCESS = "SEARCH_SUCCESS";
 export const SEARCH_FAIL = "SEARCH_FAIL";
 
 
-const upload = (searchlink) => async (dispatch) => {
+const search = (searchlink) => async (dispatch) => {
     dispatch({ type: SEARCH_REQUEST, payload: { searchlink } });
     try {
         const { searchdata } = await axios.get(`${searchlink}`);
@@ -14,3 +14,5 @@ const upload = (searchlink) => async (dispatch) => {
         dispatch({ type: SEARCH_FAIL, payload: error });
     }
 };
+
+export { search };
