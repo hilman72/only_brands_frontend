@@ -75,7 +75,6 @@ const RegisterPage = () => {
     }, 300);
   }
 
-
   const styles = useStyles();
 
 
