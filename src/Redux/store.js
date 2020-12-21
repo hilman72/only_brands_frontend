@@ -15,6 +15,10 @@ import { reviewReducer } from './Reducers/Reivewreducers'
 
 import { businessInfoUploadReducer } from './Reducers/BusinessPhotoreducers'
 
+//search function
+
+import { searchReducer } from './Reducers/Searchreducers'
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
@@ -30,6 +34,9 @@ const rootReducer = combineReducers({
 
   //Business photo upload
   businessInfoUploadStore: businessInfoUploadReducer,
+
+  //For searchdata
+  searchStore: searchReducer,
 });
 
 export const store = createStore(

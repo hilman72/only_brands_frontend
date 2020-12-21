@@ -3,7 +3,7 @@
 // <Button>Unfollow</Button>
 
 import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import "./UserInfoCard.components.scss";
 import cx from "clsx";
 
@@ -149,6 +149,11 @@ function UserInfoCard() {
 
   //End of state i used
 
+  //get URL
+  let location = useLocation();
+  const pathname = location.pathname.split("/");
+  const TMusername = pathname[2];
+
   //another store
   const breakdescription = useSelector(
     (state) => state.userInfoUploadDetailsStore
@@ -256,7 +261,8 @@ function UserInfoCard() {
     let c = localStorage.getItem("ob_id");
 
     let user = localStorage.getItem("ob_username")
-  
+
+
     // console.log(url)
 
     const pathname = url.pathname.split("/");
@@ -265,40 +271,41 @@ function UserInfoCard() {
 
     //Add followers -> Adrian's
 
+
     const followerGrab = await Axios.get(`http://localhost:5000/api/followersAdd/${c}`)
     // console.log(followerGrab.data)
-    if(followerGrab !== null || followerGrab !== undefined ){
-        setFollowers(followerGrab.data)
+    if (followerGrab !== null || followerGrab !== undefined) {
+      setFollowers(followerGrab.data)
     } else {
       setFollowers(0);
     }
-    
+
     //Count followers 
+
 
     const countFollowers = await Axios.get(`http://localhost:5000/api/countFollowers/${username}`)
     console.log(countFollowers)
 
-    if(countFollowers !== null || countFollowers !== undefined ){
-      setFollowers2(countFollowers.data)
-  } else {
-      setFollowers2(0)
-  }
 
-  //Check if followed
+    // const countFollowers = await Axios.get(`http://localhost:5000/api/countFollowers/${user}`)
+    // console.log(countFollowers)
 
-  const checkFollowed = await Axios.get(`http://localhost:5000/api/checkFollowed/${username}/${c}`)
-  // console.log(checkFollowed)
+    //Check if followed
 
-  let checked = checkFollowed.data
-  console.log(checked)
+    const checkFollowed = await Axios.get(`http://localhost:5000/api/checkFollowed/${username}/${c}`)
+    // console.log(checkFollowed)
 
-  if(checkFollowed !== null || checkFollowed !== undefined ){
+    let checked = checkFollowed.data
+    console.log(checked)
+
+    if (checkFollowed !== null || checkFollowed !== undefined) {
       setFollow(checked)
-    } 
+    }
 
+    //Photo
     setRealdescription(false);
-    const response = await Axios.get(`http://localhost:5000/photo/${c}`);
-    // console.log(response);
+    const response = await Axios.get(`http://localhost:5000/photo/${TMusername}`);
+    console.log(response);
     if (response !== null || response !== undefined) {
       setHavephoto(true);
       setphotoFile(response.data[0].photo);
@@ -376,7 +383,7 @@ function UserInfoCard() {
                 >
                   <Grid item xs={12}>
                     <h6 className={styles.noPadding}>Followers</h6>
-                        <h4>{followers2}</h4>
+                    <h4>{followers2}</h4>
                   </Grid>
                 </Grid>
                 <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
