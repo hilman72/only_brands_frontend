@@ -1,20 +1,9 @@
 import React from "react";
 
-<<<<<<< HEAD
-import "./TestingPage.style.scss";
-// import BrandsCardLong from '../../Components/BrandCardsLong/BrandCardsLong.components'
-
-const TestingPage = () => {
-  return (
-    <div>
-    {/* <BrandsCardLong /> */}
-        <h1>
-=======
 const TestingPage = () => {
   return (
     <div>
       <h1>
->>>>>>> 6eca8e5a94e1ceccbad5fc1c45dff8675d3d403e
         H1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 123456
       </h1>
       <h2>
