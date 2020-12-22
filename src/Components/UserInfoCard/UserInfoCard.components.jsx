@@ -259,6 +259,7 @@ function UserInfoCard() {
 
   useEffect(async () => {
     let c = localStorage.getItem("ob_id");
+    console.log(c)
 
     let user = localStorage.getItem("ob_username")
 
@@ -269,25 +270,21 @@ function UserInfoCard() {
     const username = pathname[2];
     console.log(username)
 
-    //Add followers -> Adrian's
+    //Set followers -> Adrian's
 
 
-    const followerGrab = await Axios.get(`http://localhost:5000/api/followersAdd/${c}`)
-    // console.log(followerGrab.data)
+    const followerGrab = await Axios.get(`http://localhost:5000/api/followersAdd/${username}`)
+    console.log(followerGrab.data)
+
     if (followerGrab !== null || followerGrab !== undefined) {
-      setFollowers(followerGrab.data)
+      setFollowers2(followerGrab.data)
     } else {
-      setFollowers(0);
+      setFollowers2(0);
     }
 
     //Count followers 
 
-
     const countFollowers = await Axios.get(`http://localhost:5000/api/countFollowers/${username}`)
-    console.log(countFollowers)
-
-
-    // const countFollowers = await Axios.get(`http://localhost:5000/api/countFollowers/${user}`)
     // console.log(countFollowers)
 
     //Check if followed
@@ -296,19 +293,19 @@ function UserInfoCard() {
     // console.log(checkFollowed)
 
     let checked = checkFollowed.data
-    console.log(checked)
+    // console.log(checked)
 
     if (checkFollowed !== null || checkFollowed !== undefined) {
       setFollow(checked)
     }
 
     //Photo
-    setRealdescription(false);
+    // setRealdescription(false);
     const response = await Axios.get(`http://localhost:5000/photo/${TMusername}`);
     console.log(response);
     if (response !== null || response !== undefined) {
-      setHavephoto(true);
-      setphotoFile(response.data[0].photo);
+      // setHavephoto(true);
+       setphotoFile(response.data[0].photo);
     } else {
       setphotoFile("");
     }
@@ -319,7 +316,7 @@ function UserInfoCard() {
     // console.log(response2.data[0].description);
     if (response2 !== null || response2 !== undefined) {
       setHavedescription(true);
-      setDescription(response2.data[0].description);
+      // setDescription(response2.data[0].description);
     }
   }, [success1, success2, realdescription, follow]);
 
