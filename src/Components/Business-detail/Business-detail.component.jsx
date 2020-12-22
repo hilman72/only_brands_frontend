@@ -135,47 +135,46 @@ const BusinessDetail = (props) => {
 
   //Follower functions
 
-  // const handleUnfollow = async (e) => {
-  //   setFollow(!follow);
+  const handleUnfollow = async (e) => {
+    setFollow(!follow);
 
-  //   console.log(e);
-  //   const link = e.target.baseURI;
+    console.log(e);
+    const link = e.target.baseURI;
 
-  //   const pathname = new URL(link).pathname.split("/");
-  //   const username = pathname[2];
+    const pathname = new URL(link).pathname.split("/");
+    const username = pathname[2];
 
-  //   const ownUser = localStorage.getItem("ob_id");
+    const ownUser = localStorage.getItem("ob_id");
 
-  //   // console.log(username);
+    // console.log(username);
 
-  //   await Axios.post("http://localhost:5000/api/unfollow", {
-  //     username: username,
-  //     ownUser: ownUser,
-  //   });
-  // };
+    await Axios.post("http://localhost:5000/api/unfollowBrand", {
+      username: username,
+      ownUser: ownUser,
+    });
+  };
 
-  // const handleFollow = async (e) => {
-  //   setFollow(!follow);
+  const handleFollow = async (e) => {
+    setFollow(!follow);
 
 
-  //   const ownUser = localStorage.getItem("ob_id");
-  //   const link = e.target.baseURI;
+    const ownUser = localStorage.getItem("ob_id");
+    const link = e.target.baseURI;
 
-  //   const pathname = new URL(link).pathname.split("/");
-  //   const username = pathname[2];
-  //   // console.log(username);
+    const pathname = new URL(link).pathname.split("/");
+    const username = pathname[2];
+    console.log(username);
 
-  //   await Axios.post("http://localhost:5000/api/followers", {
-  //     username: username,
-  //     ownUser: ownUser,
-  //   }).then((data) => {
-  //     console.log(data);
-  //     alert(data.data);
-  //   });
-  // };
+    await Axios.post("http://localhost:5000/api/followBrand", {
+      username: username,
+      ownUser: ownUser,
+    }).then((data) => {
+      console.log(data);
+      alert(data.data);
+    });
+  };
 
   //useLocation(url)
-  //Get URL username 
   let url = useLocation();
   const pathname = url.pathname.split("/");
   const TMusername = pathname[2];
@@ -190,40 +189,57 @@ const BusinessDetail = (props) => {
     }
 
 
-  //   let c = localStorage.getItem("ob_id");
+    let c = localStorage.getItem("ob_id");
 
-  //   let user = localStorage.getItem("ob_username")
+    let user = localStorage.getItem("ob_username")
   
-  //   // console.log(url)
+    // console.log(url)
 
-  //   const pathname = url.pathname.split("/");
-  //   const username = pathname[2];
-  //   console.log(username)
-  
-  //   //Count followers 
+    const pathname = url.pathname.split("/");
+    const username = pathname[2];
+    console.log(username)
 
-  //   const countFollowers = await Axios.get(`http://localhost:5000/api/countBusFollowers/${username}`)
-  //   console.log(countFollowers)
 
-  //   if(countFollowers !== null || countFollowers !== undefined ){
-  //     setFollowers(countFollowers.data)
-  // } else {
-  //     setFollowers(0)
-  // }
+       //Count followers -> Adrian's
 
-  // //Check if followed
+       if (user === username){
 
-  // const checkFollowed = await Axios.get(`http://localhost:5000/api/checkBusFollowed/${username}/${c}`)
-  // // console.log(checkFollowed)
-
-  // let checked = checkFollowed.data
-  // console.log(checked)
-
-  // if(checkFollowed !== null || checkFollowed !== undefined ){
-  //     setFollow(checked)
-  //   } 
+        const followerGrab = await Axios.get(`http://localhost:5000/api/countBrandFollowers/${user}`)
+        console.log(followerGrab.data)
     
-  }, [success1])
+        if (followerGrab !== null || followerGrab !== undefined) {
+          setFollowers(followerGrab.data)
+        } else {
+          setFollowers(0);
+        }
+  
+      } else {
+  
+        const followerGrab = await Axios.get(`http://localhost:5000/api/countBrandFollowers/${username}`)
+        console.log(followerGrab.data)
+    
+        if (followerGrab !== null || followerGrab !== undefined) {
+          setFollowers(followerGrab.data)
+        } else {
+          setFollowers(0);
+        }
+  
+  
+      }
+  
+  //Check if followed
+
+  const checkFollowed = await Axios.get(`http://localhost:5000/api/checkBrandFollowed/${username}/${c}`)
+  // console.log(checkFollowed)
+  let checked = checkFollowed.data
+  console.log(checked)
+
+  if(checkFollowed !== null || checkFollowed !== undefined ){
+      setFollow(checked)
+    } 
+
+    
+  }, [success1, follow])
 
 
   const handleBusinessPhotoUpload = (ev) => {
@@ -243,18 +259,6 @@ const BusinessDetail = (props) => {
         setBusinesssmallphoto(data.data.link);
         dispatch(businessupload(data.data.link, importantid));
       });
-  }
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  function handleClick() {
-    setFollow(!follow);
   }
 
   useEffect(() => {
@@ -339,37 +343,27 @@ const BusinessDetail = (props) => {
               <h6 className={styles.noPadding}>Followers</h6>
             </Grid>
             <Grid xs={12}>
-              <h4>903K</h4>
+            <h4>{followers}</h4>
             </Grid>
           </Grid>
           <Grid item xs={3}>
             <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
               <Box p={1} flex={"auto"} className={styles.followButtonContainer}>
-                {follow ? (
-                  <Button onClick={handleClick} className={styles.button}>
-                    Follow
-                  </Button>
-                ) : (
-                  <Box p={1} flex={"auto"}>
-                  {follow ? (
+                  {follow ? 
                     <Button
-                      // onClick={handleUnfollow}
+                      onClick={handleUnfollow}
                       className={styles.button}
                     >
                       Unfollow
                     </Button>
-                  ) : (
-                      <Box flex={"auto"}>
+                   : 
                         <Button
-                          // onClick={handleFollow}
+                          onClick={handleFollow}
                           className={styles.button}
                         >
                           Follow
                     </Button>
-                      </Box>
-                    )}
-                </Box>
-                  )}
+                    }
               </Box>
             </Box>
           </Grid>
