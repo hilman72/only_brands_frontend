@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import cx from "clsx";
+import { useLocation } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Divider from "@material-ui/core/Divider";
 import Box from "@material-ui/core/Box";
@@ -124,6 +125,7 @@ const BusinessDetail = (props) => {
   const [detail, setDetail] = React.useState([]);
   const [first, setFirst] = React.useState(false);
   const [businesssmallphoto, setBusinesssmallphoto] = React.useState("")
+  const [followers, setFollowers] = React.useState(0);
   const importantid = localStorage.getItem("ob_id");
   const dispatch = useDispatch();
 
@@ -131,9 +133,52 @@ const BusinessDetail = (props) => {
   const choosestore = useSelector((state) => state.businessInfoUploadStore)
   const { loading, success: success1, userInfoUploadObject } = choosestore
 
+
+  //Follower functions
+
+  const handleUnfollow = async (e) => {
+    setFollow(!follow);
+
+    console.log(e);
+    const link = e.target.baseURI;
+
+    const pathname = new URL(link).pathname.split("/");
+    const username = pathname[2];
+
+    const ownUser = localStorage.getItem("ob_id");
+
+    // console.log(username);
+
+    await Axios.post("http://localhost:5000/api/unfollow", {
+      username: username,
+      ownUser: ownUser,
+    });
+  };
+
+  const handleFollow = async (e) => {
+    setFollow(!follow);
+
+
+    const ownUser = localStorage.getItem("ob_id");
+    const link = e.target.baseURI;
+
+    const pathname = new URL(link).pathname.split("/");
+    const username = pathname[2];
+    // console.log(username);
+
+    await Axios.post("http://localhost:5000/api/followers", {
+      username: username,
+      ownUser: ownUser,
+    }).then((data) => {
+      console.log(data);
+      alert(data.data);
+    });
+  };
+
+  //useLocation(url)
   //Get URL username 
-  let location = useLocation();
-  const pathname = location.pathname.split("/");
+  let url = useLocation();
+  const pathname = url.pathname.split("/");
   const TMusername = pathname[2];
 
   useEffect(async () => {
@@ -144,6 +189,41 @@ const BusinessDetail = (props) => {
     } else {
       setBusinesssmallphoto(response.data[0].photo);
     }
+
+
+    let c = localStorage.getItem("ob_id");
+
+    let user = localStorage.getItem("ob_username")
+  
+    // console.log(url)
+
+    const pathname = url.pathname.split("/");
+    const username = pathname[2];
+    console.log(username)
+  
+    //Count followers 
+
+    const countFollowers = await Axios.get(`http://localhost:5000/api/countBusFollowers/${username}`)
+    console.log(countFollowers)
+
+    if(countFollowers !== null || countFollowers !== undefined ){
+      setFollowers(countFollowers.data)
+  } else {
+      setFollowers(0)
+  }
+
+  //Check if followed
+
+  const checkFollowed = await Axios.get(`http://localhost:5000/api/checkBusFollowed/${username}/${c}`)
+  // console.log(checkFollowed)
+
+  let checked = checkFollowed.data
+  console.log(checked)
+
+  if(checkFollowed !== null || checkFollowed !== undefined ){
+      setFollow(checked)
+    } 
+    
   }, [success1])
 
 
@@ -271,16 +351,25 @@ const BusinessDetail = (props) => {
                     Follow
                   </Button>
                 ) : (
-                    <Box flex={"auto"}>
-                      <Button onClick={handleClick} className={styles.button}>
-                        Followed
+                  <Box p={1} flex={"auto"}>
+                  {follow ? (
+                    <Button
+                      onClick={handleUnfollow}
+                      className={styles.button}
+                    >
+                      Unfollow
                     </Button>
-                      <br />
-                      <br />
-                      <Button onClick={handleClick} className={styles.button}>
-                        UnFollow
+                  ) : (
+                      <Box flex={"auto"}>
+                        <Button
+                          onClick={handleFollow}
+                          className={styles.button}
+                        >
+                          Follow
                     </Button>
-                    </Box>
+                      </Box>
+                    )}
+                </Box>
                   )}
               </Box>
             </Box>
