@@ -8,8 +8,9 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 //for redux
 import { useSelector, useDispatch } from "react-redux";
-import { uploadreview } from '../../Redux/Actions/Reviewactions'
+import { uploadreview } from '../../Redux/Actions/Reviewactions';
 import Axios from "axios";
+import { useParams, useLocation } from "react-router-dom";
 
 export default function CreateBrandReview() {
 
@@ -18,11 +19,9 @@ export default function CreateBrandReview() {
     const dispatch = useDispatch();
     const [open, setOpen] = React.useState(false);
     const [reviewdetail, setReviewdetail] = React.useState("")
-
-    const x = window.location.href.replaceAll("/", " ").split(" ");
-    const render_business = x[x.length - 1];
-
-
+    let location = useLocation();
+    const pathname = location.pathname.split("/");
+    const render_business = pathname[2];
 
 
     const handleClickOpen = () => {
