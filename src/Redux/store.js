@@ -25,6 +25,8 @@ import { getReceRefReducer } from "./Reducers/get_received_referal_user";
 
 import { getReceRefBusinessReducer } from "./Reducers/get_received_referal_business";
 
+import { getDisplayCouponReducer } from "./Reducers/couponfordisplay";
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
@@ -52,6 +54,9 @@ const rootReducer = combineReducers({
 
   //for the received ref coupon my my coupon (USER)
   getReceRefBusinessStore: getReceRefBusinessReducer,
+
+  //for display coupon
+  getDisplayCouponStore: getDisplayCouponReducer,
 });
 
 export const store = createStore(

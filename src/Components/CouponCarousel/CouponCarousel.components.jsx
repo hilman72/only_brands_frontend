@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./CouponCarousel.style.scss";
 
 import Coupon from "../../Components/Coupon/Coupon.components";
@@ -19,7 +19,13 @@ import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
-function CouponCarousel() {
+function CouponCarousel(props) {
+  const [update, setUpdate] = useState(false);
+
+  const needUpdate = () => {
+    setUpdate(true);
+  };
+
   return (
     <div className="CouponContainer">
       <Swiper
@@ -32,6 +38,23 @@ function CouponCarousel() {
         onSlideChange={() => {}}
         onSwiper={(swiper) => {}}
       >
+        {props.data && props.data.length > 0 ? (
+          props.data.map((data, i) => {
+            return (
+              <SwiperSlide>
+                {" "}
+                <Coupon
+                  key={i}
+                  data={data}
+                  passUpdate={needUpdate}
+                  page={"no"}
+                />
+              </SwiperSlide>
+            );
+          })
+        ) : (
+          <div></div>
+        )}
         <SwiperSlide> {/* <Coupon />{" "} */}</SwiperSlide>
       </Swiper>
     </div>
