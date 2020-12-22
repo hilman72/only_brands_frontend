@@ -26,7 +26,7 @@ import UserCreateProfilePage from "./Pages/UserCreateProfilePage/UserCreateProfi
 import BusinessCreateProfilePage from "./Pages/BusinessCreateProfilePage/BusinessCreateProfilePage.component";
 
 import ClaimCouponPage from "./Pages/ClaimCouponPage/ClaimCouponPage.component";
-import UnsuccessfulClaim from "./Pages/UnsuccessfulClaimPage/UnsuccessfulClaimPage.component"
+import UnsuccessfulClaim from "./Pages/UnsuccessfulClaimPage/UnsuccessfulClaimPage.component";
 import SuccessfulClaimPage from "./Pages/SuccessfulClaimPage/SuccessfulClaimPage.component";
 
 class App extends React.Component {
@@ -84,13 +84,23 @@ class App extends React.Component {
               component={ClaimCouponPage}
             />
 
-            <Route path="/BusinessCreateProfile" component={BusinessCreateProfilePage} />
+            <Route
+              path="/BusinessCreateProfile"
+              component={BusinessCreateProfilePage}
+            />
             <Route path="/Unsuccessful" component={ClaimCouponPage} />
             <PrivateRoute path="/UserProfiles/:name" component={UserProfile} />
             <PrivateRoute path="/NotYet" component={NotYet} />
             <PrivateRoute path="/VerifySuccess" component={VerifySuccessPage} />
-            <PrivateRoute path="/UnsuccessfulClaim" component={UnsuccessfulClaim} />
-            <PrivateRoute path="/SuccessfulClaim" component={SuccessfulClaimPage} />
+            <PrivateRoute
+              path="/UnsuccessfulClaim"
+              component={UnsuccessfulClaim}
+            />
+            <PrivateRoute
+              path="/SuccessfulClaim"
+              component={SuccessfulClaimPage}
+            />
+            <PrivateRoute
               path="/BusinessProfiles/:name"
               component={BusinessProfiles}
             />
