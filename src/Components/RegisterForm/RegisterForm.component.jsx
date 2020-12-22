@@ -6,7 +6,7 @@ import "./RegisterForm.style.scss";
 const RegisterForm = (props) => {
   const [username, setUsername] = useState("");
   const [brandname, setBrandname] = useState("");
-//editedbydar
+  //editedbydar
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password_again, setPassword_again] = useState("");
@@ -17,7 +17,7 @@ const RegisterForm = (props) => {
   const handleChange_username = (e) => {
     setUsername(e.target.value);
   };
-//editedbydar
+  //editedbydar
   const handleChange_brandname = (e) => {
     setBrandname(e.target.value);
   };
@@ -46,7 +46,6 @@ const RegisterForm = (props) => {
           headers: { "content-Type": "application/json" },
           body: JSON.stringify({
             username: username,
-        //hilmanplzcheck
             brandname: brandname,
             email: email,
             password: password,
@@ -78,70 +77,65 @@ const RegisterForm = (props) => {
   }, [register, history, props.who]);
 
   return (
-
     <div>
-      
-      {error === true ? (
-        <div>Please input the same password</div>
-      ) : (
-        <div></div>
-      )}
-    <div>
-
-    <div className="registerForm">
-      <form>
-        {/* <label>UserName</label> */}
-        <h2 class="registerH2">{props.id} Register</h2>
-        <input
-          type="text"
-          name="username"
-          id="username"
-          placeholder="User Name"
-          onChange={handleChange_username}
-        ></input>
-      {/* editedbydar */}
-      {props.who ==="business" ?
-        <input
-          type="text"
-          name="brandname"
-          id="brandname"
-          placeholder="Brand Name"
-          onChange={handleChange_brandname}
-        ></input>
-        : null
-      }
-        {/* <label>Email</label> */}
-        <input
-          type="email"
-          name="email"
-          id="email"
-          placeholder="Email"
-          onChange={handleChange_email}
-        ></input>
-        {/* <label>Password</label> */}
-        <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Password"
-          onChange={handleChange_password}
-        ></input>
-        {/* <label>Password Again you Motherfucker</label> */}
-        <input
-          type="password"
-          name="password_again"
-          id="password_again"
-          placeholder="Confirm Password"
-          onChange={handleChange_password_again}
-        ></input>
-        <br />
-        <input type="submit" value="send" onClick={handleSubmit} class="registerFormButton registerButton" />
-      </form>
+      {error === true ? <div>Please input the same password</div> : <div></div>}
+      <div>
+        <div className="registerForm">
+          <form>
+            {/* <label>UserName</label> */}
+            <h2 class="registerH2">{props.id} Register</h2>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              placeholder="User Name"
+              onChange={handleChange_username}
+            ></input>
+            {/* editedbydar */}
+            {props.who === "business" ? (
+              <input
+                type="text"
+                name="brandname"
+                id="brandname"
+                placeholder="Brand Name"
+                onChange={handleChange_brandname}
+              ></input>
+            ) : null}
+            {/* <label>Email</label> */}
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email"
+              onChange={handleChange_email}
+            ></input>
+            {/* <label>Password</label> */}
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Password"
+              onChange={handleChange_password}
+            ></input>
+            {/* <label>Password Again you Motherfucker</label> */}
+            <input
+              type="password"
+              name="password_again"
+              id="password_again"
+              placeholder="Confirm Password"
+              onChange={handleChange_password_again}
+            ></input>
+            <br />
+            <input
+              type="submit"
+              value="send"
+              onClick={handleSubmit}
+              class="registerFormButton registerButton"
+            />
+          </form>
+        </div>
+      </div>
     </div>
-
-</div>
-</div>
-
   );
 };
 
