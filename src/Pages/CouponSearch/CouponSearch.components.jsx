@@ -32,10 +32,9 @@ const CouponSearch = () => {
 
 
   useEffect(async () => {
-
-    if (searchdata !== null || searchdata !== undefined) {
-      console.log(searchdata)
-      // setFinaldisplay([...a])
+    if (searchdata) {
+      console.log([...searchdata])
+      setFinaldisplay([...searchdata])
     } else {
       setFinaldisplay("")
     }
@@ -73,7 +72,7 @@ const CouponSearch = () => {
               <Paper className={classes.cardPaper}>
                 <Grid container xs={12} spacing={3}>
 
-                  {/* {finaldisplay && finaldisplay.length > 0 ? (
+                  {finaldisplay && finaldisplay.length > 0 ? (
                     finaldisplay.map((data, i) => {
                       return (
                         <Grid item s={6}>
@@ -83,9 +82,9 @@ const CouponSearch = () => {
                     })
                   ) : (
                       <div>Sorry No Coupon</div>
-                    )} */}
+                    )}
 
-                  <UserCards />
+                  {/* <UserCards /> */}
 
                   {/* <Grid item xs={6}>
                    <Coupons />
