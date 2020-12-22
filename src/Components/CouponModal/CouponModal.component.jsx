@@ -71,12 +71,21 @@ function CouponModal(props) {
       u_name: props.pastData.user_name,
       b_name: props.pastData.business_name,
     });
-    console.log("ref");
   };
 
   const handleConfirm = () => {
     axios
       .post(`http://localhost:5000/api/confirmCoupon/`, {
+        u_name: props.pastData.user_name,
+        b_name: props.pastData.business_name,
+        id: props.pastData.coupon_id,
+      })
+      .then(handleRef(), handleClose());
+  };
+
+  const handleConfirm2 = () => {
+    axios
+      .post(`http://localhost:5000/api/confirmRefCoupon/`, {
         u_name: props.pastData.user_name,
         b_name: props.pastData.business_name,
         id: props.pastData.coupon_id,
@@ -96,9 +105,10 @@ function CouponModal(props) {
 
   return (
     <div>
-      {you === render_user &&
-      props.pastData.used === false &&
-      props.pastData.expired === false ? (
+      {(you === render_user &&
+        props.pastData.used === false &&
+        props.pastData.expired === false) ||
+      props.page === "ref" ? (
         <Button onClick={handleClickOpen}>Details</Button>
       ) : (
         <div></div>
@@ -136,15 +146,27 @@ function CouponModal(props) {
             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
             culpa qui officia deserunt mollit anim id est laborum
           </Typography>
-          <DialogActions>
-            {who === "business" ? (
-              <Button autoFocus onClick={handleConfirm}>
-                Confirm
-              </Button>
-            ) : (
-              <div></div>
-            )}
-          </DialogActions>
+          {props.page === "ref" ? (
+            <DialogActions>
+              {who === "business" ? (
+                <Button autoFocus onClick={handleConfirm2}>
+                  Confirm
+                </Button>
+              ) : (
+                <div></div>
+              )}
+            </DialogActions>
+          ) : (
+            <DialogActions>
+              {who === "business" ? (
+                <Button autoFocus onClick={handleConfirm}>
+                  Confirm
+                </Button>
+              ) : (
+                <div></div>
+              )}
+            </DialogActions>
+          )}
         </DialogContent>
       </Dialog>
     </div>

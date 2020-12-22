@@ -1,11 +1,11 @@
 import React from 'react';
-import './VerifySuccessCard.scss'
+import './SuccessfulClaimCard.scss'
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
 import { useHistory } from "react-router-dom";
 
-import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
@@ -32,7 +32,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-function VerifySuccessCard() {
+function SuccessfulClaimCard() {
   const styles = useStyles();
 
     const history = useHistory();
@@ -47,14 +47,14 @@ function VerifySuccessCard() {
             <Grid container direction="column" justify="center" alignItems="center" xs={12}>
                 <Grid item xs={12} className={styles.gutter}></Grid>
                 <Grid item xs={12}>
-                    <VerifiedUserIcon className={styles.icon}/>
+                    <CheckCircleIcon className={styles.icon}/>
                 </Grid>
                 <Grid item xs={12} className={styles.gutter}></Grid>
                 <Grid item xs={12}>
-                    <h2>Email Address Verified</h2>
+                    <h2>Successful Claim</h2>
                 </Grid>
                 <Grid item xs={12}>
-                    <p>Welcome to OnlyBrands!</p>
+                    <p>And now its time to use it!</p>
                 </Grid>
                 <Grid item xs={12}>
                     <button onClick={handleClick} className={styles.button}>Home</button>
@@ -66,4 +66,4 @@ function VerifySuccessCard() {
   );
 }
 
-export default VerifySuccessCard; 
+export default SuccessfulClaimCard; 

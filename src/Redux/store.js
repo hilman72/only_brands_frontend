@@ -15,11 +15,17 @@ import { reviewReducer } from "./Reducers/Reivewreducers";
 
 import { getRefReducer } from "./Reducers/referal_coupon";
 
-import { businessInfoUploadReducer } from './Reducers/BusinessPhotoreducers'
+import { businessInfoUploadReducer } from "./Reducers/BusinessPhotoreducers";
 
 //search function
 
-import { searchReducer } from './Reducers/Searchreducers'
+import { searchReducer } from "./Reducers/Searchreducers";
+
+import { getReceRefReducer } from "./Reducers/get_received_referal_user";
+
+import { getReceRefBusinessReducer } from "./Reducers/get_received_referal_business";
+
+import { getDisplayCouponReducer } from "./Reducers/couponfordisplay";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -34,7 +40,6 @@ const rootReducer = combineReducers({
   //review
   reviewStore: reviewReducer,
 
-
   // getrefcoupon
   getRefStore: getRefReducer,
 
@@ -44,6 +49,14 @@ const rootReducer = combineReducers({
   //For searchdata
   searchStore: searchReducer,
 
+  //for the received ref coupon my my coupon (USER)
+  getReceRefStore: getReceRefReducer,
+
+  //for the received ref coupon my my coupon (USER)
+  getReceRefBusinessStore: getReceRefBusinessReducer,
+
+  //for display coupon
+  getDisplayCouponStore: getDisplayCouponReducer,
 });
 
 export const store = createStore(
