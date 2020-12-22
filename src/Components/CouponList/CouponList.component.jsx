@@ -13,10 +13,14 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import { TrendingUpOutlined } from "@material-ui/icons";
+
 import CancelIcon from '@material-ui/icons/Cancel';
 import SendIcon from '@material-ui/icons/Send';
 import MoveToInboxIcon from '@material-ui/icons/MoveToInbox';
 import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
+
+import { useSelector, useDispatch } from "react-redux";
+import { getMyRef } from "../../Redux/Actions/referal_coupon";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -66,6 +70,7 @@ const CouponList = (props) => {
   const classes = useStyles();
   const [value, setValue] = useState(0);
   const [cou, setCou] = useState([]);
+
   const [first, setFirst] = useState(false);
   const [update, setUpdate] = useState(false);
 
@@ -76,11 +81,23 @@ const CouponList = (props) => {
   const needUpdate = () => {
     setUpdate(true);
   };
+  const dispatch = useDispatch();
+  const my_ref_coupon = useSelector((state) => state.getRefStore);
+  const {
+    loading: loading,
+    sucess: success,
+    uploadedObject: description,
+  } = my_ref_coupon;
+
+  const x = window.location.href.replaceAll("/", " ").split(" ");
+  const render_user = x[x.length - 1];
 
   const styles = useStyles();
 
   useEffect(
     () => {
+      dispatch(getMyRef(render_user));
+      console.log(my_ref_coupon.uploadedObject);
       let x = props.coupon;
       if (x.length > 0) {
         setFirst(true);
@@ -89,7 +106,7 @@ const CouponList = (props) => {
         setCou([...x]);
       }
     },
-    [first, props.coupon],
+    [first, props.coupon, success],
     update
   );
 

@@ -48,7 +48,7 @@ const RegisterPage = () => {
 
   const history = useHistory();
 
-    function navigateToHome() {
+  function navigateToHome() {
     history.push("/");
   }
 
@@ -93,32 +93,32 @@ const RegisterPage = () => {
           <RegisterForm who={"business"} id={id} input={inputHidden} />
         </div>
 
-      <div class="registerOverlay-container">
-        <div class="registerOverlay">
-          <div class="registerOverlay-panel registerOverlay-left">
-            <h2 class="registerH2">Looking for discounts in your favourite restaurant?</h2>
-            <p class="registerP">Join OnlyBrands to get sweet offets!</p>
-            <button
-              onClick={handleSwitch}
-              class="ghost registerButton"
-              id="signIn"
-            >
-              Register as a User
+        <div class="registerOverlay-container">
+          <div class="registerOverlay">
+            <div class="registerOverlay-panel registerOverlay-left">
+              <h2 class="registerH2">Looking for discounts in your favourite restaurant?</h2>
+              <p class="registerP">Join OnlyBrands to get sweet offets!</p>
+              <button
+                onClick={handleSwitch}
+                class="ghost registerButton"
+                id="signIn"
+              >
+                Register as a User
             </button>
-            <p onClick={navigateToLogin} className={styles.toLogin}>
-              {" "}
+              <p onClick={navigateToLogin} className={styles.toLogin}>
+                {" "}
               Have an account already? Click me to login!
             </p>
-          </div>
-          <div class="registerOverlay-panel registerOverlay-right">
-            <h2 class="registerH2">Brands looking for more customers?</h2>
-            <p class="registerP">Create your fanbase on OnlyBrands!</p>
-            <button
-              onClick={handleChange}
-              class="ghost registerButton"
-              id="signUp"
-            >
-              Register a Brands Account
+            </div>
+            <div class="registerOverlay-panel registerOverlay-right">
+              <h2 class="registerH2">Brands looking for more customers?</h2>
+              <p class="registerP">Create your fanbase on OnlyBrands!</p>
+              <button
+                onClick={handleChange}
+                class="ghost registerButton"
+                id="signUp"
+              >
+                Register a Brands Account
             </button>
               <p onClick={navigateToLogin} className={styles.toLogin}>
                 {" "}
