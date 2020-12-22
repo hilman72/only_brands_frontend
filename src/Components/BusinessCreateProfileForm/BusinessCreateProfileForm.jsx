@@ -1,5 +1,5 @@
 import React from "react";
-import "./UserCreateProfileForm.style.scss";
+import "./BusinessCreateProfileForm.style.scss";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
@@ -7,14 +7,17 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 import { useHistory } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 
-// const family = 'PeaceSans';
-
 const useStyles = makeStyles(() => ({
+
   icon: {
     fontSize: "5rem",
     color: "#ff4c6d",
@@ -28,12 +31,12 @@ const useStyles = makeStyles(() => ({
   button: {
     padding: "0.4rem",
     borderRadius: "1rem",
-    backgroundColor: "#ff4c6d",
+    backgroundColor: "#8eebdc",
     color: "white",
-    border: "3px solid #8eebdc",
+    border: "3px solid #ff829b",
   },
   title: {
-    backgroundColor: "#ff4c6d",
+    backgroundColor: "#8eebdc",
     margin: '0',
     padding: "0.5rem",
     paddingTop: '1rem',
@@ -49,12 +52,30 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     justifyContent: 'center',
   },
+  formControl: {
+    minWidth: '120',
+  },
 }));
 
-function UserCreateProfileForm() {
+function EmailVerificationCard() {
   const styles = useStyles();
 
   const history = useHistory();
+
+  const [cate, setCate] = React.useState('');
+  const [open, setOpen] = React.useState(false);
+
+  const handleChange = (event) => {
+    setCate(event.target.value);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   {
     /* hilmanplzeditthis-onclick */
@@ -75,7 +96,7 @@ function UserCreateProfileForm() {
             xs={12}
           >
             <Grid item xs={12}>
-              <h2 className={styles.title}>Create User Profile</h2>
+              <h2 className={styles.title}>Create Business Profile</h2>
             </Grid>
           </Grid>
 
@@ -86,21 +107,19 @@ function UserCreateProfileForm() {
             alignItems="center"
             xs={12}
           >
-
             <Grid item xs={12}>
               {/* ---------------------- FORM STARTS ---------------------- */}
 
-              {/* <form className={classes.form} noValidate> */}
               <Grid container spacing={2} className={styles.formContainer}>
                 <Grid item xs={12}>
                   <TextField
                     autoComplete="fname"
-                    // name="firstName"
+                    name="firstName"
                     variant="outlined"
                     required
                     fullWidth
-                    // id="firstName"
-                    label="About Me"
+                    id="firstName"
+                    label="About The Brand"
                     autoFocus
                   />
                 </Grid>
@@ -109,12 +128,52 @@ function UserCreateProfileForm() {
                     variant="outlined"
                     required
                     fullWidth
-                    // id="lastName"
-                    label="Location"
-                    // name="lastName"
+                    id="lastName"
+                    label="Address"
+                    name="lastName"
                     autoComplete="lname"
                   />
                 </Grid>
+                <Grid item xs={12}>
+                  <FormControl variant="outlined" fullWidth className={styles.formControl}>
+                    <InputLabel id="demo-controlled-open-select-label">Category</InputLabel>
+                    <Select
+                      labelId="demo-controlled-open-select-label"
+                      id="demo-controlled-open-select"
+                      open={open}
+                      onClose={handleClose}
+                      onOpen={handleOpen}
+                      value={cate}
+                      onChange={handleChange}
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value={10}>Cantonese</MenuItem>
+                      <MenuItem value={10}>Europe</MenuItem>
+                      <MenuItem value={20}>French</MenuItem>
+                      <MenuItem value={30}>Indian</MenuItem>
+                      <MenuItem value={40}>Italian</MenuItem>
+                      <MenuItem value={50}>Japanese</MenuItem>
+                      <MenuItem value={60}>Korean</MenuItem>
+                      <MenuItem value={70}>Taiwanese</MenuItem>
+                      <MenuItem value={80}>Thai</MenuItem>
+                      <MenuItem value={90}>Other</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="lastName"
+                    label="Points per Referral"
+                    name="lastName"
+                    autoComplete="lname"
+                  />
+                </Grid>
+
 
                 <Grid item xs={12} className={styles.lastRow}>
                   {/* hilmanplzeditthis-onclick */}
@@ -136,4 +195,4 @@ function UserCreateProfileForm() {
   );
 }
 
-export default UserCreateProfileForm;
+export default EmailVerificationCard;
