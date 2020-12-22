@@ -296,6 +296,8 @@ function UserInfoCard() {
       setFollow(checked)
     } 
 
+  //
+
     setRealdescription(false);
     const response = await Axios.get(`http://localhost:5000/photo/${c}`);
     // console.log(response);

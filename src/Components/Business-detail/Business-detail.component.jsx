@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import cx from "clsx";
+import { useLocation } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Divider from "@material-ui/core/Divider";
 import Box from "@material-ui/core/Box";
@@ -123,6 +124,7 @@ const BusinessDetail = (props) => {
   const [detail, setDetail] = React.useState([]);
   const [first, setFirst] = React.useState(false);
   const [businesssmallphoto, setBusinesssmallphoto] = React.useState("")
+  const [followers, setFollowers] = React.useState(0);
   const importantid = localStorage.getItem("ob_id");
   const dispatch = useDispatch();
 
@@ -130,14 +132,100 @@ const BusinessDetail = (props) => {
   const choosestore = useSelector((state) => state.businessInfoUploadStore)
   const { loading, success: success1, userInfoUploadObject } = choosestore
 
+  //Follower functions
+
+  const handleUnfollow = async (e) => {
+    setFollow(!follow);
+
+    console.log(e);
+    const url = e.target.baseURI;
+
+    const pathname = new URL(url).pathname.split("/");
+    const username = pathname[2];
+
+    const ownUser = localStorage.getItem("ob_id");
+
+    // console.log(username);
+
+    await Axios.post("http://localhost:5000/api/unfollow", {
+      username: username,
+      ownUser: ownUser,
+    });
+  };
+
+  const handleFollow = async (e) => {
+    setFollow(!follow);
+
+
+    const ownUser = localStorage.getItem("ob_id");
+
+    console.log(e);
+    const url = e.target.baseURI;
+
+
+    const pathname = new URL(url).pathname.split("/");
+    const username = pathname[2];
+    // console.log(username);
+
+    await Axios.post("http://localhost:5000/api/followers", {
+      username: username,
+      ownUser: ownUser,
+    }).then((data) => {
+      console.log(data);
+      alert(data.data);
+    });
+  };
+
+  //useLocation(url)
+
+  const url = useLocation();
+
   useEffect(async () => {
+
+    //Handle photo 
     console.log(importantid)
     const response = await Axios.get(`http://localhost:5000/api/getbusinessphoto/${importantid}`);
     if (response !== null || response !== undefined) {
-      setBusinesssmallphoto(response.data[0].photo);
+      console.log(response)
+      setBusinesssmallphoto(response && response.data && response.data[0] && response.data[0].photo);
     } else {
       setBusinesssmallphoto("");
     }
+
+
+    let c = localStorage.getItem("ob_id");
+
+    let user = localStorage.getItem("ob_username")
+  
+    // console.log(url)
+
+    const pathname = url.pathname.split("/");
+    const username = pathname[2];
+    console.log(username)
+  
+    //Count followers 
+
+    const countFollowers = await Axios.get(`http://localhost:5000/api/countBusFollowers/${username}`)
+    console.log(countFollowers)
+
+    if(countFollowers !== null || countFollowers !== undefined ){
+      setFollowers(countFollowers.data)
+  } else {
+      setFollowers(0)
+  }
+
+  //Check if followed
+
+  const checkFollowed = await Axios.get(`http://localhost:5000/api/checkBusFollowed/${username}/${c}`)
+  // console.log(checkFollowed)
+
+  let checked = checkFollowed.data
+  console.log(checked)
+
+  if(checkFollowed !== null || checkFollowed !== undefined ){
+      setFollow(checked)
+    } 
+    
   }, [success1])
 
 
@@ -265,16 +353,25 @@ const BusinessDetail = (props) => {
                     Follow
                   </Button>
                 ) : (
-                    <Box flex={"auto"}>
-                      <Button onClick={handleClick} className={styles.button}>
-                        Followed
+                  <Box p={1} flex={"auto"}>
+                  {follow ? (
+                    <Button
+                      onClick={handleUnfollow}
+                      className={styles.button}
+                    >
+                      Unfollow
                     </Button>
-                      <br />
-                      <br />
-                      <Button onClick={handleClick} className={styles.button}>
-                        UnFollow
+                  ) : (
+                      <Box flex={"auto"}>
+                        <Button
+                          onClick={handleFollow}
+                          className={styles.button}
+                        >
+                          Follow
                     </Button>
-                    </Box>
+                      </Box>
+                    )}
+                </Box>
                   )}
               </Box>
             </Box>
