@@ -221,18 +221,33 @@ function Coupon(props) {
           </Grid>
           <Grid item xs={8}>
             <div className="brandInfo">
-              <h4 className={styles.subheader}>
-                {props && props.data && props.data.business_name}
-              </h4>
-              <p className={styles.text}>
-                Valid Until: {props && props.data && props.data.date}
-              </p>
+              {props.page === "ref" ? (
+                <h4 className={styles.subheader}>
+                  {props && props.data && props.data.description}
+                </h4>
+              ) : (
+                <h4 className={styles.subheader}>
+                  {props && props.data && props.data.business_name}
+                </h4>
+              )}
+
+              {props.page === "ref" ? (
+                <div></div>
+              ) : (
+                <p className={styles.text}>
+                  Valid Until: {props && props.data && props.data.date}
+                </p>
+              )}
             </div>
           </Grid>
           <Grid item xs={4}>
             <div className="buttonContainer">
               <CardActions>
-                <CouponModal pastData={props.data} update={whenUpdate} />
+                <CouponModal
+                  pastData={props.data}
+                  update={whenUpdate}
+                  page={props.page}
+                />
               </CardActions>
             </div>
           </Grid>
