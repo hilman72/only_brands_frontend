@@ -14,13 +14,15 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import { TrendingUpOutlined } from "@material-ui/icons";
 
-import CancelIcon from '@material-ui/icons/Cancel';
-import SendIcon from '@material-ui/icons/Send';
-import MoveToInboxIcon from '@material-ui/icons/MoveToInbox';
-import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
+import CancelIcon from "@material-ui/icons/Cancel";
+import SendIcon from "@material-ui/icons/Send";
+import MoveToInboxIcon from "@material-ui/icons/MoveToInbox";
+import ConfirmationNumberIcon from "@material-ui/icons/ConfirmationNumber";
 
 import { useSelector, useDispatch } from "react-redux";
 import { getMyRef } from "../../Redux/Actions/referal_coupon";
+import { getReceMyRef } from "../../Redux/Actions/get_received_referal_user";
+import { getReceMyRefBusiness } from "../../Redux/Actions/get_received_referal_business";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -60,8 +62,8 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
   },
-  tabBar:{
-    marginTop: '2rem',
+  tabBar: {
+    marginTop: "2rem",
   },
 }));
 
@@ -84,15 +86,32 @@ const CouponList = (props) => {
   const dispatch = useDispatch();
   const my_ref_coupon = useSelector((state) => state.getRefStore);
   const { loading, sucess: success, uploadedObject } = my_ref_coupon;
+  const my_rece_ref_coupon = useSelector((state) => state.getReceRefStore);
+  const { loading1, sucess1: success1, uploadedObject1 } = my_rece_ref_coupon;
+  const my_rece_ref_coupon_Business = useSelector(
+    (state) => state.getReceRefBusinessStore
+  );
+  const {
+    loading2,
+    sucess2: success2,
+    uploadedObject2,
+  } = my_rece_ref_coupon_Business;
 
   const x = window.location.href.replaceAll("/", " ").split(" ");
   const render_user = x[x.length - 1];
 
   const styles = useStyles();
 
+  const who = localStorage.getItem("ob_who");
+
   useEffect(
     () => {
       dispatch(getMyRef(render_user));
+      if (who === "user") {
+        dispatch(getReceMyRef(render_user));
+      } else if (who === "business") {
+        dispatch(getReceMyRefBusiness(render_user));
+      }
 
       let x = props.coupon;
       if (x.length > 0) {
@@ -102,7 +121,7 @@ const CouponList = (props) => {
         setCou([...x]);
       }
     },
-    [first, props.coupon, success],
+    [first, props.coupon, success, success1],
     update
   );
 
@@ -115,10 +134,22 @@ const CouponList = (props) => {
           aria-label="simple tabs example"
           centered
         >
-          <Tab label="Current" icon={<ConfirmationNumberIcon />} {...a11yProps(0)} />
-          <Tab label="Used or Expired" icon={<CancelIcon />} {...a11yProps(1)} />
-          <Tab label="Referals" icon={<SendIcon />}{...a11yProps(2)} />
-          <Tab label="Received Referals" icon={<MoveToInboxIcon />} {...a11yProps(3)} />
+          <Tab
+            label="Current"
+            icon={<ConfirmationNumberIcon />}
+            {...a11yProps(0)}
+          />
+          <Tab
+            label="Used or Expired"
+            icon={<CancelIcon />}
+            {...a11yProps(1)}
+          />
+          <Tab label="Referals" icon={<SendIcon />} {...a11yProps(2)} />
+          <Tab
+            label="Received Referals"
+            icon={<MoveToInboxIcon />}
+            {...a11yProps(3)}
+          />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -128,7 +159,12 @@ const CouponList = (props) => {
               if (data.used === false && data.expired === false) {
                 return (
                   <Grid item xs={12} sm={6}>
-                    <Coupon key={i} data={data} passUpdate={needUpdate} />
+                    <Coupon
+                      key={i}
+                      data={data}
+                      passUpdate={needUpdate}
+                      page={"no"}
+                    />
                   </Grid>
                 );
               } else {
@@ -147,7 +183,12 @@ const CouponList = (props) => {
               if (data.used === true || data.expired === TrendingUpOutlined) {
                 return (
                   <Grid item xs={12} sm={6}>
-                    <Coupon key={i} data={data} passUpdate={needUpdate} />
+                    <Coupon
+                      key={i}
+                      data={data}
+                      passUpdate={needUpdate}
+                      page={"no"}
+                    />
                   </Grid>
                 );
               } else {
@@ -176,9 +217,54 @@ const CouponList = (props) => {
       </TabPanel>
 
       <TabPanel value={value} index={3}>
-        <ReferalCard />
+        {who === "user" ? (
+          <Grid container spacing={3}>
+            {uploadedObject1 && uploadedObject1.length > 0 ? (
+              uploadedObject1.map((data, i) => {
+                if (data.used === false) {
+                  return (
+                    <Grid item xs={12} sm={6}>
+                      <Coupon
+                        key={i}
+                        data={data}
+                        passUpdate={needUpdate}
+                        page={"ref"}
+                      />
+                    </Grid>
+                  );
+                } else {
+                  return <div></div>;
+                }
+              })
+            ) : (
+              <div>Sorry No Coupon</div>
+            )}
+          </Grid>
+        ) : (
+          <Grid container spacing={3}>
+            {uploadedObject2 && uploadedObject2.length > 0 ? (
+              uploadedObject2.map((data, i) => {
+                if (data.used === false) {
+                  return (
+                    <Grid item xs={12} sm={6}>
+                      <Coupon
+                        key={i}
+                        data={data}
+                        passUpdate={needUpdate}
+                        page={"ref"}
+                      />
+                    </Grid>
+                  );
+                } else {
+                  return <div></div>;
+                }
+              })
+            ) : (
+              <div>Sorry No Coupon</div>
+            )}
+          </Grid>
+        )}
       </TabPanel>
-
     </div>
   );
 };
