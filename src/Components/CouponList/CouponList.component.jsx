@@ -13,6 +13,10 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import { TrendingUpOutlined } from "@material-ui/icons";
+import CancelIcon from '@material-ui/icons/Cancel';
+import SendIcon from '@material-ui/icons/Send';
+import MoveToInboxIcon from '@material-ui/icons/MoveToInbox';
+import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -52,6 +56,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
   },
+  tabBar:{
+    marginTop: '2rem',
+  },
 }));
 
 //update seperation to  used/unused stage
@@ -70,6 +77,8 @@ const CouponList = (props) => {
     setUpdate(true);
   };
 
+  const styles = useStyles();
+
   useEffect(
     () => {
       let x = props.coupon;
@@ -86,15 +95,17 @@ const CouponList = (props) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" className={styles.tabBar}>
         <Tabs
           value={value}
           onChange={handleChange}
           aria-label="simple tabs example"
+          centered
         >
-          <Tab label="Current Coupon" {...a11yProps(0)} />
-          <Tab label="Used or Expired Coupon" {...a11yProps(1)} />
-          <Tab label="Referals" {...a11yProps(2)} />
+          <Tab label="Current" icon={<ConfirmationNumberIcon />} {...a11yProps(0)} />
+          <Tab label="Used or Expired" icon={<CancelIcon />} {...a11yProps(1)} />
+          <Tab label="Referals" icon={<SendIcon />}{...a11yProps(2)} />
+          <Tab label="Received Referals" icon={<MoveToInboxIcon />} {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -136,6 +147,9 @@ const CouponList = (props) => {
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={2}>
+        <ReferalCard />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
         <ReferalCard />
       </TabPanel>
     </div>
