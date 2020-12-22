@@ -1,12 +1,16 @@
+
+
 import React from 'react';
-import './VerifySuccessCard.scss'
+import './UnsuccessfulClaimCard.style.scss';
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
 import { useHistory } from "react-router-dom";
 
-import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
+import ErrorIcon from '@material-ui/icons/Error';
 import { makeStyles } from '@material-ui/core/styles';
+
+// const family = 'PeaceSans';
 
 const useStyles = makeStyles(() => ({
 //   gutter: {
@@ -14,25 +18,25 @@ const useStyles = makeStyles(() => ({
 //   },
   icon:{
       fontSize: '5rem',
-      color: '#8eebdc',
+      color: '#ff4c6d',
   },
   paper:{
       padding: '2.5rem',
-      border: '5px solid #8eebdc',
+      border: '5px solid #ff4c6d',
       borderRadius: '1rem',
       boxShadow: 'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px',
   },
   button:{
     padding: '0.7rem',
     borderRadius: '1.5rem',
-    backgroundColor: '#8eebdc',
+    backgroundColor: '#ff4c6d',
     color: 'white',
-    border: '3px solid #ff829b',
+    border: '3px solid #c1ffff',
     padding: '0.5rem 1.3rem 0.5rem 1.3rem',
   }
 }));
 
-function VerifySuccessCard() {
+function UnsuccessfulClaimCard() {
   const styles = useStyles();
 
     const history = useHistory();
@@ -47,14 +51,14 @@ function VerifySuccessCard() {
             <Grid container direction="column" justify="center" alignItems="center" xs={12}>
                 <Grid item xs={12} className={styles.gutter}></Grid>
                 <Grid item xs={12}>
-                    <VerifiedUserIcon className={styles.icon}/>
+                    <ErrorIcon className={styles.icon}/>
                 </Grid>
                 <Grid item xs={12} className={styles.gutter}></Grid>
                 <Grid item xs={12}>
-                    <h2>Email Address Verified</h2>
+                    <h2>Unsuccessful Claim of the Coupon</h2>
                 </Grid>
                 <Grid item xs={12}>
-                    <p>Welcome to OnlyBrands!</p>
+                    <p>Please contact support@onlybrands.com for further assistance.</p>
                 </Grid>
                 <Grid item xs={12}>
                     <button onClick={handleClick} className={styles.button}>Home</button>
@@ -66,4 +70,4 @@ function VerifySuccessCard() {
   );
 }
 
-export default VerifySuccessCard; 
+export default UnsuccessfulClaimCard; 
