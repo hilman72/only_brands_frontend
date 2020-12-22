@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import cx from "clsx";
-import { useLocation } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Divider from "@material-ui/core/Divider";
 import Box from "@material-ui/core/Box";
@@ -136,44 +135,44 @@ const BusinessDetail = (props) => {
 
   //Follower functions
 
-  const handleUnfollow = async (e) => {
-    setFollow(!follow);
+  // const handleUnfollow = async (e) => {
+  //   setFollow(!follow);
 
-    console.log(e);
-    const link = e.target.baseURI;
+  //   console.log(e);
+  //   const link = e.target.baseURI;
 
-    const pathname = new URL(link).pathname.split("/");
-    const username = pathname[2];
+  //   const pathname = new URL(link).pathname.split("/");
+  //   const username = pathname[2];
 
-    const ownUser = localStorage.getItem("ob_id");
+  //   const ownUser = localStorage.getItem("ob_id");
 
-    // console.log(username);
+  //   // console.log(username);
 
-    await Axios.post("http://localhost:5000/api/unfollow", {
-      username: username,
-      ownUser: ownUser,
-    });
-  };
+  //   await Axios.post("http://localhost:5000/api/unfollow", {
+  //     username: username,
+  //     ownUser: ownUser,
+  //   });
+  // };
 
-  const handleFollow = async (e) => {
-    setFollow(!follow);
+  // const handleFollow = async (e) => {
+  //   setFollow(!follow);
 
 
-    const ownUser = localStorage.getItem("ob_id");
-    const link = e.target.baseURI;
+  //   const ownUser = localStorage.getItem("ob_id");
+  //   const link = e.target.baseURI;
 
-    const pathname = new URL(link).pathname.split("/");
-    const username = pathname[2];
-    // console.log(username);
+  //   const pathname = new URL(link).pathname.split("/");
+  //   const username = pathname[2];
+  //   // console.log(username);
 
-    await Axios.post("http://localhost:5000/api/followers", {
-      username: username,
-      ownUser: ownUser,
-    }).then((data) => {
-      console.log(data);
-      alert(data.data);
-    });
-  };
+  //   await Axios.post("http://localhost:5000/api/followers", {
+  //     username: username,
+  //     ownUser: ownUser,
+  //   }).then((data) => {
+  //     console.log(data);
+  //     alert(data.data);
+  //   });
+  // };
 
   //useLocation(url)
   //Get URL username 
@@ -184,45 +183,45 @@ const BusinessDetail = (props) => {
   useEffect(async () => {
     console.log(TMusername)
     const response = await Axios.get(`http://localhost:5000/api/getbusinessphoto/${TMusername}`);
-    if (response.data[0].photo === null || response.data[0].photo === undefined) {
-      setBusinesssmallphoto("");
-    } else {
+    if (response.data[0].photo !== null || response.data[0].photo !== undefined) {
       setBusinesssmallphoto(response.data[0].photo);
+    } else {
+      setBusinesssmallphoto("");
     }
 
 
-    let c = localStorage.getItem("ob_id");
+  //   let c = localStorage.getItem("ob_id");
 
-    let user = localStorage.getItem("ob_username")
+  //   let user = localStorage.getItem("ob_username")
   
-    // console.log(url)
+  //   // console.log(url)
 
-    const pathname = url.pathname.split("/");
-    const username = pathname[2];
-    console.log(username)
+  //   const pathname = url.pathname.split("/");
+  //   const username = pathname[2];
+  //   console.log(username)
   
-    //Count followers 
+  //   //Count followers 
 
-    const countFollowers = await Axios.get(`http://localhost:5000/api/countBusFollowers/${username}`)
-    console.log(countFollowers)
+  //   const countFollowers = await Axios.get(`http://localhost:5000/api/countBusFollowers/${username}`)
+  //   console.log(countFollowers)
 
-    if(countFollowers !== null || countFollowers !== undefined ){
-      setFollowers(countFollowers.data)
-  } else {
-      setFollowers(0)
-  }
+  //   if(countFollowers !== null || countFollowers !== undefined ){
+  //     setFollowers(countFollowers.data)
+  // } else {
+  //     setFollowers(0)
+  // }
 
-  //Check if followed
+  // //Check if followed
 
-  const checkFollowed = await Axios.get(`http://localhost:5000/api/checkBusFollowed/${username}/${c}`)
-  // console.log(checkFollowed)
+  // const checkFollowed = await Axios.get(`http://localhost:5000/api/checkBusFollowed/${username}/${c}`)
+  // // console.log(checkFollowed)
 
-  let checked = checkFollowed.data
-  console.log(checked)
+  // let checked = checkFollowed.data
+  // console.log(checked)
 
-  if(checkFollowed !== null || checkFollowed !== undefined ){
-      setFollow(checked)
-    } 
+  // if(checkFollowed !== null || checkFollowed !== undefined ){
+  //     setFollow(checked)
+  //   } 
     
   }, [success1])
 
@@ -354,7 +353,7 @@ const BusinessDetail = (props) => {
                   <Box p={1} flex={"auto"}>
                   {follow ? (
                     <Button
-                      onClick={handleUnfollow}
+                      // onClick={handleUnfollow}
                       className={styles.button}
                     >
                       Unfollow
@@ -362,7 +361,7 @@ const BusinessDetail = (props) => {
                   ) : (
                       <Box flex={"auto"}>
                         <Button
-                          onClick={handleFollow}
+                          // onClick={handleFollow}
                           className={styles.button}
                         >
                           Follow

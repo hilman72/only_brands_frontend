@@ -273,21 +273,18 @@ function UserInfoCard() {
 
 
     const followerGrab = await Axios.get(`http://localhost:5000/api/followersAdd/${c}`)
-    // console.log(followerGrab.data)
+    console.log(followerGrab.data)
+    
     if (followerGrab !== null || followerGrab !== undefined) {
-      setFollowers(followerGrab.data)
+      setFollowers2(followerGrab.data)
     } else {
-      setFollowers(0);
+      setFollowers2(0);
     }
 
     //Count followers 
 
 
     const countFollowers = await Axios.get(`http://localhost:5000/api/countFollowers/${username}`)
-    console.log(countFollowers)
-
-
-    // const countFollowers = await Axios.get(`http://localhost:5000/api/countFollowers/${user}`)
     // console.log(countFollowers)
 
     //Check if followed
@@ -296,19 +293,19 @@ function UserInfoCard() {
     // console.log(checkFollowed)
 
     let checked = checkFollowed.data
-    console.log(checked)
+    // console.log(checked)
 
     if (checkFollowed !== null || checkFollowed !== undefined) {
       setFollow(checked)
     }
 
     //Photo
-    setRealdescription(false);
+    // setRealdescription(false);
     const response = await Axios.get(`http://localhost:5000/photo/${TMusername}`);
     console.log(response);
     if (response !== null || response !== undefined) {
-      setHavephoto(true);
-      setphotoFile(response.data[0].photo);
+      // setHavephoto(true);
+       setphotoFile(response.data[0].photo);
     } else {
       setphotoFile("");
     }
