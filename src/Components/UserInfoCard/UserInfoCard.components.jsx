@@ -259,6 +259,7 @@ function UserInfoCard() {
 
   useEffect(async () => {
     let c = localStorage.getItem("ob_id");
+    console.log(c)
 
     let user = localStorage.getItem("ob_username")
 
@@ -269,12 +270,12 @@ function UserInfoCard() {
     const username = pathname[2];
     console.log(username)
 
-    //Add followers -> Adrian's
+    //Set followers -> Adrian's
 
 
-    const followerGrab = await Axios.get(`http://localhost:5000/api/followersAdd/${c}`)
+    const followerGrab = await Axios.get(`http://localhost:5000/api/followersAdd/${username}`)
     console.log(followerGrab.data)
-    
+
     if (followerGrab !== null || followerGrab !== undefined) {
       setFollowers2(followerGrab.data)
     } else {
@@ -282,7 +283,6 @@ function UserInfoCard() {
     }
 
     //Count followers 
-
 
     const countFollowers = await Axios.get(`http://localhost:5000/api/countFollowers/${username}`)
     // console.log(countFollowers)
@@ -316,7 +316,7 @@ function UserInfoCard() {
     // console.log(response2.data[0].description);
     if (response2 !== null || response2 !== undefined) {
       setHavedescription(true);
-      setDescription(response2.data[0].description);
+      // setDescription(response2.data[0].description);
     }
   }, [success1, success2, realdescription, follow]);
 
