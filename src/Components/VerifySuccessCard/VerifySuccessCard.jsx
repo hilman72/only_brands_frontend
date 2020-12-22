@@ -1,16 +1,12 @@
-
-
 import React from 'react';
-import './NotYetVerifiedCard.style.scss';
+import './VerifySuccessCard.scss'
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
 import { useHistory } from "react-router-dom";
 
-import ErrorIcon from '@material-ui/icons/Error';
+import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import { makeStyles } from '@material-ui/core/styles';
-
-// const family = 'PeaceSans';
 
 const useStyles = makeStyles(() => ({
 //   gutter: {
@@ -18,25 +14,25 @@ const useStyles = makeStyles(() => ({
 //   },
   icon:{
       fontSize: '5rem',
-      color: '#ff4c6d',
+      color: '#8eebdc',
   },
   paper:{
       padding: '2.5rem',
-      border: '5px solid #ff4c6d',
+      border: '5px solid #8eebdc',
       borderRadius: '1rem',
       boxShadow: 'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px',
   },
   button:{
     padding: '0.7rem',
     borderRadius: '1.5rem',
-    backgroundColor: '#ff4c6d',
+    backgroundColor: '#8eebdc',
     color: 'white',
-    border: '3px solid #c1ffff',
+    border: '3px solid #ff829b',
     padding: '0.5rem 1.3rem 0.5rem 1.3rem',
   }
 }));
 
-function NotYetVerifiedCard() {
+function VerifySuccessCard() {
   const styles = useStyles();
 
     const history = useHistory();
@@ -51,11 +47,11 @@ function NotYetVerifiedCard() {
             <Grid container direction="column" justify="center" alignItems="center" xs={12}>
                 <Grid item xs={12} className={styles.gutter}></Grid>
                 <Grid item xs={12}>
-                    <ErrorIcon className={styles.icon}/>
+                    <VerifiedUserIcon className={styles.icon}/>
                 </Grid>
                 <Grid item xs={12} className={styles.gutter}></Grid>
                 <Grid item xs={12}>
-                    <h2>Please Verify Your Account</h2>
+                    <h2>Email Address Verified</h2>
                 </Grid>
                 <Grid item xs={12}>
                     <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
@@ -70,4 +66,4 @@ function NotYetVerifiedCard() {
   );
 }
 
-export default NotYetVerifiedCard; 
+export default VerifySuccessCard; 
