@@ -10,7 +10,6 @@ import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import axios from "axios";
 
-
 const styles = (theme) => ({
   root: {
     margin: 0,
@@ -67,6 +66,14 @@ function CouponModal(props) {
     props.update();
   };
 
+  const handleRef = () => {
+    axios.post(`http://localhost:5000/api/makeRef/`, {
+      u_name: props.pastData.user_name,
+      b_name: props.pastData.business_name,
+    });
+    console.log("ref");
+  };
+
   const handleConfirm = () => {
     axios
       .post(`http://localhost:5000/api/confirmCoupon/`, {
@@ -74,7 +81,7 @@ function CouponModal(props) {
         b_name: props.pastData.business_name,
         id: props.pastData.coupon_id,
       })
-      .then(handleClose(), console.log("hi"));
+      .then(handleRef(), handleClose());
   };
 
   const x = window.location.href.replaceAll("/", " ").split(" ");

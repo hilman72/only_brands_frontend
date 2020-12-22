@@ -25,6 +25,7 @@ import CreateBrandReviewModal from '../CreateBrandsReviewModal/CreateBrandsRevie
 import { useSelector, useDispatch } from "react-redux";
 import { businessupload } from "../../Redux/Actions/BusinessPhotoaction"
 import Axios from 'axios';
+import { useParams, useLocation } from "react-router-dom";
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
@@ -132,15 +133,16 @@ const BusinessDetail = (props) => {
   const choosestore = useSelector((state) => state.businessInfoUploadStore)
   const { loading, success: success1, userInfoUploadObject } = choosestore
 
+
   //Follower functions
 
   const handleUnfollow = async (e) => {
     setFollow(!follow);
 
     console.log(e);
-    const url = e.target.baseURI;
+    const link = e.target.baseURI;
 
-    const pathname = new URL(url).pathname.split("/");
+    const pathname = new URL(link).pathname.split("/");
     const username = pathname[2];
 
     const ownUser = localStorage.getItem("ob_id");
@@ -158,12 +160,9 @@ const BusinessDetail = (props) => {
 
 
     const ownUser = localStorage.getItem("ob_id");
+    const link = e.target.baseURI;
 
-    console.log(e);
-    const url = e.target.baseURI;
-
-
-    const pathname = new URL(url).pathname.split("/");
+    const pathname = new URL(link).pathname.split("/");
     const username = pathname[2];
     // console.log(username);
 
@@ -177,19 +176,18 @@ const BusinessDetail = (props) => {
   };
 
   //useLocation(url)
-
-  const url = useLocation();
+  //Get URL username 
+  let url = useLocation();
+  const pathname = url.pathname.split("/");
+  const TMusername = pathname[2];
 
   useEffect(async () => {
-
-    //Handle photo 
-    console.log(importantid)
-    const response = await Axios.get(`http://localhost:5000/api/getbusinessphoto/${importantid}`);
-    if (response !== null || response !== undefined) {
-      console.log(response)
-      setBusinesssmallphoto(response && response.data && response.data[0] && response.data[0].photo);
-    } else {
+    console.log(TMusername)
+    const response = await Axios.get(`http://localhost:5000/api/getbusinessphoto/${TMusername}`);
+    if (response.data[0].photo === null || response.data[0].photo === undefined) {
       setBusinesssmallphoto("");
+    } else {
+      setBusinesssmallphoto(response.data[0].photo);
     }
 
 
