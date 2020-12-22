@@ -74,11 +74,7 @@ const CouponList = (props) => {
   };
   const dispatch = useDispatch();
   const my_ref_coupon = useSelector((state) => state.getRefStore);
-  const {
-    loading: loading,
-    sucess: success,
-    uploadedObject: description,
-  } = my_ref_coupon;
+  const { loading, sucess: success, uploadedObject } = my_ref_coupon;
 
   const x = window.location.href.replaceAll("/", " ").split(" ");
   const render_user = x[x.length - 1];
@@ -86,7 +82,7 @@ const CouponList = (props) => {
   useEffect(
     () => {
       dispatch(getMyRef(render_user));
-      console.log(my_ref_coupon.uploadedObject);
+
       let x = props.coupon;
       if (x.length > 0) {
         setFirst(true);
@@ -151,8 +147,21 @@ const CouponList = (props) => {
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <ReferalCard />
+        <Grid container spacing={3}>
+          {uploadedObject && uploadedObject.length > 0 ? (
+            uploadedObject.map((data, i) => {
+              return (
+                <Grid item xs={12} sm={6}>
+                  <ReferalCard key={i} data={data} />
+                </Grid>
+              );
+            })
+          ) : (
+            <div>Sorry No Coupon</div>
+          )}
+        </Grid>
       </TabPanel>
+      {/* <p>{uploadedObject && uploadedObject[0] && uploadedObject[0].send_by}</p> */}
     </div>
   );
 };
