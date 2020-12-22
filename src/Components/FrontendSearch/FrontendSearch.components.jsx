@@ -10,22 +10,28 @@ export default function FrontendSearch() {
     return (
         <div className="search">
                  <FormControl component="fieldset">
-            <FormLabel component="legend">FrontEndSearch Results Rearrangement</FormLabel>
+            {/* <FormLabel component="legend">FrontEndSearch Results Rearrangement</FormLabel> */}
             <RadioGroup row aria-label="position" name="position" defaultValue="top">
                 <FormControlLabel
-                    value="top"
+                    value="Categories"
                     control={<Radio color="primary" />}
                     label="Top"
                     labelPlacement="start"
                 />
                 <FormControlLabel
-                    value="start"
+                    value="Soon To Expire"
                     control={<Radio color="primary" />}
                     label="Start"
                     labelPlacement="start"
                 />
                 <FormControlLabel
-                    value="bottom"
+                    value="Brands You Follow"
+                    control={<Radio color="primary" />}
+                    label="Bottom"
+                    labelPlacement="start"
+                />
+                    <FormControlLabel
+                    value="Brands You Follow"
                     control={<Radio color="primary" />}
                     label="Bottom"
                     labelPlacement="start"

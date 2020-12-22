@@ -18,7 +18,6 @@ const useStyles = makeStyles(() => ({
     },
     card: {
         height: 100,
-
     },
     border: {
         border: '6px solid black !important'
@@ -30,7 +29,7 @@ function UserCards() {
   const styles = useStyles();
   const avatarStyles = useDynamicAvatarStyles({ radius: 50, size: 70});
   return (
-    <Row className={styles.border} p={2} gap={2} bgcolor={'#f5f5f5'} borderRadius={16}>
+    <Row className={styles.border} p={2} gap={2} bgcolor={'#ffffff'} borderRadius={16}>
       <Item className={styles.card}>
         <Avatar
           classes={avatarStyles}
