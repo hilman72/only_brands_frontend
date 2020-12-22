@@ -14,6 +14,7 @@ import BusinessTopFans from "../Business-topfans/Business-topfans.component";
 import BusinessTiers from "../Business-tiers/Business-tiers.component";
 import BusinessRecom from "../Business-recom/Business-recom.component";
 import CreateCoupon from "../CreateCoupon/CreateCoupon.component";
+import axios from "axios";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -81,10 +82,11 @@ const BusinessDiffCom = (props) => {
 
   useEffect(() => {
     setWho(props.who);
-    fetch(`http://localhost:5000/api/getCoupon/${render_user}`)
-      .then((res) => res.json())
+    axios
+      .get(`http://localhost:5000/api/getCoupon/${render_user}`)
       .then((data) => {
-        setCoupon([...data]);
+        let x = data.data;
+        setCoupon([...x]);
       });
   }, [create, props.who, render_user]);
 
@@ -110,8 +112,8 @@ const BusinessDiffCom = (props) => {
               <CreateCoupon create={whenCreate} />
             </Grid>
           ) : (
-              <div></div>
-            )}
+            <div></div>
+          )}
 
           <Grid item xs={12}>
             <BusinessCoupon coupon={coupon} />
