@@ -77,7 +77,6 @@ const RegisterPage = () => {
 
   const styles = useStyles();
 
-
   return (
     <div class="registerBody">
       <img src={logo} onClick={navigateToHome} className={styles.logo} />
