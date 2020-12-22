@@ -1,10 +1,12 @@
 import React from "react";
 
 import "./TestingPage.style.scss";
+import BrandsCardLong from '../../Components/BrandCardsLong/BrandCardsLong.components'
 
 const TestingPage = () => {
   return (
     <div>
+    <BrandsCardLong />
         <h1>
         H1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 123456
         </h1>

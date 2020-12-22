@@ -24,6 +24,8 @@ import TestingPage from "./Pages/TestingPage/TestingPage.jsx";
 import UserCreateProfilePage from "./Pages/UserCreateProfilePage/UserCreateProfilePage.component";
 import BusinessCreateProfilePage from "./Pages/BusinessCreateProfilePage/BusinessCreateProfilePage.component";
 import ClaimCouponPage from "./Pages/ClaimCouponPage/ClaimCouponPage.component";
+import UnsuccessfulClaim from "./Pages/UnsuccessfulClaimPage/UnsuccessfulClaimPage.component"
+import SuccessfulClaimPage from "./Pages/SuccessfulClaimPage/SuccessfulClaimPage.component";
 
 class App extends React.Component {
   constructor() {
@@ -73,10 +75,12 @@ class App extends React.Component {
             <Route path="/UserCreateProfile" component={UserCreateProfilePage} />
             <Route path="/BusinessCreateProfile" component={BusinessCreateProfilePage} />
             <Route path="/ClaimRoute/:id" component={ClaimCouponPage} />
+            <Route path="/Unsuccessful" component={ClaimCouponPage} />
             <PrivateRoute path="/UserProfiles/:name" component={UserProfile} />
             <PrivateRoute path="/NotYet" component={NotYet} />
             <PrivateRoute path="/VerifySuccess" component={VerifySuccessPage} />
-            <PrivateRoute
+            <PrivateRoute path="/UnsuccessfulClaim" component={UnsuccessfulClaim} />
+            <PrivateRoute path="/SuccessfulClaim" component={SuccessfulClaimPage} />
               path="/BusinessProfiles/:name"
               component={BusinessProfiles}
             />
