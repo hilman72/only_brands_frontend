@@ -357,16 +357,18 @@ const BusinessDetail = (props) => {
                           Unfollow
                         </Button>
                       ) : (
-                          <Box flex={"auto"}>
                             <Button
                               onClick={handleFollow}
                               className={styles.button}
                             >
                               Follow
-                    </Button>
-                    }
+                        </Button>
+                      )
+                      }
+              </Box>
               </Box>
             </Box>
+            
           </Grid>
           <Grid item xs={3}>
             <CreateBrandReviewModal />
