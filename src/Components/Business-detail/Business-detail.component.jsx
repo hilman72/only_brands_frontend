@@ -183,46 +183,46 @@ const BusinessDetail = (props) => {
   useEffect(async () => {
     console.log(TMusername)
     const response = await Axios.get(`http://localhost:5000/api/getbusinessphoto/${TMusername}`);
-    if (response.data[0].photo !== null || response.data[0].photo !== undefined) {
+    if (response.data[0].photo) {
       setBusinesssmallphoto(response.data[0].photo);
     } else {
       setBusinesssmallphoto("");
     }
 
 
-  //   let c = localStorage.getItem("ob_id");
+    //   let c = localStorage.getItem("ob_id");
 
-  //   let user = localStorage.getItem("ob_username")
-  
-  //   // console.log(url)
+    //   let user = localStorage.getItem("ob_username")
 
-  //   const pathname = url.pathname.split("/");
-  //   const username = pathname[2];
-  //   console.log(username)
-  
-  //   //Count followers 
+    //   // console.log(url)
 
-  //   const countFollowers = await Axios.get(`http://localhost:5000/api/countBusFollowers/${username}`)
-  //   console.log(countFollowers)
+    //   const pathname = url.pathname.split("/");
+    //   const username = pathname[2];
+    //   console.log(username)
 
-  //   if(countFollowers !== null || countFollowers !== undefined ){
-  //     setFollowers(countFollowers.data)
-  // } else {
-  //     setFollowers(0)
-  // }
+    //   //Count followers 
 
-  // //Check if followed
+    //   const countFollowers = await Axios.get(`http://localhost:5000/api/countBusFollowers/${username}`)
+    //   console.log(countFollowers)
 
-  // const checkFollowed = await Axios.get(`http://localhost:5000/api/checkBusFollowed/${username}/${c}`)
-  // // console.log(checkFollowed)
+    //   if(countFollowers !== null || countFollowers !== undefined ){
+    //     setFollowers(countFollowers.data)
+    // } else {
+    //     setFollowers(0)
+    // }
 
-  // let checked = checkFollowed.data
-  // console.log(checked)
+    // //Check if followed
 
-  // if(checkFollowed !== null || checkFollowed !== undefined ){
-  //     setFollow(checked)
-  //   } 
-    
+    // const checkFollowed = await Axios.get(`http://localhost:5000/api/checkBusFollowed/${username}/${c}`)
+    // // console.log(checkFollowed)
+
+    // let checked = checkFollowed.data
+    // console.log(checked)
+
+    // if(checkFollowed !== null || checkFollowed !== undefined ){
+    //     setFollow(checked)
+    //   } 
+
   }, [success1])
 
 
@@ -350,25 +350,25 @@ const BusinessDetail = (props) => {
                     Follow
                   </Button>
                 ) : (
-                  <Box p={1} flex={"auto"}>
-                  {follow ? (
-                    <Button
-                      // onClick={handleUnfollow}
-                      className={styles.button}
-                    >
-                      Unfollow
-                    </Button>
-                  ) : (
-                      <Box flex={"auto"}>
+                    <Box p={1} flex={"auto"}>
+                      {follow ? (
                         <Button
-                          // onClick={handleFollow}
+                          // onClick={handleUnfollow}
                           className={styles.button}
                         >
-                          Follow
+                          Unfollow
+                        </Button>
+                      ) : (
+                          <Box flex={"auto"}>
+                            <Button
+                              // onClick={handleFollow}
+                              className={styles.button}
+                            >
+                              Follow
                     </Button>
-                      </Box>
-                    )}
-                </Box>
+                          </Box>
+                        )}
+                    </Box>
                   )}
               </Box>
             </Box>
