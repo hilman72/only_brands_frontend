@@ -13,6 +13,12 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import { TrendingUpOutlined } from "@material-ui/icons";
+
+import CancelIcon from '@material-ui/icons/Cancel';
+import SendIcon from '@material-ui/icons/Send';
+import MoveToInboxIcon from '@material-ui/icons/MoveToInbox';
+import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
+
 import { useSelector, useDispatch } from "react-redux";
 import { getMyRef } from "../../Redux/Actions/referal_coupon";
 
@@ -54,6 +60,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
   },
+  tabBar:{
+    marginTop: '2rem',
+  },
 }));
 
 //update seperation to  used/unused stage
@@ -74,19 +83,17 @@ const CouponList = (props) => {
   };
   const dispatch = useDispatch();
   const my_ref_coupon = useSelector((state) => state.getRefStore);
-  const {
-    loading: loading,
-    sucess: success,
-    uploadedObject: description,
-  } = my_ref_coupon;
+  const { loading, sucess: success, uploadedObject } = my_ref_coupon;
 
   const x = window.location.href.replaceAll("/", " ").split(" ");
   const render_user = x[x.length - 1];
 
+  const styles = useStyles();
+
   useEffect(
     () => {
       dispatch(getMyRef(render_user));
-      console.log(my_ref_coupon.uploadedObject);
+
       let x = props.coupon;
       if (x.length > 0) {
         setFirst(true);
@@ -101,15 +108,17 @@ const CouponList = (props) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" className={styles.tabBar}>
         <Tabs
           value={value}
           onChange={handleChange}
           aria-label="simple tabs example"
+          centered
         >
-          <Tab label="Current Coupon" {...a11yProps(0)} />
-          <Tab label="Used or Expired Coupon" {...a11yProps(1)} />
-          <Tab label="Referals" {...a11yProps(2)} />
+          <Tab label="Current" icon={<ConfirmationNumberIcon />} {...a11yProps(0)} />
+          <Tab label="Used or Expired" icon={<CancelIcon />} {...a11yProps(1)} />
+          <Tab label="Referals" icon={<SendIcon />}{...a11yProps(2)} />
+          <Tab label="Received Referals" icon={<MoveToInboxIcon />} {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -151,8 +160,25 @@ const CouponList = (props) => {
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={2}>
+        <Grid container spacing={3}>
+          {uploadedObject && uploadedObject.length > 0 ? (
+            uploadedObject.map((data, i) => {
+              return (
+                <Grid item xs={12} sm={6}>
+                  <ReferalCard key={i} data={data} />
+                </Grid>
+              );
+            })
+          ) : (
+            <div>Sorry No Coupon</div>
+          )}
+        </Grid>
+      </TabPanel>
+
+      <TabPanel value={value} index={3}>
         <ReferalCard />
       </TabPanel>
+
     </div>
   );
 };

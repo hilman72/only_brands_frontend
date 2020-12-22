@@ -182,11 +182,12 @@ const BusinessDetail = (props) => {
   useEffect(async () => {
     console.log(TMusername)
     const response = await Axios.get(`http://localhost:5000/api/getbusinessphoto/${TMusername}`);
-    if (response.data[0].photo !== null || response.data[0].photo !== undefined) {
+    if (response.data[0].photo) {
       setBusinesssmallphoto(response.data[0].photo);
     } else {
       setBusinesssmallphoto("");
     }
+
 
 
     let c = localStorage.getItem("ob_id");
@@ -237,8 +238,6 @@ const BusinessDetail = (props) => {
   if(checkFollowed !== null || checkFollowed !== undefined ){
       setFollow(checked)
     } 
-
-    
   }, [success1, follow])
 
 
@@ -349,19 +348,21 @@ const BusinessDetail = (props) => {
           <Grid item xs={3}>
             <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
               <Box p={1} flex={"auto"} className={styles.followButtonContainer}>
-                  {follow ? 
-                    <Button
-                      onClick={handleUnfollow}
-                      className={styles.button}
-                    >
-                      Unfollow
-                    </Button>
-                   : 
+                    <Box p={1} flex={"auto"}>
+                      {follow ? (
                         <Button
-                          onClick={handleFollow}
+                          onClick={handleUnfollow}
                           className={styles.button}
                         >
-                          Follow
+                          Unfollow
+                        </Button>
+                      ) : (
+                          <Box flex={"auto"}>
+                            <Button
+                              onClick={handleFollow}
+                              className={styles.button}
+                            >
+                              Follow
                     </Button>
                     }
               </Box>

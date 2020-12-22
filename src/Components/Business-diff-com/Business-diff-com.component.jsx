@@ -95,6 +95,7 @@ const BusinessDiffCom = (props) => {
           value={value}
           onChange={handleChange}
           aria-label="simple tabs example"
+          centered
         >
           <Tab label="Coupons" {...a11yProps(0)} />
           <Tab label="Top Fans" {...a11yProps(1)} />
@@ -109,8 +110,8 @@ const BusinessDiffCom = (props) => {
               <CreateCoupon create={whenCreate} />
             </Grid>
           ) : (
-            <div></div>
-          )}
+              <div></div>
+            )}
 
           <Grid item xs={12}>
             <BusinessCoupon coupon={coupon} />
