@@ -270,22 +270,32 @@ function UserInfoCard() {
     const username = pathname[2];
     console.log(username)
 
-    //Set followers -> Adrian's
+    //Count followers -> Adrian's
 
+    if (user === username){
 
-    const followerGrab = await Axios.get(`http://localhost:5000/api/followersAdd/${username}`)
-    console.log(followerGrab.data)
+      const followerGrab = await Axios.get(`http://localhost:5000/api/countFollowers/${user}`)
+      console.log(followerGrab.data)
+  
+      if (followerGrab !== null || followerGrab !== undefined) {
+        setFollowers2(followerGrab.data)
+      } else {
+        setFollowers2(0);
+      }
 
-    if (followerGrab !== null || followerGrab !== undefined) {
-      setFollowers2(followerGrab.data)
     } else {
-      setFollowers2(0);
+
+      const followerGrab = await Axios.get(`http://localhost:5000/api/countFollowers/${username}`)
+      console.log(followerGrab.data)
+  
+      if (followerGrab !== null || followerGrab !== undefined) {
+        setFollowers2(followerGrab.data)
+      } else {
+        setFollowers2(0);
+      }
+
+
     }
-
-    //Count followers 
-
-    const countFollowers = await Axios.get(`http://localhost:5000/api/countFollowers/${username}`)
-    // console.log(countFollowers)
 
     //Check if followed
 
@@ -305,7 +315,7 @@ function UserInfoCard() {
     console.log(response);
     if (response !== null || response !== undefined) {
       // setHavephoto(true);
-       setphotoFile(response.data[0].photo);
+      //  setphotoFile(response.data[0].photo);
     } else {
       setphotoFile("");
     }
