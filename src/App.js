@@ -20,6 +20,9 @@ import AfterRegister from "./Pages/AfterRegisterPage/after_register.component";
 import Error from "./Pages/errorPage/error.component";
 import NotYet from "./Pages/Notyet_verifyPage/notyet_verify.component";
 import TestingPage from "./Pages/TestingPage/TestingPage.jsx";
+import UserCreateProfilePage from "./Pages/UserCreateProfilePage/UserCreateProfilePage.component";
+import BusinessCreateProfilePage from "./Pages/BusinessCreateProfilePage/BusinessCreateProfilePage.component";
+import ClaimCouponPage from "./Pages/ClaimCouponPage/ClaimCouponPage.component";
 
 class App extends React.Component {
   constructor() {
@@ -66,6 +69,9 @@ class App extends React.Component {
             <Route path="/TestingPage" component={TestingPage} />
             <Route path="/After" component={AfterRegister} />
             <Route path="/Error" component={Error} />
+            <Route path="/UserCreateProfile" component={UserCreateProfilePage} />
+            <Route path="/BusinessCreateProfile" component={BusinessCreateProfilePage} />
+            <Route path="/ClaimRoute/:id" component={ClaimCouponPage} />
             <PrivateRoute path="/UserProfiles/:name" component={UserProfile} />
             <PrivateRoute path="/NotYet" component={NotYet} />
             <PrivateRoute
