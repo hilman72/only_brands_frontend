@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ReferalCard() {
+export default function ReferalCard(props) {
   const classes = useStyles();
 
   return (
@@ -30,16 +30,15 @@ export default function ReferalCard() {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="h2">
-          Coupon Name
+          {props.data.business_name}`s Refercal Coupon
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+          Refercal Coupon sent by {props.data.send_by}
         </Typography>
       </CardContent>
 
       <CardActions>
-        <ReferalEarnReward />
+        <ReferalEarnReward data={props.data} />
       </CardActions>
     </Card>
   );
