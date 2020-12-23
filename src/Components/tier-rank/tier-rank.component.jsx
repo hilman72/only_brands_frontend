@@ -11,6 +11,7 @@ import CardGiftcardIcon from "@material-ui/icons/CardGiftcard";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 
 import "./tier-rank.style.scss";
 
@@ -104,6 +105,7 @@ const DiffRank = () => {
           <TimelineConnector className={classes.secondaryTail} />
         </TimelineSeparator>
         <TimelineContent>
+          <Button>Claim Reward</Button>
           <Paper elevation={3} className={classes.paper}>
             <Typography variant="h6" component="h1">
               Bronze
@@ -113,6 +115,7 @@ const DiffRank = () => {
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
+        <Button>Claim Reward</Button>
         <TimelineOppositeContent>
           <Typography variant="body2" color="textSecondary">
             0 pt
@@ -128,7 +131,6 @@ const DiffRank = () => {
             <Typography variant="h6" component="h1">
               Start
             </Typography>
-            <Typography>GoGoGo</Typography>
           </Paper>
         </TimelineContent>
       </TimelineItem>
