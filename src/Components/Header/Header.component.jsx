@@ -349,7 +349,7 @@ const PrimarySearchAppBar = (props) => {
             </IconButton>
             <IconButton edge="end" color="inherit" onClick={toCoupon}>
               <Fab size="medium" color="primary" aria-label="add">
-                <Badge badgeContent={17} color="secondary">
+                <Badge color="secondary">
                   <LocalOfferIcon />
                 </Badge>
               </Fab>
