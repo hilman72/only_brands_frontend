@@ -158,7 +158,7 @@ function EmailVerificationCard() {
                       <MenuItem value={50}>Japanese</MenuItem>
                       <MenuItem value={60}>Korean</MenuItem>
                       <MenuItem value={70}>Taiwanese</MenuItem>
-                      <MenuItem value={80}>Thai</MenuItem>
+                      <MenuItem value={80}>American</MenuItem>
                       <MenuItem value={90}>Other</MenuItem>
                     </Select>
                   </FormControl>
