@@ -5,8 +5,8 @@ export const BIZDETAILS_UPLOAD_FAIL = "BIZDETAILS_UPLOAD_FAIL";
 
 
 
-const bizDetailsupload = (description, business) => async (dispatch) => {
-    dispatch({ type: BIZDETAILS_UPLOAD_REQUEST, payload: { description, business } });
+const bizDetailsupload = (description, category, business) => async (dispatch) => {
+    dispatch({ type: BIZDETAILS_UPLOAD_REQUEST, payload: { description, category, business } });
     try {
         const { data } = await axios.post('http://localhost:5000/api/bizdetailsupload',
             { description: description, business: business });
