@@ -37,6 +37,7 @@ import Axios from "axios";
 
 //new updates
 import Input from "@material-ui/core/Input";
+import { ContactSupportTwoTone } from "@material-ui/icons";
 
 const useStyles = makeStyles(({ palette }) => ({
   card: {
@@ -80,7 +81,7 @@ const useStyles = makeStyles(({ palette }) => ({
   },
   content: {
     padding: "0",
-    float: "left !important"
+    float: "left !important",
   },
   container: {
     margin: "auto",
@@ -107,14 +108,14 @@ const useStyles = makeStyles(({ palette }) => ({
     float: "left",
   },
   followers: {
-    height: '5rem !important'
+    height: "5rem !important",
   },
   padding: {
-    padding: "1rem !important"
+    padding: "1rem !important",
   },
   left: {
-    textAlign: "left"
-  }
+    textAlign: "left",
+  },
 }));
 
 function UserInfoCard() {
@@ -150,12 +151,11 @@ function UserInfoCard() {
   //b.success = true
   const { loading, success: success1, userInfoUploadObject } = TMB;
 
-
   //Follower Count
 
   const [followers, setFollowers] = React.useState(0);
 
-  const [followers2, setFollowers2] = React.useState(0)
+  const [followers2, setFollowers2] = React.useState(0);
 
   //End of state i used
 
@@ -204,12 +204,10 @@ function UserInfoCard() {
   const handleFollow = async (e) => {
     setFollow(!follow);
 
-
     const ownUser = localStorage.getItem("ob_id");
 
     console.log(e);
     const url = e.target.baseURI;
-
 
     const pathname = new URL(url).pathname.split("/");
     const username = pathname[2];
@@ -253,37 +251,37 @@ function UserInfoCard() {
 
   useEffect(async () => {
     let c = localStorage.getItem("ob_id");
-    console.log(c)
+    console.log(c);
 
-    let user = localStorage.getItem("ob_username")
-
+    let user = localStorage.getItem("ob_username");
 
     // console.log(url)
 
     const pathname = url.pathname.split("/");
     const username = pathname[2];
-    console.log(username)
+    console.log(username);
 
     //Count followers -> Adrian's
 
     if (user === username) {
-
-      const followerGrab = await Axios.get(`http://localhost:5000/api/countFollowers/${user}`)
-      console.log(followerGrab.data)
+      const followerGrab = await Axios.get(
+        `http://localhost:5000/api/countFollowers/${user}`
+      );
+      console.log(followerGrab.data);
 
       if (followerGrab !== null || followerGrab !== undefined) {
-        setFollowers2(followerGrab.data)
+        setFollowers2(followerGrab.data);
       } else {
         setFollowers2(0);
       }
-
     } else {
-
-      const followerGrab = await Axios.get(`http://localhost:5000/api/countFollowers/${username}`)
-      console.log(followerGrab.data)
+      const followerGrab = await Axios.get(
+        `http://localhost:5000/api/countFollowers/${username}`
+      );
+      console.log(followerGrab.data);
 
       if (followerGrab !== null || followerGrab !== undefined) {
-        setFollowers2(followerGrab.data)
+        setFollowers2(followerGrab.data);
       } else {
         setFollowers2(0);
       }
@@ -291,19 +289,23 @@ function UserInfoCard() {
 
     //Check if followed
 
-    const checkFollowed = await Axios.get(`http://localhost:5000/api/checkFollowed/${username}/${c}`)
+    const checkFollowed = await Axios.get(
+      `http://localhost:5000/api/checkFollowed/${username}/${c}`
+    );
     // console.log(checkFollowed)
 
-    let checked = checkFollowed.data
+    let checked = checkFollowed.data;
     // console.log(checked)
 
     if (checkFollowed !== null || checkFollowed !== undefined) {
-      setFollow(checked)
+      setFollow(checked);
     }
 
     //Photo
     // setRealdescription(false);
-    const response = await Axios.get(`http://localhost:5000/photo/${TMusername}`);
+    const response = await Axios.get(
+      `http://localhost:5000/photo/${TMusername}`
+    );
     console.log(response);
     if (response) {
       // setHavephoto(true);
@@ -314,11 +316,11 @@ function UserInfoCard() {
     }
   }, [success1, success2, realdescription, follow]);
 
-
   const x = window.location.href.replaceAll("/", " ").split(" ");
   const render_user = x[x.length - 1];
 
   const you = localStorage.getItem("ob_username");
+  const whoi = localStorage.getItem("ob_who");
 
   return (
     <Card className={cx(styles.card, shadowStyles.root)}>
@@ -334,8 +336,8 @@ function UserInfoCard() {
                       <input type="file" hidden onChange={handleUpload} />
                     </Button>
                   ) : (
-                      <div></div>
-                    )}
+                    <div></div>
+                  )}
 
                   {/* <input type="file" onChange={handleUpload} /> */}
                 </Grid>
@@ -363,29 +365,29 @@ function UserInfoCard() {
                   </Grid>
                 </Grid>
                 {/* <Box p={2} flex={"auto"} className={borderedGridStyles.item}> */}
-                {render_user === you ? (
+                {render_user === you || whoi === "business" ? (
                   <div></div>
                 ) : (
-                    <Box p={1} flex={"auto"}>
-                      {follow ? (
+                  <Box p={1} flex={"auto"}>
+                    {follow ? (
+                      <Button
+                        onClick={handleUnfollow}
+                        className={styles.button}
+                      >
+                        Unfollow
+                      </Button>
+                    ) : (
+                      <Box flex={"auto"}>
                         <Button
-                          onClick={handleUnfollow}
+                          onClick={handleFollow}
                           className={styles.button}
                         >
-                          Unfollow
+                          Follow
                         </Button>
-                      ) : (
-                          <Box flex={"auto"}>
-                            <Button
-                              onClick={handleFollow}
-                              className={styles.button}
-                            >
-                              Follow
-                          </Button>
-                          </Box>
-                        )}
-                    </Box>
-                  )}
+                      </Box>
+                    )}
+                  </Box>
+                )}
                 {/* </Box> */}
               </Box>
             </Grid>
@@ -397,8 +399,8 @@ function UserInfoCard() {
             <UserInfoModal pass={realdescriptionset} />
           </Grid>
           <Grid className={styles.left} item={12}>
-              <h3>About Me</h3>
-              <p>{description}</p>
+            <h3>About Me</h3>
+            <p>{description}</p>
             <Divider varient="middle" />
           </Grid>
 

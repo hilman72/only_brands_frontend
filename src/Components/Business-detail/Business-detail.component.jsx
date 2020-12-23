@@ -98,7 +98,6 @@ const useStyles = makeStyles(({ palette }) => ({
   bottomRow: {
     backgroundColor: "#a4efef",
     borderRadius: "0rem 0rem 0.5rem 0.5rem",
-    paddingTop: "1rem"
   },
   followButtonContainer: {
     padding: 0,
@@ -109,10 +108,13 @@ const useStyles = makeStyles(({ palette }) => ({
     margin: "0 !important",
   },
   imgBtn: {
-    marginBottom: "4"
+    marginBottom: "4",
   },
   padding: {
-    padding: "1.5rem !important"
+    padding: "1.5rem !important",
+  },
+  edit: {
+    padding: "0.5rem",
   },
 }));
 
@@ -282,14 +284,26 @@ const BusinessDetail = (props) => {
           {/* --------- row for avatar --------- */}
           <Grid item className={styles.shrink} xs={4}>
             <Avatar className={styles.avatar} src={businesssmallphoto} />
-            <Button className="customButton" component="label">
-              Upload Image
-              <input type="file" hidden onChange={handleBusinessPhotoUpload} />
-            </Button>
           </Grid>
-          <Grid item xs={6}></Grid>
-          <Grid item className={styles.editButton} xs={2}>
-            <BusinessInfoModal />
+          <Grid item xs={5}></Grid>
+          <Grid container className={styles.edit} xs={3}>
+            <Grid item xs={6}>
+              <BusinessInfoModal />
+            </Grid>
+            <Grid item xs={6}>
+              {user === TMusername ? (
+                <Button className="customButton" component="label">
+                  Upload Image
+                  <input
+                    type="file"
+                    hidden
+                    onChange={handleBusinessPhotoUpload}
+                  />
+                </Button>
+              ) : (
+                <div></div>
+              )}
+            </Grid>
           </Grid>
         </Grid>
         {/* --------- row for name and description --------- */}
@@ -307,18 +321,18 @@ const BusinessDetail = (props) => {
                   {detail && detail[0] && detail[0].business_name}
                 </h2>
               </Typography>
-              <span className={styles.subheader}>{detail && detail[0] && detail[0].category}</span>
+              <span className={styles.subheader}>
+                {detail && detail[0] && detail[0].category}
+              </span>
             </CardContent>
           </Grid>
           <Grid item xs={8}>
             <CardContent className={styles.content}>
-              {/* <Typography>
-                  <h2 className={styles.heading}>Description/Bio</h2>
-                </Typography> */}
               <Typography>
-                <p>
-                  {detail && detail[0] && detail[0].description}
-                </p>
+                <h2 className={styles.heading}>What we're known for</h2>
+              </Typography>
+              <Typography>
+                <p>{detail && detail[0] && detail[0].description}</p>
               </Typography>
             </CardContent>
           </Grid>
@@ -350,21 +364,21 @@ const BusinessDetail = (props) => {
                 {user === TMusername || whoi === "business" ? (
                   <div className={styles.padding}></div>
                 ) : (
-                    <Box p={1} flex={"auto"}>
-                      {follow ? (
-                        <Button
-                          onClick={handleUnfollow}
-                          className={styles.button}
-                        >
-                          Unfollow
-                        </Button>
-                      ) : (
-                          <Button onClick={handleFollow} className={styles.button}>
-                            Follow
-                          </Button>
-                        )}
-                    </Box>
-                  )}
+                  <Box p={1} flex={"auto"}>
+                    {follow ? (
+                      <Button
+                        onClick={handleUnfollow}
+                        className={styles.button}
+                      >
+                        Unfollow
+                      </Button>
+                    ) : (
+                      <Button onClick={handleFollow} className={styles.button}>
+                        Follow
+                      </Button>
+                    )}
+                  </Box>
+                )}
               </Box>
             </Box>
           </Grid>
@@ -372,8 +386,8 @@ const BusinessDetail = (props) => {
             {user === TMusername || whoi === "business" ? (
               <div></div>
             ) : (
-                <CreateBrandReviewModal />
-              )}
+              <CreateBrandReviewModal />
+            )}
           </Grid>
           <Grid item xs={3}>
             <ButtonGroup
