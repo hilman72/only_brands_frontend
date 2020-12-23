@@ -21,6 +21,7 @@ import { useParams, useLocation } from "react-router-dom";
 //new
 import { displayuserownreviewonbiz } from '../../Redux/Actions/BisDisplayUserOwnReviewaction'
 import { useSelector, useDispatch } from "react-redux";
+import { user_rank } from '../../Redux/Actions/GetUserRankaction'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -103,6 +104,7 @@ const BusinessDiffCom = (props) => {
   useEffect(() => {
     //TRY for own review 
     dispatch(displayuserownreviewonbiz(TMusername, importantid))
+    dispatch(user_rank(TMusername, importantid))
     setWho(props.who);
     axios
       .get(`http://localhost:5000/api/getCoupon/${render_user}`)
@@ -134,8 +136,8 @@ const BusinessDiffCom = (props) => {
               <CreateCoupon create={whenCreate} />
             </Grid>
           ) : (
-            <div></div>
-          )}
+              <div></div>
+            )}
 
           <Grid item xs={12}>
             <BusinessCoupon coupon={coupon} />

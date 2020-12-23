@@ -17,6 +17,49 @@ import SwiperCore, { Navigation, Autoplay } from "swiper";
 SwiperCore.use([Navigation, Autoplay]);
 
 function PointsCarousel() {
+  const list = [
+    {
+      business_name: "Hilman's Hamburgers",
+      point: "0",
+    },
+    {
+      business_name: "Bibek's Bagels",
+      point: "30",
+    },
+    {
+      business_name: "Darian's Doughnuts",
+      point: "100",
+    },
+    {
+      business_name: "Brokeback Steakhouse ",
+      point: "80",
+    },
+    {
+      business_name: "Mika's Muffins  ",
+      point: "30",
+    },
+    {
+      business_name: "Arrans' Appetizers   ",
+      point: "50",
+    },
+    {
+      business_name: "Sam's Supersalads   ",
+      point: "70",
+    },
+    {
+      business_name: "Lesley's Lobsters and Grill   ",
+      point: "80",
+    },
+    {
+      business_name: "Doug's Deli Sandwiches  ",
+      point: "90",
+    },
+    {
+      business_name: "Rachel's Ramen ",
+      point: "20",
+    },
+  ];
+
   return (
     <div className="CardContainer">
       <Swiper
@@ -28,46 +71,13 @@ function PointsCarousel() {
         onSlideChange={() => {}}
         onSwiper={(swiper) => {}}
       >
-        <SwiperSlide>
-          {" "}
-          <PointsCards />
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <PointsCards />
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <PointsCards />
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <PointsCards />
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <PointsCards />
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <PointsCards />
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <PointsCards />
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <PointsCards />
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <PointsCards />
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <PointsCards />
-        </SwiperSlide>
+        {list.map((data, i) => {
+          return (
+            <SwiperSlide>
+              <PointsCards key={i} data={data} />
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
     </div>
   );
