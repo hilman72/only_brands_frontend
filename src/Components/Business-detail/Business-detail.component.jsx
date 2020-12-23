@@ -350,7 +350,6 @@ const BusinessDetail = (props) => {
                 {user === TMusername || whoi === "business" ? (
                   <div className={styles.padding}></div>
                 ) : (
-<<<<<<< HEAD
                     <Box p={1} flex={"auto"}>
                       {follow ? (
                         <Button
@@ -366,39 +365,6 @@ const BusinessDetail = (props) => {
                         )}
                     </Box>
                   )}
-||||||| merged common ancestors
-                  <Box p={1} flex={"auto"}>
-                    {follow ? (
-                      <Button
-                        onClick={handleUnfollow}
-                        className={styles.button}
-                      >
-                        Unfollow
-                      </Button>
-                    ) : (
-                      <Button onClick={handleFollow} className={styles.button}>
-                        Follow
-                      </Button>
-                    )}
-                  </Box>
-                )}
-=======
-                  <Box p={1} flex={"auto"}>
-                    {follow ? (
-                      <Button
-                        onClick={handleUnfollow}
-                      >
-                        Unfollow
-                      </Button>
-                    ) : (
-                      <Button 
-                      onClick={handleFollow}>
-                        Follow
-                      </Button>
-                    )}
-                  </Box>
-                )}
->>>>>>> master
               </Box>
             </Box>
           </Grid>
