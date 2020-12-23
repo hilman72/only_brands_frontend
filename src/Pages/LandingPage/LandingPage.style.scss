@@ -1,6 +1,23 @@
 .LogoHeader {
-    font-size: 7rem;
+    font-size: 5rem !important;
+    color: white;
+    z-index: 99 !important;
   }
+
+.logo {
+  background-color: rgba(255,255,255,0);
+  width: 80%;
+  // display: flex !important;
+  // justify-content: center !important;
+  // align-items: center !important;
+  // margin: auto !important;
+  margin-left: 11rem;
+}
+
+.tagline {
+  color: white;
+  font-size: 1.8rem !important;
+}
 
 h1,
 h2 {
@@ -9,7 +26,7 @@ h2 {
 
 .HeaderContainer {
   border-bottom: 2px solid black;
-  height: 120vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,10 +104,15 @@ h2 {
 
 .LoginButton {
   padding: 10px 150px !important;
+  width: 10rem !important;
+  background-color: #ff829b !important;
+  color: white !important;
 }
 
 .RegisterButton {
-  padding: 15px 60px !important;
+  padding: 10px 150px !important;
+  width: 10rem !important;
+  color: white !important;
 }
 
 .RegisterBtnContainer{
@@ -100,7 +122,7 @@ h2 {
 }
 
 .container {
-  z-index: 1000;
+  z-index: 90;
 }
 
 // background styling
@@ -149,12 +171,16 @@ $purple: #7c071d;
 }
 
 .svg{
-  stroke:#c1ffff;
+  fill:#c1ffff;
+  stroke:#7ddfd0;
+  stroke-width: 0.8px;
   // background-color:#c1ffff ;
 	position:absolute;
 	bottom: -100vh;
   transform-style: preserve-3d;
-  color: #c1ffff;
+  // color: #c1ffff;
+  height: 150px;
+  width: 150px;
 }
 
 $total: 10;
