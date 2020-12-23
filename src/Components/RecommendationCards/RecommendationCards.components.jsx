@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     padding: theme.spacing(2),
     borderRadius: 16,
+    height: '138px',
   },
   media: {
     minWidth: "25%",
