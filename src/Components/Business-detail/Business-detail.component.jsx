@@ -97,8 +97,7 @@ const useStyles = makeStyles(({ palette }) => ({
 
   bottomRow: {
     backgroundColor: "#a4efef",
-    borderRadius: "0rem 0rem 0.5rem 0.5rem",
-    paddingTop: "1rem"
+    borderRadius: "0rem 0rem 0.5rem 0.5rem"
   },
   followButtonContainer: {
     padding: 0,
@@ -114,6 +113,9 @@ const useStyles = makeStyles(({ palette }) => ({
   padding: {
     padding: "1.5rem !important"
   },
+  edit: {
+    padding: '0.5rem'
+  }
 }));
 
 const BusinessDetail = (props) => {
@@ -282,15 +284,20 @@ const BusinessDetail = (props) => {
           {/* --------- row for avatar --------- */}
           <Grid item className={styles.shrink} xs={4}>
             <Avatar className={styles.avatar} src={businesssmallphoto} />
-            <Button className="customButton" component="label">
+          </Grid>
+          <Grid item xs={5}></Grid>
+            <Grid container className={styles.edit} xs={3}>
+              <Grid item xs={6}>
+              <BusinessInfoModal />
+              </Grid>
+              <Grid item xs={6}>
+              <Button className="customButton" component="label">
               Upload Image
               <input type="file" hidden onChange={handleBusinessPhotoUpload} />
             </Button>
-          </Grid>
-          <Grid item xs={6}></Grid>
-          <Grid item className={styles.editButton} xs={2}>
-            <BusinessInfoModal />
-          </Grid>
+              </Grid>
+          
+            </Grid>
         </Grid>
         {/* --------- row for name and description --------- */}
         <Grid
@@ -312,9 +319,9 @@ const BusinessDetail = (props) => {
           </Grid>
           <Grid item xs={8}>
             <CardContent className={styles.content}>
-              {/* <Typography>
-                  <h2 className={styles.heading}>Description/Bio</h2>
-                </Typography> */}
+              <Typography>
+                  <h2 className={styles.heading}>What we're known for</h2>
+                </Typography>
               <Typography>
                 <p>
                   {detail && detail[0] && detail[0].description}
