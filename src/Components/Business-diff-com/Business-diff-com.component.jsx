@@ -14,6 +14,13 @@ import BusinessTopFans from "../Business-topfans/Business-topfans.component";
 import BusinessTiers from "../Business-tiers/Business-tiers.component";
 import BusinessRecom from "../Business-recom/Business-recom.component";
 import CreateCoupon from "../CreateCoupon/CreateCoupon.component";
+import axios from "axios";
+
+//gg
+import { useParams, useLocation } from "react-router-dom";
+//new
+import { displayuserownreviewonbiz } from '../../Redux/Actions/BisDisplayUserOwnReviewaction'
+import { useSelector, useDispatch } from "react-redux";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -78,13 +85,30 @@ const BusinessDiffCom = (props) => {
   const render_user = x[x.length - 1];
 
   const you = localStorage.getItem("ob_username");
+  const dispatch = useDispatch();
+
+  //new
+  let url = useLocation();
+  const pathname = url.pathname.split("/");
+  const TMusername = pathname[2];
+  const importantid = localStorage.getItem("ob_id");
+
+
+
+  //for useselector for own review 
+  const breakdownreviewstore = useSelector((state) => state.getUserOwnReviewToBizStore);
+  const { loading: loadingreview, success: success4, realuploadedObject } = breakdownreviewstore
+
 
   useEffect(() => {
+    //TRY for own review 
+    dispatch(displayuserownreviewonbiz(TMusername, importantid))
     setWho(props.who);
-    fetch(`http://localhost:5000/api/getCoupon/${render_user}`)
-      .then((res) => res.json())
+    axios
+      .get(`http://localhost:5000/api/getCoupon/${render_user}`)
       .then((data) => {
-        setCoupon([...data]);
+        let x = data.data;
+        setCoupon([...x]);
       });
   }, [create, props.who, render_user]);
 
@@ -110,8 +134,8 @@ const BusinessDiffCom = (props) => {
               <CreateCoupon create={whenCreate} />
             </Grid>
           ) : (
-              <div></div>
-            )}
+            <div></div>
+          )}
 
           <Grid item xs={12}>
             <BusinessCoupon coupon={coupon} />
@@ -125,7 +149,7 @@ const BusinessDiffCom = (props) => {
         <BusinessTiers />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <BusinessRecom />
+        <BusinessRecom data={realuploadedObject} />
       </TabPanel>
     </div>
   );

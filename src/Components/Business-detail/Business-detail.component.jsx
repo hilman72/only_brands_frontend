@@ -25,6 +25,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { businessupload } from "../../Redux/Actions/BusinessPhotoaction";
 import Axios from "axios";
 import { useParams, useLocation } from "react-router-dom";
+//new
+
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
@@ -128,6 +130,7 @@ const BusinessDetail = (props) => {
   const importantid = localStorage.getItem("ob_id");
   const dispatch = useDispatch();
 
+
   //useSelector for redux
   const choosestore = useSelector((state) => state.businessInfoUploadStore);
   const { loading, success: success1, userInfoUploadObject } = choosestore;
@@ -190,7 +193,10 @@ const BusinessDetail = (props) => {
 
     let c = localStorage.getItem("ob_id");
 
+
+
     let user = localStorage.getItem("ob_username");
+
 
     // console.log(url)
 
@@ -200,10 +206,9 @@ const BusinessDetail = (props) => {
 
     //Count followers -> Adrian's
 
+
     if (user === username) {
-      const followerGrab = await Axios.get(
-        `http://localhost:5000/api/countBrandFollowers/${user}`
-      );
+      const followerGrab = await Axios.get(`http://localhost:5000/api/countBrandFollowers/${user}`);
       console.log(followerGrab.data);
 
       if (followerGrab !== null || followerGrab !== undefined) {
@@ -215,8 +220,6 @@ const BusinessDetail = (props) => {
       const followerGrab = await Axios.get(
         `http://localhost:5000/api/countBrandFollowers/${username}`
       );
-      console.log(followerGrab.data);
-
       if (followerGrab !== null || followerGrab !== undefined) {
         setFollowers(followerGrab.data);
       } else {
@@ -226,15 +229,13 @@ const BusinessDetail = (props) => {
 
     //Check if followed
 
-    const checkFollowed = await Axios.get(
-      `http://localhost:5000/api/checkBrandFollowed/${username}/${c}`
-    );
+    const checkFollowed = await Axios.get(`http://localhost:5000/api/checkBrandFollowed/${username}/${c}`)
     // console.log(checkFollowed)
-    let checked = checkFollowed.data;
-    console.log(checked);
+    let checked = checkFollowed.data
+    console.log(checked)
 
     if (checkFollowed !== null || checkFollowed !== undefined) {
-      setFollow(checked);
+      setFollow(checked)
     }
   }, [success1, follow]);
 
@@ -348,10 +349,10 @@ const BusinessDetail = (props) => {
                       Unfollow
                     </Button>
                   ) : (
-                    <Button onClick={handleFollow} className={styles.button}>
-                      Follow
-                    </Button>
-                  )}
+                      <Button onClick={handleFollow} className={styles.button}>
+                        Follow
+                      </Button>
+                    )}
                 </Box>
               </Box>
             </Box>

@@ -27,6 +27,10 @@ import { getReceRefBusinessReducer } from "./Reducers/get_received_referal_busin
 
 import { getDisplayCouponReducer } from "./Reducers/couponfordisplay";
 
+//Get user own review to business page
+
+import { userGetOwnReviewFromBizReducer } from './Reducers/BisDisplayUserOwnReviewreducers'
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
@@ -48,6 +52,9 @@ const rootReducer = combineReducers({
 
   //For searchdata
   searchStore: searchReducer,
+
+  //Get user own review to business page
+  getUserOwnReviewToBizStore: userGetOwnReviewFromBizReducer,
 
   //for the received ref coupon my my coupon (USER)
   getReceRefStore: getReceRefReducer,

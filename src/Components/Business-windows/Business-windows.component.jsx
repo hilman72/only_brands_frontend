@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 
 import "./business-windows.style.scss";
 import BusinessDiffCom from "../Business-diff-com/Business-diff-com.component";
-import { WhereToVote } from "@material-ui/icons";
 
 const BusinessWindows = () => {
   const [who, setWho] = useState("");
