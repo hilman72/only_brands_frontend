@@ -99,6 +99,7 @@ const useStyles = makeStyles(({ palette }) => ({
   bottomRow: {
     backgroundColor: "#a4efef",
     borderRadius: "0rem 0rem 0.5rem 0.5rem",
+    paddingTop: "0.5rem"
   },
   followButtonContainer: {
     padding: 0,
@@ -108,6 +109,9 @@ const useStyles = makeStyles(({ palette }) => ({
     padding: "0 !important",
     margin: "0 !important",
   },
+  imgBtn: {
+    marginBottom: "4"
+  }
 }));
 
 const BusinessDetail = (props) => {
@@ -276,7 +280,7 @@ const BusinessDetail = (props) => {
           {/* --------- row for avatar --------- */}
           <Grid item className={styles.shrink} xs={4}>
             <Avatar className={styles.avatar} src={businesssmallphoto} />
-            <Button className={styles.imgBtn} component="label">
+            <Button className="customButton" component="label">
               Upload Image
               <input type="file" hidden onChange={handleBusinessPhotoUpload} />
             </Button>
@@ -340,7 +344,7 @@ const BusinessDetail = (props) => {
               <h4>{followers}</h4>
             </Grid>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={2}>
             <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
               <Box p={1} flex={"auto"} className={styles.followButtonContainer}>
                 {user === TMusername || whoi === "business" ? (

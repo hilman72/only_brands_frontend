@@ -57,11 +57,9 @@ function BusinessProfiles() {
       <Header />
       <Grid container>
         <Grid className="bannerImg" item xs={12}>
-          Banner Photo
         </Grid>
         <Grid container spacing={2}>
           <Grid item xs={2}>
-            Gutter
           </Grid>
           <Grid container xs={8}>
             <Grid className={styles.cover} item xs={12}></Grid>
@@ -75,7 +73,6 @@ function BusinessProfiles() {
             </Grid>
           </Grid>
           <Grid item xs={2}>
-            Gutter
           </Grid>
         </Grid>
       </Grid>

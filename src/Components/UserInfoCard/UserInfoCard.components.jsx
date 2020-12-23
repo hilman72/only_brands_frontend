@@ -105,6 +105,9 @@ const useStyles = makeStyles(({ palette }) => ({
   imgBtn: {
     float: "left",
   },
+  followers: {
+    height: '5rem !important'
+  }
 }));
 
 function UserInfoCard() {
@@ -386,12 +389,12 @@ function UserInfoCard() {
                   alignItems="center"
                   container
                 >
-                  <Grid item xs={12}>
+                  <Grid item classes={12}>
                     <h6 className={styles.noPadding}>Followers</h6>
                     <h4>{followers2}</h4>
                   </Grid>
                 </Grid>
-                <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
+                {/* <Box p={2} flex={"auto"} className={borderedGridStyles.item}> */}
                   {render_user === you ? (
                     <div></div>
                   ) : (
@@ -415,7 +418,7 @@ function UserInfoCard() {
                           )}
                       </Box>
                     )}
-                </Box>
+                {/* </Box> */}
               </Box>
             </Grid>
           </Grid>
