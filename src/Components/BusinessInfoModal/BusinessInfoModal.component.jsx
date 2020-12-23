@@ -47,14 +47,10 @@ function BusinessInfoModal() {
   };
 
   //Send the form data to the backend
-  const on99 = async (e) => {
-    e.preventDefault();
-    await fetch("http://localhost:5000/edit", {
-      method: "post",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ name: name, photo: photofile, id: importantid }),
-    });
-  };
+
+  const updatebusiness = () => {
+
+  }
 
   const x = window.location.href.replaceAll("/", " ").split(" ");
   const render_user = x[x.length - 1];
@@ -68,15 +64,15 @@ function BusinessInfoModal() {
           Edit Profile
         </Button>
       ) : (
-        <div></div>
-      )}
+          <div></div>
+        )}
 
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Edit Profile Details</DialogTitle>
+        <DialogTitle id="form-dialog-title">ff Profile Details</DialogTitle>
         <DialogContent>
           <DialogContentText>Enter Details Below</DialogContentText>
           <TextField
@@ -111,7 +107,7 @@ function BusinessInfoModal() {
           </Button>
         </DialogContent>
         <DialogActions>
-          <Button onClick={on99}>Update</Button>
+          <Button onClick={updatebusiness}>Update</Button>
           <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>

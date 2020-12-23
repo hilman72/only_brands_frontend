@@ -272,11 +272,11 @@ function UserInfoCard() {
 
     //Count followers -> Adrian's
 
-    if (user === username){
+    if (user === username) {
 
       const followerGrab = await Axios.get(`http://localhost:5000/api/countFollowers/${user}`)
       console.log(followerGrab.data)
-  
+
       if (followerGrab !== null || followerGrab !== undefined) {
         setFollowers2(followerGrab.data)
       } else {
@@ -287,14 +287,12 @@ function UserInfoCard() {
 
       const followerGrab = await Axios.get(`http://localhost:5000/api/countFollowers/${username}`)
       console.log(followerGrab.data)
-  
+
       if (followerGrab !== null || followerGrab !== undefined) {
         setFollowers2(followerGrab.data)
       } else {
         setFollowers2(0);
       }
-
-
     }
 
     //Check if followed
@@ -326,7 +324,7 @@ function UserInfoCard() {
     // console.log(response2.data[0].description);
     if (response2 !== null || response2 !== undefined) {
       setHavedescription(true);
-      // setDescription(response2.data[0].description);
+      setDescription(response2.data[0].description);
     }
   }, [success1, success2, realdescription, follow]);
 
