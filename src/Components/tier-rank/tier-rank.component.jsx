@@ -105,6 +105,7 @@ const DiffRank = () => {
           <TimelineConnector className={classes.secondaryTail} />
         </TimelineSeparator>
         <TimelineContent>
+          <Button>Claim Reward</Button>
           <Paper elevation={3} className={classes.paper}>
             <Typography variant="h6" component="h1">
               Bronze
