@@ -8,6 +8,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
+import axios from "axios";
 
 function CreateCoupon(props) {
   const [open, setOpen] = useState(false);
@@ -44,18 +45,16 @@ function CreateCoupon(props) {
   const handleSubmit = async () => {
     const b_id = localStorage.getItem("ob_id");
     const b_name = localStorage.getItem("ob_username");
-    await fetch(`http://localhost:5000/api/createCoupon`, {
-      method: "POST",
-      headers: { "content-Type": "application/json" },
-      body: JSON.stringify({
+    await axios
+      .post(`http://localhost:5000/api/createCoupon`, {
         finished_date: date,
         description: detail,
         discount: offer,
         limit: coupLimit,
         account_business_id: b_id,
         business_name: b_name,
-      }),
-    }).then(handleClose());
+      })
+      .then(handleClose());
   };
 
   const couponLimit = [
