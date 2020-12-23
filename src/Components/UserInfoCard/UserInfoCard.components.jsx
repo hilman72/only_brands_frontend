@@ -79,7 +79,8 @@ const useStyles = makeStyles(({ palette }) => ({
     letterSpacing: "1px",
   },
   content: {
-    padding: 24,
+    padding: "0",
+    float: "left !important"
   },
   container: {
     margin: "auto",
@@ -107,6 +108,12 @@ const useStyles = makeStyles(({ palette }) => ({
   },
   followers: {
     height: '5rem !important'
+  },
+  padding: {
+    padding: "1rem !important"
+  },
+  left: {
+    textAlign: "left"
   }
 }));
 
@@ -342,7 +349,7 @@ function UserInfoCard() {
               </Grid>
             </CardContent>
             <Divider light />
-            <Grid item xs={12}>
+            <Grid item className={styles.padding} xs={12}>
               <Box display={"flex"}>
                 <Grid
                   direction="row"
@@ -389,14 +396,9 @@ function UserInfoCard() {
           <Grid item xs={12}>
             <UserInfoModal pass={realdescriptionset} />
           </Grid>
-          <Grid item={12}>
-            <CardContent className={styles.content}>
-              <TextInfoContent
-                classes={textCardContentStyles}
-                heading={"About Me"}
-              />
-              <h2>{description}</h2>
-            </CardContent>
+          <Grid className={styles.left} item={12}>
+              <h3>About Me</h3>
+              <p>{description}</p>
             <Divider varient="middle" />
           </Grid>
 
