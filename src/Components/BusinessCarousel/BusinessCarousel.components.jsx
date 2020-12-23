@@ -15,6 +15,60 @@ import SwiperCore, { Navigation, Pagination, EffectCoverflow } from "swiper";
 SwiperCore.use([Navigation, Pagination, EffectCoverflow]);
 
 function BusinessCarousel() {
+  const list = [
+    {
+      photo:
+        "https://twisper.com/wp-content/uploads/2020/03/close-up-photo-of-burger-3915906-scaled.jpg",
+      business_name: "Hilman's Hamburgers",
+      category: "American",
+    },
+    {
+      photo: "https://source.unsplash.com/random",
+      business_name: "Bibek's Bagels",
+      category: "French",
+    },
+    {
+      photo: "https://source.unsplash.com/random",
+      business_name: "Darian's Doughnuts",
+      category: "Korean",
+    },
+    {
+      photo: "https://source.unsplash.com/random",
+      business_name: "Brokeback Steakhouse ",
+      category: "italian",
+    },
+    {
+      photo: "https://source.unsplash.com/random",
+      business_name: "Mika's Muffins  ",
+      category: "Taiwanese",
+    },
+    {
+      photo: "https://source.unsplash.com/random",
+      business_name: "Arrans' Appetizers   ",
+      category: "Other",
+    },
+    {
+      photo: "https://source.unsplash.com/random",
+      business_name: "Sam's Supersalads   ",
+      category: "Europe",
+    },
+    {
+      photo: "https://source.unsplash.com/random",
+      business_name: "Lesley's Lobsters and Grill   ",
+      category: "Europe",
+    },
+    {
+      photo: "https://source.unsplash.com/random",
+      business_name: "Doug's Deli Sandwiches  ",
+      category: "French",
+    },
+    {
+      photo: "https://source.unsplash.com/random",
+      business_name: "Rachel's Ramen ",
+      category: "Japanese",
+    },
+  ];
+
   return (
     <div className="BusinessCarousel">
       <Swiper
@@ -25,27 +79,13 @@ function BusinessCarousel() {
         onSlideChange={() => {}}
         onSwiper={(swiper) => {}}
       >
-        <SwiperSlide>
-          <BrandCards />
-        </SwiperSlide>
-        <SwiperSlide>
-          <BrandCards />
-        </SwiperSlide>
-        <SwiperSlide>
-          <BrandCards />
-        </SwiperSlide>
-        <SwiperSlide>
-          <BrandCards />
-        </SwiperSlide>
-        <SwiperSlide>
-          <BrandCards />
-        </SwiperSlide>
-        <SwiperSlide>
-          <BrandCards />
-        </SwiperSlide>
-        <SwiperSlide>
-          <BrandCards />
-        </SwiperSlide>
+        {list.map((data, i) => {
+          return (
+            <SwiperSlide>
+              <BrandCards key={i} data={data} />
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
     </div>
   );
