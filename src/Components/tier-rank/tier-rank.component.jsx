@@ -12,6 +12,7 @@ import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import { useHistory } from 'react-router-dom';
 
 import "./tier-rank.style.scss";
 
@@ -24,8 +25,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 const DiffRank = () => {
   const classes = useStyles();
+  const history = useHistory();
+
+  function getReward(){
+    history.push("/Confetti")
+  }
 
   return (
     <Timeline align="alternate">
@@ -105,7 +112,6 @@ const DiffRank = () => {
           <TimelineConnector className={classes.secondaryTail} />
         </TimelineSeparator>
         <TimelineContent>
-          <Button>Claim Reward</Button>
           <Paper elevation={3} className={classes.paper}>
             <Typography variant="h6" component="h1">
               Bronze
@@ -115,7 +121,6 @@ const DiffRank = () => {
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
-        <Button>Claim Reward</Button>
         <TimelineOppositeContent>
           <Typography variant="body2" color="textSecondary">
             0 pt
@@ -134,6 +139,7 @@ const DiffRank = () => {
           </Paper>
         </TimelineContent>
       </TimelineItem>
+      <Button onClick={getReward}>Claim Reward</Button>
     </Timeline>
   );
 };

@@ -22,6 +22,7 @@ import NotYet from "./Pages/Notyet_verifyPage/notyet_verify.component";
 import VerifySuccessPage from "./Pages/VerifySuccessPage/VerfiySuccessPage.component";
 import TestingPage from "./Pages/TestingPage/TestingPage.jsx";
 import UserCreateProfilePage from "./Pages/UserCreateProfilePage/UserCreateProfilePage.component";
+import ConfettiPage from "./Pages/ConfettiPage/ConfettiPage.components";
 
 import BusinessCreateProfilePage from "./Pages/BusinessCreateProfilePage/BusinessCreateProfilePage.component";
 
@@ -74,6 +75,7 @@ class App extends React.Component {
             <Route path="/TestingPage" component={TestingPage} />
             <Route path="/After" component={AfterRegister} />
             <Route path="/Error" component={Error} />
+            <Route path="/Confetti" component={ConfettiPage} />
 
             <Route
               path="/UserCreateProfile"
