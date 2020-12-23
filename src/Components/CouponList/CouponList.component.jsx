@@ -183,7 +183,7 @@ const CouponList = (props) => {
             cou.map((data, i) => {
               if (data.used === true || data.expired === TrendingUpOutlined) {
                 return (
-                  <Grid item xs={12} sm={6}>
+                  <Grid item xs={6}>
                     <Coupon
                       key={i}
                       data={data}
@@ -206,7 +206,7 @@ const CouponList = (props) => {
           {uploadedObject && uploadedObject.length > 0 ? (
             uploadedObject.map((data, i) => {
               return (
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={6}>
                   <ReferalCard key={i} data={data} />
                 </Grid>
               );
@@ -224,7 +224,7 @@ const CouponList = (props) => {
               uploadedObject1.map((data, i) => {
                 if (data.used === false) {
                   return (
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={6}>
                       <Coupon
                         key={i}
                         data={data}
@@ -247,7 +247,7 @@ const CouponList = (props) => {
               uploadedObject2.map((data, i) => {
                 if (data.used === false) {
                   return (
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={6}>
                       <Coupon
                         key={i}
                         data={data}

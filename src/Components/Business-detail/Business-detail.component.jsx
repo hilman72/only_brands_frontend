@@ -25,6 +25,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { businessupload } from "../../Redux/Actions/BusinessPhotoaction";
 import Axios from "axios";
 import { useParams, useLocation } from "react-router-dom";
+//new
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
@@ -181,6 +182,12 @@ const BusinessDetail = (props) => {
   const pathname = url.pathname.split("/");
   const TMusername = pathname[2];
 
+  let c = localStorage.getItem("ob_id");
+
+  let user = localStorage.getItem("ob_username");
+
+  let whoi = localStorage.getItem("ob_who");
+
   useEffect(async () => {
     console.log(TMusername);
     const response = await Axios.get(
@@ -191,10 +198,6 @@ const BusinessDetail = (props) => {
     } else {
       setBusinesssmallphoto("");
     }
-
-    let c = localStorage.getItem("ob_id");
-
-    let user = localStorage.getItem("ob_username");
 
     // console.log(url)
 
@@ -219,8 +222,6 @@ const BusinessDetail = (props) => {
       const followerGrab = await Axios.get(
         `http://localhost:5000/api/countBrandFollowers/${username}`
       );
-      console.log(followerGrab.data);
-
       if (followerGrab !== null || followerGrab !== undefined) {
         setFollowers(followerGrab.data);
       } else {
@@ -346,22 +347,33 @@ const BusinessDetail = (props) => {
           <Grid item xs={2}>
             <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
               <Box p={1} flex={"auto"} className={styles.followButtonContainer}>
-                <Box p={1} flex={"auto"}>
-                  {follow ? (
-                    <Button onClick={handleUnfollow} className={styles.button}>
-                      Unfollow
-                    </Button>
-                  ) : (
-                    <Button onClick={handleFollow} className={styles.button}>
-                      Follow
-                    </Button>
-                  )}
-                </Box>
+                {user === TMusername || whoi === "business" ? (
+                  <div></div>
+                ) : (
+                  <Box p={1} flex={"auto"}>
+                    {follow ? (
+                      <Button
+                        onClick={handleUnfollow}
+                        className={styles.button}
+                      >
+                        Unfollow
+                      </Button>
+                    ) : (
+                      <Button onClick={handleFollow} className={styles.button}>
+                        Follow
+                      </Button>
+                    )}
+                  </Box>
+                )}
               </Box>
             </Box>
           </Grid>
           <Grid item xs={3}>
-            <CreateBrandReviewModal />
+            {user === TMusername || whoi === "business" ? (
+              <div></div>
+            ) : (
+              <CreateBrandReviewModal />
+            )}
           </Grid>
           <Grid item xs={3}>
             <ButtonGroup
