@@ -147,7 +147,7 @@ function RecommendationCards(props) {
         <Box>
           <h3 className={styles.heading}>OUTBACK STEAKHOUSE</h3>
         </Box>
-        <p className={styles.body}>{props.data && props.data.reviewdetail}</p>
+        <p className={styles.body}>{props.data.reviewdetail}</p>
         <Divider className={styles.divider} light />
         <Box
           display={"flex"}
