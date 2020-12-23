@@ -1,6 +1,23 @@
 .LogoHeader {
-    font-size: 7rem;
+    font-size: 5rem !important;
+    color: white;
+    z-index: 99 !important;
   }
+
+.logo {
+  background-color: rgba(255,255,255,0);
+  width: 80%;
+  // display: flex !important;
+  // justify-content: center !important;
+  // align-items: center !important;
+  // margin: auto !important;
+  margin-left: 11rem;
+}
+
+.tagline {
+  color: white;
+  font-size: 1.8rem !important;
+}
 
 h1,
 h2 {
@@ -9,10 +26,11 @@ h2 {
 
 .HeaderContainer {
   border-bottom: 2px solid black;
-  height: 120vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #ff4c6d;
 }
 
 .LoginContainer h2 {
@@ -86,10 +104,15 @@ h2 {
 
 .LoginButton {
   padding: 10px 150px !important;
+  width: 10rem !important;
+  background-color: #ff829b !important;
+  color: white !important;
 }
 
 .RegisterButton {
-  padding: 15px 60px !important;
+  padding: 10px 150px !important;
+  width: 10rem !important;
+  color: white !important;
 }
 
 .RegisterBtnContainer{
@@ -99,5 +122,84 @@ h2 {
 }
 
 .container {
-  z-index: 1000;
+  z-index: 90;
+}
+
+// background styling
+
+@import 'https://fonts.googleapis.com/css?family=Playfair+Display:400,700i,900i';
+
+$green: #7c0202;
+$purple: #7c071d;
+
+*{
+  box-sizing: border-box;
+}
+
+.body{
+	font-family: 'Playfair Display', serif;
+	color: rgb(156, 15, 15);
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: $purple;
+	font-size: 14px;
+	overflow: hidden;
+	height: 100vh;
+}
+
+.wrap{
+	perspective-origin: 50% 50%;
+}
+
+.page{
+	margin: 3%;
+	max-width:600px;
+	margin-left:auto;
+	margin-right: auto;
+	padding: 30px;
+	border-radius: 3px;
+	text-align:center;
+	font-size: 1.4vw;
+	h2{
+		font-weight: bold;
+		font-size: 6.5vw;
+		font-weight: 900;
+		font-style: italic;
+		color:white;
+	}
+}
+
+.svg{
+  fill:#c1ffff;
+  stroke:#7ddfd0;
+  stroke-width: 0.8px;
+  // background-color:#c1ffff ;
+	position:absolute;
+	bottom: -100vh;
+  transform-style: preserve-3d;
+  // color: #c1ffff;
+  height: 150px;
+  width: 150px;
+}
+
+$total: 10;
+@for $i from 1 through $total {
+	$scale:random(2) - .4;
+	
+	.svg:nth-child(#{$i}){
+		left:random(120) * 1% - 20;
+		animation: raise#{$i} 6 + random(15) +s linear infinite;
+		animation-delay:random(5) - 5 + s;
+		transform: scale(.3 * $i - .6) rotate(random(360) + deg);
+		z-index: $i - 7;
+		filter: blur($i - 6 + px);
+
+	  @keyframes raise#{$i} {
+		  to{
+			 bottom:150vh;
+			 transform: scale(.3 * $i - .6) rotate(random(360) + deg);
+			}
+		}
+	}
 }
