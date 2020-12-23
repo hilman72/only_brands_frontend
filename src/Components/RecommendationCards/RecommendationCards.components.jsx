@@ -34,6 +34,8 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     borderRadius: 16,
     height: '138px',
+    width: '100%',
+    justifyContent: 'space-around',
   },
   media: {
     minWidth: "25%",
@@ -83,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
     top: 0,
     border: "3px solid #8eebdc",
     borderRadius: "50%",
-    transform: "translate(2rem,-0.5rem)",
+    transform: "translate(4rem,-0.5rem)",
   },
   closeButton: {
     right: theme.spacing(1),
