@@ -3,7 +3,6 @@ import "./MyCouponPage.style.scss";
 import CouponList from "../../Components/CouponList/CouponList.component";
 import Header from "../../Components/Header/Header.component";
 import Grid from "@material-ui/core/Grid";
-import axios from "axios";
 
 const MyCouponPage = (props) => {
   const [who, setWho] = useState("");
