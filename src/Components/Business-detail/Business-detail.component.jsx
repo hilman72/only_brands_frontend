@@ -76,7 +76,6 @@ const useStyles = makeStyles(({ palette }) => ({
     letterSpacing: "1px",
   },
   button: {
-    padding: "1rem",
     borderRadius: "1.5rem",
   },
   editButton: {
@@ -99,7 +98,7 @@ const useStyles = makeStyles(({ palette }) => ({
   bottomRow: {
     backgroundColor: "#a4efef",
     borderRadius: "0rem 0rem 0.5rem 0.5rem",
-    paddingTop: "0.5rem"
+    paddingTop: "1rem"
   },
   followButtonContainer: {
     padding: 0,
@@ -111,7 +110,10 @@ const useStyles = makeStyles(({ palette }) => ({
   },
   imgBtn: {
     marginBottom: "4"
-  }
+  },
+  padding: {
+    padding: "1.5rem !important"
+  },
 }));
 
 const BusinessDetail = (props) => {
@@ -348,18 +350,18 @@ const BusinessDetail = (props) => {
             <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
               <Box p={1} flex={"auto"} className={styles.followButtonContainer}>
                 {user === TMusername || whoi === "business" ? (
-                  <div></div>
+                  <div className={styles.padding}></div>
                 ) : (
                   <Box p={1} flex={"auto"}>
                     {follow ? (
                       <Button
                         onClick={handleUnfollow}
-                        className={styles.button}
                       >
                         Unfollow
                       </Button>
                     ) : (
-                      <Button onClick={handleFollow} className={styles.button}>
+                      <Button 
+                      onClick={handleFollow}>
                         Follow
                       </Button>
                     )}
