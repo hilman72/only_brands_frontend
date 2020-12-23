@@ -7,14 +7,16 @@ import UserCards from "../../Components/UserCards/UserCards.components";
 import BrandCard from "../../Components/BrandCards/BrandCards.components";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card"
 import "./CouponSearch.style.scss";
 import Axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 
 const useStyles = makeStyles({
   box: {
-    padding: 20,
-    margin: 20,
+    padding: 5,
+    margin: 30,
+    border: '5px solid #ff4c6d'
   },
   cardPaper: {
     boxShadow: "none",
@@ -47,26 +49,22 @@ const CouponSearch = () => {
       <Header />
       <Grid container spacing={3}>
         <Grid item xs={2}>
-          Gutter
         </Grid>
         <Grid item xs={8}>
           <Grid container spacing={3}>
-            <Grid item xs={12}>
-              Gutter
-            </Grid>
             <Grid container xs={12}>
               <Grid item xs={2}>
-                Gutter
+
               </Grid>
               <Grid item xs={8}>
                 <Paper className={classes.box} elevation={5}>
-                  <FrontendSearch />
+                 <h2>Search Results</h2>
                 </Paper>
               </Grid>
               <Grid item xs={2}>
-                Gutter
+
               </Grid>
-              <Paper className={classes.cardPaper}>
+
                 {choose === "Coupons" ? (
                   <Grid container xs={12} spacing={3}>
                     {finaldisplay && finaldisplay.length > 0 ? (
@@ -78,7 +76,7 @@ const CouponSearch = () => {
                         );
                       })
                     ) : (
-                      <div>Sorry No Coupon</div>
+                      <div><h4>No Coupons Available.</h4></div>
                     )}
 
                     {/* <UserCards /> */}
@@ -94,7 +92,7 @@ const CouponSearch = () => {
                         );
                       })
                     ) : (
-                      <div>Sorry No Coupon</div>
+                      <div><h4>No Brands Available.</h4></div>
                     )}
 
                     {/* <UserCards /> */}
@@ -110,18 +108,17 @@ const CouponSearch = () => {
                         );
                       })
                     ) : (
-                      <div>Sorry No Coupon</div>
+                      <div><h4>No Users Available.</h4></div>
                     )}
                   </Grid>
                 ) : (
                   <div></div>
                 )}
-              </Paper>
+
             </Grid>
           </Grid>
         </Grid>
         <Grid item xs={2}>
-          Gutter
         </Grid>
       </Grid>
     </div>

@@ -23,6 +23,9 @@ const useStyles = makeStyles(({ palette }) => ({
   paper: {
     borderRadius: "1rem",
   },
+  translate: {
+    transform: "translate(0px,-3rem)",
+  }
 }));
 
 function BusinessProfiles() {
@@ -56,12 +59,15 @@ function BusinessProfiles() {
     <div className={styles.background}>
       <Header />
       <Grid container>
-        <Grid className="bannerImg" item xs={12}>
+        <Grid item xs={12}>
+          <div className="bannerImg">
+          <div className="gradient"></div>
+          </div>
         </Grid>
         <Grid container spacing={2}>
           <Grid item xs={2}>
           </Grid>
-          <Grid container xs={8}>
+          <Grid className={styles.translate} container xs={8}>
             <Grid className={styles.cover} item xs={12}></Grid>
             <Grid item xs={12}>
               <BusinessDetail who={who} detail={detail} />
