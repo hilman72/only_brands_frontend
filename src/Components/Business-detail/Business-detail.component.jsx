@@ -27,7 +27,6 @@ import Axios from "axios";
 import { useParams, useLocation } from "react-router-dom";
 //new
 
-
 const useStyles = makeStyles(({ palette }) => ({
   root: {
     minWidth: 1000,
@@ -130,7 +129,6 @@ const BusinessDetail = (props) => {
   const importantid = localStorage.getItem("ob_id");
   const dispatch = useDispatch();
 
-
   //useSelector for redux
   const choosestore = useSelector((state) => state.businessInfoUploadStore);
   const { loading, success: success1, userInfoUploadObject } = choosestore;
@@ -180,6 +178,12 @@ const BusinessDetail = (props) => {
   const pathname = url.pathname.split("/");
   const TMusername = pathname[2];
 
+  let c = localStorage.getItem("ob_id");
+
+  let user = localStorage.getItem("ob_username");
+
+  let whoi = localStorage.getItem("ob_who");
+
   useEffect(async () => {
     console.log(TMusername);
     const response = await Axios.get(
@@ -191,13 +195,6 @@ const BusinessDetail = (props) => {
       setBusinesssmallphoto("");
     }
 
-    let c = localStorage.getItem("ob_id");
-
-
-
-    let user = localStorage.getItem("ob_username");
-
-
     // console.log(url)
 
     const pathname = url.pathname.split("/");
@@ -206,9 +203,10 @@ const BusinessDetail = (props) => {
 
     //Count followers -> Adrian's
 
-
     if (user === username) {
-      const followerGrab = await Axios.get(`http://localhost:5000/api/countBrandFollowers/${user}`);
+      const followerGrab = await Axios.get(
+        `http://localhost:5000/api/countBrandFollowers/${user}`
+      );
       console.log(followerGrab.data);
 
       if (followerGrab !== null || followerGrab !== undefined) {
@@ -229,13 +227,15 @@ const BusinessDetail = (props) => {
 
     //Check if followed
 
-    const checkFollowed = await Axios.get(`http://localhost:5000/api/checkBrandFollowed/${username}/${c}`)
+    const checkFollowed = await Axios.get(
+      `http://localhost:5000/api/checkBrandFollowed/${username}/${c}`
+    );
     // console.log(checkFollowed)
-    let checked = checkFollowed.data
-    console.log(checked)
+    let checked = checkFollowed.data;
+    console.log(checked);
 
     if (checkFollowed !== null || checkFollowed !== undefined) {
-      setFollow(checked)
+      setFollow(checked);
     }
   }, [success1, follow]);
 
@@ -343,22 +343,33 @@ const BusinessDetail = (props) => {
           <Grid item xs={3}>
             <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
               <Box p={1} flex={"auto"} className={styles.followButtonContainer}>
-                <Box p={1} flex={"auto"}>
-                  {follow ? (
-                    <Button onClick={handleUnfollow} className={styles.button}>
-                      Unfollow
-                    </Button>
-                  ) : (
+                {user === TMusername || whoi === "business" ? (
+                  <div></div>
+                ) : (
+                  <Box p={1} flex={"auto"}>
+                    {follow ? (
+                      <Button
+                        onClick={handleUnfollow}
+                        className={styles.button}
+                      >
+                        Unfollow
+                      </Button>
+                    ) : (
                       <Button onClick={handleFollow} className={styles.button}>
                         Follow
                       </Button>
                     )}
-                </Box>
+                  </Box>
+                )}
               </Box>
             </Box>
           </Grid>
           <Grid item xs={3}>
-            <CreateBrandReviewModal />
+            {user === TMusername || whoi === "business" ? (
+              <div></div>
+            ) : (
+              <CreateBrandReviewModal />
+            )}
           </Grid>
           <Grid item xs={3}>
             <ButtonGroup
