@@ -6,6 +6,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import { useHistory } from "react-router-dom";
 //for redux
 import { useSelector, useDispatch } from "react-redux";
 import { uploadreview } from "../../Redux/Actions/Reviewactions";
@@ -21,6 +22,11 @@ export default function CreateBrandReview() {
   let location = useLocation();
   const pathname = location.pathname.split("/");
   const render_business = pathname[2];
+  const TMB = useSelector((state) => state.reviewStore);
+  //b.success = true
+  const { loading, success: success1, uploadedObject } = TMB;
+
+  const history = useHistory();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -37,7 +43,12 @@ export default function CreateBrandReview() {
   const handleSubmit = () => {
     console.log(render_business);
     dispatch(uploadreview(render_business, reviewdetail, importantid));
+    handleClose();
   };
+
+  useEffect(() => {
+    history.push(`/BusinessProfiles/${render_business}`);
+  }, [success1]);
 
   return (
     <div>
@@ -64,12 +75,8 @@ export default function CreateBrandReview() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleSubmit} color="primary">
-            Submit
-          </Button>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleSubmit}>Submit</Button>
         </DialogActions>
       </Dialog>
     </div>
