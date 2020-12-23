@@ -8,8 +8,8 @@ const FdReview = () => {
     <div className="fdReview">
       <h1>Friend Review</h1>
       <div className="each">
-        <RecommendationCard />
-        <RecommendationCard />
+        {/* <RecommendationCard />
+        <RecommendationCard /> */}
       </div>
     </div>
   );
