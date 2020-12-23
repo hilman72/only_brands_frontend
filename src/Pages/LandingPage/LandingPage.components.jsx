@@ -16,12 +16,12 @@ function LandingPage() {
   return (
     <div>
       <div className="HeaderContainer">
-      <Confetti
+      {/* <Confetti
       opacity={1}
       width={width}
       height={height}
       color={'#e91e63'}
-      />
+      /> */}
         <Grid container spacing={3}>
           <Grid item xs={6}>
             <div className="Logo">
@@ -63,7 +63,7 @@ function LandingPage() {
           </Grid>
         </Grid>
       </div>
-      <div className="CarouselContainer">
+      {/* <div className="CarouselContainer">
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <h1>Check Out The Hottest Offers in Town </h1>
@@ -120,7 +120,7 @@ function LandingPage() {
             <div className="HowItWorkSteps">Step 3</div>
           </Grid>
         </Grid>
-      </div>
+      </div> */}
       <Footer />
     </div>
   );
