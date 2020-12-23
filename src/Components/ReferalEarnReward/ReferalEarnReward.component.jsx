@@ -20,19 +20,12 @@ export default function ReferalEarnReward(props) {
 
   const handleSend = () => {
     axios
-      .post(`http://localhost:5000/api/sendRef/${props.data.id}`, {
+      .post(`http://localhost:5000/api/sendRef/`, {
         name: props.data.send_by,
         business_name: props.data.business_name,
         id: props.data.id,
       })
       .then(handleClose());
-    // axios
-    //   .post(`http://localhost:5000/api/claimRef/`, {
-    //     name: "sam",
-    //     b_name: "adrian",
-    //     sent_by: "hilman",
-    //   }).then((data)=> if(data === "error"){}else if(data=== "ok"){})
-    //   .then(handleClose());
   };
 
   return (

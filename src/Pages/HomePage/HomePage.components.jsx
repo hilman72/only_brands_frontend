@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import BusinessCarousel from "../../Components/BusinessCarousel/BusinessCarousel.components";
 import "./HomePage.style.scss";
 import Grid from "@material-ui/core/Grid";
@@ -7,28 +7,36 @@ import PointsCarousel from "../../Components/PointsCarousel/PointsCarousel.compo
 import RecommendationCarousel from "../../Components/RecommendationCarousel/RecommendationCarousel.components";
 import Footer from "../../Components/Footer/Footer.components";
 import Header from "../../Components/Header/Header.component";
-import Divider from "@material-ui/core/Divider"
-import Card from "@material-ui/core/Card"
+import Divider from "@material-ui/core/Divider";
+import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
-import Paper from '@material-ui/core/Paper'
-import { makeStyles } from '@material-ui/core/styles'
+import Paper from "@material-ui/core/Paper";
+import { makeStyles } from "@material-ui/core/styles";
 import { CardContent, Typography } from "@material-ui/core";
 
+import { useSelector, useDispatch } from "react-redux";
+import { getDisplayCoupon } from "../../Redux/Actions/couponfordisplay.js";
 
 const useStyles = makeStyles(() => ({
   container: {
     padding: 20,
-    borderBottom: '1px solid #ff829b'
+    borderBottom: "1px solid #ff829b",
   },
   button: {
-    float: 'right'
-  }
+    float: "right",
+  },
 }));
 
 function HomePage() {
+  const dispatch = useDispatch();
+  const coupon_display = useSelector((state) => state.getDisplayCouponStore);
+  const { loading, sucess: success, uploadedObject } = coupon_display;
 
-  const classes = useStyles()
-    ;
+  useEffect(() => {
+    dispatch(getDisplayCoupon());
+  }, []);
+
+  const classes = useStyles();
   return (
     <div>
       <div>
@@ -37,20 +45,22 @@ function HomePage() {
       <div className="MainSection">
         <Grid container>
           {/* ---------------- Gutter ---------------- */}
-          <Grid item xs={2}>
-
-          </Grid>
+          <Grid item xs={2}></Grid>
           <Grid item xs={8}>
             <Paper elevation={4}>
               <Grid container>
-
                 {/* ---------------- Brands Recommendations ---------------- */}
-                <Grid container justify="flex-start" >
+                <Grid container justify="flex-start">
                   <Grid item className={classes.container} xs={6}>
                     <h2>Hottest Brands</h2>
                     <BusinessCarousel />
                   </Grid>
-                  <Grid justify="flex-start" className={classes.container} item xs={6}>
+                  <Grid
+                    justify="flex-start"
+                    className={classes.container}
+                    item
+                    xs={6}
+                  >
                     <h2>Newest Brands</h2>
                     <BusinessCarousel />
                   </Grid>
@@ -63,33 +73,37 @@ function HomePage() {
                       <Grid item xs={10}>
                         <h2 className="CouponSectionHeaders">
                           New Offers from Brands You Follow
-                      </h2>
+                        </h2>
                       </Grid>
                       <Grid item xs={2}>
                         <Button className={classes.button}>More</Button>
                       </Grid>
                     </Grid>
                     <Grid item xs={12}>
-                      <CouponCarousel />
+                      <CouponCarousel data={uploadedObject} />
                     </Grid>
                   </Grid>
                   {/* ---------------- Refer a Frend Button ---------------- */}
-                  <Grid container
+                  <Grid
+                    container
                     justify="center"
                     alignItems="center"
                     className={classes.container}
-                    xs={3}>
-                    <Grid
-                      item xs={12}>
-                            <div className="wrap">
-                              <button className="referButton"><h2>Refer A Friend</h2></button>
-                            </div>
+                    xs={3}
+                  >
+                    <Grid item xs={12}>
+                      <div className="wrap">
+                        <button className="referButton">
+                          <h2>Refer A Friend</h2>
+                        </button>
+                      </div>
                     </Grid>
-                    <Grid
-                      item xs={12}>
-                            <div className="wrap">
-                              <button className="referButton"><h2>Explore Offers</h2></button>
-                            </div>
+                    <Grid item xs={12}>
+                      <div className="wrap">
+                        <button className="referButton">
+                          <h2>Explore Offers</h2>
+                        </button>
+                      </div>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -100,10 +114,12 @@ function HomePage() {
                     <Grid item className={classes.container} xs={6}>
                       <Grid container item xs={12}>
                         <Grid item xs={10}>
-                          <h2 className="CouponSectionHeaders">Earned Points</h2>
+                          <h2 className="CouponSectionHeaders">
+                            Earned Points
+                          </h2>
                         </Grid>
                         <Grid item xs={2}>
-                          <Button className={classes.button} >More</Button>
+                          <Button className={classes.button}>More</Button>
                         </Grid>
                       </Grid>
                       <Grid item xs={12}>
@@ -116,10 +132,10 @@ function HomePage() {
                         <Grid item xs={10}>
                           <h2 className="CouponSectionHeaders">
                             Recommendations From Friends
-                        </h2>
+                          </h2>
                         </Grid>
                         <Grid item xs={2}>
-                          <Button className={classes.button} >More</Button>
+                          <Button className={classes.button}>More</Button>
                         </Grid>
                       </Grid>
                       <Grid item xs={12}>
@@ -130,12 +146,9 @@ function HomePage() {
                 </Grid>
               </Grid>
             </Paper>
-
           </Grid>
 
-          <Grid item xs={2}>
-
-          </Grid>
+          <Grid item xs={2}></Grid>
         </Grid>
       </div>
       <Footer />

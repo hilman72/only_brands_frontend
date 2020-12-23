@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import cx from "clsx";
 import Avatar from "@material-ui/core/Avatar";
-import Divider from "@material-ui/core/Divider";
+
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
@@ -9,7 +9,7 @@ import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import { makeStyles } from "@material-ui/core/styles";
 import CardContent from "@material-ui/core/CardContent";
-import TextInfoContent from "@mui-treasury/components/content/textInfo";
+
 import { useN01TextInfoContentStyles } from "@mui-treasury/styles/textInfoContent/n01";
 import { useFadedShadowStyles } from "@mui-treasury/styles/shadow/faded";
 import { useGutterBorderedGridStyles } from "@mui-treasury/styles/grid/gutterBordered";
@@ -17,13 +17,13 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import "./Business-detail.style.scss";
-import ChatIcon from "@material-ui/icons/Chat";
+
 import { Typography } from "@material-ui/core";
 import BusinessInfoModal from "../BusinessInfoModal/BusinessInfoModal.component";
-import CreateBrandReviewModal from '../CreateBrandsReviewModal/CreateBrandsReview.components'
+import CreateBrandReviewModal from "../CreateBrandsReviewModal/CreateBrandsReview.components";
 import { useSelector, useDispatch } from "react-redux";
-import { businessupload } from "../../Redux/Actions/BusinessPhotoaction"
-import Axios from 'axios';
+import { businessupload } from "../../Redux/Actions/BusinessPhotoaction";
+import Axios from "axios";
 import { useParams, useLocation } from "react-router-dom";
 //new
 
@@ -125,16 +125,15 @@ const BusinessDetail = (props) => {
   const [who, setWho] = React.useState("");
   const [detail, setDetail] = React.useState([]);
   const [first, setFirst] = React.useState(false);
-  const [businesssmallphoto, setBusinesssmallphoto] = React.useState("")
+  const [businesssmallphoto, setBusinesssmallphoto] = React.useState("");
   const [followers, setFollowers] = React.useState(0);
   const importantid = localStorage.getItem("ob_id");
   const dispatch = useDispatch();
 
 
   //useSelector for redux
-  const choosestore = useSelector((state) => state.businessInfoUploadStore)
-  const { loading, success: success1, userInfoUploadObject } = choosestore
-
+  const choosestore = useSelector((state) => state.businessInfoUploadStore);
+  const { loading, success: success1, userInfoUploadObject } = choosestore;
 
   //Follower functions
 
@@ -160,7 +159,6 @@ const BusinessDetail = (props) => {
   const handleFollow = async (e) => {
     setFollow(!follow);
 
-
     const ownUser = localStorage.getItem("ob_id");
     const link = e.target.baseURI;
 
@@ -183,52 +181,50 @@ const BusinessDetail = (props) => {
   const TMusername = pathname[2];
 
   useEffect(async () => {
-    console.log(TMusername)
-    const response = await Axios.get(`http://localhost:5000/api/getbusinessphoto/${TMusername}`);
+    console.log(TMusername);
+    const response = await Axios.get(
+      `http://localhost:5000/api/getbusinessphoto/${TMusername}`
+    );
     if (response.data[0].photo) {
       setBusinesssmallphoto(response.data[0].photo);
     } else {
       setBusinesssmallphoto("");
     }
 
-
-
     let c = localStorage.getItem("ob_id");
 
-    let user = localStorage.getItem("ob_username")
+
+
+    let user = localStorage.getItem("ob_username");
+
 
     // console.log(url)
 
     const pathname = url.pathname.split("/");
     const username = pathname[2];
-    console.log(username)
-
+    console.log(username);
 
     //Count followers -> Adrian's
 
+
     if (user === username) {
-
-      const followerGrab = await Axios.get(`http://localhost:5000/api/countBrandFollowers/${user}`)
-      console.log(followerGrab.data)
+      const followerGrab = await Axios.get(`http://localhost:5000/api/countBrandFollowers/${user}`);
+      console.log(followerGrab.data);
 
       if (followerGrab !== null || followerGrab !== undefined) {
-        setFollowers(followerGrab.data)
+        setFollowers(followerGrab.data);
       } else {
         setFollowers(0);
       }
-
     } else {
-
-      const followerGrab = await Axios.get(`http://localhost:5000/api/countBrandFollowers/${username}`)
-      console.log(followerGrab.data)
-
+      const followerGrab = await Axios.get(
+        `http://localhost:5000/api/countBrandFollowers/${username}`
+      );
       if (followerGrab !== null || followerGrab !== undefined) {
-        setFollowers(followerGrab.data)
+        setFollowers(followerGrab.data);
       } else {
         setFollowers(0);
       }
-
-
     }
 
     //Check if followed
@@ -241,8 +237,7 @@ const BusinessDetail = (props) => {
     if (checkFollowed !== null || checkFollowed !== undefined) {
       setFollow(checked)
     }
-  }, [success1, follow])
-
+  }, [success1, follow]);
 
   const handleBusinessPhotoUpload = (ev) => {
     const formdata = new FormData();
@@ -261,7 +256,7 @@ const BusinessDetail = (props) => {
         setBusinesssmallphoto(data.data.link);
         dispatch(businessupload(data.data.link, importantid));
       });
-  }
+  };
 
   useEffect(() => {
     setWho(props.who);
@@ -280,13 +275,10 @@ const BusinessDetail = (props) => {
         <Grid container xs={12}>
           {/* --------- row for avatar --------- */}
           <Grid item className={styles.shrink} xs={4}>
-            <Avatar
-              className={styles.avatar}
-              src={businesssmallphoto}
-            />
+            <Avatar className={styles.avatar} src={businesssmallphoto} />
             <Button className={styles.imgBtn} component="label">
               Upload Image
-                      <input type="file" hidden onChange={handleBusinessPhotoUpload} />
+              <input type="file" hidden onChange={handleBusinessPhotoUpload} />
             </Button>
           </Grid>
           <Grid item xs={6}></Grid>
@@ -353,25 +345,17 @@ const BusinessDetail = (props) => {
               <Box p={1} flex={"auto"} className={styles.followButtonContainer}>
                 <Box p={1} flex={"auto"}>
                   {follow ? (
-                    <Button
-                      onClick={handleUnfollow}
-                      className={styles.button}
-                    >
+                    <Button onClick={handleUnfollow} className={styles.button}>
                       Unfollow
                     </Button>
                   ) : (
-                      <Button
-                        onClick={handleFollow}
-                        className={styles.button}
-                      >
+                      <Button onClick={handleFollow} className={styles.button}>
                         Follow
                       </Button>
-                    )
-                  }
+                    )}
                 </Box>
               </Box>
             </Box>
-
           </Grid>
           <Grid item xs={3}>
             <CreateBrandReviewModal />
