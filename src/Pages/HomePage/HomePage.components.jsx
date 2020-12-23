@@ -20,10 +20,19 @@ import { getDisplayCoupon } from "../../Redux/Actions/couponfordisplay.js";
 const useStyles = makeStyles(() => ({
   container: {
     padding: 20,
-    borderBottom: "1px solid #ff829b",
+    backgroundColor: 'white',
+    marginTop: '4px',
+    marginBottom: '4px',
+    // margin: '1rem',
+    // borderBottom: "1px solid #ff829b",
+    borderRight: '8px solid #f0f0f0',
   },
   button: {
     float: "right",
+  },
+  mainSection:{
+    paddingTop:'1rem',
+    paddingBottom:'1rem',
   },
 }));
 
@@ -42,70 +51,74 @@ function HomePage() {
       <div>
         <Header />
       </div>
-      <div className="MainSection">
+      <div className={classes.mainSection}>
         <Grid container>
           {/* ---------------- Gutter ---------------- */}
           <Grid item xs={1}></Grid>
           <Grid item xs={10}>
-            <Paper elevation={4}>
-              <Grid container>
+            {/* <Paper elevation={4}> */}
+              <Grid container>       
                 {/* ---------------- Brands Recommendations ---------------- */}
-                <Grid container justify="flex-start">
-                  <Grid item className={classes.container} xs={6}>
-                    <h2>Hottest Brands</h2>
-                    <BusinessCarousel />
+   
+                  <Grid container justify="flex-start">
+                      <Grid item className={classes.container} xs={6}>
+                        <h2>Hottest Brands</h2>
+                        <BusinessCarousel />
+                      </Grid>
+                      <Grid
+                        justify="flex-start"
+                        className={classes.container}
+                        item
+                        xs={6}
+                      >
+                        <h2>Newest Brands</h2>
+                        <BusinessCarousel />
+                      </Grid>
                   </Grid>
-                  <Grid
-                    justify="flex-start"
-                    className={classes.container}
-                    item
-                    xs={6}
-                  >
-                    <h2>Newest Brands</h2>
-                    <BusinessCarousel />
-                  </Grid>
-                </Grid>
 
+               
                 <Grid container>
                   <Grid item className={classes.container} xs={9}>
                     {/* ---------------- New Offers from Brands You Follow ---------------- */}
-                    <Grid container item xs={12}>
-                      <Grid item xs={10}>
-                        <h2 className="CouponSectionHeaders">
-                          New Offers from Brands You Follow
-                        </h2>
-                      </Grid>
-                      <Grid item xs={2}>
-                        <Button className={classes.button}>More</Button>
-                      </Grid>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <CouponCarousel data={uploadedObject} />
+                    <Grid container>    
+                        <Grid container item xs={12}>
+                          <Grid item xs={10}>
+                            <h2 className="CouponSectionHeaders">
+                              New Offers from Brands You Follow
+                            </h2>
+                          </Grid>
+                          <Grid item xs={2}>
+                            <Button className={classes.button}>More</Button>
+                          </Grid>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <CouponCarousel data={uploadedObject} />
+                        </Grid>
                     </Grid>
                   </Grid>
                   {/* ---------------- Refer a Frend Button ---------------- */}
-                  <Grid
-                    container
-                    justify="center"
-                    alignItems="center"
-                    className={classes.container}
-                    xs={3}
-                  >
-                    <Grid item xs={12}>
-                      <div className="wrap">
-                        <button className="referButton topButton">
-                          <h2>Refer A Friend</h2>
-                        </button>
-                      </div>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <div className="wrap">
-                        <button className="referButton">
-                          <h2>Explore Offers</h2>
-                        </button>
-                      </div>
-                    </Grid>
-                  </Grid>
+                    <Grid
+                      container
+                      justify="center"
+                      alignItems="center"
+                      className={classes.container}
+                      xs={3}
+                    >
+                        <Grid item xs={12}>
+                          <div className="wrap">
+                            <button className="referButton topButton">
+                              <h2>Refer A Friend</h2>
+                            </button>
+                          </div>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <div className="wrap">
+                            <button className="referButton">
+                              <h2>Explore Offers</h2>
+                            </button>
+                          </div>
+                        </Grid>
+                      </Grid>
                 </Grid>
 
                 <Grid container>
@@ -145,7 +158,7 @@ function HomePage() {
                   </Grid>
                 </Grid>
               </Grid>
-            </Paper>
+            {/* </Paper> */}
           </Grid>
 
           <Grid item xs={1}></Grid>
