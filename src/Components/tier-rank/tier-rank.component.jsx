@@ -11,6 +11,8 @@ import CardGiftcardIcon from "@material-ui/icons/CardGiftcard";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import { useHistory } from 'react-router-dom';
 
 import "./tier-rank.style.scss";
 
@@ -23,8 +25,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 const DiffRank = () => {
   const classes = useStyles();
+  const history = useHistory();
+
+  function getReward(){
+    history.push("/Confetti")
+  }
 
   return (
     <Timeline align="alternate">
@@ -128,10 +136,10 @@ const DiffRank = () => {
             <Typography variant="h6" component="h1">
               Start
             </Typography>
-            <Typography>GoGoGo</Typography>
           </Paper>
         </TimelineContent>
       </TimelineItem>
+      <Button onClick={getReward}>Claim Reward</Button>
     </Timeline>
   );
 };

@@ -58,6 +58,7 @@ function LandingPage( ) {
         </div>
 
         <Grid container spacing={3} alignItems="center" justify="center">
+
           <Grid item xs={6}>
             {/* <div className="Logo"> */}
               {/* <h1 className="LogoHeader">OnlyBrands</h1> */}
