@@ -20,6 +20,7 @@ const useStyles = makeStyles(() => ({
     padding: 5,
     backgroundColor: '#8eebdc',
     minWidth: 100,
+    height: '160px',
   },
   // learnMore: {
   //   backgroundColor: '#fff !important',

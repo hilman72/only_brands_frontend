@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./CouponCarousel.style.scss";
 
 import Coupon from "../../Components/Coupon/Coupon.components";

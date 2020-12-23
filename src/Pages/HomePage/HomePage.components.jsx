@@ -45,8 +45,8 @@ function HomePage() {
       <div className="MainSection">
         <Grid container>
           {/* ---------------- Gutter ---------------- */}
-          <Grid item xs={2}></Grid>
-          <Grid item xs={8}>
+          <Grid item xs={1}></Grid>
+          <Grid item xs={10}>
             <Paper elevation={4}>
               <Grid container>
                 {/* ---------------- Brands Recommendations ---------------- */}
@@ -93,7 +93,7 @@ function HomePage() {
                   >
                     <Grid item xs={12}>
                       <div className="wrap">
-                        <button className="referButton">
+                        <button className="referButton topButton">
                           <h2>Refer A Friend</h2>
                         </button>
                       </div>
@@ -148,7 +148,7 @@ function HomePage() {
             </Paper>
           </Grid>
 
-          <Grid item xs={2}></Grid>
+          <Grid item xs={1}></Grid>
         </Grid>
       </div>
       <Footer />
