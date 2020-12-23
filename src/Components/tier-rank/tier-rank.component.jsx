@@ -30,7 +30,7 @@ const DiffRank = () => {
   const classes = useStyles();
   const history = useHistory();
 
-  function getReward(){
+  function getReward() {
     history.push("/Confetti")
   }
 
@@ -139,12 +139,10 @@ const DiffRank = () => {
           </Paper>
         </TimelineContent>
       </TimelineItem>
-<<<<<<< HEAD
-      <Button>Claim Reward</Button>
-||||||| merged common ancestors
-=======
+
+
       <Button onClick={getReward}>Claim Reward</Button>
->>>>>>> master
+
     </Timeline>
   );
 };
