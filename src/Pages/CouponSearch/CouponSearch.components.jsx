@@ -1,49 +1,46 @@
 import React, { useState, useEffect } from "react";
 import FrontendSearch from "../../Components/FrontendSearch/FrontendSearch.components";
-import Grid from "@material-ui/core/Grid"
+import Grid from "@material-ui/core/Grid";
 import Header from "../../Components/Header/Header.component";
-import Coupons from "../../Components/Coupon/Coupon.components"
-import UserCards from '../../Components/UserCards/UserCards.components'
-import Paper from "@material-ui/core/Paper"
-import { makeStyles } from "@material-ui/core/styles"
+import Coupons from "../../Components/Coupon/Coupon.components";
+import UserCards from "../../Components/UserCards/UserCards.components";
+import BrandCard from "../../Components/BrandCards/BrandCards.components";
+import Paper from "@material-ui/core/Paper";
+import { makeStyles } from "@material-ui/core/styles";
 import "./CouponSearch.style.scss";
 import Axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 
-
 const useStyles = makeStyles({
   box: {
     padding: 20,
-    margin: 20
+    margin: 20,
   },
   cardPaper: {
-    boxShadow: 'none',
+    boxShadow: "none",
   },
   body: {
-    backgroundColor: '#f0f0f0',
-  }
-})
+    backgroundColor: "#f0f0f0",
+  },
+});
 
 const CouponSearch = () => {
-
   const [finaldisplay, setFinaldisplay] = useState([]);
-  const choosesearchstate = useSelector((state) => state.searchStore)
+  const choosesearchstate = useSelector((state) => state.searchStore);
   const { loading, success: success1, searchdata } = choosesearchstate;
 
+  const choose = localStorage.getItem("filter");
 
   useEffect(async () => {
     if (searchdata) {
-      console.log([...searchdata])
-      setFinaldisplay([...searchdata])
+      console.log([...searchdata]);
+      setFinaldisplay([...searchdata]);
     } else {
-      setFinaldisplay("")
+      setFinaldisplay("");
     }
-
-  }, [success1])
-
+  }, [success1]);
 
   const classes = useStyles();
-
 
   return (
     <div className={classes.body}>
@@ -70,27 +67,55 @@ const CouponSearch = () => {
                 Gutter
               </Grid>
               <Paper className={classes.cardPaper}>
-                <Grid container xs={12} spacing={3}>
-
-                  {finaldisplay && finaldisplay.length > 0 ? (
-                    finaldisplay.map((data, i) => {
-                      return (
-                        <Grid item s={6}>
-                          <Coupons key={i} data={data} />
-                        </Grid>
-                      );
-                    })
-                  ) : (
+                {choose === "Coupons" ? (
+                  <Grid container xs={12} spacing={3}>
+                    {finaldisplay && finaldisplay.length > 0 ? (
+                      finaldisplay.map((data, i) => {
+                        return (
+                          <Grid item s={6}>
+                            <Coupons key={i} data={data} />
+                          </Grid>
+                        );
+                      })
+                    ) : (
                       <div>Sorry No Coupon</div>
                     )}
 
-                  {/* <UserCards /> */}
+                    {/* <UserCards /> */}
+                  </Grid>
+                ) : choose === "Brands" ? (
+                  <Grid container xs={12} spacing={3}>
+                    {finaldisplay && finaldisplay.length > 0 ? (
+                      finaldisplay.map((data, i) => {
+                        return (
+                          <Grid item s={6}>
+                            <BrandCard key={i} data={data} />
+                          </Grid>
+                        );
+                      })
+                    ) : (
+                      <div>Sorry No Coupon</div>
+                    )}
 
-                  {/* <Grid item xs={6}>
-                   <Coupons />
-                </Grid> */}
-
-                </Grid>
+                    {/* <UserCards /> */}
+                  </Grid>
+                ) : choose === "Users" ? (
+                  <Grid container xs={12} spacing={3}>
+                    {finaldisplay && finaldisplay.length > 0 ? (
+                      finaldisplay.map((data, i) => {
+                        return (
+                          <Grid item s={6}>
+                            <UserCards key={i} data={data} />
+                          </Grid>
+                        );
+                      })
+                    ) : (
+                      <div>Sorry No Coupon</div>
+                    )}
+                  </Grid>
+                ) : (
+                  <div></div>
+                )}
               </Paper>
             </Grid>
           </Grid>
