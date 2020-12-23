@@ -66,6 +66,7 @@ function EmailVerificationCard() {
   const [open, setOpen] = React.useState(false);
 
   const handleChange = (event) => {
+    console.log(event.target.value)
     setCate(event.target.value);
   };
 
