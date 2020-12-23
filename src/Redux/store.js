@@ -31,6 +31,9 @@ import { getDisplayCouponReducer } from "./Reducers/couponfordisplay";
 
 import { userGetOwnReviewFromBizReducer } from './Reducers/BisDisplayUserOwnReviewreducers'
 
+//post biz details to business page
+import { bizdetailsReducer } from './Reducers/UpdateBizDetailsreducers'
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
@@ -64,6 +67,8 @@ const rootReducer = combineReducers({
 
   //for display coupon
   getDisplayCouponStore: getDisplayCouponReducer,
+
+  // for posting biz details to backend
 });
 
 export const store = createStore(

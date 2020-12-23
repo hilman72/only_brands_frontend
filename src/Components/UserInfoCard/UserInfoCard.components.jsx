@@ -242,22 +242,6 @@ function UserInfoCard() {
       });
   };
 
-  //Send the form data to the backend
-  //const on99 = async (e) => {
-  //e.preventDefault();
-  //TM
-  //dispatch(upload(name, photofile, importantid));
-
-  //redux TM actions
-  //let a = await fetch('http://localhost:5000/edit/', {
-  //    method: "post",
-  //    headers: { 'content-type': 'application/json' },
-  //    body: JSON.stringify({ name: name, photo: photofile, id: importantid })
-  //})
-  //console.log(a)
-
-  //}
-
   const url = useLocation();
 
   useEffect(async () => {
@@ -275,11 +259,11 @@ function UserInfoCard() {
 
     //Count followers -> Adrian's
 
-    if (user === username){
+    if (user === username) {
 
       const followerGrab = await Axios.get(`http://localhost:5000/api/countFollowers/${user}`)
       console.log(followerGrab.data)
-  
+
       if (followerGrab !== null || followerGrab !== undefined) {
         setFollowers2(followerGrab.data)
       } else {
@@ -290,14 +274,12 @@ function UserInfoCard() {
 
       const followerGrab = await Axios.get(`http://localhost:5000/api/countFollowers/${username}`)
       console.log(followerGrab.data)
-  
+
       if (followerGrab !== null || followerGrab !== undefined) {
         setFollowers2(followerGrab.data)
       } else {
         setFollowers2(0);
       }
-
-
     }
 
     //Check if followed
@@ -316,38 +298,15 @@ function UserInfoCard() {
     // setRealdescription(false);
     const response = await Axios.get(`http://localhost:5000/photo/${TMusername}`);
     console.log(response);
-    if (response !== null || response !== undefined) {
+    if (response) {
       // setHavephoto(true);
-      //  setphotoFile(response.data[0].photo);
+      setphotoFile(response.data[0].photo);
+      setDescription(response.data[0].description);
     } else {
       setphotoFile("");
     }
-
-    const response2 = await Axios.get(
-      `http://localhost:5000/textdescription/${c}`
-    );
-    // console.log(response2.data[0].description);
-    if (response2 !== null || response2 !== undefined) {
-      setHavedescription(true);
-      setDescription(response2.data[0].description);
-    }
   }, [success1, success2, realdescription, follow]);
 
-  //Send the form data to the backend
-  //const on99 = async (e) => {
-  //e.preventDefault();
-  //TM
-  //dispatch(upload(name, photofile, importantid));
-
-  //redux TM actions
-  //let a = await fetch('http://localhost:5000/edit/', {
-  //    method: "post",
-  //    headers: { 'content-type': 'application/json' },
-  //    body: JSON.stringify({ name: name, photo: photofile, id: importantid })
-  //})
-  //console.log(a)
-
-  //}
 
   const x = window.location.href.replaceAll("/", " ").split(" ");
   const render_user = x[x.length - 1];
@@ -397,29 +356,29 @@ function UserInfoCard() {
                   </Grid>
                 </Grid>
                 {/* <Box p={2} flex={"auto"} className={borderedGridStyles.item}> */}
-                  {render_user === you ? (
-                    <div></div>
-                  ) : (
-                      <Box p={1} flex={"auto"}>
-                        {follow ? (
-                          <Button
-                            onClick={handleUnfollow}
-                            className={styles.button}
-                          >
-                            Unfollow
+                {render_user === you ? (
+                  <div></div>
+                ) : (
+                    <Box p={1} flex={"auto"}>
+                      {follow ? (
+                        <Button
+                          onClick={handleUnfollow}
+                          className={styles.button}
+                        >
+                          Unfollow
+                        </Button>
+                      ) : (
+                          <Box flex={"auto"}>
+                            <Button
+                              onClick={handleFollow}
+                              className={styles.button}
+                            >
+                              Follow
                           </Button>
-                        ) : (
-                            <Box flex={"auto"}>
-                              <Button
-                                onClick={handleFollow}
-                                className={styles.button}
-                              >
-                                Follow
-                          </Button>
-                            </Box>
-                          )}
-                      </Box>
-                    )}
+                          </Box>
+                        )}
+                    </Box>
+                  )}
                 {/* </Box> */}
               </Box>
             </Grid>
@@ -459,35 +418,6 @@ function UserInfoCard() {
           </Grid>
         </Grid>
       </Grid>
-
-      {/* <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-              <DialogTitle id="form-dialog-title">gg Profile Details</DialogTitle>
-              <DialogContent>
-                  <DialogContentText>
-                      Enter Details Below
-              </DialogContentText>
-                  <TextField
-                      autoFocus
-                      margin="dense"
-                      id="location"
-                      label="Location"
-                      type="text"
-                      fullWidth
-                  />
-
-                  <br></br>
-                  this is for the photo input
-                  <input type="file" onChange={handleUpload} />
-              </DialogContent>
-              <DialogActions>
-                  <Button onClick={on99}>
-                      wtf
-                  </Button>
-                  <Button onClick={handleClose}>
-                      Cancel
-                  </Button>
-              </DialogActions>
-          </Dialog> */}
     </Card>
   );
 }
