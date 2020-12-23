@@ -20,7 +20,6 @@ function LandingPage() {
       opacity={1}
       width={width}
       height={height}
-      color={'#e91e63'}
       />
         <Grid container spacing={3}>
           <Grid item xs={6}>
