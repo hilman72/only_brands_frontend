@@ -21,6 +21,10 @@ import { businessInfoUploadReducer } from './Reducers/BusinessPhotoreducers'
 
 import { searchReducer } from './Reducers/Searchreducers'
 
+//Get user own review to business page
+
+import { userGetOwnReviewFromBizReducer } from './Reducers/BisDisplayUserOwnReviewreducers'
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
@@ -43,6 +47,9 @@ const rootReducer = combineReducers({
 
   //For searchdata
   searchStore: searchReducer,
+
+  //Get user own review to business page
+  getUserOwnReviewToBizStore: userGetOwnReviewFromBizReducer
 
 });
 

@@ -25,6 +25,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { businessupload } from "../../Redux/Actions/BusinessPhotoaction"
 import Axios from 'axios';
 import { useParams, useLocation } from "react-router-dom";
+//new
+
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
@@ -128,6 +130,7 @@ const BusinessDetail = (props) => {
   const importantid = localStorage.getItem("ob_id");
   const dispatch = useDispatch();
 
+
   //useSelector for redux
   const choosestore = useSelector((state) => state.businessInfoUploadStore)
   const { loading, success: success1, userInfoUploadObject } = choosestore
@@ -193,7 +196,7 @@ const BusinessDetail = (props) => {
     let c = localStorage.getItem("ob_id");
 
     let user = localStorage.getItem("ob_username")
-  
+
     // console.log(url)
 
     const pathname = url.pathname.split("/");
@@ -201,43 +204,43 @@ const BusinessDetail = (props) => {
     console.log(username)
 
 
-       //Count followers -> Adrian's
+    //Count followers -> Adrian's
 
-       if (user === username){
+    if (user === username) {
 
-        const followerGrab = await Axios.get(`http://localhost:5000/api/countBrandFollowers/${user}`)
-        console.log(followerGrab.data)
-    
-        if (followerGrab !== null || followerGrab !== undefined) {
-          setFollowers(followerGrab.data)
-        } else {
-          setFollowers(0);
-        }
-  
+      const followerGrab = await Axios.get(`http://localhost:5000/api/countBrandFollowers/${user}`)
+      console.log(followerGrab.data)
+
+      if (followerGrab !== null || followerGrab !== undefined) {
+        setFollowers(followerGrab.data)
       } else {
-  
-        const followerGrab = await Axios.get(`http://localhost:5000/api/countBrandFollowers/${username}`)
-        console.log(followerGrab.data)
-    
-        if (followerGrab !== null || followerGrab !== undefined) {
-          setFollowers(followerGrab.data)
-        } else {
-          setFollowers(0);
-        }
-  
-  
+        setFollowers(0);
       }
-  
-  //Check if followed
 
-  const checkFollowed = await Axios.get(`http://localhost:5000/api/checkBrandFollowed/${username}/${c}`)
-  // console.log(checkFollowed)
-  let checked = checkFollowed.data
-  console.log(checked)
+    } else {
 
-  if(checkFollowed !== null || checkFollowed !== undefined ){
+      const followerGrab = await Axios.get(`http://localhost:5000/api/countBrandFollowers/${username}`)
+      console.log(followerGrab.data)
+
+      if (followerGrab !== null || followerGrab !== undefined) {
+        setFollowers(followerGrab.data)
+      } else {
+        setFollowers(0);
+      }
+
+
+    }
+
+    //Check if followed
+
+    const checkFollowed = await Axios.get(`http://localhost:5000/api/checkBrandFollowed/${username}/${c}`)
+    // console.log(checkFollowed)
+    let checked = checkFollowed.data
+    console.log(checked)
+
+    if (checkFollowed !== null || checkFollowed !== undefined) {
       setFollow(checked)
-    } 
+    }
   }, [success1, follow])
 
 
@@ -342,33 +345,33 @@ const BusinessDetail = (props) => {
               <h6 className={styles.noPadding}>Followers</h6>
             </Grid>
             <Grid xs={12}>
-            <h4>{followers}</h4>
+              <h4>{followers}</h4>
             </Grid>
           </Grid>
           <Grid item xs={3}>
             <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
               <Box p={1} flex={"auto"} className={styles.followButtonContainer}>
-                    <Box p={1} flex={"auto"}>
-                      {follow ? (
-                        <Button
-                          onClick={handleUnfollow}
-                          className={styles.button}
-                        >
-                          Unfollow
-                        </Button>
-                      ) : (
-                            <Button
-                              onClick={handleFollow}
-                              className={styles.button}
-                            >
-                              Follow
-                        </Button>
-                      )
-                      }
-              </Box>
+                <Box p={1} flex={"auto"}>
+                  {follow ? (
+                    <Button
+                      onClick={handleUnfollow}
+                      className={styles.button}
+                    >
+                      Unfollow
+                    </Button>
+                  ) : (
+                      <Button
+                        onClick={handleFollow}
+                        className={styles.button}
+                      >
+                        Follow
+                      </Button>
+                    )
+                  }
+                </Box>
               </Box>
             </Box>
-            
+
           </Grid>
           <Grid item xs={3}>
             <CreateBrandReviewModal />
