@@ -19,9 +19,9 @@ import axios from "axios";
 //gg
 import { useParams, useLocation } from "react-router-dom";
 //new
-import { displayuserownreviewonbiz } from '../../Redux/Actions/BisDisplayUserOwnReviewaction'
+import { displayuserownreviewonbiz } from "../../Redux/Actions/BisDisplayUserOwnReviewaction";
 import { useSelector, useDispatch } from "react-redux";
-import { user_rank } from '../../Redux/Actions/GetUserRankaction'
+import { user_rank } from "../../Redux/Actions/GetUserRankaction";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -94,17 +94,26 @@ const BusinessDiffCom = (props) => {
   const TMusername = pathname[2];
   const importantid = localStorage.getItem("ob_id");
 
-
-
-  //for useselector for own review 
-  const breakdownreviewstore = useSelector((state) => state.getUserOwnReviewToBizStore);
-  const { loading: loadingreview, success: success4, realuploadedObject } = breakdownreviewstore
-
+  //for useselector for own review
+  const breakdownreviewstore = useSelector(
+    (state) => state.getUserOwnReviewToBizStore
+  );
+  const {
+    loading: loadingreview,
+    success: success4,
+    realuploadedObject,
+  } = breakdownreviewstore;
+  const rank = useSelector((state) => state.getUserRankStore);
+  const {
+    loading: loadingreview2,
+    success: success5,
+    uploadedObjectRank,
+  } = rank;
 
   useEffect(() => {
-    //TRY for own review 
-    dispatch(displayuserownreviewonbiz(TMusername, importantid))
-    dispatch(user_rank(TMusername, importantid))
+    //TRY for own review
+    dispatch(displayuserownreviewonbiz(TMusername, importantid));
+    dispatch(user_rank(TMusername, importantid));
     setWho(props.who);
     axios
       .get(`http://localhost:5000/api/getCoupon/${render_user}`)
@@ -136,8 +145,8 @@ const BusinessDiffCom = (props) => {
               <CreateCoupon create={whenCreate} />
             </Grid>
           ) : (
-              <div></div>
-            )}
+            <div></div>
+          )}
 
           <Grid item xs={12}>
             <BusinessCoupon coupon={coupon} />
@@ -148,7 +157,7 @@ const BusinessDiffCom = (props) => {
         <BusinessTopFans />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <BusinessTiers />
+        <BusinessTiers data={uploadedObjectRank} />
       </TabPanel>
       <TabPanel value={value} index={3}>
         <BusinessRecom data={realuploadedObject} />
