@@ -307,7 +307,7 @@ const BusinessDetail = (props) => {
                   {detail && detail[0] && detail[0].business_name}
                 </h2>
               </Typography>
-              <span className={styles.subheader}>Hong Kong</span>
+              <span className={styles.subheader}>{detail && detail[0] && detail[0].category}</span>
             </CardContent>
           </Grid>
           <Grid item xs={8}>
@@ -317,9 +317,7 @@ const BusinessDetail = (props) => {
                 </Typography> */}
               <Typography>
                 <p>
-                  What is Lorem Ipsum Lorem Ipsum is simply dummy text of the
-                  printing and typesetting industry Lorem Ipsum has been the
-                  industry's standard dummy text ever since the 1500s{" "}
+                  {detail && detail[0] && detail[0].description}
                 </p>
               </Typography>
             </CardContent>
@@ -352,21 +350,21 @@ const BusinessDetail = (props) => {
                 {user === TMusername || whoi === "business" ? (
                   <div className={styles.padding}></div>
                 ) : (
-                  <Box p={1} flex={"auto"}>
-                    {follow ? (
-                      <Button
-                        onClick={handleUnfollow}
-                      >
-                        Unfollow
-                      </Button>
-                    ) : (
-                      <Button 
-                      onClick={handleFollow}>
-                        Follow
-                      </Button>
-                    )}
-                  </Box>
-                )}
+                    <Box p={1} flex={"auto"}>
+                      {follow ? (
+                        <Button
+                          onClick={handleUnfollow}
+                          className={styles.button}
+                        >
+                          Unfollow
+                        </Button>
+                      ) : (
+                          <Button onClick={handleFollow} className={styles.button}>
+                            Follow
+                          </Button>
+                        )}
+                    </Box>
+                  )}
               </Box>
             </Box>
           </Grid>
@@ -374,8 +372,8 @@ const BusinessDetail = (props) => {
             {user === TMusername || whoi === "business" ? (
               <div></div>
             ) : (
-              <CreateBrandReviewModal />
-            )}
+                <CreateBrandReviewModal />
+              )}
           </Grid>
           <Grid item xs={3}>
             <ButtonGroup

@@ -12,6 +12,10 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from "@material-ui/core/styles";
 import Select from '@material-ui/core/Select';
+//redux
+import { useSelector, useDispatch } from "react-redux";
+import { bizDetailsupload } from "../../Redux/Actions/UpdateBizDetailsaction";
+import Axios from "axios";
 
 
 const useStyles = makeStyles(() => ({
@@ -46,7 +50,7 @@ const useStyles = makeStyles(() => ({
   formContainer: {
     padding: "3rem",
   },
-  lastRow:{
+  lastRow: {
     display: 'flex',
     justifyContent: 'center',
   },
@@ -57,17 +61,22 @@ const useStyles = makeStyles(() => ({
 
 function BusinessInfoModal() {
   const styles = useStyles();
-
+  const dispatch = useDispatch();
 
   // State to store uploaded file
   const importantid = localStorage.getItem("ob_id");
-  console.log(importantid);
+  const x = window.location.href.replaceAll("/", " ").split(" ");
+  const render_user = x[x.length - 1];
+  const who = localStorage.getItem("ob_who");
+  const you = localStorage.getItem("ob_username");
+
 
   const [open, setOpen] = React.useState(false);
   const [open2, setOpen2] = React.useState(true);
   const [name, setName] = React.useState("User Input");
   const [photofile, setphotoFile] = React.useState("");
-  const [cate, setCate] = React.useState('');
+  const [category, setCategory] = React.useState('');
+  const [bizdescription, setBizdescription] = React.useState("")
 
   // Handles file upload event and updates state // done
   const handleUpload = (event) => {
@@ -102,10 +111,14 @@ function BusinessInfoModal() {
     setOpen2(false);
   };
 
-  const handleChange = (event) => {
+  const handleCategory = (event) => {
     console.log(event.target.value)
-    setCate(event.target.value);
+    setCategory(event.target.value);
   };
+
+  const handleDescription = (event) => {
+    setBizdescription(event.target.value)
+  }
 
   const handleOpen = () => {
     setOpen(true);
@@ -116,19 +129,12 @@ function BusinessInfoModal() {
   };
 
   //Send the form data to the backend
-  const on99 = async (e) => {
-    e.preventDefault();
-    await fetch("http://localhost:5000/edit", {
-      method: "post",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ name: name, photo: photofile, id: importantid }),
-    });
-  };
 
-  const x = window.location.href.replaceAll("/", " ").split(" ");
-  const render_user = x[x.length - 1];
-  const who = localStorage.getItem("ob_who");
-  const you = localStorage.getItem("ob_username");
+  const updatebusiness = () => {
+    dispatch(bizDetailsupload(bizdescription, category, render_user))
+  }
+
+
 
   return (
     <div>
@@ -137,43 +143,36 @@ function BusinessInfoModal() {
           Edit Profile
         </Button>
       ) : (
-        <div></div>
-      )}
+          <div></div>
+        )}
 
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Edit Profile Details</DialogTitle>
+        <DialogTitle id="form-dialog-title">ff Profile Details</DialogTitle>
         <DialogContent>
           <DialogContentText>Enter Details Below</DialogContentText>
           <FormControl variant="outlined" fullWidth>
-                    <InputLabel id="demo-controlled-open-select-label">Category</InputLabel>
-                    <Select
-                      labelId="demo-controlled-open-select-label"
-                      id="demo-controlled-open-select"
-                      open={open2}
-                      onClose={handleClose2}
-                      onOpen={handleOpen2}
-                      value={cate}
-                      onChange={handleChange}
-                    >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      <MenuItem value={10}>Cantonese</MenuItem>
-                      <MenuItem value={10}>Europe</MenuItem>
-                      <MenuItem value={20}>French</MenuItem>
-                      <MenuItem value={30}>Indian</MenuItem>
-                      <MenuItem value={40}>Italian</MenuItem>
-                      <MenuItem value={50}>Japanese</MenuItem>
-                      <MenuItem value={60}>Korean</MenuItem>
-                      <MenuItem value={70}>Taiwanese</MenuItem>
-                      <MenuItem value={80}>Thai</MenuItem>
-                      <MenuItem value={90}>Other</MenuItem>
-                    </Select>
-                  </FormControl>
+            <InputLabel id="demo-controlled-open-select-label">Category</InputLabel>
+            <Select
+              labelId="demo-controlled-open-select-label"
+              id="demo-controlled-open-select"
+              // open={open2}
+              onClose={handleClose2}
+              onOpen={handleOpen2}
+              value={category}
+              onChange={handleCategory}
+            >
+              <MenuItem value={"Cantonese"}>Cantonese</MenuItem>
+              <MenuItem value={"Europe"}>Europe</MenuItem>
+              <MenuItem value={"French"}>French</MenuItem>
+              <MenuItem value={"Indian"}>Indian</MenuItem>
+              <MenuItem value={"Italian"}>Italian</MenuItem>
+              <MenuItem value={"Other"}>Other</MenuItem>
+            </Select>
+          </FormControl>
           <TextField
             autoFocus
             margin="dense"
@@ -181,10 +180,12 @@ function BusinessInfoModal() {
             label="Description"
             type="text"
             fullWidth
+            value={bizdescription}
+            onChange={handleDescription}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={on99}>Update</Button>
+          <Button onClick={updatebusiness}>Update</Button>
           <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>
