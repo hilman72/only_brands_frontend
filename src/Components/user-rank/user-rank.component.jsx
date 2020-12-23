@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,11 +13,13 @@ const useStyles = makeStyles({
   },
 });
 
-const UserRank = () => {
-  const dispatch = useDispatch();
+const UserRank = (props) => {
   const classes = useStyles();
   const [progress, setProgress] = React.useState(0);
 
+  useEffect(() => {
+    setProgress(props.data.point);
+  });
 
   return (
     <div className={classes.root}>
