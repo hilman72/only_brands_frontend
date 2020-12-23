@@ -43,7 +43,7 @@ function HomePage() {
 
   useEffect(() => {
     dispatch(getDisplayCoupon());
-  }, [success]);
+  }, []);
 
   const classes = useStyles();
   return (

@@ -1,82 +1,81 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
+import Card from "@material-ui/core/Card";
+import CardMedia from "@material-ui/core/CardMedia";
 import {
   Info,
-//   InfoCaption,
+  //   InfoCaption,
   InfoSubtitle,
   InfoTitle,
-} from '@mui-treasury/components/info';
-import { useGalaxyInfoStyles } from '@mui-treasury/styles/info/galaxy';
-import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
+} from "@mui-treasury/components/info";
+import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
+import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 
-import RestaurantMenuRoundedIcon from '@material-ui/icons/RestaurantMenuRounded';
-
+import RestaurantMenuRoundedIcon from "@material-ui/icons/RestaurantMenuRounded";
 
 const useStyles = makeStyles(() => ({
   card: {
-    borderRadius: '1rem',
-    boxShadow: 'none',
-    position: 'relative',
+    borderRadius: "1rem",
+    boxShadow: "none",
+    position: "relative",
     minWidth: 150,
     minHeight: 150,
-    '&:after': {
+    "&:after": {
       content: '""',
-      display: 'block',
-      position: 'absolute',
-      width: '100%',
-      height: '100%',
+      display: "block",
+      position: "absolute",
+      width: "100%",
+      height: "100%",
       bottom: 0,
       zIndex: 1,
-      backgroundColor: 'rgba(255, 76, 109, 0.2) !important',
-      backgroundBlendMode: 'multiply !important',
+      backgroundColor: "rgba(255, 76, 109, 0.2) !important",
+      backgroundBlendMode: "multiply !important",
     },
   },
   content: {
-    position: 'absolute',
+    position: "absolute",
     zIndex: 2,
     bottom: 0,
-    width: '100%',
+    width: "100%",
   },
   icon: {
-    position: 'absolute',
-    bottom: '-1.4rem',
-    right: '-1.4rem',
-    display: 'block',
-    zIndex: '0 !important' ,
-    color:'rgba(255,255,255,0.5)',
-    fontSize: '7rem',
+    position: "absolute",
+    bottom: "-1.4rem",
+    right: "-1.4rem",
+    display: "block",
+    zIndex: "0 !important",
+    color: "rgba(255,255,255,0.5)",
+    fontSize: "7rem",
   },
   text: {
-    textAlign: 'left'
-  }
+    textAlign: "left",
+  },
 }));
 
-
-
-function BrandCards() {
-  const mediaStyles = useCoverCardMediaStyles({ bgPosition: 'top' });
+function BrandCards(props) {
+  const mediaStyles = useCoverCardMediaStyles({ bgPosition: "top" });
   const styles = useStyles();
-  
+
   return (
-      <Card className={styles.card}>
-        <CardMedia
-          classes={mediaStyles}
-          image={
-            'https://source.unsplash.com/random'
-          }
-        />
-        <Box py={3} px={2} className={styles.content}>
-          <Info className={styles.text} useStyles={useGalaxyInfoStyles}>
-            <InfoSubtitle>European</InfoSubtitle>
-            <InfoTitle>Frites</InfoTitle>
-            {/* <InfoCaption>Perfect for everyone</InfoCaption> */}
-          </Info>
-        </Box>
-        <RestaurantMenuRoundedIcon className={styles.icon}/>
-      </Card>
+    <Card className={styles.card}>
+      <CardMedia
+        classes={mediaStyles}
+        image={props && props.data && props.data.photo}
+      />
+      <Box py={3} px={2} className={styles.content}>
+        <Info className={styles.text} useStyles={useGalaxyInfoStyles}>
+          <InfoSubtitle>
+            {props && props.data && props.data.category}
+          </InfoSubtitle>
+          <InfoTitle>
+            {props && props.data && props.data.business_name}
+          </InfoTitle>
+          {/* <InfoCaption>Perfect for everyone</InfoCaption> */}
+        </Info>
+      </Box>
+      <RestaurantMenuRoundedIcon className={styles.icon} />
+    </Card>
   );
-};
-export default BrandCards; 
+}
+export default BrandCards;

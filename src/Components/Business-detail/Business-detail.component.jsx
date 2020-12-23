@@ -25,6 +25,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { businessupload } from "../../Redux/Actions/BusinessPhotoaction";
 import Axios from "axios";
 import { useParams, useLocation } from "react-router-dom";
+//new
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
@@ -98,6 +99,7 @@ const useStyles = makeStyles(({ palette }) => ({
   bottomRow: {
     backgroundColor: "#a4efef",
     borderRadius: "0rem 0rem 0.5rem 0.5rem",
+    paddingTop: "0.5rem"
   },
   followButtonContainer: {
     padding: 0,
@@ -107,6 +109,9 @@ const useStyles = makeStyles(({ palette }) => ({
     padding: "0 !important",
     margin: "0 !important",
   },
+  imgBtn: {
+    marginBottom: "4"
+  }
 }));
 
 const BusinessDetail = (props) => {
@@ -177,6 +182,12 @@ const BusinessDetail = (props) => {
   const pathname = url.pathname.split("/");
   const TMusername = pathname[2];
 
+  let c = localStorage.getItem("ob_id");
+
+  let user = localStorage.getItem("ob_username");
+
+  let whoi = localStorage.getItem("ob_who");
+
   useEffect(async () => {
     console.log(TMusername);
     const response = await Axios.get(
@@ -187,10 +198,6 @@ const BusinessDetail = (props) => {
     } else {
       setBusinesssmallphoto("");
     }
-
-    let c = localStorage.getItem("ob_id");
-
-    let user = localStorage.getItem("ob_username");
 
     // console.log(url)
 
@@ -215,8 +222,6 @@ const BusinessDetail = (props) => {
       const followerGrab = await Axios.get(
         `http://localhost:5000/api/countBrandFollowers/${username}`
       );
-      console.log(followerGrab.data);
-
       if (followerGrab !== null || followerGrab !== undefined) {
         setFollowers(followerGrab.data);
       } else {
@@ -275,7 +280,7 @@ const BusinessDetail = (props) => {
           {/* --------- row for avatar --------- */}
           <Grid item className={styles.shrink} xs={4}>
             <Avatar className={styles.avatar} src={businesssmallphoto} />
-            <Button className={styles.imgBtn} component="label">
+            <Button className="customButton" component="label">
               Upload Image
               <input type="file" hidden onChange={handleBusinessPhotoUpload} />
             </Button>
@@ -339,25 +344,36 @@ const BusinessDetail = (props) => {
               <h4>{followers}</h4>
             </Grid>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={2}>
             <Box p={2} flex={"auto"} className={borderedGridStyles.item}>
               <Box p={1} flex={"auto"} className={styles.followButtonContainer}>
-                <Box p={1} flex={"auto"}>
-                  {follow ? (
-                    <Button onClick={handleUnfollow} className={styles.button}>
-                      Unfollow
-                    </Button>
-                  ) : (
-                    <Button onClick={handleFollow} className={styles.button}>
-                      Follow
-                    </Button>
-                  )}
-                </Box>
+                {user === TMusername || whoi === "business" ? (
+                  <div></div>
+                ) : (
+                  <Box p={1} flex={"auto"}>
+                    {follow ? (
+                      <Button
+                        onClick={handleUnfollow}
+                        className={styles.button}
+                      >
+                        Unfollow
+                      </Button>
+                    ) : (
+                      <Button onClick={handleFollow} className={styles.button}>
+                        Follow
+                      </Button>
+                    )}
+                  </Box>
+                )}
               </Box>
             </Box>
           </Grid>
           <Grid item xs={3}>
-            <CreateBrandReviewModal />
+            {user === TMusername || whoi === "business" ? (
+              <div></div>
+            ) : (
+              <CreateBrandReviewModal />
+            )}
           </Grid>
           <Grid item xs={3}>
             <ButtonGroup
