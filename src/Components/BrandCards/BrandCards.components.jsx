@@ -53,6 +53,9 @@ const useStyles = makeStyles(() => ({
   text: {
     textAlign: "left",
   },
+  button: {
+    marginTop: "0.5rem"
+  }
 }));
 
 function BrandCards(props) {
@@ -83,7 +86,7 @@ function BrandCards(props) {
           </InfoTitle>
           {/* <InfoCaption>Perfect for everyone</InfoCaption> */}
         </Info>
-        <Button onClick={go}>Visit</Button>
+        <Button className={styles.button} onClick={go}>Visit</Button>
       </Box>
       <RestaurantMenuRoundedIcon className={styles.icon} />
     </Card>
