@@ -71,6 +71,7 @@ function RecommendationCarousel() {
         navigation
         onSlideChange={() => {}}
         onSwiper={(swiper) => {}}
+        autoplay={{disableOnInteraction: false, delay: 3000}}
       >
         {list.map((data, i) => {
           return (
