@@ -197,8 +197,15 @@ const BusinessDetail = (props) => {
     const response = await Axios.get(
       `http://localhost:5000/api/getbusinessphoto/${TMusername}`
     );
-    if (response.data[0].photo) {
-      setBusinesssmallphoto(response.data[0].photo);
+    if (
+      response &&
+      response.data &&
+      response.data[0] &&
+      response.data[0].photo
+    ) {
+      setBusinesssmallphoto(
+        response && response.data && response.data[0] && response.data[0].photo
+      );
     } else {
       setBusinesssmallphoto("");
     }
