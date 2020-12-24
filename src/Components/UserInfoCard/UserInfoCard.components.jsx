@@ -345,7 +345,7 @@ function UserInfoCard() {
                   <Avatar className={styles.avatar} src={photofile} />
                 </Grid>
                 <Grid item xs={12}>
-                  <h3 className={styles.heading}>Designer Darian</h3>
+                  <h3 className={styles.heading}>{TMusername}</h3>
                   <span className={styles.subheader}>Kowloon</span>
                 </Grid>
               </Grid>
