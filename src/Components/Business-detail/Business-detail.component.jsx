@@ -76,7 +76,8 @@ const useStyles = makeStyles(({ palette }) => ({
     letterSpacing: "1px",
   },
   button: {
-    borderRadius: "1.5rem",
+    borderRadius: "1rem",
+    padding: "1.2rem",
   },
   editButton: {
     padding: "0.5rem",
@@ -336,7 +337,7 @@ const BusinessDetail = (props) => {
           <Grid item xs={8}>
             <CardContent className={styles.content}>
               <Typography>
-                <h2 className={styles.heading}>What we're known for</h2>
+                <h2 className={styles.heading}>About Us</h2>
               </Typography>
               <Typography>
                 <p>{detail && detail[0] && detail[0].description}</p>

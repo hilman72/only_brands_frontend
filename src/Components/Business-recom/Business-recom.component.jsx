@@ -5,7 +5,8 @@ import { useParams, useLocation } from "react-router-dom";
 import "./Bisiness-recom.style.scss";
 import FdReview from "../fd-review/fd-review.component";
 import OtherReview from "../other-review/other-review.component";
-import { displayuserownreviewonbiz } from '../../Redux/Actions/BisDisplayUserOwnReviewaction'
+import { displayuserownreviewonbiz } from '../../Redux/Actions/BisDisplayUserOwnReviewaction';
+import Grid from "@material-ui/core/Grid";
 
 const BusinessRecom = (props) => {
   const dispatch = useDispatch();
@@ -27,8 +28,10 @@ const BusinessRecom = (props) => {
 
   return (
     <div>
-      <FdReview />
-      <OtherReview data={props.data} />
+
+        {/* <FdReview /> */}
+        <OtherReview data={props.data} />
+
     </div>
   );
 };
