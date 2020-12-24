@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
     top: 0,
     border: "3px solid #8eebdc",
     borderRadius: "50%",
-    transform: "translate(4rem,-0.5rem)",
+    transform: "translate(2.5rem,-0.5rem)",
   },
   closeButton: {
     right: theme.spacing(1),

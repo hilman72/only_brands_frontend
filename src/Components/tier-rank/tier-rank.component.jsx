@@ -29,16 +29,8 @@ const DiffRank = (props) => {
   const classes = useStyles();
   const history = useHistory();
 
-<<<<<<< HEAD
   function getReward() {
     history.push("/Confetti")
-||||||| merged common ancestors
-  function getReward(){
-    history.push("/Confetti")
-=======
-  function getReward() {
-    history.push("/Confetti");
->>>>>>> master
   }
 
   return (
@@ -146,20 +138,11 @@ const DiffRank = (props) => {
           </Paper>
         </TimelineContent>
       </TimelineItem>
-<<<<<<< HEAD
-
-
-      <Button onClick={getReward}>Claim Reward</Button>
-
-||||||| merged common ancestors
-      <Button onClick={getReward}>Claim Reward</Button>
-=======
       {props.data.point >= 25 ? (
         <Button onClick={getReward}>Claim Reward</Button>
       ) : (
         <div></div>
       )}
->>>>>>> master
     </Timeline>
   );
 };
