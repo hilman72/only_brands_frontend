@@ -7,14 +7,24 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { useHistory } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
 //for redux
 import { useSelector, useDispatch } from "react-redux";
 import { uploadreview } from "../../Redux/Actions/Reviewactions";
 import Axios from "axios";
 import { useParams, useLocation } from "react-router-dom";
 
+const useStyles = makeStyles(({ palette }) => ({
+  button: {
+    borderRadius: "1rem",
+    padding: "0.4rem",
+    border: '3px solid #8eebdc'
+  },
+}));
+
 export default function CreateBrandReview() {
   const importantid = localStorage.getItem("ob_id");
+  const styles = useStyles();
   //redux
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
@@ -52,7 +62,7 @@ export default function CreateBrandReview() {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button variant="contained" color="primary" onClick={handleClickOpen} className={styles.button}>
         Leave a Review
       </Button>
       <Dialog
