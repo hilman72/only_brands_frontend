@@ -20,43 +20,44 @@ function RecommendationCarousel() {
   const list = [
     {
       business_name: "Hilman's Hamburgers",
-      point: "0",
+      reviewdetail:
+        "Superb food made fresh on location and cooked with fresh produce. Perfectly cooked and truly delicious. Fantastic staff who are personal and attentive but not overbearing. We also love the selection of Italian wines which is affordable and delicious.",
+      photo:
+        "https://twisper.com/wp-content/uploads/2020/03/close-up-photo-of-burger-3915906-scaled.jpg",
     },
     {
       business_name: "Bibek's Bagels",
-      point: "30",
+      reviewdetail:
+        "We live closer to the one in wan chai, and they had given us a voucher to use for my husbands birthday so we decided to pay a visit on passing. They had an excellent brunch deal, great value for money & delicious fresh food. It is the staff however that really make this place great & a place you want to keep visiting, they are so friendly & attentive.",
+      photo:
+        "https://www.sylviacenter.org/wp-content/uploads/2019/04/bagel.jpeg",
     },
     {
       business_name: "Darian's Doughnuts",
-      point: "100",
+      reviewdetail:
+        "The food here is excellent for such a reasonable price especially if you do the taster. They have great options for vegetarians and the burrata was out of this world! Only reason for 4 star is because we waited over 2 hours for a table even though the host told us an hour and half on a Friday night.",
+      photo:
+        "https://img.sndimg.com/food/image/upload/w_560,h_315,c_thumb,fl_progressive,q_80/v1/img/recipes/73/31/5/IPvKrcSrR36q0IXlP5wn_DSC02679.jpg",
     },
     {
       business_name: "Brokeback Steakhouse ",
-      point: "80",
+      reviewdetail:
+        "Delightful dinner experience. The black truffle was soso. But the cold cut was great. The mussels were nice. Have to come again for their tasting menu. Good value for money especially in central area",
+      photo: "https://source.unsplash.com/random",
     },
     {
       business_name: "Mika's Muffins  ",
-      point: "30",
+      reviewdetail:
+        "Food were stunningly good! They had all kinds of food and each tasted great. Love the one with prawns especially. The only problem was that the portion was HUGE that we need two hours to finish the meal.",
+      photo:
+        "https://www.simplyrecipes.com/wp-content/uploads/2019/06/Blueberry-Muffins-LEAD-2-1.jpg",
     },
     {
       business_name: "Arrans' Appetizers   ",
-      point: "50",
-    },
-    {
-      business_name: "Sam's Supersalads   ",
-      point: "70",
-    },
-    {
-      business_name: "Lesley's Lobsters and Grill   ",
-      point: "80",
-    },
-    {
-      business_name: "Doug's Deli Sandwiches  ",
-      point: "90",
-    },
-    {
-      business_name: "Rachel's Ramen ",
-      point: "20",
+      reviewdetail:
+        "Amazing food and excellent value, we’ve had the tasting menu with 2 starters, 3 pastas and 2 desserts!! Good value and more importantly food are superb! Will definitely go back again.",
+      photo:
+        "https://jenniferbanz.com/wp-content/uploads/2019/09/keto-appetizers-feature-image.jpg",
     },
   ];
 
@@ -71,50 +72,13 @@ function RecommendationCarousel() {
         onSlideChange={() => {}}
         onSwiper={(swiper) => {}}
       >
-        <SwiperSlide>
-          {" "}
-          <RecommendationCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <RecommendationCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <RecommendationCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <RecommendationCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <RecommendationCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <RecommendationCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <RecommendationCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <RecommendationCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <RecommendationCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <RecommendationCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <RecommendationCard />
-        </SwiperSlide>
+        {list.map((data, i) => {
+          return (
+            <SwiperSlide>
+              <RecommendationCard key={i} data={data} />
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
     </div>
   );

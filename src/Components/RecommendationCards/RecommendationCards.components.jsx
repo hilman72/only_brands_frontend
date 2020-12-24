@@ -33,9 +33,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     padding: theme.spacing(2),
     borderRadius: 16,
-    height: '138px',
-    width: '100%',
-    justifyContent: 'space-around',
+    height: "138px",
+    width: "100%",
+    justifyContent: "space-around",
   },
   media: {
     minWidth: "25%",
@@ -147,7 +147,9 @@ function RecommendationCards(props) {
     <Card className={styles.card} elevation={2}>
       <CardContent className={styles.content}>
         <Box>
-          <h3 className={styles.heading}>OUTBACK STEAKHOUSE</h3>
+          <h3 className={styles.heading}>
+            {props.data && props.data.business_name}
+          </h3>
         </Box>
         <p className={styles.body}>{props.data && props.data.reviewdetail}</p>
         <Divider className={styles.divider} light />
@@ -166,15 +168,10 @@ function RecommendationCards(props) {
           </Link>
         </Box>
       </CardContent>
-      <Avatar
-        className={styles.avatar}
-        src={
-          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftheblogofkevin.files.wordpress.com%2F2011%2F04%2Fdonkey-shrek-iphone-4-wallpaper-320x480.jpg&f=1&nofb=1"
-        }
-      />
+      <Avatar className={styles.avatar} src={"https://imgur.com/krR5xwF.jpg"} />
       <CardMedia
         className={styles.media}
-        image="https://source.unsplash.com/random"
+        image={props.data && props.data.photo}
       />
 
       <Dialog
