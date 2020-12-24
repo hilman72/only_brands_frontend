@@ -55,7 +55,12 @@ const useStyles = makeStyles(() => ({
   },
   button: {
     marginTop: "0.5rem"
-  }
+  },
+  name:{
+    background: 'rgba(0,0,0,0.4)',
+    borderRadius: '5px',
+    padding: '3px',
+  },
 }));
 
 function BrandCards(props) {
@@ -81,7 +86,7 @@ function BrandCards(props) {
           <InfoSubtitle>
             {props && props.data && props.data.category}
           </InfoSubtitle>
-          <InfoTitle>
+          <InfoTitle className={styles.name}>
             {props && props.data && props.data.business_name}
           </InfoTitle>
           {/* <InfoCaption>Perfect for everyone</InfoCaption> */}
