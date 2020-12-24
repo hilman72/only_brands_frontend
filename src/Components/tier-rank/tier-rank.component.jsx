@@ -12,7 +12,7 @@ import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 import "./tier-rank.style.scss";
 
@@ -25,13 +25,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-const DiffRank = () => {
+const DiffRank = (props) => {
   const classes = useStyles();
   const history = useHistory();
 
+<<<<<<< HEAD
   function getReward() {
     history.push("/Confetti")
+||||||| merged common ancestors
+  function getReward(){
+    history.push("/Confetti")
+=======
+  function getReward() {
+    history.push("/Confetti");
+>>>>>>> master
   }
 
   return (
@@ -139,10 +146,20 @@ const DiffRank = () => {
           </Paper>
         </TimelineContent>
       </TimelineItem>
+<<<<<<< HEAD
 
 
       <Button onClick={getReward}>Claim Reward</Button>
 
+||||||| merged common ancestors
+      <Button onClick={getReward}>Claim Reward</Button>
+=======
+      {props.data.point >= 25 ? (
+        <Button onClick={getReward}>Claim Reward</Button>
+      ) : (
+        <div></div>
+      )}
+>>>>>>> master
     </Timeline>
   );
 };
