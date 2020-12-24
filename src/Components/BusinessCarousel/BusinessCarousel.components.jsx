@@ -85,6 +85,7 @@ function BusinessCarousel() {
         navigation
         onSlideChange={() => {}}
         onSwiper={(swiper) => {}}
+        autoplay={{disableOnInteraction: false, delay: 2300}}
       >
         {list.map((data, i) => {
           return (
