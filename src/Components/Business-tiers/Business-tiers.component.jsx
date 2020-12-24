@@ -19,7 +19,7 @@ const BusinessTiers = (props) => {
       )}
 
       <div>
-        <DiffRank />
+        <DiffRank data={props.data} />
       </div>
     </div>
   );
