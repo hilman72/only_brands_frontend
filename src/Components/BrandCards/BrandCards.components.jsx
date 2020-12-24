@@ -71,7 +71,7 @@ function BrandCards(props) {
   const go = () => {
     history.push(
       `/BusinessProfiles/${props && props.data && props.data.business_name}`
-    );
+    )
   };
 
   return (
